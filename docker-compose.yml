@@ -1,0 +1,14 @@
+services:
+  web:
+    container_name: innoquest-website
+    image: innoquest-website
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8888:8888"
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
