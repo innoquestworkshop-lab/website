@@ -3,7 +3,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
 import { ContactForm } from "@/components/ui/ContactForm";
-import { IconPhone, IconMail, IconMapPin } from "@tabler/icons-react";
+import { IconPhone, IconMail } from "@tabler/icons-react";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -47,19 +47,15 @@ export default function ContactPage() {
                 </h3>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <IconPhone size={16} className="text-[#E8473F] mt-0.5 shrink-0" />
+                    <IconPhone size={16} className="text-[#C0392B] mt-0.5 shrink-0" />
                     <div>
-                      <p className="text-sm text-[#1A1A1A]">+66 XX-XXXX-XXXX</p>
+                      <p className="text-sm text-[#1A1A1A]">+66 97 097 0797</p>
                       <p className="text-xs text-[#3D3D3D]">Mon–Fri, 9:00–18:00</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <IconMail size={16} className="text-[#E8473F] mt-0.5 shrink-0" />
-                    <p className="text-sm text-[#1A1A1A]">hello@innoquest.co.th</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <IconMapPin size={16} className="text-[#E8473F] mt-0.5 shrink-0" />
-                    <p className="text-sm text-[#1A1A1A]">Bangkok, Thailand</p>
+                    <IconMail size={16} className="text-[#C0392B] mt-0.5 shrink-0" />
+                    <p className="text-sm text-[#1A1A1A]">innoquestworkshop@gmail.com</p>
                   </div>
                 </div>
               </div>

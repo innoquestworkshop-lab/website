@@ -1,60 +1,88 @@
 "use client";
 
+import { useRef, useEffect, useState } from "react";
+
 const partners = [
-  "Bangkok International School",
-  "STEM Academy",
-  "Thai MNC Group",
-  "Regional Bank TH",
-  "Youth Foundation",
-  "EdTech Thailand",
-  "CSR Alliance",
-  "Learning Hub BKK",
+  "Assumption College", "Assumption Sriracha", "CSII",
+  "Assumption College", "Assumption Sriracha", "CSII",
 ];
 
-export function PartnersSection() {
-  return (
-    <section style={{ background: "#1A1A1A" }} className="snap-start min-h-screen flex flex-col justify-center py-[60px] px-8 overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        <p className="text-[11px] font-medium uppercase tracking-[0.08em] text-white/30 text-center mb-10">
-          Trusted by schools, corporates & institutions across Thailand
-        </p>
+function useReveal(threshold = 0.15) {
+  const ref = useRef<HTMLElement>(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    if (!ref.current) return;
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setInView(true); obs.disconnect(); } },
+      { threshold }
+    );
+    obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, [threshold]);
+  return [ref, inView] as const;
+}
 
-        {/* Desktop: static row */}
-        <div className="hidden md:flex flex-wrap justify-center gap-4">
-          {partners.map((name) => (
+export function PartnersSection() {
+  const [sectionRef, inView] = useReveal(0.1);
+  const items = [...partners, ...partners];
+
+  return (
+    <section
+      ref={sectionRef as React.RefObject<HTMLElement>}
+      className="dot-bg py-[72px] overflow-hidden"
+      style={{ background: "#1A1A1A", color: "#F5F0EA" }}
+    >
+      <div className="max-w-[1240px] mx-auto px-8">
+        <p
+          className={`text-[11px] font-medium uppercase tracking-[0.14em] text-center transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
+          style={{
+            color: "rgba(245,240,234,0.55)",
+            fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace",
+          }}
+        >
+          ▸ Our Ecosystem
+        </p>
+      </div>
+
+      <div
+        className={`mt-9 marquee-mask transition-all duration-700 ${inView ? "opacity-100" : "opacity-0"}`}
+        style={{ transitionDelay: "160ms" }}
+      >
+        <div className="flex gap-14 w-max animate-marquee">
+          {items.map((p, i) => (
             <div
-              key={name}
-              className="px-5 py-2 rounded-full border border-white/10 text-white/40 text-sm"
+              key={i}
+              className="flex items-center gap-[10px] whitespace-nowrap"
+              style={{
+                padding: "14px 22px",
+                border: "1px solid rgba(245,240,234,0.18)",
+                borderRadius: 999,
+                fontSize: 15,
+                fontWeight: 500,
+                color: "rgba(245,240,234,0.85)",
+              }}
             >
-              {name}
+              <span
+                className="w-2 h-2 rounded-full"
+                style={{ background: i % 3 === 0 ? "#C0392B" : "rgba(245,240,234,0.4)" }}
+              />
+              {p}
             </div>
           ))}
         </div>
-
-        {/* Mobile: scrolling marquee */}
-        <div className="md:hidden relative">
-          <div className="flex gap-4 animate-marquee whitespace-nowrap">
-            {[...partners, ...partners].map((name, i) => (
-              <div
-                key={i}
-                className="px-5 py-2 rounded-full border border-white/10 text-white/40 text-sm shrink-0"
-              >
-                {name}
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
 
-      <style>{`
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-marquee {
-          animation: marquee 20s linear infinite;
-        }
-      `}</style>
+      <div className="max-w-[1240px] mx-auto px-8 mt-7 text-center">
+        <p
+          className="text-[11px]"
+          style={{
+            color: "rgba(245,240,234,0.35)",
+            fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace",
+          }}
+        >
+          // PLACEHOLDER · replace pill name tags with real partner logos (SVG, white/light variants)
+        </p>
+      </div>
     </section>
   );
 }

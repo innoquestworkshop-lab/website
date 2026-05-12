@@ -1,4 +1,4 @@
-export type TestimonialAudience = "corporate" | "school" | "parent";
+export type TestimonialAudience = "corporate" | "school" | "parent" | "student";
 
 export type Testimonial = {
   id: string;
@@ -7,19 +7,20 @@ export type Testimonial = {
   name: string;
   role: string;
   context: string;
+  stars?: 1 | 2 | 3 | 4 | 5;
+  avatar?: string;
   programSlug?: string;
 };
 
 export const testimonials: Testimonial[] = [
   {
     id: "t1",
-    audience: "corporate",
+    audience: "student",
     quote:
-      "The kids came back energized and our CSR team had a story worth telling. ROI was immediate and the impact report made it easy to share with leadership.",
-    name: "Head of HR",
-    role: "MNC Thailand",
-    context: "200-person CSR program",
-    programSlug: "corporate-csr-camp",
+      "พี่เอเชียป็น mentor ที่อธิบายทุกอย่างออกมาได้เข้าใจง่ายมากๆ ไม่ว่าจะเป็นเรื่องที่ยากแค่ไหนก็สามารถทำให้ผมเข้าใจได้ชัดเจนในแบบที่เป็นกันเองสุดๆ ตลอดช่วง mini hackathon พี่คอยช่วยแนะนำและสนับสนุนทีมเราอย่างเต็มที่ ทำให้พวกเราทำงานได้มั่นใจขึ้นมากจริงๆ พี่คือ mentor ที่ดีที่สุดที่พวกเราจะขอได้เลยครับ.",
+    name: "Trust",
+    role: "InCSii Playground Mentee",
+    context: "InCSii Playground",
   },
   {
     id: "t2",
@@ -27,19 +28,17 @@ export const testimonials: Testimonial[] = [
     quote:
       "Students who hadn't spoken up all year were pitching ideas on day two. Something genuinely shifted — we saw it in the classroom for weeks after.",
     name: "Principal",
-    role: "Bangkok International School",
+    role: "Assumption College Sriracha",
     context: "Semester program",
-    programSlug: "leadership-program",
   },
   {
     id: "t3",
     audience: "parent",
     quote:
-      "She came home asking to solve problems. I didn't know a camp could do that. She's been different ever since — more curious, more confident.",
+      "She came home asking to solve problems. I didn't know a camp could do that.",
     name: "Parent of participant, age 12",
     role: "Parent",
     context: "Summer workshop · 5 days",
-    programSlug: "creative-thinking-workshop",
   },
   {
     id: "t4",
@@ -49,7 +48,6 @@ export const testimonials: Testimonial[] = [
     name: "Head of Curriculum",
     role: "STEM Academy Bangkok",
     context: "Innovation Hackathon · Full school",
-    programSlug: "innovation-hackathon",
   },
   {
     id: "t5",
@@ -59,6 +57,5 @@ export const testimonials: Testimonial[] = [
     name: "CSR Director",
     role: "Regional Bank Thailand",
     context: "Half-day CSR camp · 80 kids",
-    programSlug: "corporate-csr-camp",
   },
 ];

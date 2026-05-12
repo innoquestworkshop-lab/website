@@ -1,168 +1,206 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
-const stats = [
-  { value: 500, suffix: "+", label: "Students trained" },
-  { value: 30, suffix: "+", label: "Partner schools" },
-  { value: 98, suffix: "%", label: "Satisfaction score" },
-  { value: 5, suffix: " yrs", label: "Experience" },
-];
-
-function useCountUp(target: number, started: boolean) {
-  const [count, setCount] = useState(0);
+function useCountUp(to: number, active: boolean, duration = 1500) {
+  const [val, setVal] = useState(0);
   useEffect(() => {
-    if (!started) return;
-    const duration = 1200;
-    const steps = 40;
-    const increment = target / steps;
-    let current = 0;
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= target) {
-        setCount(target);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(current));
-      }
-    }, duration / steps);
-    return () => clearInterval(timer);
-  }, [target, started]);
-  return count;
+    if (!active) return;
+    const start = performance.now();
+    let raf: number;
+    const tick = (t: number) => {
+      const p = Math.min(1, (t - start) / duration);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setVal(Math.round(to * eased));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [active, to, duration]);
+  return val;
 }
 
-function StatItem({ value, suffix, label }: (typeof stats)[0]) {
+function StatItem({ n, suf, label }: { n: number; suf: string; label: string }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [started, setStarted] = useState(false);
-  const count = useCountUp(value, started);
-
+  const [active, setActive] = useState(false);
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setStarted(true); },
-      { threshold: 0.5 }
+    if (!ref.current) return;
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setActive(true); obs.disconnect(); } },
+      { threshold: 0.4 }
     );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
+    obs.observe(ref.current);
+    return () => obs.disconnect();
   }, []);
-
+  const val = useCountUp(n, active);
   return (
-    <div ref={ref} className="text-center">
-      <div className="text-2xl font-medium text-white">
-        {count}
-        <span className="text-[#E8473F]">{suffix}</span>
+    <div ref={ref}>
+      <div
+        className="font-medium leading-none tabular-nums"
+        style={{ fontSize: "clamp(40px, 4.4vw, 64px)", color: "#C0392B", letterSpacing: "-0.03em" }}
+      >
+        {val}{suf}
       </div>
-      <div className="text-xs text-gray-400 mt-1">{label}</div>
+      <div
+        className="mt-[10px] uppercase tracking-[0.1em] text-[11px]"
+        style={{ color: "rgba(245,240,234,0.65)", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
+      >
+        {label}
+      </div>
     </div>
   );
 }
 
-const headlineWords = ["Where", "kids", "learn", "to"];
-const headlineRedWords = ["think,", "create", "&", "lead."];
+function ArrowIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="5" y1="12" x2="19" y2="12" />
+      <polyline points="12 5 19 12 12 19" />
+    </svg>
+  );
+}
+
+const stats = [
+  { n: 400, suf: "+", label: "Students trained" },
+  { n: 100, suf: "+", label: "Speaker hours" },
+  { n: 96, suf: "%", label: "Satisfaction score" },
+  { n: 100, suf: "%", label: "Enterprise retention" },
+];
 
 export function HeroSection() {
+  const [started, setStarted] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setStarted(true), 100);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
     <section
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden snap-start"
-      style={{ background: "#1A1A1A" }}
+      id="top"
+      className="relative overflow-hidden dot-bg"
+      style={{
+        background: "#1A1A1A",
+        color: "#F5F0EA",
+        paddingTop: 140,
+        paddingBottom: 96,
+      }}
     >
       {/* Decorative circles */}
       <div
-        className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, #E8473F1A 0%, transparent 70%)", transform: "translate(30%, -30%)" }}
+        className="absolute pointer-events-none rounded-full animate-float-slow"
+        style={{
+          top: -160, right: -120, width: 560, height: 560,
+          background: "#C0392B", opacity: 0.11, filter: "blur(2px)",
+        }}
       />
       <div
-        className="absolute bottom-0 left-1/2 w-[500px] h-[500px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, #E8473F1A 0%, transparent 70%)", transform: "translate(-50%, 40%)" }}
+        className="absolute pointer-events-none rounded-full animate-float-slower"
+        style={{
+          bottom: -260, left: "40%", width: 640, height: 640,
+          background: "#C0392B", opacity: 0.07,
+        }}
       />
 
-      <div className="relative max-w-7xl mx-auto px-8 pt-32 pb-20 w-full">
+      <div className="relative z-10 max-w-[1240px] mx-auto px-8">
         {/* Eyebrow */}
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-[#E8473F] text-[11px] font-medium uppercase tracking-[0.08em] mb-6"
+        <p
+          className={`text-[11px] font-medium uppercase tracking-[0.14em] mb-7 transition-all duration-500 ${started ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+          style={{ color: "#C0392B", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
         >
-          Uplifting young human ability
-        </motion.p>
+          ▸ Empowering tomorrow&apos;s innovators
+        </p>
 
         {/* Headline */}
-        <h1 className="text-[40px] lg:text-[56px] font-medium leading-tight mb-6">
-          <span className="flex flex-wrap gap-x-3">
-            {headlineWords.map((word, i) => (
-              <motion.span
-                key={word}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 + i * 0.08, duration: 0.5 }}
-                className="text-white"
-              >
-                {word}
-              </motion.span>
-            ))}
+        <h1
+          className="font-medium leading-[0.98] tracking-[-0.035em]"
+          style={{ fontSize: "clamp(44px, 7.2vw, 96px)" }}
+        >
+          <span
+            className={`block text-[#F5F0EA] transition-all duration-700 ${started ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
+            style={{ transitionDelay: "80ms" }}
+          >
+            The skills schools
           </span>
-          <span className="flex flex-wrap gap-x-3 mt-1">
-            {headlineRedWords.map((word, i) => (
-              <motion.span
-                key={word}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 + (headlineWords.length + i) * 0.08, duration: 0.5 }}
-                className="text-[#E8473F]"
-              >
-                {word}
-              </motion.span>
-            ))}
+          <span
+            className={`block transition-all duration-700 ${started ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
+            style={{ color: "#C0392B", transitionDelay: "240ms" }}
+          >
+            forgot to teach.
           </span>
         </h1>
 
         {/* Sub */}
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.5 }}
-          className="text-gray-400 text-base max-w-[560px] mb-10"
+        <p
+          className={`mt-8 text-[18px] leading-[1.55] max-w-[640px] transition-all duration-500 ${started ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+          style={{ color: "rgba(245,240,234,0.7)", transitionDelay: "500ms" }}
         >
-          Experiential learning programs for schools, corporates &
-          institutions — science-backed, play-driven, designed for the next
-          generation.
-        </motion.p>
+          Where learning looks like playing — and the skills are completely real.
+        </p>
 
         {/* CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.95, duration: 0.5 }}
-          className="flex flex-wrap gap-4 mb-16"
+        <div
+          className={`flex flex-wrap gap-3 mt-9 transition-all duration-500 ${started ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+          style={{ transitionDelay: "650ms" }}
         >
           <Link
             href="/contact"
-            className="inline-flex items-center px-6 py-3 bg-[#E8473F] text-white text-sm font-medium rounded-full transition-transform active:scale-[0.98] hover:bg-[#D63B34]"
+            className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full transition-all active:scale-[0.97]"
+            style={{ background: "#C0392B", color: "#F5F0EA" }}
           >
-            Partner with us
+            Explore your potential <ArrowIcon />
           </Link>
           <Link
             href="/programs"
-            className="inline-flex items-center px-6 py-3 border border-white/30 text-white text-sm font-medium rounded-full hover:bg-white/10 transition-colors"
+            className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border transition-colors"
+            style={{ color: "#F5F0EA", borderColor: "rgba(245,240,234,0.5)" }}
           >
-            Explore programs
+            Grow with us
           </Link>
-        </motion.div>
+        </div>
+
+        {/* Hero image grid */}
+        <div
+          className={`mt-16 transition-all duration-700 ${started ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
+          style={{ transitionDelay: "800ms" }}
+        >
+          <div className="grid gap-4" style={{ gridTemplateColumns: "1.4fr 1fr 1fr" }}>
+            <div className="imgph dark" style={{ height: 320 }}>
+              <div className="imgph-tag">HERO · WIDE</div>
+              <div className="imgph-caption">// candid wide shot: 4–6 kids (age 10–14) mid-build at a workshop table, daylight, real expressions of focus + joy. Horizontal.</div>
+            </div>
+            <div className="imgph dark" style={{ height: 320 }}>
+              <div className="imgph-tag">HERO · DETAIL</div>
+              <div className="imgph-caption">// hands close-up: kid sketching on whiteboard / sticking post-its. Tight crop. Vertical.</div>
+            </div>
+            <div className="imgph dark" style={{ height: 320 }}>
+              <div className="imgph-tag">HERO · ENERGY</div>
+              <div className="imgph-caption">// teen pitching to peers, mic in hand, smiling. Vertical.</div>
+            </div>
+          </div>
+        </div>
 
         {/* Stats */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.1, duration: 0.6 }}
-          className="border-t border-white/10 pt-10 grid grid-cols-2 sm:grid-cols-4 gap-8"
+        <div
+          className="mt-16 pt-8 grid"
+          style={{
+            borderTop: "1px solid rgba(245,240,234,0.15)",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: 24,
+          }}
         >
-          {stats.map((stat) => (
-            <StatItem key={stat.label} {...stat} />
+          {stats.map((s) => (
+            <StatItem key={s.label} {...s} />
           ))}
-        </motion.div>
+        </div>
       </div>
+
+      <style>{`
+        @media (max-width: 900px) {
+          #top .hero-img-grid { grid-template-columns: 1fr !important; }
+          #top .stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+      `}</style>
     </section>
   );
 }

@@ -1,99 +1,204 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import {
-  IconPhone,
-  IconPencil,
-  IconBolt,
-  IconChartBar,
-  IconArrowUp,
-} from "@tabler/icons-react";
-import { cn } from "@/lib/utils";
+import { useRef, useEffect, useState } from "react";
 
 const steps = [
-  { label: "Discovery call", Icon: IconPhone, state: "done" as const },
-  { label: "Custom design", Icon: IconPencil, state: "done" as const },
-  { label: "Program delivery", Icon: IconBolt, state: "active" as const },
-  { label: "Impact report", Icon: IconChartBar, state: "upcoming" as const },
-  { label: "Long-term program", Icon: IconArrowUp, state: "upcoming" as const },
+  {
+    label: "Discovery call",
+    state: "done" as const,
+    Icon: () => (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/>
+      </svg>
+    ),
+  },
+  {
+    label: "Custom design",
+    state: "done" as const,
+    Icon: () => (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+      </svg>
+    ),
+  },
+  {
+    label: "Program delivery",
+    state: "active" as const,
+    Icon: () => (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+      </svg>
+    ),
+  },
+  {
+    label: "Impact report",
+    state: "upcoming" as const,
+    Icon: () => (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+      </svg>
+    ),
+  },
+  {
+    label: "Long-term program",
+    state: "upcoming" as const,
+    Icon: () => (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
+      </svg>
+    ),
+  },
 ];
 
+function useReveal(threshold = 0.15) {
+  const ref = useRef<HTMLElement>(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    if (!ref.current) return;
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setInView(true); obs.disconnect(); } },
+      { threshold }
+    );
+    obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, [threshold]);
+  return [ref, inView] as const;
+}
+
 export function JourneySection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+  const [sectionRef, inView] = useReveal(0.1);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [trackVisible, setTrackVisible] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
+    if (!trackRef.current) return;
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setTrackVisible(true); obs.disconnect(); } },
       { threshold: 0.3 }
     );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
+    obs.observe(trackRef.current);
+    return () => obs.disconnect();
   }, []);
 
+  const n = steps.length;
+
   return (
-    <section className="snap-start min-h-screen flex flex-col justify-center bg-white py-[60px] px-8">
-      <div className="max-w-7xl mx-auto">
-        <p className="text-[11px] font-medium uppercase tracking-[0.08em] text-[#3D3D3D] mb-3">
-          How it works
-        </p>
-        <h2 className="text-2xl font-medium text-[#1A1A1A] mb-3">
-          Your organization&apos;s learning path
-        </h2>
-        <p className="text-sm text-[#3D3D3D] max-w-[520px] mb-14">
-          From first conversation to long-term partnership — InnoQuest guides every step.
-        </p>
+    <section
+      ref={sectionRef as React.RefObject<HTMLElement>}
+      className="py-24"
+      style={{ background: "#FFFFFF" }}
+    >
+      <div className="max-w-[1240px] mx-auto px-8">
+        {/* Header */}
+        <div className="journey-head grid gap-16 items-end" style={{ gridTemplateColumns: "1fr 1.2fr" }}>
+          <div className={`transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}>
+            <p
+              className="text-[11px] font-medium uppercase tracking-[0.14em]"
+              style={{ color: "#C0392B", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
+            >
+              ▸ How it works
+            </p>
+            <h2
+              className="mt-[18px] font-medium leading-[1.05]"
+              style={{ fontSize: "clamp(34px, 4.4vw, 56px)", letterSpacing: "-0.03em" }}
+            >
+              Your organization&apos;s<br />
+              <span className="scribble">learning path</span>.
+            </h2>
+          </div>
+          <div
+            className={`transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
+            style={{ transitionDelay: "120ms" }}
+          >
+            <p className="text-[17px] leading-[1.55]" style={{ color: "rgba(26,26,26,0.6)", maxWidth: 480 }}>
+              From first conversation to long-term partnership — InnoQuest guides every step.
+            </p>
+          </div>
+        </div>
 
-        {/* Step track */}
-        <div ref={ref} className="overflow-x-auto pb-4">
-          <div className="flex items-start gap-0 min-w-[600px]">
-            {steps.map((step, i) => {
-              const isDone = step.state === "done";
-              const isActive = step.state === "active";
-              const isLast = i === steps.length - 1;
+        {/* Journey track */}
+        <div ref={trackRef} className="mt-[72px] relative overflow-x-auto">
+          <div
+            className="relative"
+            style={{
+              display: "grid",
+              gridTemplateColumns: `repeat(${n}, minmax(170px, 1fr))`,
+              minWidth: 800,
+            }}
+          >
+            {/* Background connector */}
+            <div
+              className="absolute rounded-sm"
+              style={{
+                left: `calc(100% / ${n} / 2)`,
+                right: `calc(100% / ${n} / 2)`,
+                top: 36,
+                height: 3,
+                background: "#E8E0D5",
+                zIndex: 0,
+              }}
+            />
+            {/* Red fill */}
+            <div
+              className="absolute rounded-sm"
+              style={{
+                left: `calc(100% / ${n} / 2)`,
+                top: 36,
+                height: 3,
+                background: "#C0392B",
+                zIndex: 1,
+                width: trackVisible ? `calc(100% * 2 / ${n})` : "0%",
+                transition: "width 1.6s cubic-bezier(0.2, 0.7, 0.2, 1)",
+              }}
+            />
 
+            {steps.map((s, i) => {
+              const isDone = s.state === "done";
+              const isActive = s.state === "active";
               return (
-                <div key={step.label} className="flex items-start">
-                  {/* Step node */}
-                  <div className="flex flex-col items-center gap-3">
-                    <div
-                      className={cn(
-                        "w-12 h-12 rounded-full flex items-center justify-center transition-all duration-700",
-                        isDone && "bg-[#E8473F]",
-                        isActive && "bg-[#1A1A1A] ring-2 ring-[#E8473F] ring-offset-2",
-                        !isDone && !isActive && "bg-[#E8E0D5]"
-                      )}
-                      style={visible ? { transitionDelay: `${i * 150}ms` } : { opacity: 0 }}
-                    >
-                      <step.Icon
-                        size={20}
-                        className={cn(
-                          isDone && "text-white",
-                          isActive && "text-[#E8473F]",
-                          !isDone && !isActive && "text-[#3D3D3D]"
-                        )}
-                      />
-                    </div>
-                    <span
-                      className={cn(
-                        "text-xs font-medium text-center max-w-[80px]",
-                        isActive ? "text-[#E8473F]" : "text-[#3D3D3D]"
-                      )}
-                    >
-                      {step.label}
-                    </span>
+                <div
+                  key={i}
+                  className="flex flex-col items-center text-center gap-4 relative z-10"
+                >
+                  <div
+                    className="w-[72px] h-[72px] rounded-full grid place-items-center transition-transform duration-700"
+                    style={{
+                      background: isDone ? "#C0392B" : isActive ? "#1A1A1A" : "#E8E0D5",
+                      border: isActive ? "3px solid #C0392B" : "none",
+                      color: isDone || isActive ? "#F5F0EA" : "#3D3D3D",
+                      boxShadow: isActive ? "0 8px 24px rgba(192,57,43,0.25)" : "none",
+                      transform: trackVisible ? "scale(1)" : "scale(0.6)",
+                      transitionDelay: `${i * 120}ms`,
+                    }}
+                  >
+                    <s.Icon />
                   </div>
-
-                  {/* Connector */}
-                  {!isLast && (
-                    <div className="relative w-20 h-0.5 mt-6 mx-1 overflow-hidden bg-[#E8E0D5] rounded-full">
-                      {isDone && (
-                        <div
-                          className="absolute inset-0 bg-[#E8473F] rounded-full transition-all duration-700"
-                          style={visible ? { width: "100%", transitionDelay: `${i * 150 + 200}ms` } : { width: 0 }}
-                        />
-                      )}
-                    </div>
+                  <p
+                    className="text-[11px] uppercase tracking-[0.08em]"
+                    style={{
+                      color: "rgba(26,26,26,0.4)",
+                      fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace",
+                    }}
+                  >
+                    Step 0{i + 1}
+                  </p>
+                  <p
+                    className="text-[15px] font-medium"
+                    style={{ color: isActive ? "#C0392B" : "#1A1A1A" }}
+                  >
+                    {s.label}
+                  </p>
+                  {isActive && (
+                    <span
+                      className="inline-flex items-center px-[10px] py-[5px] rounded-full text-[10px] font-medium uppercase tracking-[0.06em]"
+                      style={{
+                        background: "#C0392B",
+                        color: "#F5F0EA",
+                        fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace",
+                      }}
+                    >
+                      You are here
+                    </span>
                   )}
                 </div>
               );
@@ -101,6 +206,12 @@ export function JourneySection() {
           </div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 900px) {
+          .journey-head { grid-template-columns: 1fr !important; gap: 24px !important; }
+        }
+      `}</style>
     </section>
   );
 }

@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { ScrollNav } from "@/components/layout/ScrollNav";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { AudienceSwitcher } from "@/components/sections/AudienceSwitcher";
 import { MethodologySection } from "@/components/sections/MethodologySection";
@@ -13,15 +14,16 @@ export default function HomePage() {
   return (
     <>
       <Navbar />
-      <main className="h-screen overflow-y-scroll snap-y snap-mandatory">
+      <ScrollNav />
+      <main className="h-screen overflow-y-scroll snap-y snap-proximity">
         <HeroSection />
-        <AudienceSwitcher />
-        <MethodologySection />
-        <ProgramsSection />
-        <PartnersSection />
-        <JourneySection />
-        <TestimonialsSection />
-        <CTASection />
+        <div id="section-who-we-serve"><AudienceSwitcher /></div>
+        <div id="section-method"><MethodologySection /></div>
+        <div id="section-experiences"><ProgramsSection /></div>
+        <div id="section-partners"><PartnersSection /></div>
+        <div id="section-journey"><JourneySection /></div>
+        <div id="section-reviews"><TestimonialsSection /></div>
+        <div id="section-cta"><CTASection /></div>
         <Footer />
       </main>
     </>

@@ -28,7 +28,7 @@ export default function CorporatesPage() {
               For corporates & CSR
             </p>
             <h1 className="text-4xl font-medium text-white mb-4 max-w-2xl">
-              A CSR program that actually works
+              A CSR Program with everlasting impact.
             </h1>
             <p className="text-gray-400 text-sm max-w-[520px] mb-8">
               Partner with InnoQuest to deliver meaningful youth development under your CSR strategy. Your team gets a compelling story — the kids get life-changing skills.
@@ -56,10 +56,9 @@ export default function CorporatesPage() {
         <div className="bg-white py-20 px-8">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-2xl font-medium text-[#1A1A1A] mb-8">Recommended program</h2>
-            <Link href="/programs/corporate-csr-camp" className="block bg-[#F5F0EA] rounded-[14px] p-8 max-w-xl group hover:-translate-y-1 transition-transform">
-              <h3 className="text-lg font-medium text-[#1A1A1A] group-hover:text-[#E8473F] transition-colors mb-2">Corporate CSR Camp</h3>
-              <p className="text-sm text-[#3D3D3D] mb-4">Meaningful impact. Measurable outcomes. A story worth telling.</p>
-              <span className="text-sm text-[#E8473F]">View program →</span>
+            <Link href="/custom" className="block bg-[#F5F0EA] rounded-[14px] p-8 max-w-xl group hover:-translate-y-1 transition-transform">
+              <p className="text-sm text-[#3D3D3D] mb-4">Every corporate program is built from scratch; tell us your goals and we&apos;ll design the rest.</p>
+              <span className="text-sm text-[#E8473F]">Talk to us →</span>
             </Link>
           </div>
         </div>

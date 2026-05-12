@@ -8,32 +8,24 @@ import { IconMenu2, IconX, IconChevronDown } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  {
-    label: "Programs",
-    href: "/programs",
-    dropdown: [
-      { label: "The Change Lab", href: "/programs/the-change-lab" },
-      { label: "Entrepreneur in Innovation", href: "/programs/entrepreneur-in-innovation" },
-      { label: "Break the Market", href: "/programs/break-the-market" },
-      { label: "Capital Minds", href: "/programs/capital-minds" },
-    ],
-  },
-  { label: "For corporates", href: "/corporates" },
-  { label: "For schools", href: "/schools" },
-  { label: "Custom solutions", href: "/custom" },
+  { label: "Experiences", href: "/programs" },
+  { label: "What we do", href: "/what-we-do" },
+  { label: "For Schools", href: "/schools" },
+  { label: "Corporate & CSR", href: "/corporates" },
+  { label: "Design yours", href: "/custom" },
   {
     label: "About",
     href: "/about",
     dropdown: [
       { label: "About us", href: "/about" },
-      { label: "Our team", href: "/team" },
-      { label: "Blog", href: "/blog" },
+      { label: "Our people", href: "/team" },
     ],
   },
 ];
 
 export function Navbar() {
   const pathname = usePathname();
+  const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -43,7 +35,7 @@ export function Navbar() {
     const target = container ?? window;
     const onScroll = () => {
       const y = container ? container.scrollTop : window.scrollY;
-      setScrolled(y > 60);
+      setScrolled(y > 80);
     };
     target.addEventListener("scroll", onScroll, { passive: true });
     return () => target.removeEventListener("scroll", onScroll);
@@ -58,9 +50,15 @@ export function Navbar() {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        scrolled || mobileOpen
-          ? "bg-white shadow-sm"
-          : "bg-transparent"
+        isHome
+          ? scrolled && !mobileOpen
+            ? "-translate-y-full opacity-0 pointer-events-none"
+            : mobileOpen
+              ? "bg-white shadow-sm"
+              : "bg-transparent"
+          : scrolled || mobileOpen
+            ? "bg-white shadow-sm"
+            : "bg-transparent"
       )}
     >
       <nav className="max-w-7xl mx-auto px-8 h-16 flex items-center justify-between">
@@ -94,7 +92,7 @@ export function Navbar() {
                     <IconChevronDown size={14} className="transition-transform group-hover:rotate-180" />
                   </button>
                   <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150">
-                    <div className="bg-white rounded-[14px] shadow-lg border border-gray-100 py-2 min-w-[220px]">
+                    <div className="bg-white rounded-[14px] shadow-lg border border-gray-100 py-2 min-w-[180px]">
                       {link.dropdown.map((item) => (
                         <Link
                           key={item.href}

@@ -2,22 +2,24 @@ import Link from "next/link";
 import Image from "next/image";
 
 const footerLinks = {
-  Programs: [
-    { label: "Workshops", href: "/programs" },
-    { label: "Long-term", href: "/programs/leadership-program" },
-    { label: "Custom", href: "/custom" },
-    { label: "CSR camps", href: "/programs/corporate-csr-camp" },
+  Experiences: [
+    { label: "All experiences", href: "/programs" },
+    { label: "The Change Lab", href: "/programs/the-change-lab" },
+    { label: "Entrepreneur in Innovation", href: "/programs/entrepreneur-in-innovation" },
+    { label: "Break the Market", href: "/programs/break-the-market" },
+    { label: "Capital Minds", href: "/programs/capital-minds" },
+    { label: "Design yours", href: "/custom" },
   ],
-  Audiences: [
-    { label: "Corporates", href: "/corporates" },
-    { label: "Schools", href: "/schools" },
+  "Who we serve": [
+    { label: "For Schools", href: "/schools" },
+    { label: "Corporate & CSR", href: "/corporates" },
     { label: "Parents", href: "/programs" },
     { label: "Students", href: "/programs" },
   ],
   Company: [
+    { label: "What we do", href: "/what-we-do" },
     { label: "About us", href: "/about" },
-    { label: "Our team", href: "/team" },
-    { label: "Blog", href: "/blog" },
+    { label: "Our people", href: "/team" },
     { label: "Contact", href: "/contact" },
   ],
 };
@@ -67,7 +69,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-white/10 mt-16 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-600">
-          <span>© 2025 InnoQuest. All rights reserved.</span>
+          <span>© 2026 InnoQuest. All rights reserved.</span>
           <span>Bangkok, Thailand</span>
         </div>
       </div>
