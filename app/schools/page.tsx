@@ -74,7 +74,7 @@ export default function SchoolsPage() {
                 <div key={m.tag} className="card-lift" style={{
                   background: m.bg, borderRadius: 14, padding: 32,
                   minHeight: 380, display: "flex", flexDirection: "column", justifyContent: "space-between",
-                  border: m.bg === "#FFFFFF" ? "1px solid rgba(18,18,18,0.06)" : undefined,
+                  border: (m.bg as string) === "#FFFFFF" ? "1px solid rgba(18,18,18,0.06)" : undefined,
                 }}>
                   <div>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
