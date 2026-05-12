@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollNav } from "@/components/layout/ScrollNav";
+import { CinematicIntro } from "@/components/sections/CinematicIntro";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { AudienceSwitcher } from "@/components/sections/AudienceSwitcher";
 import { MethodologySection } from "@/components/sections/MethodologySection";
@@ -15,7 +16,8 @@ export default function HomePage() {
     <>
       <Navbar />
       <ScrollNav />
-      <main className="h-screen overflow-y-scroll snap-y snap-proximity">
+      <main className="h-screen overflow-y-scroll">
+        <CinematicIntro />
         <HeroSection />
         <div id="section-who-we-serve"><AudienceSwitcher /></div>
         <div id="section-method"><MethodologySection /></div>

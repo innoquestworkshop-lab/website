@@ -1,3 +1,13 @@
+/** Full-screen cinematic intro — shown before the hero. */
+export const cinematicIntro = {
+  eyebrow: "Welcome to InnoQuest",
+  line1: "The Future",
+  line2: "Of Human",
+  line3: "Ability.",
+  sub: "Transcend traditional learning. Immerse in experiences that forge real-world mastery.",
+  scrollLabel: "Scroll to discover",
+} as const;
+
 /** Home page hero section content. */
 export const heroSection = {
   eyebrow: "▸ Uplifting young human ability",
