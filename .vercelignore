@@ -1,0 +1,7 @@
+node_modules
+Event images
+.claude
+.claude-flow
+.mcp.json
+*.md
+!README.md
