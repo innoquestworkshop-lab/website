@@ -39,9 +39,9 @@ export default function ParentsPage() {
       <Navbar />
       <main className="pt-16">
         {/* Hero */}
-        <div style={{ background: "#1A1A1A" }} className="py-20 px-8">
+        <div style={{ background: "#121212" }} className="py-20 px-8">
           <div className="max-w-7xl mx-auto">
-            <p className="text-[11px] font-medium uppercase tracking-[0.08em] text-[#E8473F] mb-3">
+            <p className="text-[11px] font-medium uppercase tracking-[0.08em] text-[#8A0F14] mb-3">
               For parents
             </p>
             <h1 className="text-4xl font-medium text-white mb-4 max-w-2xl">
@@ -52,7 +52,7 @@ export default function ParentsPage() {
             </p>
             <Link
               href="/contact"
-              className="inline-flex items-center px-6 py-3 bg-[#E8473F] text-white text-sm font-medium rounded-full hover:bg-[#D63B34]"
+              className="inline-flex items-center px-6 py-3 bg-[#8A0F14] text-white text-sm font-medium rounded-full hover:bg-[#D63B34]"
             >
               Talk to us →
             </Link>
@@ -62,12 +62,12 @@ export default function ParentsPage() {
         {/* Why it matters */}
         <div style={{ background: "#F5F0EA" }} className="py-20 px-8">
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-2xl font-medium text-[#1A1A1A] mb-10">Why it matters</h2>
+            <h2 className="text-2xl font-medium text-[#121212] mb-10">Why it matters</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {whyItMatters.map((item) => (
                 <div key={item.title} className="bg-white rounded-[14px] p-6">
-                  <h3 className="text-base font-medium text-[#1A1A1A] mb-2">{item.title}</h3>
-                  <p className="text-sm text-[#3D3D3D] leading-relaxed">{item.body}</p>
+                  <h3 className="text-base font-medium text-[#121212] mb-2">{item.title}</h3>
+                  <p className="text-sm text-[#4A4A4A] leading-relaxed">{item.body}</p>
                 </div>
               ))}
             </div>
@@ -78,7 +78,7 @@ export default function ParentsPage() {
         {parentPrograms.length > 0 && (
           <div className="bg-white py-20 px-8">
             <div className="max-w-7xl mx-auto">
-              <h2 className="text-2xl font-medium text-[#1A1A1A] mb-10">Programs your child can join</h2>
+              <h2 className="text-2xl font-medium text-[#121212] mb-10">Programs your child can join</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {parentPrograms.map((p) => (
                   <Link
@@ -86,11 +86,11 @@ export default function ParentsPage() {
                     href={`/programs/${p.slug}`}
                     className="bg-[#F5F0EA] rounded-[14px] p-6 group transition-transform hover:-translate-y-1"
                   >
-                    <h3 className="text-base font-medium text-[#1A1A1A] group-hover:text-[#E8473F] transition-colors mb-2">
+                    <h3 className="text-base font-medium text-[#121212] group-hover:text-[#8A0F14] transition-colors mb-2">
                       {p.name}
                     </h3>
-                    <p className="text-sm text-[#3D3D3D] leading-relaxed mb-4 line-clamp-2">{p.tagline}</p>
-                    <p className="text-xs text-[#3D3D3D]">{p.duration} · Ages {p.ages}</p>
+                    <p className="text-sm text-[#4A4A4A] leading-relaxed mb-4 line-clamp-2">{p.tagline}</p>
+                    <p className="text-xs text-[#4A4A4A]">{p.duration} · Ages {p.ages}</p>
                   </Link>
                 ))}
               </div>

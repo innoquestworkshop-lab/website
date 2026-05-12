@@ -126,7 +126,7 @@ export function ProgramsSection() {
           <div className={`transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}>
             <p
               className="text-[11px] font-medium uppercase tracking-[0.14em]"
-              style={{ color: "#C0392B", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
+              style={{ color: "#8A0F14", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
             >
               ▸ Programs
             </p>
@@ -142,7 +142,7 @@ export function ProgramsSection() {
             className={`transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
             style={{ transitionDelay: "120ms" }}
           >
-            <p className="text-[17px] leading-[1.55]" style={{ color: "rgba(26,26,26,0.6)", maxWidth: 480 }}>
+            <p className="text-[17px] leading-[1.55]" style={{ color: "rgba(18,18,18,0.6)", maxWidth: 480 }}>
               From a single-day spark to a semester-long transformation —
               built around your goals.
             </p>
@@ -158,7 +158,7 @@ export function ProgramsSection() {
           <div
             className={`card-lift rounded-[14px] relative overflow-hidden transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
             style={{
-              background: "#1A1A1A",
+              background: "#121212",
               color: "#F5F0EA",
               gridRow: "1 / span 2",
               padding: 36,
@@ -171,10 +171,10 @@ export function ProgramsSection() {
             {/* Red glow circle */}
             <div
               className="absolute rounded-full pointer-events-none"
-              style={{ top: -100, right: -100, width: 320, height: 320, background: "#C0392B", opacity: 0.18, filter: "blur(2px)" }}
+              style={{ top: -100, right: -100, width: 320, height: 320, background: "#8A0F14", opacity: 0.18, filter: "blur(2px)" }}
             />
             <div className="relative z-10">
-              <PillTag style={{ background: "#C0392B", color: "#F5F0EA" }}>★ Most popular</PillTag>
+              <PillTag style={{ background: "#8A0F14", color: "#F5F0EA" }}>★ Most popular</PillTag>
               <h3
                 className="mt-5 font-medium leading-[1.1]"
                 style={{ fontSize: "clamp(28px, 3.4vw, 44px)", letterSpacing: "-0.025em", maxWidth: 460 }}
@@ -198,7 +198,7 @@ export function ProgramsSection() {
               <Link
                 href={`/programs/${featuredProgram.slug}`}
                 className="mt-[22px] inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full transition-all active:scale-[0.97]"
-                style={{ background: "#C0392B", color: "#F5F0EA" }}
+                style={{ background: "#8A0F14", color: "#F5F0EA" }}
               >
                 Explore program <ArrowIcon />
               </Link>
@@ -212,17 +212,17 @@ export function ProgramsSection() {
           >
             <p
               className="text-[11px] uppercase tracking-[0.14em]"
-              style={{ color: "rgba(26,26,26,0.6)", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
+              style={{ color: "rgba(18,18,18,0.6)", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
             >
               Satisfaction score
             </p>
             <div
               className="font-medium leading-none tabular-nums"
-              style={{ fontSize: "clamp(64px, 7vw, 104px)", color: "#C0392B", letterSpacing: "-0.04em" }}
+              style={{ fontSize: "clamp(64px, 7vw, 104px)", color: "#8A0F14", letterSpacing: "-0.04em" }}
             >
-              <CountUp to={96} suffix="%" />
+              <CountUp to={98} suffix="%" />
             </div>
-            <p className="text-[14px] leading-[1.7]" style={{ color: "rgba(26,26,26,0.6)", maxWidth: 280 }}>
+            <p className="text-[14px] leading-[1.7]" style={{ color: "rgba(18,18,18,0.6)", maxWidth: 280 }}>
               of teachers say students returned to class more engaged.
             </p>
             {/* Spinning badge */}
@@ -236,7 +236,7 @@ export function ProgramsSection() {
               </defs>
               <text
                 fontSize="9"
-                fill="#1A1A1A"
+                fill="#121212"
                 letterSpacing="2"
                 style={{ fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
               >
@@ -252,23 +252,23 @@ export function ProgramsSection() {
               background: "#FFFFFF",
               padding: 28,
               minHeight: 222,
-              border: "1px solid rgba(26,26,26,0.06)",
+              border: "1px solid rgba(18,18,18,0.06)",
               transitionDelay: "200ms",
             }}
           >
             <p
               className="text-[11px] uppercase tracking-[0.14em]"
-              style={{ color: "rgba(26,26,26,0.6)", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
+              style={{ color: "rgba(18,18,18,0.6)", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
             >
               Students trained
             </p>
             <div
               className="font-medium leading-none"
-              style={{ fontSize: "clamp(64px, 7vw, 104px)", color: "#C0392B", letterSpacing: "-0.04em" }}
+              style={{ fontSize: "clamp(64px, 7vw, 104px)", color: "#8A0F14", letterSpacing: "-0.04em" }}
             >
-              <CountUp to={400} suffix="+" />
+              <CountUp to={500} suffix="+" />
             </div>
-            <p className="text-[14px] leading-[1.7]" style={{ color: "rgba(26,26,26,0.6)", maxWidth: 280 }}>
+            <p className="text-[14px] leading-[1.7]" style={{ color: "rgba(18,18,18,0.6)", maxWidth: 280 }}>
               across Thailand since 2021. From Bangkok to Chiang Mai.
             </p>
           </div>
@@ -287,7 +287,7 @@ export function ProgramsSection() {
               style={{
                 background: "#FFFFFF",
                 padding: 22,
-                border: "1px solid rgba(26,26,26,0.06)",
+                border: "1px solid rgba(18,18,18,0.06)",
                 minHeight: 200,
                 textDecoration: "none",
                 color: "inherit",
@@ -296,9 +296,9 @@ export function ProgramsSection() {
             >
               <div
                 className="w-11 h-11 rounded-[10px] grid place-items-center"
-                style={{ background: "#1A1A1A" }}
+                style={{ background: "#121212" }}
               >
-                <p.Icon color="#C0392B" />
+                <p.Icon color="#8A0F14" />
               </div>
               <div className="flex-1">
                 <h4
@@ -309,8 +309,8 @@ export function ProgramsSection() {
                 </h4>
               </div>
               <div className="flex gap-[6px] flex-wrap">
-                <PillTag style={{ background: "#F5F0EA", color: "#1A1A1A" }}>{p.dur}</PillTag>
-                <PillTag style={{ background: "#F5F0EA", color: "#1A1A1A" }}>Ages {p.ages}</PillTag>
+                <PillTag style={{ background: "#F5F0EA", color: "#121212" }}>{p.dur}</PillTag>
+                <PillTag style={{ background: "#F5F0EA", color: "#121212" }}>Ages {p.ages}</PillTag>
               </div>
             </Link>
           ))}
@@ -319,7 +319,7 @@ export function ProgramsSection() {
             href="/custom"
             className={`card-lift rounded-[14px] flex flex-col justify-between transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
             style={{
-              background: "#1A1A1A",
+              background: "#121212",
               color: "#F5F0EA",
               padding: 22,
               minHeight: 200,
@@ -342,7 +342,7 @@ export function ProgramsSection() {
               </h4>
               <span
                 className="text-[13px] font-medium inline-flex items-center gap-[6px]"
-                style={{ color: "#C0392B" }}
+                style={{ color: "#8A0F14" }}
               >
                 Start a custom brief <ArrowIcon />
               </span>

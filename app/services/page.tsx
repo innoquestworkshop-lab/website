@@ -57,9 +57,9 @@ export default function ServicesPage() {
       <Navbar />
       <main className="pt-16">
         {/* Hero */}
-        <div style={{ background: "#1A1A1A" }} className="py-20 px-8">
+        <div style={{ background: "#121212" }} className="py-20 px-8">
           <div className="max-w-7xl mx-auto">
-            <p className="text-[11px] font-medium uppercase tracking-[0.08em] text-[#E8473F] mb-3">
+            <p className="text-[11px] font-medium uppercase tracking-[0.08em] text-[#8A0F14] mb-3">
               Our Services
             </p>
             <h1 className="text-4xl font-medium text-white mb-4 max-w-2xl">
@@ -76,13 +76,13 @@ export default function ServicesPage() {
           <div className="max-w-7xl mx-auto flex gap-8">
             <a
               href="#design"
-              className="py-4 text-sm font-medium border-b-2 border-transparent hover:border-[#E8473F] hover:text-[#E8473F] transition-colors text-[#1A1A1A]"
+              className="py-4 text-sm font-medium border-b-2 border-transparent hover:border-[#8A0F14] hover:text-[#8A0F14] transition-colors text-[#121212]"
             >
               Content, Game Design & Licensing
             </a>
             <a
               href="#delivery"
-              className="py-4 text-sm font-medium border-b-2 border-transparent hover:border-[#E8473F] hover:text-[#E8473F] transition-colors text-[#1A1A1A]"
+              className="py-4 text-sm font-medium border-b-2 border-transparent hover:border-[#8A0F14] hover:text-[#8A0F14] transition-colors text-[#121212]"
             >
               Delivery, Coordination & Talent
             </a>
@@ -92,27 +92,27 @@ export default function ServicesPage() {
         {/* Design service */}
         <div id="design" className="py-20 px-8" style={{ background: "#F5F0EA" }}>
           <div className="max-w-7xl mx-auto">
-            <p className="text-[11px] font-medium uppercase tracking-[0.08em] text-[#E8473F] mb-3">
+            <p className="text-[11px] font-medium uppercase tracking-[0.08em] text-[#8A0F14] mb-3">
               Service 01
             </p>
-            <h2 className="text-3xl font-medium text-[#1A1A1A] mb-3 max-w-xl">
+            <h2 className="text-3xl font-medium text-[#121212] mb-3 max-w-xl">
               Content, Game Design & Licensing
             </h2>
-            <p className="text-sm text-[#3D3D3D] max-w-[560px] mb-12 leading-relaxed">
+            <p className="text-sm text-[#4A4A4A] max-w-[560px] mb-12 leading-relaxed">
               Build your own ecosystem using our battle-tested IP. We help you architect a curriculum from scratch that integrates innovation directly into your organisation's DNA.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
               {designServices.map((s) => (
                 <div key={s.title} className="bg-white rounded-[14px] p-6">
-                  <h3 className="text-base font-medium text-[#1A1A1A] mb-2">{s.title}</h3>
-                  <p className="text-sm text-[#3D3D3D] leading-relaxed">{s.body}</p>
+                  <h3 className="text-base font-medium text-[#121212] mb-2">{s.title}</h3>
+                  <p className="text-sm text-[#4A4A4A] leading-relaxed">{s.body}</p>
                 </div>
               ))}
             </div>
             <div className="mt-10">
               <Link
                 href="/contact"
-                className="inline-flex items-center px-6 py-3 bg-[#E8473F] text-white text-sm font-medium rounded-full hover:bg-[#D63B34] transition-colors"
+                className="inline-flex items-center px-6 py-3 bg-[#8A0F14] text-white text-sm font-medium rounded-full hover:bg-[#D63B34] transition-colors"
               >
                 Enquire about design services →
               </Link>
@@ -123,27 +123,27 @@ export default function ServicesPage() {
         {/* Delivery service */}
         <div id="delivery" className="py-20 px-8 bg-white">
           <div className="max-w-7xl mx-auto">
-            <p className="text-[11px] font-medium uppercase tracking-[0.08em] text-[#E8473F] mb-3">
+            <p className="text-[11px] font-medium uppercase tracking-[0.08em] text-[#8A0F14] mb-3">
               Service 02
             </p>
-            <h2 className="text-3xl font-medium text-[#1A1A1A] mb-3 max-w-xl">
+            <h2 className="text-3xl font-medium text-[#121212] mb-3 max-w-xl">
               Delivery, Coordination & Talent
             </h2>
-            <p className="text-sm text-[#3D3D3D] max-w-[560px] mb-12 leading-relaxed">
+            <p className="text-sm text-[#4A4A4A] max-w-[560px] mb-12 leading-relaxed">
               Professional execution for any scale. If it relates to innovation and learning, we can deliver it.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {deliveryServices.map((s) => (
                 <div key={s.title} className="rounded-[14px] p-6" style={{ background: "#F5F0EA" }}>
-                  <h3 className="text-base font-medium text-[#1A1A1A] mb-2">{s.title}</h3>
-                  <p className="text-sm text-[#3D3D3D] leading-relaxed">{s.body}</p>
+                  <h3 className="text-base font-medium text-[#121212] mb-2">{s.title}</h3>
+                  <p className="text-sm text-[#4A4A4A] leading-relaxed">{s.body}</p>
                 </div>
               ))}
             </div>
             <div className="mt-10">
               <Link
                 href="/contact"
-                className="inline-flex items-center px-6 py-3 bg-[#E8473F] text-white text-sm font-medium rounded-full hover:bg-[#D63B34] transition-colors"
+                className="inline-flex items-center px-6 py-3 bg-[#8A0F14] text-white text-sm font-medium rounded-full hover:bg-[#D63B34] transition-colors"
               >
                 Enquire about event services →
               </Link>

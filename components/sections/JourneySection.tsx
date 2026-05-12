@@ -94,7 +94,7 @@ export function JourneySection() {
           <div className={`transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}>
             <p
               className="text-[11px] font-medium uppercase tracking-[0.14em]"
-              style={{ color: "#C0392B", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
+              style={{ color: "#8A0F14", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
             >
               ▸ How it works
             </p>
@@ -110,7 +110,7 @@ export function JourneySection() {
             className={`transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
             style={{ transitionDelay: "120ms" }}
           >
-            <p className="text-[17px] leading-[1.55]" style={{ color: "rgba(26,26,26,0.6)", maxWidth: 480 }}>
+            <p className="text-[17px] leading-[1.55]" style={{ color: "rgba(18,18,18,0.6)", maxWidth: 480 }}>
               From first conversation to long-term partnership — InnoQuest guides every step.
             </p>
           </div>
@@ -145,7 +145,7 @@ export function JourneySection() {
                 left: `calc(100% / ${n} / 2)`,
                 top: 36,
                 height: 3,
-                background: "#C0392B",
+                background: "#8A0F14",
                 zIndex: 1,
                 width: trackVisible ? `calc(100% * 2 / ${n})` : "0%",
                 transition: "width 1.6s cubic-bezier(0.2, 0.7, 0.2, 1)",
@@ -163,9 +163,9 @@ export function JourneySection() {
                   <div
                     className="w-[72px] h-[72px] rounded-full grid place-items-center transition-transform duration-700"
                     style={{
-                      background: isDone ? "#C0392B" : isActive ? "#1A1A1A" : "#E8E0D5",
-                      border: isActive ? "3px solid #C0392B" : "none",
-                      color: isDone || isActive ? "#F5F0EA" : "#3D3D3D",
+                      background: isDone ? "#8A0F14" : isActive ? "#121212" : "#E8E0D5",
+                      border: isActive ? "3px solid #8A0F14" : "none",
+                      color: isDone || isActive ? "#F5F0EA" : "#4A4A4A",
                       boxShadow: isActive ? "0 8px 24px rgba(192,57,43,0.25)" : "none",
                       transform: trackVisible ? "scale(1)" : "scale(0.6)",
                       transitionDelay: `${i * 120}ms`,
@@ -176,7 +176,7 @@ export function JourneySection() {
                   <p
                     className="text-[11px] uppercase tracking-[0.08em]"
                     style={{
-                      color: "rgba(26,26,26,0.4)",
+                      color: "rgba(18,18,18,0.4)",
                       fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace",
                     }}
                   >
@@ -184,7 +184,7 @@ export function JourneySection() {
                   </p>
                   <p
                     className="text-[15px] font-medium"
-                    style={{ color: isActive ? "#C0392B" : "#1A1A1A" }}
+                    style={{ color: isActive ? "#8A0F14" : "#121212" }}
                   >
                     {s.label}
                   </p>
@@ -192,7 +192,7 @@ export function JourneySection() {
                     <span
                       className="inline-flex items-center px-[10px] py-[5px] rounded-full text-[10px] font-medium uppercase tracking-[0.06em]"
                       style={{
-                        background: "#C0392B",
+                        background: "#8A0F14",
                         color: "#F5F0EA",
                         fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace",
                       }}

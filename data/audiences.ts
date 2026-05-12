@@ -1,0 +1,81 @@
+/** Audience tabs for the home page AudienceSwitcher + audience cards on What We Do. */
+export type AudienceTab = {
+  id: string;
+  tab: string;
+  title: string;
+  body: string;
+  link: { text: string; href: string };
+  bullets: string[];
+  imgCaption: string;
+};
+
+export const audienceTabs: AudienceTab[] = [
+  {
+    id: "corp",
+    tab: "For corporates & CSR",
+    title: "Corporate & CSR programs",
+    body: "Partner with InnoQuest to deliver meaningful youth development under your CSR strategy. We design, facilitate, and produce impact reports. Your team gets a compelling story — the kids get life-changing skills.",
+    link: { text: "Explore Possibilities", href: "/corporates" },
+    bullets: ["Impact reports", "Branded outcomes", "Custom CSR design"],
+    imgCaption:
+      "// photo: corporate team observing kids workshop, two CSR leads smiling. Wide. Daylight.",
+  },
+  {
+    id: "school",
+    tab: "For schools",
+    title: "School & institution programs",
+    body: "From one-day workshops to semester-long journeys. Our learning designers align with your curriculum, teachers, and academic calendar — so programs enhance what you already do.",
+    link: { text: "Explore Possibilities", href: "/schools" },
+    bullets: ["Curriculum-aligned", "Teacher onboarding", "Semester-friendly"],
+    imgCaption:
+      "// photo: classroom shot — teacher + facilitator working with students at desks arranged in clusters.",
+  },
+  {
+    id: "parent",
+    tab: "For parents",
+    title: "Programs for parents & families",
+    body: "Give your child skills that school doesn't teach: critical thinking, creativity, and confidence. Designed by child development specialists, in safe and fun environments your kids will love.",
+    link: { text: "See InnoQuest's Programs", href: "/programs" },
+    bullets: ["Safe environments", "Specialist-designed", "Holiday camps"],
+    imgCaption:
+      "// photo: parent dropping off child at workshop, child smiling running to friends.",
+  },
+  {
+    id: "student",
+    tab: "For students",
+    title: "Hey, students!",
+    body: "Tired of sitting and listening? Us too. Come build, create, and solve real challenges alongside other curious kids. No textbooks. No boring lectures. Just you, your ideas, and your team.",
+    link: { text: "See student programs", href: "/programs" },
+    bullets: ["Real challenges", "Team-based", "No textbooks"],
+    imgCaption:
+      "// photo: students high-fiving over prototype on table, sticky notes everywhere.",
+  },
+];
+
+/** Audience cards used on the What We Do page. */
+export const audienceCards = [
+  {
+    label: "Schools & Institutions",
+    body: "Programs that align with your curriculum and calendar, designed alongside your teachers, not on top of them.",
+    href: "/schools",
+    cta: "Learn more",
+  },
+  {
+    label: "Corporates & CSR",
+    body: "Turn your CSR budget into a story worth telling. We handle everything — your team shows up, the kids leave with real skills.",
+    href: "/corporates",
+    cta: "Learn more",
+  },
+  {
+    label: "Parents & Families",
+    body: "Give your child the skills that formal education doesn't prioritise — creativity, confidence, and critical thinking.",
+    href: "/programs",
+    cta: "See programs",
+  },
+  {
+    label: "Students",
+    body: "Come solve real problems with real teams. No textbooks. No right answers. Just you, your ideas, and a challenge worth tackling.",
+    href: "/programs",
+    cta: "See programs",
+  },
+];

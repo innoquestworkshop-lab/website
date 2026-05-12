@@ -50,7 +50,7 @@ function Stars({ count }: { count: number }) {
 
 function QuoteIcon() {
   return (
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="#C0392B">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="#8A0F14">
       <path d="M9.41 6c-3.25 0-5.91 2.66-5.91 5.91V18h6.09v-6.09H6.5c0-1.6 1.31-2.91 2.91-2.91V6zm10 0c-3.25 0-5.91 2.66-5.91 5.91V18h6.09v-6.09H16.5c0-1.6 1.31-2.91 2.91-2.91V6z"/>
     </svg>
   );
@@ -83,7 +83,7 @@ export function TestimonialsSection() {
       <div className="max-w-[1240px] mx-auto px-8">
         <p
           className={`text-[11px] font-medium uppercase tracking-[0.14em] transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
-          style={{ color: "#C0392B", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
+          style={{ color: "#8A0F14", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
         >
           ▸ Testimonials
         </p>
@@ -105,7 +105,7 @@ export function TestimonialsSection() {
               style={{
                 background: "#FFFFFF",
                 padding: 28,
-                border: "1px solid rgba(26,26,26,0.06)",
+                border: "1px solid rgba(18,18,18,0.06)",
                 minHeight: 380,
                 transitionDelay: `${i * 100}ms`,
               }}
@@ -129,7 +129,7 @@ export function TestimonialsSection() {
               </p>
               <div
                 className="flex gap-[14px] items-center pt-4"
-                style={{ borderTop: "1px solid rgba(26,26,26,0.08)" }}
+                style={{ borderTop: "1px solid rgba(18,18,18,0.08)" }}
               >
                 {t.avatar ? (
                   <Image
@@ -148,7 +148,7 @@ export function TestimonialsSection() {
                 )}
                 <div>
                   <p className="text-[14px] font-medium">{t.name}</p>
-                  <p className="text-[12px]" style={{ color: "rgba(26,26,26,0.6)" }}>{t.role}</p>
+                  <p className="text-[12px]" style={{ color: "rgba(18,18,18,0.6)" }}>{t.role}</p>
                 </div>
               </div>
             </div>
@@ -158,7 +158,7 @@ export function TestimonialsSection() {
         <p
           className="mt-4 text-[11px]"
           style={{
-            color: "rgba(26,26,26,0.4)",
+            color: "rgba(18,18,18,0.4)",
             fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace",
           }}
         >

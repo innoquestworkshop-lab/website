@@ -2,15 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 
-const pillars = [
-  { num: "01", title: "Double-Sided Learning", desc: "Hard skills (like strategy) and soft skills (like confidence) are two sides of the same coin. We never teach them separately because, in the real world, you can't have one without the other." },
-  { num: "02", title: "Thinking as a Habit", desc: "Critical thinking isn't a subject on a syllabus; it's a reflex. We train people to pause and analyze the \"why\" before they ever jump into the \"how.\"" },
-  { num: "03", title: "Connecting the Dots", desc: "Innovation happens at the edges of different worlds. We teach participants to find the links between business, design, science, and psychology to solve complex problems." },
-  { num: "04", title: "Action Over Instruction", desc: "We skip the manuals and the long lectures. Real learning lives in the struggle of a game and the pressure of a challenge—not in a slideshow." },
-  { num: "05", title: "Teamwork by Necessity", desc: "The challenges we design are too big for one person to solve alone. In our sessions, collaboration isn't a suggestion; it is a mechanical requirement to succeed." },
-  { num: "06", title: "The Insight is in the Debrief", desc: "The game is the hook, but the reflection is the teacher. We spend dedicated time after every activity dissecting what happened so the lesson actually sticks." },
-  { num: "07", title: "Real-World Stakes", desc: "We don't do \"busy work.\" Every program is rooted in actual entrepreneurial thinking and real-world strategy, ensuring the experience feels as meaningful as it is educational." },
-];
+import { methodPillars, methodologySection } from "@/data/methodology";
 
 function useReveal(threshold = 0.15) {
   const ref = useRef<HTMLElement>(null);
@@ -44,26 +36,25 @@ export function MethodologySection() {
           >
             <p
               className="text-[11px] font-medium uppercase tracking-[0.14em]"
-              style={{ color: "#C0392B", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
+              style={{ color: "#8A0F14", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
             >
-              ▸ Our learning framework
+              {methodologySection.eyebrow}
             </p>
             <h2
               className="mt-[18px] font-medium leading-[1.05]"
               style={{ fontSize: "clamp(34px, 4.4vw, 56px)", letterSpacing: "-0.03em" }}
             >
-              The InnoQuest{" "}
+              {methodologySection.heading}{" "}
               <span className="scribble">Method</span>
-              <sup style={{ fontSize: "0.4em", verticalAlign: "super", marginLeft: 4, color: "#C0392B" }}>©</sup>
+              <sup style={{ fontSize: "0.4em", verticalAlign: "super", marginLeft: 4, color: "#8A0F14" }}>©</sup>
             </h2>
           </div>
           <div
             className={`transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
             style={{ transitionDelay: "120ms" }}
           >
-            <p className="text-[17px] leading-[1.55]" style={{ color: "rgba(26,26,26,0.6)", maxWidth: 520 }}>
-              Seven principles that define how we design every program —
-              because the way people learn matters just as much as what they learn.
+            <p className="text-[17px] leading-[1.55]" style={{ color: "rgba(18,18,18,0.6)", maxWidth: 520 }}>
+              {methodologySection.sub}
             </p>
           </div>
         </div>
@@ -73,7 +64,7 @@ export function MethodologySection() {
           className="method-grid mt-14 grid gap-4"
           style={{ gridTemplateColumns: "repeat(4, 1fr)" }}
         >
-          {pillars.map((p, i) => (
+          {methodPillars.map((p, i) => (
             <div
               key={p.num}
               className={`card-lift rounded-[14px] p-7 flex flex-col justify-between transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
@@ -88,7 +79,7 @@ export function MethodologySection() {
             >
               <div
                 className="font-medium leading-none"
-                style={{ fontSize: 56, color: "#C0392B", letterSpacing: "-0.04em" }}
+                style={{ fontSize: 56, color: "#8A0F14", letterSpacing: "-0.04em" }}
               >
                 {p.num}
               </div>
@@ -96,7 +87,7 @@ export function MethodologySection() {
                 <h3 className="font-medium" style={{ fontSize: 22, letterSpacing: "-0.015em", lineHeight: 1.2 }}>
                   {p.title}
                 </h3>
-                <p className="mt-[10px] text-[14px] leading-[1.7]" style={{ color: "rgba(26,26,26,0.6)" }}>
+                <p className="mt-[10px] text-[14px] leading-[1.7]" style={{ color: "rgba(18,18,18,0.6)" }}>
                   {p.desc}
                 </p>
               </div>

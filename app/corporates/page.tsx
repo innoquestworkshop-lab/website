@@ -4,64 +4,212 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
 import { ContextualTestimonials } from "@/components/sections/ContextualTestimonials";
+import { corporatesPage } from "@/data/corporates";
 
 export const metadata: Metadata = {
-  title: "For Corporates",
+  title: "For Corporates & CSR",
   description: "Partner with InnoQuest to deliver meaningful youth development under your CSR strategy.",
 };
 
-const benefits = [
-  { title: "Turnkey delivery", body: "We handle everything — design, facilitation, logistics, and documentation. Your team shows up, we take care of the rest." },
-  { title: "Impact report", body: "Every program ends with a documented impact report your leadership and comms teams can use to tell the story." },
-  { title: "Flexible scope", body: "Half-day, full-day, multi-day. 30 kids or 300. We scale to your budget and headcount." },
-  { title: "Brand alignment", body: "Programs are branded and themed around your company values, industries, or CSR priorities." },
-];
+const iconMap = {
+  bolt: (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8A0F14" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+    </svg>
+  ),
+  chart: (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8A0F14" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+    </svg>
+  ),
+  refresh: (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8A0F14" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+    </svg>
+  ),
+  star: (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8A0F14" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+    </svg>
+  ),
+} as const;
 
 export default function CorporatesPage() {
   return (
     <>
       <Navbar />
-      <main className="pt-16">
-        <div style={{ background: "#1A1A1A" }} className="py-20 px-8">
-          <div className="max-w-7xl mx-auto">
-            <p className="text-[11px] font-medium uppercase tracking-[0.08em] text-[#E8473F] mb-3">
-              For corporates & CSR
-            </p>
-            <h1 className="text-4xl font-medium text-white mb-4 max-w-2xl">
-              A CSR Program with everlasting impact.
-            </h1>
-            <p className="text-gray-400 text-sm max-w-[520px] mb-8">
-              Partner with InnoQuest to deliver meaningful youth development under your CSR strategy. Your team gets a compelling story — the kids get life-changing skills.
-            </p>
-            <Link href="/contact" className="inline-flex items-center px-6 py-3 bg-[#E8473F] text-white text-sm font-medium rounded-full hover:bg-[#D63B34]">
-              Talk to us →
-            </Link>
+      <main>
+        {/* Hero */}
+        <section
+          style={{ background: "#121212", color: "#F5F0EA", paddingTop: 140, paddingBottom: 80 }}
+          className="relative overflow-hidden dot-bg"
+        >
+          <div
+            className="absolute rounded-full pointer-events-none"
+            style={{ top: -120, right: -80, width: 480, height: 480, background: "#8A0F14", opacity: 0.11, filter: "blur(2px)" }}
+          />
+          <div className="max-w-[1240px] mx-auto px-8 relative z-10">
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1.1fr", gap: 64, alignItems: "center" }} className="corp-hero-grid">
+              <div>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>{corporatesPage.hero.eyebrow}</p>
+                <h1 style={{ fontSize: "clamp(36px, 5vw, 68px)", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05, color: "#F5F0EA" }}>
+                  {corporatesPage.hero.heading.replace(corporatesPage.hero.headingAccent, "").trimEnd()}{" "}
+                  <span style={{ color: "#8A0F14" }}>{corporatesPage.hero.headingAccent}</span>
+                </h1>
+                <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(245,240,234,0.7)", maxWidth: 520, marginTop: 24 }}>
+                  {corporatesPage.hero.sub}
+                </p>
+                <div style={{ display: "flex", gap: 12, marginTop: 32, flexWrap: "wrap" }}>
+                  <Link href={corporatesPage.hero.cta1.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#8A0F14", color: "#F5F0EA" }}>
+                    {corporatesPage.hero.cta1.text}
+                  </Link>
+                  <Link href={corporatesPage.hero.cta2.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border" style={{ color: "#F5F0EA", borderColor: "rgba(245,240,234,0.3)" }}>
+                    {corporatesPage.hero.cta2.text}
+                  </Link>
+                </div>
+              </div>
+              <div>
+                <div className="imgph dark" style={{ height: 380, borderRadius: 14 }}>
+                  <div className="imgph-tag">{corporatesPage.hero.image.tag}</div>
+                  <div className="imgph-caption">{corporatesPage.hero.image.caption}</div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+          <style>{`@media(max-width:900px){ .corp-hero-grid { grid-template-columns: 1fr !important; } }`}</style>
+        </section>
 
-        <div style={{ background: "#F5F0EA" }} className="py-20 px-8">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-2xl font-medium text-[#1A1A1A] mb-10">What you get</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {benefits.map((b) => (
-                <div key={b.title} className="bg-white rounded-[14px] p-6">
-                  <h3 className="text-base font-medium text-[#1A1A1A] mb-2">{b.title}</h3>
-                  <p className="text-sm text-[#3D3D3D] leading-relaxed">{b.body}</p>
+        {/* Partner logos strip */}
+        <section style={{ background: "#121212", color: "#F5F0EA", padding: "48px 0" }}>
+          <div className="max-w-[1240px] mx-auto px-8">
+            <p className="eyebrow" style={{ color: "rgba(245,240,234,0.45)", textAlign: "center", marginBottom: 28 }}>
+              ▸ Corporate partners
+            </p>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: 12 }} className="corp-logos">
+              {["PTT Group", "KBank", "CP All", "Thai Bev", "SCG", "Regional Bank"].map((p) => (
+                <div key={p} style={{
+                  border: "1px solid rgba(245,240,234,0.15)", borderRadius: 8,
+                  padding: "20px 12px", textAlign: "center",
+                  fontSize: 13, color: "rgba(245,240,234,0.6)", letterSpacing: "0.04em",
+                }}>{p}</div>
+              ))}
+            </div>
+            <p className="mono" style={{ fontSize: 11, color: "rgba(245,240,234,0.3)", textAlign: "center", marginTop: 20 }}>
+              // LOGOS · replace with real corporate partner logos (SVG, white/light variants)
+            </p>
+          </div>
+          <style>{`@media(max-width:900px){ .corp-logos { grid-template-columns: repeat(3,1fr) !important; } } @media(max-width:540px){ .corp-logos { grid-template-columns: repeat(2,1fr) !important; } }`}</style>
+        </section>
+
+        {/* What you get */}
+        <section style={{ background: "#F5F0EA", padding: "96px 0" }}>
+          <div className="max-w-[1240px] mx-auto px-8">
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "end", marginBottom: 48 }} className="corp-head">
+              <div>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{corporatesPage.benefits.eyebrow}</p>
+                <h2 className="h-section">{corporatesPage.benefits.heading.split("\n").map((l, i) => <span key={i}>{l}{i === 0 && <br />}</span>)}</h2>
+              </div>
+              <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(18,18,18,0.6)", maxWidth: 520 }}>
+                {corporatesPage.benefits.sub}
+              </p>
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }} className="benefits-grid">
+              {corporatesPage.benefits.items.map((b) => (
+                <div key={b.title} className="card-lift" style={{
+                  background: "#FFFFFF", borderRadius: 14, padding: 32,
+                  display: "flex", gap: 20, alignItems: "flex-start",
+                  border: "1px solid rgba(18,18,18,0.06)", minHeight: 180,
+                }}>
+                  <div style={{ width: 48, height: 48, borderRadius: 12, background: "#E8E0D5", display: "grid", placeItems: "center", flexShrink: 0 }}>
+                    {iconMap[b.iconKey]}
+                  </div>
+                  <div>
+                    <h3 style={{ fontSize: 19, fontWeight: 500, letterSpacing: "-0.015em" }}>{b.title}</h3>
+                    <p style={{ fontSize: 14, lineHeight: 1.6, color: "rgba(18,18,18,0.6)", marginTop: 8 }}>{b.body}</p>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
-        </div>
+          <style>{`
+            @media(max-width:900px){ .corp-head { grid-template-columns: 1fr !important; gap: 24px !important; } .benefits-grid { grid-template-columns: 1fr !important; } }
+          `}</style>
+        </section>
 
-        <div className="bg-white py-20 px-8">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-2xl font-medium text-[#1A1A1A] mb-8">Recommended program</h2>
-            <Link href="/custom" className="block bg-[#F5F0EA] rounded-[14px] p-8 max-w-xl group hover:-translate-y-1 transition-transform">
-              <p className="text-sm text-[#3D3D3D] mb-4">Every corporate program is built from scratch; tell us your goals and we&apos;ll design the rest.</p>
-              <span className="text-sm text-[#E8473F]">Talk to us →</span>
-            </Link>
+        {/* Case study */}
+        <section style={{ background: "#FFFFFF", padding: "96px 0" }}>
+          <div className="max-w-[1240px] mx-auto px-8">
+            <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: 48, alignItems: "center" }} className="case-grid">
+              <div className="imgph" style={{ height: 420, borderRadius: 14 }}>
+                <div className="imgph-tag">{corporatesPage.caseStudy.image.tag}</div>
+                <div className="imgph-caption">{corporatesPage.caseStudy.image.caption}</div>
+              </div>
+              <div>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 16 }}>{corporatesPage.caseStudy.eyebrow}</p>
+                <h3 style={{ fontSize: 28, fontWeight: 500, letterSpacing: "-0.02em", lineHeight: 1.2 }}>
+                  {corporatesPage.caseStudy.heading}
+                </h3>
+                <p style={{ fontSize: 15, lineHeight: 1.65, color: "rgba(18,18,18,0.6)", marginTop: 18 }}>
+                  {corporatesPage.caseStudy.body}
+                </p>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, marginTop: 28 }}>
+                  {corporatesPage.caseStudy.stats.map((s) => (
+                    <div key={s.l} style={{ paddingTop: 18, borderTop: "2px solid #8A0F14" }}>
+                      <div style={{ fontSize: 32, fontWeight: 500, color: "#8A0F14", letterSpacing: "-0.02em" }}>{s.v}</div>
+                      <div className="eyebrow" style={{ color: "rgba(18,18,18,0.6)", marginTop: 4 }}>{s.l}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+          <style>{`@media(max-width:900px){ .case-grid { grid-template-columns: 1fr !important; } }`}</style>
+        </section>
+
+        {/* Your CSR learning path */}
+        <section style={{ background: "#F5F0EA", padding: "96px 0" }}>
+          <div className="max-w-[1240px] mx-auto px-8">
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "end", marginBottom: 56 }} className="corp-path-head">
+              <div>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{corporatesPage.learningPath.eyebrow}</p>
+                <h2 className="h-section">{corporatesPage.learningPath.heading.split("\n").map((l, i) => <span key={i}>{l}{i === 0 && <br />}</span>)}</h2>
+              </div>
+              <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(18,18,18,0.6)" }}>
+                {corporatesPage.learningPath.sub}
+              </p>
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }} className="corp-path-grid">
+              {corporatesPage.learningPath.steps.map((s) => (
+                <div key={s.num} className="card-lift" style={{
+                  background: "#FFFFFF", borderRadius: 14, padding: 28,
+                  minHeight: 240, display: "flex", flexDirection: "column", justifyContent: "space-between",
+                  border: "1px solid rgba(18,18,18,0.06)",
+                }}>
+                  <div style={{ fontSize: 48, fontWeight: 500, color: "#8A0F14", letterSpacing: "-0.04em", lineHeight: 1 }}>{s.num}</div>
+                  <div>
+                    <h3 style={{ fontSize: 18, fontWeight: 500, marginBottom: 8 }}>{s.title}</h3>
+                    <p style={{ fontSize: 13, lineHeight: 1.7, color: "rgba(18,18,18,0.6)" }}>{s.body}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div style={{ marginTop: 48, display: "flex", gap: 12, flexWrap: "wrap" }}>
+              <Link href={corporatesPage.learningPath.cta1.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#8A0F14", color: "#F5F0EA" }}>
+                {corporatesPage.learningPath.cta1.text}
+              </Link>
+              <Link href={corporatesPage.learningPath.cta2.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border" style={{ color: "#121212", borderColor: "rgba(18,18,18,0.25)" }}>
+                {corporatesPage.learningPath.cta2.text}
+              </Link>
+            </div>
+          </div>
+          <style>{`
+            @media(max-width:900px){ .corp-path-head { grid-template-columns: 1fr !important; gap: 24px !important; } .corp-path-grid { grid-template-columns: repeat(2,1fr) !important; } }
+            @media(max-width:540px){ .corp-path-grid { grid-template-columns: 1fr !important; } }
+          `}</style>
+        </section>
 
         <ContextualTestimonials audience="corporate" label="▸ What corporates say" />
         <CTASection />

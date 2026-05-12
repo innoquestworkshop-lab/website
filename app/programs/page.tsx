@@ -11,69 +11,138 @@ export const metadata: Metadata = {
 };
 
 export default function ProgramsPage() {
+  const featured = programs.find((p) => p.featured) ?? programs[0];
+  const rest = programs.filter((p) => !p.featured);
+
   return (
     <>
       <Navbar />
-      <main className="pt-16">
-        <div style={{ background: "#1A1A1A" }} className="py-20 px-8">
-          <div className="max-w-7xl mx-auto">
-            <p className="text-[11px] font-medium uppercase tracking-[0.08em] text-[#E8473F] mb-3">
-              Programs
-            </p>
-            <h1 className="text-4xl font-medium text-white mb-4">
-              Short, long, or fully custom
+      <main>
+        {/* Hero */}
+        <section
+          style={{ background: "#121212", color: "#F5F0EA", paddingTop: 140, paddingBottom: 80 }}
+          className="dot-bg"
+        >
+          <div className="max-w-[1240px] mx-auto px-8">
+            <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>▸ Programs</p>
+            <h1 style={{ fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05, maxWidth: 740 }}>
+              Short, long, or{" "}
+              <span style={{ color: "#8A0F14" }}>fully custom.</span>
             </h1>
-            <p className="text-gray-400 text-sm max-w-[480px]">
+            <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(245,240,234,0.7)", maxWidth: 540, marginTop: 24 }}>
               From a single-day spark to a semester-long transformation — built around your goals.
             </p>
           </div>
-        </div>
+        </section>
 
-        <div style={{ background: "#F5F0EA" }} className="py-20 px-8">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {programs.map((program) => (
-              <Link
-                key={program.slug}
-                href={`/programs/${program.slug}`}
-                className="bg-white rounded-[14px] p-6 flex flex-col gap-4 group transition-transform hover:-translate-y-1"
-              >
-                {program.featured && (
-                  <span className="self-start text-[11px] font-medium uppercase tracking-[0.08em] text-[#E8473F] bg-[#E8473F]/10 px-2.5 py-1 rounded-full">
-                    Most popular
+        {/* Featured program */}
+        <section style={{ background: "#F5F0EA", padding: "80px 0 48px" }}>
+          <div className="max-w-[1240px] mx-auto px-8">
+            <p className="eyebrow" style={{ color: "rgba(18,18,18,0.5)", marginBottom: 24 }}>▸ Featured program</p>
+            <Link
+              href={`/programs/${featured.slug}`}
+              className="card-lift"
+              style={{
+                background: "#121212", color: "#F5F0EA",
+                borderRadius: 14, padding: 40,
+                display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40,
+                textDecoration: "none", position: "relative", overflow: "hidden",
+              }}
+            >
+              <div
+                className="absolute rounded-full pointer-events-none"
+                style={{ top: -80, right: -80, width: 320, height: 320, background: "#8A0F14", opacity: 0.15, filter: "blur(2px)" }}
+              />
+              <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                <div>
+                  <span className="pill-tag" style={{ background: "#8A0F14", color: "#F5F0EA", marginBottom: 20, display: "inline-flex" }}>
+                    ★ Most popular
                   </span>
-                )}
-                <div className="flex-1">
-                  <h2 className="text-base font-medium text-[#1A1A1A] group-hover:text-[#E8473F] transition-colors mb-2">
-                    {program.name}
+                  <h2 style={{ fontSize: "clamp(28px, 3.4vw, 44px)", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: 1.1, marginTop: 16 }}>
+                    {featured.name}
                   </h2>
-                  <p className="text-sm text-[#3D3D3D] leading-relaxed line-clamp-3">
-                    {program.tagline}
+                  <p style={{ fontSize: 16, lineHeight: 1.65, color: "rgba(245,240,234,0.7)", marginTop: 14, maxWidth: 400 }}>
+                    {featured.tagline}
                   </p>
                 </div>
-                <div className="flex gap-4 text-xs text-[#3D3D3D] pt-4 border-t border-[#E8E0D5]">
-                  <span>{program.duration}</span>
-                  <span>Ages {program.ages}</span>
+                <div>
+                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 20 }}>
+                    <span className="pill-tag" style={{ background: "rgba(245,240,234,0.1)", color: "#F5F0EA" }}>{featured.duration}</span>
+                    <span className="pill-tag" style={{ background: "rgba(245,240,234,0.1)", color: "#F5F0EA" }}>Ages {featured.ages}</span>
+                    <span className="pill-tag" style={{ background: "rgba(245,240,234,0.1)", color: "#F5F0EA" }}>{featured.groupSize}</span>
+                  </div>
+                  <span style={{
+                    display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 22px",
+                    background: "#8A0F14", color: "#F5F0EA", borderRadius: 999, fontSize: 14, fontWeight: 500,
+                  }}>
+                    Explore program →
+                  </span>
                 </div>
-              </Link>
-            ))}
-
-            {/* Custom CTA card */}
-            <Link
-              href="/custom"
-              className="bg-[#1A1A1A] rounded-[14px] p-6 flex flex-col justify-between group transition-transform hover:-translate-y-1"
-            >
-              <div>
-                <h2 className="text-base font-medium text-white group-hover:text-[#E8473F] transition-colors mb-2">
-                  Custom program
-                </h2>
-                <p className="text-sm text-gray-400 leading-relaxed">
-                  Have something specific in mind? We design programs from scratch around your goals, audience, and timeline.
-                </p>
               </div>
-              <span className="text-sm text-[#E8473F] mt-6">Build something custom →</span>
+              <div style={{ position: "relative", zIndex: 1 }}>
+                <div className="imgph dark" style={{ height: "100%", minHeight: 280, borderRadius: 10 }}>
+                  <div className="imgph-tag">FEATURE</div>
+                  <div className="imgph-caption">// hero photo: kids presenting prototype to judges/panel. Wide. Capture energy.</div>
+                </div>
+              </div>
             </Link>
           </div>
-        </div>
+          <style>{`@media(max-width:900px){ #feat-grid { grid-template-columns: 1fr !important; } }`}</style>
+        </section>
+
+        {/* All programs */}
+        <section style={{ background: "#F5F0EA", padding: "0 0 96px" }}>
+          <div className="max-w-[1240px] mx-auto px-8">
+            <p className="eyebrow" style={{ color: "rgba(18,18,18,0.5)", marginBottom: 24 }}>▸ All programs</p>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="all-progs-grid">
+              {rest.map((program) => (
+                <Link
+                  key={program.slug}
+                  href={`/programs/${program.slug}`}
+                  className="card-lift"
+                  style={{
+                    background: "#FFFFFF", borderRadius: 14, padding: 28,
+                    display: "flex", flexDirection: "column", gap: 16,
+                    border: "1px solid rgba(18,18,18,0.06)",
+                    textDecoration: "none", color: "inherit", minHeight: 240,
+                  }}
+                >
+                  <div style={{ flex: 1 }}>
+                    <h2 style={{ fontSize: 20, fontWeight: 500, letterSpacing: "-0.015em", marginBottom: 10, lineHeight: 1.2 }}>
+                      {program.name}
+                    </h2>
+                    <p style={{ fontSize: 14, lineHeight: 1.7, color: "rgba(18,18,18,0.6)" }}>
+                      {program.tagline}
+                    </p>
+                  </div>
+                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap", paddingTop: 16, borderTop: "1px solid rgba(18,18,18,0.06)" }}>
+                    <span className="pill-tag" style={{ background: "#F5F0EA", color: "#121212" }}>{program.duration}</span>
+                    <span className="pill-tag" style={{ background: "#F5F0EA", color: "#121212" }}>Ages {program.ages}</span>
+                  </div>
+                </Link>
+              ))}
+
+              {/* Custom CTA */}
+              <Link href="/custom" className="card-lift" style={{
+                background: "#121212", color: "#F5F0EA", borderRadius: 14, padding: 28,
+                display: "flex", flexDirection: "column", justifyContent: "space-between",
+                minHeight: 240, textDecoration: "none",
+              }}>
+                <p className="eyebrow" style={{ color: "rgba(245,240,234,0.55)" }}>Don&apos;t see a fit?</p>
+                <div>
+                  <h3 style={{ fontSize: 17, fontWeight: 500, color: "#F5F0EA", marginBottom: 14 }}>
+                    Design something custom with us.
+                  </h3>
+                  <span style={{ color: "#8A0F14", fontSize: 13, fontWeight: 500 }}>Start a custom brief →</span>
+                </div>
+              </Link>
+            </div>
+          </div>
+          <style>{`
+            @media(max-width:900px){ .all-progs-grid { grid-template-columns: repeat(2, 1fr) !important; } }
+            @media(max-width:540px){ .all-progs-grid { grid-template-columns: 1fr !important; } }
+          `}</style>
+        </section>
 
         <CTASection />
       </main>

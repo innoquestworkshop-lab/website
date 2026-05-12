@@ -24,7 +24,6 @@ export const programs: Program[] = [
     format: "In-person",
     description:
       "Students step into the role of sustainability consultants tasked with solving a real environmental or social challenge. Through research, ideation, and prototyping, they design solutions that are both impactful and commercially viable — then pitch them to a panel.",
-    featured: true,
     audiences: ["school", "corporate"],
     outcomes: [
       { icon: "leaf", title: "ESG literacy", description: "Understanding environmental, social, and governance issues that matter today" },
@@ -42,6 +41,7 @@ export const programs: Program[] = [
     ages: "13–18",
     groupSize: "15–60 students",
     format: "In-person / Hybrid",
+    featured: true,
     description:
       "A startup simulation program where students build a business from scratch. They identify a real problem, validate the market, design the product, and pitch to investors — all within the program timeline. Structured to mirror the actual startup journey, just compressed.",
     audiences: ["school", "student", "parent"],

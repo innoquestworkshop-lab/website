@@ -6,23 +6,8 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { IconMenu2, IconX, IconChevronDown } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
+import { navLinks } from "@/data/navigation";
 
-const navLinks = [
-  { label: "Experiences", href: "/programs" },
-  { label: "What we do", href: "/what-we-do" },
-  { label: "For Schools", href: "/schools" },
-  { label: "Corporate & CSR", href: "/corporates" },
-  { label: "Design yours", href: "/custom" },
-  {
-    label: "About",
-    href: "/about",
-    dropdown: [
-      { label: "About us", href: "/about" },
-      { label: "Our people", href: "/team" },
-      { label: "Testimonials", href: "/testimonials" },
-    ],
-  },
-];
 
 export function Navbar() {
   const pathname = usePathname();
@@ -32,14 +17,9 @@ export function Navbar() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   useEffect(() => {
-    const container = document.querySelector("main") as HTMLElement | null;
-    const target = container ?? window;
-    const onScroll = () => {
-      const y = container ? container.scrollTop : window.scrollY;
-      setScrolled(y > 80);
-    };
-    target.addEventListener("scroll", onScroll, { passive: true });
-    return () => target.removeEventListener("scroll", onScroll);
+    const onScroll = () => setScrolled(window.scrollY > 80);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
@@ -85,8 +65,10 @@ export function Navbar() {
                     className={cn(
                       "flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-colors",
                       pathname.startsWith(link.href)
-                        ? "text-[#E8473F]"
-                        : "text-[#1A1A1A] hover:text-[#E8473F]"
+                        ? "text-[#8A0F14]"
+                        : scrolled || mobileOpen
+                          ? "text-[#121212] hover:text-[#8A0F14]"
+                          : "text-[#F5F0EA] hover:text-[#8A0F14]"
                     )}
                   >
                     {link.label}
@@ -101,8 +83,8 @@ export function Navbar() {
                           className={cn(
                             "block px-4 py-2 text-sm transition-colors",
                             pathname === item.href
-                              ? "text-[#E8473F] bg-[#F5F0EA]"
-                              : "text-[#1A1A1A] hover:bg-[#F5F0EA] hover:text-[#E8473F]"
+                              ? "text-[#8A0F14] bg-[#F5F0EA]"
+                              : "text-[#121212] hover:bg-[#F5F0EA] hover:text-[#8A0F14]"
                           )}
                         >
                           {item.label}
@@ -117,13 +99,15 @@ export function Navbar() {
                   className={cn(
                     "block px-3 py-2 text-sm font-medium rounded-lg transition-colors",
                     pathname === link.href
-                      ? "text-[#E8473F]"
-                      : "text-[#1A1A1A] hover:text-[#E8473F]"
+                      ? "text-[#8A0F14]"
+                      : scrolled || mobileOpen
+                        ? "text-[#121212] hover:text-[#8A0F14]"
+                        : "text-[#F5F0EA] hover:text-[#8A0F14]"
                   )}
                 >
                   {link.label}
                   {pathname === link.href && (
-                    <span className="block h-0.5 bg-[#E8473F] rounded-full mt-0.5" />
+                    <span className="block h-0.5 bg-[#8A0F14] rounded-full mt-0.5" />
                   )}
                 </Link>
               )}
@@ -135,13 +119,13 @@ export function Navbar() {
         <div className="flex items-center gap-3">
           <Link
             href="/contact"
-            className="hidden lg:inline-flex items-center px-5 py-2 bg-[#E8473F] text-white text-sm font-medium rounded-full transition-transform active:scale-[0.98] hover:bg-[#D63B34]"
+            className="hidden lg:inline-flex items-center px-5 py-2 bg-[#8A0F14] text-white text-sm font-medium rounded-full transition-transform active:scale-[0.98] hover:bg-[#6B0A0E]"
           >
             Talk to us →
           </Link>
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden p-2 text-[#1A1A1A]"
+            className={cn("lg:hidden p-2 transition-colors", scrolled || mobileOpen ? "text-[#121212]" : "text-[#F5F0EA]")}
             aria-label="Toggle menu"
           >
             {mobileOpen ? <IconX size={22} /> : <IconMenu2 size={22} />}
@@ -158,7 +142,7 @@ export function Navbar() {
                 onClick={() =>
                   setOpenDropdown(openDropdown === link.label ? null : link.label)
                 }
-                className="w-full flex items-center justify-between py-3 text-sm font-medium text-[#1A1A1A]"
+                className="w-full flex items-center justify-between py-3 text-sm font-medium text-[#121212]"
               >
                 {link.label}
                 {link.dropdown && (
@@ -177,7 +161,7 @@ export function Navbar() {
                     <Link
                       key={item.href}
                       href={item.href}
-                      className="block py-2 text-sm text-[#3D3D3D] hover:text-[#E8473F]"
+                      className="block py-2 text-sm text-[#4A4A4A] hover:text-[#8A0F14]"
                     >
                       {item.label}
                     </Link>
@@ -187,7 +171,7 @@ export function Navbar() {
               {!link.dropdown && (
                 <Link
                   href={link.href}
-                  className="block py-3 text-sm font-medium text-[#1A1A1A] hover:text-[#E8473F]"
+                  className="block py-3 text-sm font-medium text-[#121212] hover:text-[#8A0F14]"
                   onClick={() => setMobileOpen(false)}
                 >
                   {link.label}
@@ -198,7 +182,7 @@ export function Navbar() {
           <div className="pt-4">
             <Link
               href="/contact"
-              className="block text-center py-3 bg-[#E8473F] text-white text-sm font-medium rounded-full"
+              className="block text-center py-3 bg-[#8A0F14] text-white text-sm font-medium rounded-full"
             >
               Talk to us →
             </Link>

@@ -55,7 +55,7 @@ export function ContextualTestimonials({ audience, programSlug, limit = 3, label
           <p
             className="text-[11px] font-medium uppercase tracking-[0.12em] mb-6"
             style={{
-              color: "#C0392B",
+              color: "#8A0F14",
               fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace",
             }}
           >
@@ -72,7 +72,7 @@ export function ContextualTestimonials({ audience, programSlug, limit = 3, label
               <div
                 key={t.id}
                 className="bg-white rounded-[14px] p-6 flex flex-col gap-4"
-                style={{ border: "1px solid rgba(26,26,26,0.06)" }}
+                style={{ border: "1px solid rgba(18,18,18,0.06)" }}
               >
                 {/* Badge + stars */}
                 <div className="flex items-center justify-between">
@@ -90,14 +90,14 @@ export function ContextualTestimonials({ audience, programSlug, limit = 3, label
                 </div>
 
                 {/* Quote */}
-                <p className="text-[15px] leading-[1.6] flex-1" style={{ color: "#1A1A1A", letterSpacing: "-0.01em" }}>
+                <p className="text-[15px] leading-[1.6] flex-1" style={{ color: "#121212", letterSpacing: "-0.01em" }}>
                   &ldquo;{t.quote}&rdquo;
                 </p>
 
                 {/* Author */}
                 <div
                   className="flex gap-3 items-center pt-3"
-                  style={{ borderTop: "1px solid rgba(26,26,26,0.08)" }}
+                  style={{ borderTop: "1px solid rgba(18,18,18,0.08)" }}
                 >
                   {t.avatar ? (
                     <Image
@@ -115,8 +115,8 @@ export function ContextualTestimonials({ audience, programSlug, limit = 3, label
                     />
                   )}
                   <div>
-                    <p className="text-[13px] font-medium" style={{ color: "#1A1A1A" }}>{t.name}</p>
-                    <p className="text-[11px]" style={{ color: "rgba(26,26,26,0.55)" }}>{t.role} · {t.context}</p>
+                    <p className="text-[13px] font-medium" style={{ color: "#121212" }}>{t.name}</p>
+                    <p className="text-[11px]" style={{ color: "rgba(18,18,18,0.55)" }}>{t.role} · {t.context}</p>
                   </div>
                 </div>
               </div>

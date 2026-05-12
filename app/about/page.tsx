@@ -4,6 +4,8 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
 import { MethodologySection } from "@/components/sections/MethodologySection";
+import { AboutStats } from "@/components/sections/AboutStats";
+import { aboutPage } from "@/data/about";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -14,43 +16,110 @@ export default function AboutPage() {
   return (
     <>
       <Navbar />
-      <main className="pt-16">
-        <div style={{ background: "#1A1A1A" }} className="py-20 px-8">
-          <div className="max-w-7xl mx-auto">
-            <p className="text-[11px] font-medium uppercase tracking-[0.08em] text-[#E8473F] mb-3">
-              About InnoQuest
-            </p>
-            <h1 className="text-4xl font-medium text-white mb-4 max-w-2xl">
-              We believe every kid has extraordinary potential
-            </h1>
-            <p className="text-gray-400 text-sm max-w-[520px]">
-              InnoQuest is a youth experiential learning company based in Bangkok, Thailand. We design and facilitate programs that develop the skills the next generation will actually need.
-            </p>
-          </div>
-        </div>
-
-        <div style={{ background: "#F5F0EA" }} className="py-20 px-8">
-          <div className="max-w-7xl mx-auto max-w-2xl">
-            <h2 className="text-2xl font-medium text-[#1A1A1A] mb-6">Our story</h2>
-            <div className="space-y-4 text-sm text-[#3D3D3D] leading-relaxed">
-              <p>
-                InnoQuest started with a simple observation: the skills that matter most in the modern world — critical thinking, creativity, collaboration, and confidence — are rarely taught in traditional classrooms.
-              </p>
-              <p>
-                We set out to fix that. Not by replacing schools, but by building programs that complement formal education with real-world, play-based experiences that stick.
-              </p>
-              <p>
-                Today, we partner with schools, corporations, and institutions across Thailand to deliver programs that are genuinely different — science-backed, outcome-driven, and designed for how kids and teens actually learn.
-              </p>
+      <main>
+        {/* Hero */}
+        <section
+          style={{ background: "#121212", color: "#F5F0EA", paddingTop: 140, paddingBottom: 80 }}
+          className="relative overflow-hidden dot-bg"
+        >
+          <div
+            className="absolute rounded-full pointer-events-none"
+            style={{ top: -120, right: -80, width: 480, height: 480, background: "#8A0F14", opacity: 0.11, filter: "blur(2px)" }}
+          />
+          <div className="max-w-[1240px] mx-auto px-8 relative z-10">
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1.1fr", gap: 64, alignItems: "center" }} className="about-hero-grid">
+              <div>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>{aboutPage.hero.eyebrow}</p>
+                <h1 style={{ fontSize: "clamp(36px, 5vw, 68px)", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05 }}>
+                  {aboutPage.hero.heading.replace(aboutPage.hero.headingAccent, "").trimEnd()}{" "}
+                  <span style={{ color: "#8A0F14" }}>{aboutPage.hero.headingAccent}</span>
+                </h1>
+                <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(245,240,234,0.7)", maxWidth: 520, marginTop: 24 }}>
+                  {aboutPage.hero.sub}
+                </p>
+                <div style={{ marginTop: 32 }}>
+                  <Link href={aboutPage.hero.cta.href} style={{
+                    display: "inline-flex", alignItems: "center", gap: 8,
+                    color: "#8A0F14", textDecoration: "none", fontWeight: 500, fontSize: 14,
+                  }}>
+                    {aboutPage.hero.cta.text}
+                  </Link>
+                </div>
+              </div>
+              <div>
+                <div className="imgph dark" style={{ height: 380, borderRadius: 14 }}>
+                  <div className="imgph-tag">{aboutPage.hero.image.tag}</div>
+                  <div className="imgph-caption">{aboutPage.hero.image.caption}</div>
+                </div>
+              </div>
             </div>
+          </div>
+          <style>{`@media(max-width:900px){ .about-hero-grid { grid-template-columns: 1fr !important; } }`}</style>
+        </section>
 
-            <div className="mt-10">
-              <Link href="/team" className="text-sm font-medium text-[#E8473F] hover:underline">
-                Meet the team →
-              </Link>
+        {/* Our story */}
+        <section style={{ background: "#F5F0EA", padding: "96px 0" }}>
+          <div className="max-w-[1240px] mx-auto px-8">
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "start" }} className="story-grid">
+              <div>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{aboutPage.story.eyebrow}</p>
+                <h2 className="h-section">
+                  {aboutPage.story.heading.split("\n").map((line, i) => (
+                    <span key={i}>{line}{i === 0 && <br />}</span>
+                  ))}
+                </h2>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+                {aboutPage.story.paragraphs.map((p, i) => (
+                  <p key={i} style={{ fontSize: 17, lineHeight: 1.65, color: i === 0 ? undefined : "rgba(18,18,18,0.6)" }}>
+                    {p}
+                  </p>
+                ))}
+                <div style={{ marginTop: 8 }}>
+                  <Link href={aboutPage.story.cta.href} style={{
+                    display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 22px",
+                    border: "1px solid rgba(18,18,18,0.25)", borderRadius: 999,
+                    color: "#121212", textDecoration: "none", fontWeight: 500, fontSize: 14,
+                  }}>
+                    {aboutPage.story.cta.text}
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+          <style>{`@media(max-width:900px){ .story-grid { grid-template-columns: 1fr !important; gap: 32px !important; } }`}</style>
+        </section>
+
+        {/* Stats band */}
+        <AboutStats />
+
+        {/* Values */}
+        <section style={{ background: "#F5F0EA", padding: "96px 0" }}>
+          <div className="max-w-[1240px] mx-auto px-8">
+            <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{aboutPage.values.eyebrow}</p>
+            <h2 className="h-section" style={{ maxWidth: 780, marginBottom: 48 }}>{aboutPage.values.heading}</h2>
+
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }} className="values-grid">
+              {aboutPage.values.items.map((v) => (
+                <div key={v.n} className="card-lift" style={{
+                  background: "#FFFFFF", borderRadius: 14, padding: 32,
+                  display: "flex", gap: 24, alignItems: "flex-start",
+                  border: "1px solid rgba(18,18,18,0.06)", minHeight: 200,
+                }}>
+                  <span style={{
+                    fontSize: 32, fontWeight: 500, color: "#8A0F14",
+                    letterSpacing: "-0.03em", lineHeight: 1, flexShrink: 0,
+                  }}>{v.n}</span>
+                  <div>
+                    <h3 style={{ fontSize: 19, fontWeight: 500, letterSpacing: "-0.015em", lineHeight: 1.3 }}>{v.title}</h3>
+                    <p style={{ fontSize: 14, lineHeight: 1.6, color: "rgba(18,18,18,0.6)", marginTop: 10 }}>{v.body}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <style>{`@media(max-width:900px){ .values-grid { grid-template-columns: 1fr !important; } }`}</style>
+        </section>
 
         <MethodologySection />
         <CTASection />

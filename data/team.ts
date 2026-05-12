@@ -10,9 +10,9 @@ export type TeamMember = {
 };
 
 export const typeConfig: Record<TeamMemberType, { label: string; color: string; bg: string }> = {
-  facilitator: { label: "Facilitator", color: "#E8473F", bg: "#E8473F15" },
-  speaker: { label: "Speaker", color: "#1A1A1A", bg: "#1A1A1A12" },
-  "business-development": { label: "Business Development", color: "#3D3D3D", bg: "#3D3D3D10" },
+  facilitator: { label: "Facilitator", color: "#8A0F14", bg: "#8A0F1415" },
+  speaker: { label: "Speaker", color: "#121212", bg: "#12121212" },
+  "business-development": { label: "Business Development", color: "#4A4A4A", bg: "#4A4A4A10" },
   art: { label: "Art", color: "#7C5C3E", bg: "#7C5C3E12" },
 };
 

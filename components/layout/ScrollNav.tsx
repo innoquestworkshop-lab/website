@@ -81,7 +81,7 @@ export function ScrollNav() {
               className={cn(
                 "shrink-0 px-3 py-1 rounded-full text-[11px] font-medium transition-all whitespace-nowrap",
                 active === s.id
-                  ? "bg-[#E8473F] text-white"
+                  ? "bg-[#8A0F14] text-white"
                   : "text-white/40 hover:text-white/80"
               )}
             >
@@ -93,7 +93,7 @@ export function ScrollNav() {
         {/* CTA */}
         <Link
           href="/contact"
-          className="hidden sm:inline-flex shrink-0 items-center px-4 py-1.5 bg-[#E8473F] text-white text-xs font-medium rounded-full hover:bg-[#D63B34] transition-colors"
+          className="hidden sm:inline-flex shrink-0 items-center px-4 py-1.5 bg-[#8A0F14] text-white text-xs font-medium rounded-full hover:bg-[#D63B34] transition-colors"
         >
           Talk to us →
         </Link>

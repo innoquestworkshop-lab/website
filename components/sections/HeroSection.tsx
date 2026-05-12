@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { stats } from "@/data/stats";
+import { heroSection } from "@/data/hero";
 
 function useCountUp(to: number, active: boolean, duration = 1500) {
   const [val, setVal] = useState(0);
@@ -38,7 +40,7 @@ function StatItem({ n, suf, label }: { n: number; suf: string; label: string }) 
     <div ref={ref}>
       <div
         className="font-medium leading-none tabular-nums"
-        style={{ fontSize: "clamp(40px, 4.4vw, 64px)", color: "#C0392B", letterSpacing: "-0.03em" }}
+        style={{ fontSize: "clamp(40px, 4.4vw, 64px)", color: "#8A0F14", letterSpacing: "-0.03em" }}
       >
         {val}{suf}
       </div>
@@ -61,12 +63,6 @@ function ArrowIcon() {
   );
 }
 
-const stats = [
-  { n: 400, suf: "+", label: "Students trained" },
-  { n: 100, suf: "+", label: "Speaker hours" },
-  { n: 96, suf: "%", label: "Satisfaction score" },
-  { n: 100, suf: "%", label: "Enterprise retention" },
-];
 
 export function HeroSection() {
   const [started, setStarted] = useState(false);
@@ -80,7 +76,7 @@ export function HeroSection() {
       id="top"
       className="relative overflow-hidden dot-bg"
       style={{
-        background: "#1A1A1A",
+        background: "#121212",
         color: "#F5F0EA",
         paddingTop: 140,
         paddingBottom: 96,
@@ -91,14 +87,14 @@ export function HeroSection() {
         className="absolute pointer-events-none rounded-full animate-float-slow"
         style={{
           top: -160, right: -120, width: 560, height: 560,
-          background: "#C0392B", opacity: 0.11, filter: "blur(2px)",
+          background: "#8A0F14", opacity: 0.11, filter: "blur(2px)",
         }}
       />
       <div
         className="absolute pointer-events-none rounded-full animate-float-slower"
         style={{
           bottom: -260, left: "40%", width: 640, height: 640,
-          background: "#C0392B", opacity: 0.07,
+          background: "#8A0F14", opacity: 0.07,
         }}
       />
 
@@ -106,9 +102,9 @@ export function HeroSection() {
         {/* Eyebrow */}
         <p
           className={`text-[11px] font-medium uppercase tracking-[0.14em] mb-7 transition-all duration-500 ${started ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
-          style={{ color: "#C0392B", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
+          style={{ color: "#8A0F14", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
         >
-          ▸ Empowering tomorrow&apos;s innovators
+          {heroSection.eyebrow}
         </p>
 
         {/* Headline */}
@@ -120,13 +116,13 @@ export function HeroSection() {
             className={`block text-[#F5F0EA] transition-all duration-700 ${started ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
             style={{ transitionDelay: "80ms" }}
           >
-            The skills schools
+            {heroSection.headingLine1}
           </span>
           <span
             className={`block transition-all duration-700 ${started ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
-            style={{ color: "#C0392B", transitionDelay: "240ms" }}
+            style={{ color: "#8A0F14", transitionDelay: "240ms" }}
           >
-            forgot to teach.
+            {heroSection.headingLine2}
           </span>
         </h1>
 
@@ -135,7 +131,7 @@ export function HeroSection() {
           className={`mt-8 text-[18px] leading-[1.55] max-w-[640px] transition-all duration-500 ${started ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
           style={{ color: "rgba(245,240,234,0.7)", transitionDelay: "500ms" }}
         >
-          Where learning looks like playing — and the skills are completely real.
+          {heroSection.sub}
         </p>
 
         {/* CTAs */}
@@ -144,18 +140,18 @@ export function HeroSection() {
           style={{ transitionDelay: "650ms" }}
         >
           <Link
-            href="/contact"
+            href={heroSection.cta1.href}
             className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full transition-all active:scale-[0.97]"
-            style={{ background: "#C0392B", color: "#F5F0EA" }}
+            style={{ background: "#8A0F14", color: "#F5F0EA" }}
           >
-            Explore your potential <ArrowIcon />
+            {heroSection.cta1.text} <ArrowIcon />
           </Link>
           <Link
-            href="/programs"
+            href={heroSection.cta2.href}
             className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border transition-colors"
             style={{ color: "#F5F0EA", borderColor: "rgba(245,240,234,0.5)" }}
           >
-            Grow with us
+            {heroSection.cta2.text}
           </Link>
         </div>
 
