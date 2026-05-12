@@ -19,6 +19,7 @@ const navLinks = [
     dropdown: [
       { label: "About us", href: "/about" },
       { label: "Our people", href: "/team" },
+      { label: "Testimonials", href: "/testimonials" },
     ],
   },
 ];

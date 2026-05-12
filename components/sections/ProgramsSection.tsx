@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
+import { programs as allPrograms } from "@/data/programs";
 
 function useCountUp(to: number, active: boolean, duration = 1500) {
   const [val, setVal] = useState(0);
@@ -81,13 +82,23 @@ function FoundersIcon({ color }: { color: string }) {
   return <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>;
 }
 
-const programs = [
-  { name: "Innovation Hackathon for Schools", dur: "1–3 days", ages: "10–18", Icon: HackathonIcon, href: "/programs/the-change-lab" },
-  { name: "Leadership Program", dur: "Long-term", ages: "13–18", Icon: LeadershipIcon, href: "/programs/entrepreneur-in-innovation" },
-  { name: "Creative Thinking Workshop", dur: "1 day", ages: "8–14", Icon: CreativeIcon, href: "/programs/break-the-market" },
-  { name: "Corporate CSR Camp", dur: "Custom", ages: "All ages", Icon: CSRIcon, href: "/corporates" },
-  { name: "Young Founders Series", dur: "Semester", ages: "14–18", Icon: FoundersIcon, href: "/programs/capital-minds" },
-];
+const iconMap: Record<string, React.ComponentType<{ color: string }>> = {
+  "the-change-lab": CSRIcon,
+  "entrepreneur-in-innovation": FoundersIcon,
+  "break-the-market": HackathonIcon,
+  "capital-minds": LeadershipIcon,
+};
+
+const featuredProgram = allPrograms.find((p) => p.featured) ?? allPrograms[0];
+const listPrograms = allPrograms
+  .filter((p) => !p.featured)
+  .map((p) => ({
+    name: p.name,
+    dur: p.duration,
+    ages: p.ages,
+    Icon: iconMap[p.slug] ?? CreativeIcon,
+    href: `/programs/${p.slug}`,
+  }));
 
 function PillTag({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
   return (
@@ -168,11 +179,10 @@ export function ProgramsSection() {
                 className="mt-5 font-medium leading-[1.1]"
                 style={{ fontSize: "clamp(28px, 3.4vw, 44px)", letterSpacing: "-0.025em", maxWidth: 460 }}
               >
-                Innovation <span style={{ color: "#C0392B" }}>Hackathon</span> for Schools
+                {featuredProgram.name}
               </h3>
               <p className="mt-[14px] text-[14px] leading-[1.7]" style={{ color: "rgba(245,240,234,0.7)", maxWidth: 440 }}>
-                Real-world challenges. Mixed-grade teams. Two to three days that students
-                remember years later — and a portfolio piece they actually want to show.
+                {featuredProgram.tagline}
               </p>
             </div>
             <div className="relative z-10 mt-6">
@@ -181,12 +191,12 @@ export function ProgramsSection() {
                 <div className="imgph-caption">// hero photo: kids presenting prototype at finale, judges clapping. Wide composition. Capture energy.</div>
               </div>
               <div className="flex gap-2 flex-wrap">
-                <PillTag style={{ background: "rgba(245,240,234,0.1)", color: "#F5F0EA" }}>1–3 DAYS</PillTag>
-                <PillTag style={{ background: "rgba(245,240,234,0.1)", color: "#F5F0EA" }}>AGES 10–18</PillTag>
-                <PillTag style={{ background: "rgba(245,240,234,0.1)", color: "#F5F0EA" }}>30–120 STUDENTS</PillTag>
+                <PillTag style={{ background: "rgba(245,240,234,0.1)", color: "#F5F0EA" }}>{featuredProgram.duration.toUpperCase()}</PillTag>
+                <PillTag style={{ background: "rgba(245,240,234,0.1)", color: "#F5F0EA" }}>AGES {featuredProgram.ages}</PillTag>
+                <PillTag style={{ background: "rgba(245,240,234,0.1)", color: "#F5F0EA" }}>{featuredProgram.groupSize.toUpperCase()}</PillTag>
               </div>
               <Link
-                href="/programs/the-change-lab"
+                href={`/programs/${featuredProgram.slug}`}
                 className="mt-[22px] inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full transition-all active:scale-[0.97]"
                 style={{ background: "#C0392B", color: "#F5F0EA" }}
               >
@@ -269,7 +279,7 @@ export function ProgramsSection() {
           className="prog-list mt-4 grid gap-4"
           style={{ gridTemplateColumns: "repeat(4, 1fr)" }}
         >
-          {programs.map((p, i) => (
+          {listPrograms.map((p, i) => (
             <Link
               key={p.name}
               href={p.href}
@@ -314,7 +324,7 @@ export function ProgramsSection() {
               padding: 22,
               minHeight: 200,
               textDecoration: "none",
-              transitionDelay: `${programs.length * 60}ms`,
+              transitionDelay: `${listPrograms.length * 60}ms`,
             }}
           >
             <p

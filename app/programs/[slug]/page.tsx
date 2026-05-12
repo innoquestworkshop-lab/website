@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
+import { ContextualTestimonials } from "@/components/sections/ContextualTestimonials";
 import { programs, getProgramBySlug } from "@/data/programs";
 import { testimonials } from "@/data/testimonials";
 
@@ -183,6 +184,11 @@ export default async function ProgramPage({
           </div>
         </div>
 
+        <ContextualTestimonials
+          programSlug={program.slug}
+          audience={program.audiences as ("corporate" | "school" | "parent" | "student")[]}
+          label="▸ What participants say"
+        />
         <CTASection />
       </main>
       <Footer />

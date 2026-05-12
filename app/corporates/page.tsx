@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
-import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
+import { ContextualTestimonials } from "@/components/sections/ContextualTestimonials";
 
 export const metadata: Metadata = {
   title: "For Corporates",
@@ -63,7 +63,7 @@ export default function CorporatesPage() {
           </div>
         </div>
 
-        <TestimonialsSection />
+        <ContextualTestimonials audience="corporate" label="▸ What corporates say" />
         <CTASection />
       </main>
       <Footer />

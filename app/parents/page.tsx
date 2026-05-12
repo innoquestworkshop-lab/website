@@ -4,6 +4,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
+import { ContextualTestimonials } from "@/components/sections/ContextualTestimonials";
 import { programs } from "@/data/programs";
 
 export const metadata: Metadata = {
@@ -97,6 +98,7 @@ export default function ParentsPage() {
           </div>
         )}
 
+        <ContextualTestimonials audience={["parent", "student"]} label="▸ What parents & students say" />
         <TestimonialsSection />
         <CTASection />
       </main>
