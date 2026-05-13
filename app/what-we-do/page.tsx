@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -8,8 +9,8 @@ import { whatWeDoPage } from "@/data/whatWeDo";
 import { audienceCards } from "@/data/audiences";
 
 export const metadata: Metadata = {
-  title: "What We Do | InnoQuest — Custom Learning Design, Camps & Innovation Events",
-  description: "InnoQuest provides custom game design, camp delivery, and competition organizing. We listen to your needs to develop high-impact workshops and innovation events tailored to your objectives.",
+  title: "What We Do | InnoQuest",
+  description: "InnoQuest designs custom learning programs and delivers workshops, camps, and innovation events for schools and companies across Thailand.",
 };
 
 export default function WhatWeDoPage() {
@@ -46,10 +47,14 @@ export default function WhatWeDoPage() {
                   </Link>
                 </div>
               </div>
-              <div>
-                <div className="imgph dark" style={{ height: 400, borderRadius: 14 }}>
-                  <div className="imgph-tag">{whatWeDoPage.hero.image.tag}</div>
-                  <div className="imgph-caption">{whatWeDoPage.hero.image.caption}</div>
+              <div style={{ position: "relative" }}>
+                <div style={{
+                  position: "absolute", top: 12, left: 12,
+                  width: "calc(100% - 16px)", height: "calc(100% - 16px)",
+                  borderRadius: 14, border: "2px solid #8A0F14", opacity: 0.6,
+                }} />
+                <div style={{ height: 400, borderRadius: 14, overflow: "hidden", position: "relative" }}>
+                  <Image src="/images/events/price-war-154.jpg" alt="InnoQuest in action" fill style={{ objectFit: "contain" }} priority sizes="(max-width: 900px) 100vw, 50vw" />
                 </div>
               </div>
             </div>
@@ -123,6 +128,11 @@ export default function WhatWeDoPage() {
                     {s.title}
                   </h3>
                   <p style={{ fontSize: 15, lineHeight: 1.65, color: "rgba(18,18,18,0.65)", flex: 1 }}>{s.body}</p>
+                  {(s as { img?: string }).img && (
+                    <div className="relative w-full overflow-hidden rounded-[8px] mt-5" style={{ height: 180 }}>
+                      <Image src={(s as { img?: string }).img!} alt={s.title} fill className="object-cover" style={{ objectPosition: 'right center', transform: `scale(${(s as { imgScale?: number }).imgScale ?? 1})` }} />
+                    </div>
+                  )}
                   <Link href={s.href} style={{
                     display: "inline-flex", alignItems: "center", gap: 6,
                     marginTop: 24, color: "#8A0F14", fontWeight: 500, fontSize: 14, textDecoration: "none",

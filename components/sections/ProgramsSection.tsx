@@ -1,8 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 import { programs as allPrograms } from "@/data/programs";
+import { stats, satisfactionNote, studentsNote } from "@/data/stats";
 
 function useCountUp(to: number, active: boolean, duration = 1500) {
   const [val, setVal] = useState(0);
@@ -98,6 +100,7 @@ const listPrograms = allPrograms
     ages: p.ages,
     Icon: iconMap[p.slug] ?? CreativeIcon,
     href: `/programs/${p.slug}`,
+    comingSoon: p.comingSoon ?? false,
   }));
 
 function PillTag({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
@@ -186,9 +189,8 @@ export function ProgramsSection() {
               </p>
             </div>
             <div className="relative z-10 mt-6">
-              <div className="imgph dark" style={{ height: 180, marginBottom: 22 }}>
-                <div className="imgph-tag">FEATURE</div>
-                <div className="imgph-caption">// hero photo: kids presenting prototype at finale, judges clapping. Wide composition. Capture energy.</div>
+              <div className="relative overflow-hidden rounded-[10px]" style={{ height: 180, marginBottom: 22 }}>
+                <Image src="/images/events/entre-1-173.jpg" alt={featuredProgram.name} fill className="object-cover" style={{ objectPosition: "50% 61%" }} sizes="(max-width: 900px) 100vw, 40vw" />
               </div>
               <div className="flex gap-2 flex-wrap">
                 <PillTag style={{ background: "rgba(245,240,234,0.1)", color: "#F5F0EA" }}>{featuredProgram.duration.toUpperCase()}</PillTag>
@@ -220,10 +222,10 @@ export function ProgramsSection() {
               className="font-medium leading-none tabular-nums"
               style={{ fontSize: "clamp(64px, 7vw, 104px)", color: "#8A0F14", letterSpacing: "-0.04em" }}
             >
-              <CountUp to={98} suffix="%" />
+              <CountUp to={stats.find(s => s.label === "Participants Satisfaction")?.n ?? 96} suffix="%" />
             </div>
             <p className="text-[14px] leading-[1.7]" style={{ color: "rgba(18,18,18,0.6)", maxWidth: 280 }}>
-              of teachers say students returned to class more engaged.
+              {satisfactionNote}
             </p>
             {/* Spinning badge */}
             <svg
@@ -266,10 +268,10 @@ export function ProgramsSection() {
               className="font-medium leading-none"
               style={{ fontSize: "clamp(64px, 7vw, 104px)", color: "#8A0F14", letterSpacing: "-0.04em" }}
             >
-              <CountUp to={500} suffix="+" />
+              <CountUp to={stats.find(s => s.label === "Students trained")?.n ?? 400} suffix="+" />
             </div>
             <p className="text-[14px] leading-[1.7]" style={{ color: "rgba(18,18,18,0.6)", maxWidth: 280 }}>
-              across Thailand since 2021. From Bangkok to Chiang Mai.
+              {studentsNote}
             </p>
           </div>
         </div>
@@ -307,6 +309,14 @@ export function ProgramsSection() {
                 >
                   {p.name}
                 </h4>
+                {p.comingSoon && (
+                  <span
+                    className="inline-block mt-[6px] px-[8px] py-[3px] rounded-full text-[10px] font-medium uppercase tracking-[0.08em]"
+                    style={{ background: "#8A0F14", color: "#F5F0EA", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
+                  >
+                    Coming soon
+                  </span>
+                )}
               </div>
               <div className="flex gap-[6px] flex-wrap">
                 <PillTag style={{ background: "#F5F0EA", color: "#121212" }}>{p.dur}</PillTag>

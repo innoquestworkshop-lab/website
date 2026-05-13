@@ -14,3 +14,9 @@ export const satisfactionNote =
 /** Sub-copy for the students stat tile in ProgramsSection. */
 export const studentsNote =
   "across Thailand since 2024.";
+
+/** Named stat for school partnerships — used on testimonials page. */
+export const schoolsStat = { n: 30, suf: "+", label: "Schools partnered" } as const;
+
+/** Named stat for years running — used on testimonials page. */
+export const yearsRunningStat = { n: 2, suf: "+ yrs", label: "Running programs" } as const;

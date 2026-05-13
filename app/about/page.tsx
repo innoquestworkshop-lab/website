@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -8,8 +9,8 @@ import { AboutStats } from "@/components/sections/AboutStats";
 import { aboutPage } from "@/data/about";
 
 export const metadata: Metadata = {
-  title: "About Us",
-  description: "InnoQuest is a youth experiential learning company based in Bangkok, Thailand.",
+  title: "About InnoQuest | Youth Innovation Learning in Thailand",
+  description: "InnoQuest empowers students aged 10–18 across Thailand through hands-on innovation workshops, business simulations, and entrepreneurship camps. Discover our mission.",
 };
 
 export default function AboutPage() {
@@ -46,10 +47,14 @@ export default function AboutPage() {
                   </Link>
                 </div>
               </div>
-              <div>
-                <div className="imgph dark" style={{ height: 380, borderRadius: 14 }}>
-                  <div className="imgph-tag">{aboutPage.hero.image.tag}</div>
-                  <div className="imgph-caption">{aboutPage.hero.image.caption}</div>
+              <div style={{ position: "relative" }}>
+                <div style={{
+                  position: "absolute", top: 12, left: 12,
+                  width: "calc(100% - 16px)", height: "calc(100% - 16px)",
+                  borderRadius: 14, border: "2px solid #8A0F14", opacity: 0.6,
+                }} />
+                <div style={{ height: 380, borderRadius: 14, overflow: "hidden", position: "relative" }}>
+                  <Image src="/images/events/price-war-048.jpg" alt="InnoQuest team" fill style={{ objectFit: "cover" }} priority sizes="(max-width: 900px) 100vw, 50vw" />
                 </div>
               </div>
             </div>

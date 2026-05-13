@@ -51,7 +51,7 @@ export const schoolsPage = {
 
   teacherCollab: {
     eyebrow: "▸ Teacher collaboration",
-    heading: "We work with teachers,\nnot around them.",
+    heading: "We work with teachers, \nnot around them.",
     body: "Before any program begins, we run a teacher-briefing session to align on your students, your curriculum, and your goals. During delivery, teachers co-facilitate alongside our team so the learning continues in the classroom.",
     cta: { text: "Start a conversation →", href: "/contact" },
     image: {

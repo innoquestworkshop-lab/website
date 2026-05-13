@@ -57,7 +57,7 @@ export function Navbar() {
 
         {/* Desktop nav */}
         <ul className="hidden lg:flex items-center gap-1">
-          {navLinks.map((link) => (
+          {navLinks.filter((link) => !link.highlight).map((link) => (
             <li key={link.href} className="relative group">
               {link.dropdown ? (
                 <>
@@ -93,6 +93,22 @@ export function Navbar() {
                     </div>
                   </div>
                 </>
+              ) : link.external ? (
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(
+                    "block px-3 py-2 text-sm font-medium rounded-lg transition-colors",
+                    link.highlight
+                      ? "text-[#8A0F14] border border-[#8A0F14] rounded-full px-4 hover:bg-[#8A0F14] hover:text-white"
+                      : scrolled || mobileOpen
+                        ? "text-[#121212] hover:text-[#8A0F14]"
+                        : "text-[#F5F0EA] hover:text-[#8A0F14]"
+                  )}
+                >
+                  {link.label}
+                </a>
               ) : (
                 <Link
                   href={link.href}
@@ -123,6 +139,18 @@ export function Navbar() {
           >
             Talk to us →
           </Link>
+          {navLinks.filter((link) => link.highlight).map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden lg:inline-flex items-center gap-1.5 px-5 py-2 text-sm font-medium rounded-full text-white transition-all active:scale-[0.98] hover:opacity-90 hover:shadow-lg"
+              style={{ background: "linear-gradient(135deg, #7C3AED 0%, #2563EB 100%)" }}
+            >
+              {link.label}
+            </a>
+          ))}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className={cn("lg:hidden p-2 transition-colors", scrolled || mobileOpen ? "text-[#121212]" : "text-[#F5F0EA]")}
@@ -179,7 +207,19 @@ export function Navbar() {
               )}
             </div>
           ))}
-          <div className="pt-4">
+          <div className="pt-4 flex flex-col gap-3">
+            {navLinks.filter((link) => link.highlight).map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-center py-3 text-white text-sm font-medium rounded-full"
+              style={{ background: "linear-gradient(135deg, #7C3AED 0%, #2563EB 100%)" }}
+              >
+                {link.label}
+              </a>
+            ))}
             <Link
               href="/contact"
               className="block text-center py-3 bg-[#8A0F14] text-white text-sm font-medium rounded-full"

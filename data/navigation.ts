@@ -1,16 +1,20 @@
 export type NavItem = {
   label: string;
   href: string;
+  external?: boolean;
+  highlight?: boolean;
   dropdown?: { label: string; href: string }[];
 };
 
 /** Navigation links — source of truth for Navbar and Footer. */
 export const navLinks: NavItem[] = [
+  { label: "What We Do",      href: "/what-we-do"  },
   { label: "Experiences",     href: "/programs"    },
-  { label: "What we do",      href: "/what-we-do"  },
+  { label: "For Parents",     href: "/parents"     },
   { label: "For Schools",     href: "/schools"     },
   { label: "Corporate & CSR", href: "/corporates"  },
-  { label: "Design yours",    href: "/custom"      },
+  { label: "Design Yours",    href: "/custom"      },
+  { label: "🎮 Interactive Play",        href: "https://innoquest-interactive.vercel.app", external: true, highlight: true },
   {
     label: "About",
     href: "/about",
@@ -29,7 +33,7 @@ export const footerCols = [
     items: [
       { label: "For corporates", href: "/corporates" },
       { label: "For schools",    href: "/schools"    },
-      { label: "For parents",    href: "/programs"   },
+      { label: "For parents",    href: "/parents"    },
       { label: "For students",   href: "/programs"   },
     ],
   },

@@ -44,9 +44,22 @@ export function MethodologySection() {
               className="mt-[18px] font-medium leading-[1.05]"
               style={{ fontSize: "clamp(34px, 4.4vw, 56px)", letterSpacing: "-0.03em" }}
             >
-              {methodologySection.heading}{" "}
-              <span className="scribble">Method</span>
-              <sup style={{ fontSize: "0.4em", verticalAlign: "super", marginLeft: 4, color: "#8A0F14" }}>©</sup>
+              {(() => {
+                const scribble = methodologySection.headingScribble;
+                const full = methodologySection.heading;
+                const idx = full.lastIndexOf(scribble);
+                if (idx === -1) return <>{full}<sup style={{ fontSize: "0.4em", verticalAlign: "super", marginLeft: 4, color: "#8A0F14" }}>©</sup></>;
+                const before = full.slice(0, idx);
+                const after = full.slice(idx + scribble.length);
+                return (
+                  <>
+                    {before}
+                    <span className="scribble">{scribble}</span>
+                    {after}
+                    <sup style={{ fontSize: "0.4em", verticalAlign: "super", marginLeft: 4, color: "#8A0F14" }}>©</sup>
+                  </>
+                );
+              })()}
             </h2>
           </div>
           <div

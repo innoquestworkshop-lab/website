@@ -2,19 +2,13 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
-import { testimonials } from "@/data/testimonials";
+import { testimonials, audienceGroups, testimonialsPageMeta } from "@/data/testimonials";
+import { stats, schoolsStat, yearsRunningStat } from "@/data/stats";
 
 export const metadata: Metadata = {
   title: "Testimonials | InnoQuest — What People Are Saying",
   description: "From students who discovered what they're capable of, to schools that saw their classrooms transform, to corporates who finally ran a CSR program worth talking about.",
 };
-
-const audienceGroups = [
-  { key: "corporate" as const, label: "Corporates", tag: "CORPORATE" },
-  { key: "school"    as const, label: "Schools",    tag: "SCHOOLS"   },
-  { key: "parent"    as const, label: "Parents",    tag: "PARENTS"   },
-  { key: "student"   as const, label: "Students",   tag: "STUDENTS"  },
-];
 
 function StarRating({ stars }: { stars: number }) {
   return (
@@ -45,10 +39,9 @@ export default function TestimonialsPage() {
           <div className="max-w-[1240px] mx-auto px-8 relative z-10">
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "center" }} className="test-hero-grid">
               <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>▸ Social proof</p>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>{testimonialsPageMeta.eyebrow}</p>
                 <h1 style={{ fontSize: "clamp(36px, 5vw, 68px)", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05 }}>
-                  What people are<br />
-                  <span style={{ color: "#8A0F14" }}>saying.</span>
+                  {testimonialsPageMeta.heading}
                 </h1>
                 <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(245,240,234,0.7)", maxWidth: 480, marginTop: 24 }}>
                   From students who discovered what they&apos;re capable of, to schools that saw their
@@ -64,12 +57,16 @@ export default function TestimonialsPage() {
               </div>
               <div>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-                  {[
-                    { num: "500+", label: "Students reached" },
-                    { num: "30+",  label: "Schools partnered" },
-                    { num: "98%",  label: "Satisfaction rate" },
-                    { num: "5 yrs", label: "Running programs" },
-                  ].map((s) => (
+                  {(() => {
+                    const studentsStat = stats.find((s) => s.label === "Students trained")!;
+                    const satisfactionStat = stats.find((s) => s.label === "Participants Satisfaction")!;
+                    return [
+                      { num: `${studentsStat.n}${studentsStat.suf}`, label: studentsStat.label },
+                      { num: `${schoolsStat.n}${schoolsStat.suf}`,   label: schoolsStat.label },
+                      { num: `${satisfactionStat.n}${satisfactionStat.suf}`, label: satisfactionStat.label },
+                      { num: `${yearsRunningStat.n}${yearsRunningStat.suf}`, label: yearsRunningStat.label },
+                    ];
+                  })().map((s) => (
                     <div key={s.label} style={{
                       background: "rgba(245,240,234,0.05)",
                       border: "1px solid rgba(245,240,234,0.1)",

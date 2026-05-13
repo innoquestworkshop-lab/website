@@ -2,8 +2,8 @@
 export const corporatesPage = {
   hero: {
     eyebrow: "▸ For corporates & CSR",
-    heading: "A CSR program with everlasting impact.",
-    headingAccent: "everlasting impact.",
+    heading: "CSR or Corporate Youth Program\n",
+    headingAccent: "with long-lasting impact.",
     sub: "Partner with InnoQuest to deliver meaningful youth development under your CSR strategy. Your team gets a compelling story — the kids get life-changing skills.",
     cta1: { text: "Talk to us →", href: "/contact" },
     cta2: { text: "See programs", href: "/programs" },
@@ -88,3 +88,8 @@ export const corporatesPage = {
     cta2: { text: "Custom solutions", href: "/custom" },
   },
 } as const;
+
+export const corporatePartners: { name: string; logo?: string }[] = [
+  // { name: "Swipe Company", logo: "/images/partners/swipe-company.png" },
+  // { name: "Swipe Next Gen", logo: "/images/partners/swipe-next-gen.png" },
+];

@@ -1,7 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "InnoQuest — Build Real Skills, Not Just Grades",
+  description: "Bangkok's leading youth learning company. Innovation workshops, business camps & entrepreneurship programs for students, schools, corporates & families across Thailand.",
+};
+
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollNav } from "@/components/layout/ScrollNav";
-import { CinematicIntro } from "@/components/sections/CinematicIntro";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { AudienceSwitcher } from "@/components/sections/AudienceSwitcher";
 import { MethodologySection } from "@/components/sections/MethodologySection";
@@ -17,8 +23,7 @@ export default function HomePage() {
       <Navbar />
       <ScrollNav />
       <main className="h-screen overflow-y-scroll">
-        <CinematicIntro />
-        <HeroSection />
+<HeroSection />
         <div id="section-who-we-serve"><AudienceSwitcher /></div>
         <div id="section-method"><MethodologySection /></div>
         <div id="section-experiences"><ProgramsSection /></div>

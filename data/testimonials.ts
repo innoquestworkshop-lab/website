@@ -59,3 +59,15 @@ export const testimonials: Testimonial[] = [
     context: "Half-day CSR camp · 80 kids",
   },
 ];
+
+export const audienceGroups: { key: TestimonialAudience | "all"; label: string; tag: string }[] = [
+  { key: "corporate" as const, label: "Corporates", tag: "CORPORATE" },
+  { key: "school"    as const, label: "Schools",    tag: "SCHOOLS"   },
+  { key: "parent"    as const, label: "Parents",    tag: "PARENTS"   },
+  { key: "student"   as const, label: "Students",   tag: "STUDENTS"  },
+];
+
+export const testimonialsPageMeta = {
+  eyebrow: "▸ What people say",
+  heading: "Real words from real people.",
+} as const;

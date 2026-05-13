@@ -1,43 +1,15 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
+import { customPage } from "@/data/custom";
 
 export const metadata: Metadata = {
-  title: "Custom Solutions",
-  description: "Have something specific in mind? InnoQuest designs programs from scratch around your goals, audience, and timeline.",
+  title: "Custom-Built Programs | InnoQuest Thailand",
+  description: "Need something bespoke? InnoQuest designs experiential learning programs from scratch — your goals, your audience, your format. Trusted by schools and corporates across Bangkok.",
 };
-
-const steps = [
-  {
-    num: "01",
-    title: "Discovery call",
-    body: "We start with a 30-minute conversation to understand your goals, audience, and constraints. No slides — just a real conversation.",
-  },
-  {
-    num: "02",
-    title: "Program design",
-    body: "Our learning designers create a bespoke program framework tailored to your needs — themes, format, outcomes, and facilitation plan.",
-  },
-  {
-    num: "03",
-    title: "Review & refine",
-    body: "You review the proposal, we iterate until it's exactly right — before any commitment. We don't proceed until you're confident.",
-  },
-  {
-    num: "04",
-    title: "Delivery & reporting",
-    body: "We facilitate the program and deliver a full impact report on completion. Your story, documented.",
-  },
-];
-
-const pastBuilds = [
-  { label: "Financial Literacy", context: "200-student CSR program for a regional bank", tag: "CORPORATE" },
-  { label: "Innovation Sprint", context: "5-day startup simulation for a private school", tag: "SCHOOL" },
-  { label: "Leadership Camp", context: "3-day experiential camp for gifted students", tag: "SCHOOL" },
-  { label: "Brand Story Day", context: "Single-day CSR activation for a consumer brand", tag: "CORPORATE" },
-];
 
 export default function CustomPage() {
   return (
@@ -71,10 +43,14 @@ export default function CustomPage() {
                   </Link>
                 </div>
               </div>
-              <div>
-                <div className="imgph dark" style={{ height: 380, borderRadius: 14 }}>
-                  <div className="imgph-tag">CUSTOM · HERO</div>
-                  <div className="imgph-caption">// whiteboard planning session: team mapping out a custom program. Shows collaborative design process.</div>
+              <div style={{ position: "relative" }}>
+                <div style={{
+                  position: "absolute", top: 12, left: 12,
+                  width: "calc(100% - 16px)", height: "calc(100% - 16px)",
+                  borderRadius: 14, border: "2px solid #8A0F14", opacity: 0.6,
+                }} />
+                <div style={{ height: 380, borderRadius: 14, overflow: "hidden", position: "relative" }}>
+                  <Image src="/images/events/IMG_7900.jpg" alt="Custom program planning session" fill style={{ objectFit: "cover" }} priority sizes="(max-width: 900px) 100vw, 50vw" />
                 </div>
               </div>
             </div>
@@ -88,7 +64,7 @@ export default function CustomPage() {
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "end", marginBottom: 48 }} className="process-head">
               <div>
                 <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>▸ How it works</p>
-                <h2 className="h-section">Four steps from idea<br />to impact.</h2>
+                <h2 className="h-section">Four steps from idea to impact.</h2>
               </div>
               <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(18,18,18,0.6)" }}>
                 Our process is designed to minimize risk and maximize fit.
@@ -97,7 +73,7 @@ export default function CustomPage() {
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }} className="steps-grid">
-              {steps.map((s) => (
+              {customPage.process.steps.map((s) => (
                 <div key={s.num} className="card-lift" style={{
                   background: "#FFFFFF", borderRadius: 14, padding: 28,
                   minHeight: 280, display: "flex", flexDirection: "column", justifyContent: "space-between",
@@ -120,16 +96,16 @@ export default function CustomPage() {
           `}</style>
         </section>
 
-        {/* Past custom builds */}
+        {/* Past custom builds — only shown when items exist in data */}
+        {customPage.pastBuilds.items.length > 0 && (
         <section style={{ background: "#FFFFFF", padding: "96px 0" }}>
           <div className="max-w-[1240px] mx-auto px-8">
             <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>▸ Past custom builds</p>
             <h2 className="h-section" style={{ marginBottom: 48 }}>
               Things we&apos;ve <span className="scribble">designed from scratch</span>.
             </h2>
-
             <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }} className="builds-grid">
-              {pastBuilds.map((b, i) => (
+              {customPage.pastBuilds.items.map((b, i) => (
                 <div key={i} className="card-lift" style={{
                   background: "#F5F0EA", borderRadius: 14,
                   display: "grid", gridTemplateColumns: "1fr 1.2fr", overflow: "hidden",
@@ -148,15 +124,12 @@ export default function CustomPage() {
                 </div>
               ))}
             </div>
-
-            <p className="mono" style={{ fontSize: 11, color: "rgba(18,18,18,0.4)", marginTop: 20 }}>
-              // PHOTOS · replace placeholder images with real program photos from past custom builds
-            </p>
           </div>
           <style>{`
             @media(max-width:900px){ .builds-grid { grid-template-columns: 1fr !important; } }
           `}</style>
         </section>
+        )}
 
         <CTASection />
       </main>

@@ -46,19 +46,12 @@ function PartnerPill({ partner }: { partner: EcosystemPartner }) {
             style={{ objectFit: "contain", filter: "brightness(0) invert(1)", opacity: 0.85 }}
           />
         ) : (
-          /* Placeholder box shown until a real logo is added */
-          <div
-            style={{
-              width: 40, height: 24, borderRadius: 4,
-              background: "rgba(245,240,234,0.08)",
-              border: "1px dashed rgba(245,240,234,0.25)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-            }}
-          >
-            <span style={{ fontSize: 7, letterSpacing: "0.06em", color: "rgba(245,240,234,0.35)", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}>
-              LOGO
-            </span>
-          </div>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5 }}>
+            <rect x="3" y="3" width="7" height="7" rx="1" />
+            <rect x="14" y="3" width="7" height="7" rx="1" />
+            <rect x="3" y="14" width="7" height="7" rx="1" />
+            <rect x="14" y="14" width="7" height="7" rx="1" />
+          </svg>
         )}
       </div>
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -74,11 +75,24 @@ export default async function ProgramPage({
                   </Link>
                 </div>
               </div>
-              <div>
-                <div className="imgph dark" style={{ height: 380, borderRadius: 14 }}>
-                  <div className="imgph-tag">PROGRAM · HERO</div>
-                  <div className="imgph-caption">// tall portrait-style action shot: students mid-activity, real energy. Vertical orientation.</div>
-                </div>
+              <div style={{ position: "relative" }}>
+                {program.heroImg ? (
+                  <>
+                    <div style={{
+                      position: "absolute", top: 12, left: 12,
+                      width: "calc(100% - 16px)", height: "calc(100% - 16px)",
+                      borderRadius: 14, border: "2px solid #8A0F14", opacity: 0.6,
+                    }} />
+                    <div style={{ height: 380, borderRadius: 14, overflow: "hidden", position: "relative" }}>
+                      <Image src={program.heroImg} alt={program.name} fill style={{ objectFit: "cover" }} sizes="(max-width: 900px) 100vw, 50vw" />
+                    </div>
+                  </>
+                ) : (
+                  <div className="imgph dark" style={{ height: 380, borderRadius: 14 }}>
+                    <div className="imgph-tag">PROGRAM · HERO</div>
+                    <div className="imgph-caption">// tall portrait-style action shot: students mid-activity, real energy. Vertical orientation.</div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
-import { team, typeConfig } from "@/data/team";
+import { team, teamPage, typeConfig } from "@/data/team";
 
 export const metadata: Metadata = {
-  title: "Our People",
-  description: "Meet the facilitators, speakers, and team behind InnoQuest.",
+  title: "Our Team | InnoQuest",
+  description: "Meet the facilitators, speakers, and educators driving youth development across Bangkok and Thailand — real experts who make learning transformative.",
 };
 
 export default function OurPeoplePage() {
@@ -27,19 +28,25 @@ export default function OurPeoplePage() {
           <div className="max-w-[1240px] mx-auto px-8 relative z-10">
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1.1fr", gap: 64, alignItems: "center" }} className="team-hero-grid">
               <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>▸ Our people</p>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>{teamPage.hero.eyebrow}</p>
                 <h1 style={{ fontSize: "clamp(36px, 5vw, 68px)", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05 }}>
                   The people behind{" "}
                   <span style={{ color: "#8A0F14" }}>InnoQuest.</span>
                 </h1>
                 <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(245,240,234,0.7)", maxWidth: 480, marginTop: 24 }}>
-                  Facilitators, speakers, designers, and builders who care deeply about the next generation.
+                  {teamPage.hero.sub}
                 </p>
               </div>
               <div>
-                <div className="imgph dark" style={{ height: 380, borderRadius: 14 }}>
-                  <div className="imgph-tag">TEAM · GROUP</div>
-                  <div className="imgph-caption">// team photo: 6–10 people laughing, casual setting. NOT lined up against a wall. Show personality.</div>
+                <div style={{ position: "relative" }}>
+                  <div style={{
+                    position: "absolute", top: 12, left: 12,
+                    width: "calc(100% - 16px)", height: "calc(100% - 16px)",
+                    borderRadius: 14, border: "2px solid #8A0F14", opacity: 0.6,
+                  }} />
+                  <div style={{ height: 380, borderRadius: 14, overflow: "hidden", position: "relative" }}>
+                    <Image src="/images/events/entre1-IMG_5408.jpg" alt="InnoQuest team" fill style={{ objectFit: "cover" }} priority sizes="(max-width: 900px) 100vw, 50vw" />
+                  </div>
                 </div>
               </div>
             </div>

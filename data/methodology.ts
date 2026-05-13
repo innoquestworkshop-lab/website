@@ -42,6 +42,9 @@ export const methodPillarNames = methodPillars.map((p) => p.title) as string[];
 
 export const methodologySection = {
   eyebrow: "▸ Our learning framework",
+  /** Full heading text. The `headingScribble` word receives the .scribble style. */
   heading: "The InnoQuest Method",
+  /** The single word within `heading` that should be rendered with the .scribble style. */
+  headingScribble: "Method",
   sub: "Seven principles that define how we design every program — because the way people learn matters just as much as what they learn.",
 } as const;

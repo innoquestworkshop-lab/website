@@ -1,105 +1,110 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
-import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { ContextualTestimonials } from "@/components/sections/ContextualTestimonials";
-import { programs } from "@/data/programs";
+import { parentsPage } from "@/data/parents";
 
 export const metadata: Metadata = {
-  title: "For Parents",
-  description: "Give your child real-world skills they won't learn in a classroom — InnoQuest programs built for curious, ambitious young minds.",
+  title: "InnoQuest for Parents | Youth Programs Bangkok",
+  description: "Help your child ages 10–18 build entrepreneurship & innovation skills beyond the classroom. InnoQuest camps & workshops in Bangkok, Thailand — made for curious, driven kids.",
 };
 
-const whyItMatters = [
-  {
-    title: "Beyond the classroom",
-    body: "InnoQuest programs tackle real challenges — not textbook exercises. Your child leaves with skills that employers and universities actually look for.",
-  },
-  {
-    title: "Safe space to fail",
-    body: "We design every program so failure is part of the process. Kids learn to iterate, adapt, and try again — the most important habit they can build.",
-  },
-  {
-    title: "Mixed-age collaboration",
-    body: "Working alongside peers of different ages mirrors how the real world operates, and builds social confidence that lasts.",
-  },
-  {
-    title: "Tangible outcomes",
-    body: "Every program ends with something your child made — a pitch, a prototype, a business plan. Proof of what they're capable of.",
-  },
-];
-
 export default function ParentsPage() {
-  const parentPrograms = programs.filter((p) => p.audiences.includes("parent"));
+  const { hero, whyItMatters } = parentsPage;
 
   return (
     <>
       <Navbar />
-      <main className="pt-16">
+      <main>
         {/* Hero */}
-        <div style={{ background: "#121212" }} className="py-20 px-8">
-          <div className="max-w-7xl mx-auto">
-            <p className="text-[11px] font-medium uppercase tracking-[0.08em] text-[#8A0F14] mb-3">
-              For parents
-            </p>
-            <h1 className="text-4xl font-medium text-white mb-4 max-w-2xl">
-              Give them the skills school doesn&apos;t teach
-            </h1>
-            <p className="text-gray-400 text-sm max-w-[520px] mb-8">
-              InnoQuest programs build entrepreneurial thinking, creative problem-solving, and real-world confidence — the foundation every ambitious young person needs.
-            </p>
-            <Link
-              href="/contact"
-              className="inline-flex items-center px-6 py-3 bg-[#8A0F14] text-white text-sm font-medium rounded-full hover:bg-[#D63B34]"
-            >
-              Talk to us →
-            </Link>
+        <section
+          style={{ background: "#121212", color: "#F5F0EA", paddingTop: 140, paddingBottom: 80 }}
+          className="relative overflow-hidden dot-bg"
+        >
+          <div
+            className="absolute rounded-full pointer-events-none"
+            style={{ top: -100, right: -80, width: 420, height: 420, background: "#8A0F14", opacity: 0.11, filter: "blur(2px)" }}
+          />
+          <div className="max-w-[1240px] mx-auto px-8 relative z-10">
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1.1fr", gap: 64, alignItems: "center" }} className="parents-hero-grid">
+              <div>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>{hero.eyebrow}</p>
+                <h1 style={{ fontSize: "clamp(36px, 5vw, 68px)", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05 }}>
+                  Give them the skills{" "}
+                  <span style={{ color: "#8A0F14" }}>school doesn&apos;t teach.</span>
+                </h1>
+                <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(245,240,234,0.7)", maxWidth: 520, marginTop: 24 }}>
+                  {hero.sub}
+                </p>
+                <div style={{ display: "flex", gap: 12, marginTop: 32, flexWrap: "wrap" }}>
+                  <Link href={hero.cta.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#8A0F14", color: "#F5F0EA" }}>
+                    {hero.cta.text}
+                  </Link>
+                  <Link href="/programs" className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border" style={{ color: "#F5F0EA", borderColor: "rgba(245,240,234,0.3)" }}>
+                    See all programs
+                  </Link>
+                </div>
+              </div>
+              <div style={{ position: "relative", padding: "16px 0 0 16px" }}>
+                <div style={{
+                  position: "absolute", top: 0, left: 0,
+                  width: "calc(100% - 16px)", height: "calc(100% - 16px)",
+                  borderRadius: 14, border: "2px solid #8A0F14", opacity: 0.6,
+                }} />
+                <div style={{ height: 520, borderRadius: 14, overflow: "hidden", position: "relative" }}>
+                  <Image src="/images/events/price-war-058.jpg" alt="Parents at InnoQuest" fill style={{ objectFit: "cover" }} priority sizes="(max-width: 900px) 100vw, 50vw" />
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+          <style>{`@media(max-width:900px){ .parents-hero-grid { grid-template-columns: 1fr !important; } }`}</style>
+        </section>
 
         {/* Why it matters */}
-        <div style={{ background: "#F5F0EA" }} className="py-20 px-8">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-2xl font-medium text-[#121212] mb-10">Why it matters</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {whyItMatters.map((item) => (
-                <div key={item.title} className="bg-white rounded-[14px] p-6">
-                  <h3 className="text-base font-medium text-[#121212] mb-2">{item.title}</h3>
-                  <p className="text-sm text-[#4A4A4A] leading-relaxed">{item.body}</p>
+        <section style={{ background: "#FFFFFF", padding: "96px 0" }}>
+          <div className="max-w-[1240px] mx-auto px-8">
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "end", marginBottom: 48 }} className="parents-why-head">
+              <div>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>▸ Why it matters</p>
+                <h2 className="h-section">{whyItMatters.heading}</h2>
+              </div>
+              <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(18,18,18,0.6)" }}>
+                Every InnoQuest program is designed to develop skills that schools don&apos;t prioritise — creativity, resilience, and the confidence to back your own ideas.
+              </p>
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }} className="parents-why-grid">
+              {whyItMatters.items.map((item, i) => (
+                <div key={item.title} className="card-lift" style={{
+                  background: i === 0 ? "#121212" : "#F5F0EA",
+                  borderRadius: 14, padding: 36,
+                  minHeight: 240, display: "flex", flexDirection: "column", justifyContent: "space-between",
+                  border: i !== 0 ? "1px solid rgba(18,18,18,0.06)" : undefined,
+                }}>
+                  <div style={{ fontSize: 36, fontWeight: 500, color: "#8A0F14", letterSpacing: "-0.04em", lineHeight: 1 }}>
+                    {String(i + 1).padStart(2, "0")}
+                  </div>
+                  <div>
+                    <h3 style={{ fontSize: 20, fontWeight: 500, letterSpacing: "-0.015em", marginBottom: 10, color: i === 0 ? "#F5F0EA" : "#121212" }}>
+                      {item.title}
+                    </h3>
+                    <p style={{ fontSize: 15, lineHeight: 1.65, color: i === 0 ? "rgba(245,240,234,0.65)" : "rgba(18,18,18,0.6)" }}>
+                      {item.body}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
-        </div>
-
-        {/* Programs */}
-        {parentPrograms.length > 0 && (
-          <div className="bg-white py-20 px-8">
-            <div className="max-w-7xl mx-auto">
-              <h2 className="text-2xl font-medium text-[#121212] mb-10">Programs your child can join</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {parentPrograms.map((p) => (
-                  <Link
-                    key={p.slug}
-                    href={`/programs/${p.slug}`}
-                    className="bg-[#F5F0EA] rounded-[14px] p-6 group transition-transform hover:-translate-y-1"
-                  >
-                    <h3 className="text-base font-medium text-[#121212] group-hover:text-[#8A0F14] transition-colors mb-2">
-                      {p.name}
-                    </h3>
-                    <p className="text-sm text-[#4A4A4A] leading-relaxed mb-4 line-clamp-2">{p.tagline}</p>
-                    <p className="text-xs text-[#4A4A4A]">{p.duration} · Ages {p.ages}</p>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
+          <style>{`
+            @media(max-width:900px){ .parents-why-head { grid-template-columns: 1fr !important; gap: 24px !important; } .parents-why-grid { grid-template-columns: 1fr !important; } }
+          `}</style>
+        </section>
 
         <ContextualTestimonials audience={["parent", "student"]} label="▸ What parents & students say" />
-        <TestimonialsSection />
         <CTASection />
       </main>
       <Footer />

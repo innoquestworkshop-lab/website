@@ -2,39 +2,22 @@
 
 import Image from "next/image";
 import { useRef, useEffect, useState } from "react";
+import { testimonials as allTestimonials } from "@/data/testimonials";
 
-const testimonials = [
-  {
-    badge: "Student",
-    badgeBg: "#F3EEFF",
-    badgeInk: "#5B21B6",
-    stars: 5,
-    avatar: "",
-    quote: "พี่เอเชียป็น mentor ที่อธิบายทุกอย่างออกมาได้เข้าใจง่ายมากๆ ไม่ว่าจะเป็นเรื่องที่ยากแค่ไหนก็สามารถทำให้ผมเข้าใจได้ชัดเจนในแบบที่เป็นกันเองสุดๆ ตลอดช่วง mini hackathon พี่คอยช่วยแนะนำและสนับสนุนทีมเราอย่างเต็มที่ ทำให้พวกเราทำงานได้มั่นใจขึ้นมากจริงๆ พี่คือ mentor ที่ดีที่สุดที่พวกเราจะขอได้เลยครับ.",
-    name: "Trust",
-    role: "InCSii Playground Mentee · InCSii Playground",
-  },
-  {
-    badge: "School",
-    badgeBg: "#E6F1FB",
-    badgeInk: "#185FA5",
-    stars: 5,
-    avatar: "",
-    quote: "Students who hadn't spoken up all year were pitching ideas on day two. Something genuinely shifted — we saw it in the classroom for weeks after.",
-    name: "Principal",
-    role: "Assumption College Sriracha · Semester program",
-  },
-  {
-    badge: "Parent",
-    badgeBg: "#EAF3DE",
-    badgeInk: "#3B6D11",
-    stars: 5,
-    avatar: "",
-    quote: "She came home asking to solve problems. I didn't know a camp could do that.",
-    name: "Parent of participant, age 12",
-    role: "Summer workshop · 5 days",
-  },
-];
+const badgeStyles: Record<string, { badgeBg: string; badgeInk: string; badge: string }> = {
+  student:   { badge: "Student",   badgeBg: "#F3EEFF", badgeInk: "#5B21B6" },
+  school:    { badge: "School",    badgeBg: "#E6F1FB", badgeInk: "#185FA5" },
+  parent:    { badge: "Parent",    badgeBg: "#EAF3DE", badgeInk: "#3B6D11" },
+  corporate: { badge: "Corporate", badgeBg: "#FEF3E2", badgeInk: "#92400E" },
+};
+
+const testimonials = allTestimonials.slice(0, 3).map((t) => ({
+  ...t,
+  ...badgeStyles[t.audience],
+  stars: t.stars ?? 5,
+  avatar: t.avatar ?? "",
+  role: `${t.role} · ${t.context}`,
+}));
 
 function Stars({ count }: { count: number }) {
   return (

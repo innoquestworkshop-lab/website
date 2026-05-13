@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -7,8 +8,8 @@ import { ContextualTestimonials } from "@/components/sections/ContextualTestimon
 import { schoolsPage } from "@/data/schools";
 
 export const metadata: Metadata = {
-  title: "For Schools & Institutions",
-  description: "From one-day workshops to semester-long journeys — InnoQuest programs that align with your curriculum and calendar.",
+  title: "School Programs & Workshops | InnoQuest Thailand",
+  description: "Curriculum-aligned innovation workshops and entrepreneurship camps for Bangkok and Thailand schools. Develop student skills that go beyond the classroom.",
 };
 
 export default function SchoolsPage() {
@@ -45,10 +46,21 @@ export default function SchoolsPage() {
                   </Link>
                 </div>
               </div>
-              <div>
-                <div className="imgph dark" style={{ height: 380, borderRadius: 14 }}>
-                  <div className="imgph-tag">{schoolsPage.hero.image.tag}</div>
-                  <div className="imgph-caption">{schoolsPage.hero.image.caption}</div>
+              <div style={{ position: "relative", padding: "16px 0 0 16px" }}>
+                <div style={{
+                  position: "absolute", top: 0, left: 0,
+                  width: "calc(100% - 16px)", height: "calc(100% - 16px)",
+                  borderRadius: 14, border: "2px solid #8A0F14", opacity: 0.6,
+                }} />
+                <div style={{ height: 520, borderRadius: 14, overflow: "hidden", position: "relative" }}>
+                  <Image
+                    src="/images/events/ac-w4-001.jpg"
+                    alt="AC Workshop"
+                    fill
+                    style={{ objectFit: "cover" }}
+                    sizes="(max-width: 900px) 100vw, 50vw"
+                    priority
+                  />
                 </div>
               </div>
             </div>
@@ -118,9 +130,17 @@ export default function SchoolsPage() {
               <div>
                 <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{schoolsPage.teacherCollab.eyebrow}</p>
                 <h2 className="h-section">
-                  {schoolsPage.teacherCollab.heading.split("\n").map((l, i) => (
-                    <span key={i}>{i === 1 ? <><span className="scribble">with</span>{l.replace("with ", "")}</> : l}{i < 1 && <br />}</span>
-                  ))}
+                  {schoolsPage.teacherCollab.heading.split("\n").map((l, i, arr) => {
+                    const parts = l.split("with ");
+                    return (
+                      <span key={i}>
+                        {parts.length > 1
+                          ? <>{parts[0]}<span className="scribble">with</span> {parts[1]}</>
+                          : l}
+                        {i < arr.length - 1 && <br />}
+                      </span>
+                    );
+                  })}
                 </h2>
                 <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(18,18,18,0.6)", marginTop: 24, maxWidth: 460 }}>
                   {schoolsPage.teacherCollab.body}
@@ -129,10 +149,20 @@ export default function SchoolsPage() {
                   {schoolsPage.teacherCollab.cta.text}
                 </Link>
               </div>
-              <div>
-                <div className="imgph" style={{ height: 400, borderRadius: 14 }}>
-                  <div className="imgph-tag">{schoolsPage.teacherCollab.image.tag}</div>
-                  <div className="imgph-caption">{schoolsPage.teacherCollab.image.caption}</div>
+              <div style={{ position: "relative", padding: "16px 0 0 16px" }}>
+                <div style={{
+                  position: "absolute", top: 0, left: 0,
+                  width: "calc(100% - 16px)", height: "calc(100% - 16px)",
+                  borderRadius: 14, border: "2px solid #8A0F14", opacity: 0.6,
+                }} />
+                <div style={{ height: 400, borderRadius: 14, overflow: "hidden", position: "relative" }}>
+                  <Image
+                    src="/images/events/acs-teachers.jpg"
+                    alt="Working with teachers"
+                    fill
+                    style={{ objectFit: "cover", filter: "brightness(1.15) contrast(1.05) saturate(1.1)" }}
+                    sizes="(max-width: 900px) 100vw, 50vw"
+                  />
                 </div>
               </div>
             </div>

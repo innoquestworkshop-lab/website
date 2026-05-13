@@ -48,6 +48,8 @@ export const whatWeDoPage = {
         body: "Build your own ecosystem using our battle-tested IP. This includes Custom Game Design, In-House Product Licensing for proven formats, and Learning Journey Development as a Service. We help you architect a curriculum from scratch that integrates innovation directly into your organization's DNA.",
         cta: "View Design services",
         href: "/services#design",
+        img: "/images/events/price-war-141.jpg",
+        imgScale: 1.30,
       },
       {
         tag: "DELIVERY",
@@ -55,6 +57,8 @@ export const whatWeDoPage = {
         body: "Professional execution for any scale. Our versatile team delivers Camps, Workshops, Competitions, and Hackathons. We provide the full infrastructure: Event Organizing, Mentor and Speaker Services, and Course Hours tailored to bring your boldest ideas to life.",
         cta: "View Event services",
         href: "/services#delivery",
+        img: "/images/events/sme-business-016.jpg",
+        imgScale: 1.15,
       },
     ],
   },

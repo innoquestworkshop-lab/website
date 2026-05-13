@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
-import { programs } from "@/data/programs";
+import { programs, programsPageMeta } from "@/data/programs";
 
 export const metadata: Metadata = {
-  title: "Programs",
-  description: "From one-day workshops to semester-long journeys — InnoQuest programs for schools, corporates, and families.",
+  title: "Programs & Experiences | InnoQuest Thailand",
+  description: "Explore InnoQuest programs for students ages 10–18 in Bangkok & Thailand — from 1-day innovation workshops to semester-long entrepreneurship journeys. For schools, families & corporates.",
+  openGraph: {
+    images: [{ url: "/images/events/entre-1-173.jpg", width: 1200, height: 630, alt: "InnoQuest Programs & Experiences" }],
+  },
 };
 
 export default function ProgramsPage() {
@@ -24,7 +28,7 @@ export default function ProgramsPage() {
           className="dot-bg"
         >
           <div className="max-w-[1240px] mx-auto px-8">
-            <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>▸ Programs</p>
+            <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>▸ Experiences</p>
             <h1 style={{ fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05, maxWidth: 740 }}>
               Short, long, or{" "}
               <span style={{ color: "#8A0F14" }}>fully custom.</span>
@@ -38,7 +42,7 @@ export default function ProgramsPage() {
         {/* Featured program */}
         <section style={{ background: "#F5F0EA", padding: "80px 0 48px" }}>
           <div className="max-w-[1240px] mx-auto px-8">
-            <p className="eyebrow" style={{ color: "rgba(18,18,18,0.5)", marginBottom: 24 }}>▸ Featured program</p>
+            <p className="eyebrow" style={{ color: "rgba(18,18,18,0.5)", marginBottom: 24 }}>▸ Featured experience</p>
             <Link
               href={`/programs/${featured.slug}`}
               className="card-lift"
@@ -80,10 +84,16 @@ export default function ProgramsPage() {
                 </div>
               </div>
               <div style={{ position: "relative", zIndex: 1 }}>
-                <div className="imgph dark" style={{ height: "100%", minHeight: 280, borderRadius: 10 }}>
-                  <div className="imgph-tag">FEATURE</div>
-                  <div className="imgph-caption">// hero photo: kids presenting prototype to judges/panel. Wide. Capture energy.</div>
-                </div>
+                {featured.heroImg ? (
+                  <div style={{ height: "100%", minHeight: 280, borderRadius: 10, overflow: "hidden", position: "relative" }}>
+                    <Image src={featured.heroImg} alt={featured.name} fill style={{ objectFit: "cover" }} sizes="(max-width: 900px) 100vw, 50vw" />
+                  </div>
+                ) : (
+                  <div className="imgph dark" style={{ height: "100%", minHeight: 280, borderRadius: 10 }}>
+                    <div className="imgph-tag">FEATURE</div>
+                    <div className="imgph-caption">// hero photo: kids presenting prototype to judges/panel. Wide. Capture energy.</div>
+                  </div>
+                )}
               </div>
             </Link>
           </div>
@@ -93,7 +103,7 @@ export default function ProgramsPage() {
         {/* All programs */}
         <section style={{ background: "#F5F0EA", padding: "0 0 96px" }}>
           <div className="max-w-[1240px] mx-auto px-8">
-            <p className="eyebrow" style={{ color: "rgba(18,18,18,0.5)", marginBottom: 24 }}>▸ All programs</p>
+            <p className="eyebrow" style={{ color: "rgba(18,18,18,0.5)", marginBottom: 24 }}>▸ All experiences</p>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="all-progs-grid">
               {rest.map((program) => (
                 <Link
@@ -122,21 +132,28 @@ export default function ProgramsPage() {
                 </Link>
               ))}
 
-              {/* Custom CTA */}
-              <Link href="/custom" className="card-lift" style={{
-                background: "#121212", color: "#F5F0EA", borderRadius: 14, padding: 28,
-                display: "flex", flexDirection: "column", justifyContent: "space-between",
-                minHeight: 240, textDecoration: "none",
-              }}>
-                <p className="eyebrow" style={{ color: "rgba(245,240,234,0.55)" }}>Don&apos;t see a fit?</p>
-                <div>
-                  <h3 style={{ fontSize: 17, fontWeight: 500, color: "#F5F0EA", marginBottom: 14 }}>
-                    Design something custom with us.
-                  </h3>
-                  <span style={{ color: "#8A0F14", fontSize: 13, fontWeight: 500 }}>Start a custom brief →</span>
-                </div>
-              </Link>
             </div>
+
+            {/* Custom CTA — full width */}
+            <Link href="/custom" className="card-lift" style={{
+              background: "#121212", color: "#F5F0EA", borderRadius: 14, padding: "32px 40px",
+              display: "flex", alignItems: "center", justifyContent: "space-between",
+              gap: 24, textDecoration: "none", marginTop: 16,
+            }}>
+              <div>
+                <p className="eyebrow" style={{ color: "rgba(245,240,234,0.55)", marginBottom: 10 }}>Don&apos;t see a fit?</p>
+                <h3 style={{ fontSize: 22, fontWeight: 500, color: "#F5F0EA", letterSpacing: "-0.02em" }}>
+                  Design something custom with us.
+                </h3>
+              </div>
+              <span style={{
+                display: "inline-flex", alignItems: "center", gap: 8,
+                padding: "13px 22px", background: "#8A0F14", color: "#F5F0EA",
+                borderRadius: 999, fontSize: 14, fontWeight: 500, whiteSpace: "nowrap", flexShrink: 0,
+              }}>
+                Start a custom brief →
+              </span>
+            </Link>
           </div>
           <style>{`
             @media(max-width:900px){ .all-progs-grid { grid-template-columns: repeat(2, 1fr) !important; } }

@@ -5,8 +5,8 @@ import { ContactForm } from "@/components/ui/ContactForm";
 import { contactPage } from "@/data/contact";
 
 export const metadata: Metadata = {
-  title: "Contact",
-  description: "Talk to the InnoQuest team. No commitment — just a conversation about how we can help.",
+  title: "Contact InnoQuest | Bangkok Youth Learning Programs",
+  description: "Have a question about InnoQuest's programs in Bangkok, Thailand? Drop us a message — no pressure, just a friendly chat to see how we can help.",
 };
 
 const iconMap = {

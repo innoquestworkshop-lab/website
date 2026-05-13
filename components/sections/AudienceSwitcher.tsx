@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { audienceTabs } from "@/data/audiences";
@@ -102,38 +103,38 @@ export function AudienceSwitcher() {
           style={{ transitionDelay: "240ms" }}
         >
           <div
-            className="audience-card grid overflow-hidden rounded-[14px]"
+            className="audience-card grid overflow-hidden rounded-[18px]"
             style={{
               gridTemplateColumns: "1.05fr 1fr",
               background: "#FFFFFF",
               border: "1px solid rgba(18,18,18,0.06)",
-              boxShadow: "0 1px 0 rgba(18,18,18,0.04)",
-              minHeight: 360,
+              boxShadow: "0 2px 16px rgba(18,18,18,0.06)",
+              minHeight: 480,
               opacity: fading ? 0 : 1,
               transition: "opacity 0.15s ease",
             }}
           >
-            <div style={{ padding: "44px 44px 36px" }}>
+            <div style={{ padding: "56px 56px 48px" }}>
               <p
-                className="text-[11px] font-medium uppercase tracking-[0.14em]"
+                className="text-[12px] font-medium uppercase tracking-[0.14em]"
                 style={{ color: "rgba(18,18,18,0.6)", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
               >
                 {cur.tab}
               </p>
               <h3
-                className="mt-[14px] font-medium leading-[1.15]"
-                style={{ fontSize: 32, letterSpacing: "-0.02em" }}
+                className="mt-[16px] font-medium leading-[1.15]"
+                style={{ fontSize: 40, letterSpacing: "-0.02em" }}
               >
                 {cur.title}
               </h3>
-              <p className="mt-[18px] text-[16px] leading-[1.65]" style={{ color: "rgba(18,18,18,0.6)" }}>
+              <p className="mt-[20px] text-[18px] leading-[1.65]" style={{ color: "rgba(18,18,18,0.6)" }}>
                 {cur.body}
               </p>
-              <div className="flex flex-wrap gap-2 mt-6">
+              <div className="flex flex-wrap gap-2 mt-7">
                 {cur.bullets.map((b) => (
                   <span
                     key={b}
-                    className="inline-flex items-center gap-[6px] px-[10px] py-[5px] rounded-full text-[11px] font-medium uppercase tracking-[0.06em]"
+                    className="inline-flex items-center gap-[6px] px-[12px] py-[6px] rounded-full text-[12px] font-medium uppercase tracking-[0.06em]"
                     style={{
                       background: "#F5F0EA",
                       color: "#121212",
@@ -147,17 +148,34 @@ export function AudienceSwitcher() {
               </div>
               <Link
                 href={cur.link.href}
-                className="mt-8 inline-flex items-center gap-2 text-[14px] font-medium transition-opacity hover:opacity-80"
+                className="mt-10 inline-flex items-center gap-2 text-[15px] font-medium transition-opacity hover:opacity-80"
                 style={{ color: "#8A0F14" }}
               >
                 {cur.link.text} <span style={{ color: "#8A0F14" }}><ArrowIcon /></span>
               </Link>
             </div>
-            <div style={{ padding: 16 }}>
-              <div className="imgph w-full h-full" style={{ minHeight: 320 }}>
-                <div className="imgph-tag">PERSONA · {cur.tab.toUpperCase()}</div>
-                <div className="imgph-caption">{cur.imgCaption}</div>
-              </div>
+            <div style={{ padding: 20 }}>
+              {cur.img ? (
+                <div
+                  className="relative w-full h-full overflow-hidden rounded-[10px]"
+                  style={{ minHeight: 420, border: "2px solid rgba(18,18,18,0.12)", boxShadow: "0 2px 12px rgba(18,18,18,0.08)" }}
+                >
+                  <Image
+                    src={cur.img}
+                    alt={cur.title}
+                    fill
+                    className="object-cover scale-[1.05]"
+                  />
+                </div>
+              ) : (
+                <div
+                  className="imgph w-full h-full"
+                  style={{ minHeight: 420, border: "2px solid rgba(18,18,18,0.12)", boxShadow: "0 2px 12px rgba(18,18,18,0.08)", borderRadius: 10 }}
+                >
+                  <div className="imgph-tag">PERSONA · {cur.tab.toUpperCase()}</div>
+                  <div className="imgph-caption">{cur.imgCaption}</div>
+                </div>
+              )}
             </div>
           </div>
         </div>

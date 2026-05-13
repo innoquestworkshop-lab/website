@@ -8,6 +8,8 @@ export type Program = {
   format: string;
   description: string;
   featured?: boolean;
+  comingSoon?: boolean;
+  heroImg?: string;
   audiences: ("corporate" | "school" | "parent" | "student")[];
   outcomes: { icon: string; title: string; description: string }[];
   methodPillars: (1 | 2 | 3 | 4)[];
@@ -17,6 +19,7 @@ export const programs: Program[] = [
   {
     slug: "the-change-lab",
     name: "The Change Lab",
+    comingSoon: true,
     tagline: "Real-world ESG challenges. Hands-on solutions. Future-ready minds.",
     duration: "1–3 days",
     ages: "10–18",
@@ -36,6 +39,7 @@ export const programs: Program[] = [
   {
     slug: "entrepreneur-in-innovation",
     name: "Entrepreneur in Innovation",
+    heroImg: "/images/events/IMG_8695.jpg",
     tagline: "From zero to startup — in a day, a week, or a semester.",
     duration: "1 day – semester",
     ages: "13–18",
@@ -96,3 +100,16 @@ export const programs: Program[] = [
 export function getProgramBySlug(slug: string): Program | undefined {
   return programs.find((p) => p.slug === slug);
 }
+
+export const programsPageMeta = {
+  eyebrow: "▸ Our experiences",
+  heading: "Short, long, or fully custom.",
+  sub: "From a single-day spark to a semester-long transformation — built around your goals.",
+  popularBadge: "★ Most popular",
+  customTile: {
+    heading: "Don't see a fit?",
+    body: "Design something custom with us.",
+    cta: "Start a custom brief",
+    href: "/custom",
+  },
+} as const;

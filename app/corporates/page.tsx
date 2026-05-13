@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
+/* eslint-disable @next/next/no-img-element */
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
 import { ContextualTestimonials } from "@/components/sections/ContextualTestimonials";
-import { corporatesPage } from "@/data/corporates";
+import { corporatesPage, corporatePartners } from "@/data/corporates";
 
 export const metadata: Metadata = {
-  title: "For Corporates & CSR",
-  description: "Partner with InnoQuest to deliver meaningful youth development under your CSR strategy.",
+  title: "Corporate CSR Programs | InnoQuest Thailand",
+  description: "Power your CSR with InnoQuest — Bangkok-based youth innovation programs that deliver measurable impact for Thai students and your brand.",
 };
 
 const iconMap = {
@@ -68,10 +70,22 @@ export default function CorporatesPage() {
                   </Link>
                 </div>
               </div>
-              <div>
-                <div className="imgph dark" style={{ height: 380, borderRadius: 14 }}>
-                  <div className="imgph-tag">{corporatesPage.hero.image.tag}</div>
-                  <div className="imgph-caption">{corporatesPage.hero.image.caption}</div>
+              <div style={{ position: "relative", padding: "16px 0 0 16px" }}>
+                {/* offset frame accent */}
+                <div style={{
+                  position: "absolute", top: 0, left: 0,
+                  width: "calc(100% - 16px)", height: "calc(100% - 16px)",
+                  borderRadius: 14, border: "2px solid #8A0F14", opacity: 0.6,
+                }} />
+                <div style={{ height: 520, borderRadius: 14, overflow: "hidden", position: "relative" }}>
+                  <Image
+                    src="/images/events/price-war-071.jpg"
+                    alt="Price War Workshop"
+                    fill
+                    style={{ objectFit: "cover" }}
+                    sizes="(max-width: 900px) 100vw, 50vw"
+                    priority
+                  />
                 </div>
               </div>
             </div>
@@ -80,18 +94,29 @@ export default function CorporatesPage() {
         </section>
 
         {/* Partner logos strip */}
-        <section style={{ background: "#121212", color: "#F5F0EA", padding: "48px 0" }}>
+        {corporatePartners.length > 0 && <section style={{ background: "#121212", color: "#F5F0EA", padding: "48px 0" }}>
           <div className="max-w-[1240px] mx-auto px-8">
             <p className="eyebrow" style={{ color: "rgba(245,240,234,0.45)", textAlign: "center", marginBottom: 28 }}>
               ▸ Corporate partners
             </p>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: 12 }} className="corp-logos">
-              {["PTT Group", "KBank", "CP All", "Thai Bev", "SCG", "Regional Bank"].map((p) => (
-                <div key={p} style={{
+              {corporatePartners.map((p) => (
+                <div key={p.name} style={{
                   border: "1px solid rgba(245,240,234,0.15)", borderRadius: 8,
-                  padding: "20px 12px", textAlign: "center",
-                  fontSize: 13, color: "rgba(245,240,234,0.6)", letterSpacing: "0.04em",
-                }}>{p}</div>
+                  padding: "16px 20px",
+                  display: "flex", flexDirection: "row", alignItems: "center", gap: 14,
+                }}>
+                  {p.logo ? (
+                    <img
+                      src={p.logo}
+                      alt={p.name}
+                      style={{ height: 64, width: "auto", maxWidth: 120, objectFit: "contain", filter: "brightness(0) invert(1)", opacity: 0.7, flexShrink: 0 }}
+                    />
+                  ) : (
+                    <div style={{ width: 120, height: 64, borderRadius: 6, background: "rgba(245,240,234,0.1)", flexShrink: 0 }} />
+                  )}
+                  <span style={{ fontSize: 13, color: "rgba(245,240,234,0.6)", letterSpacing: "0.04em" }}>{p.name}</span>
+                </div>
               ))}
             </div>
             <p className="mono" style={{ fontSize: 11, color: "rgba(245,240,234,0.3)", textAlign: "center", marginTop: 20 }}>
@@ -99,7 +124,7 @@ export default function CorporatesPage() {
             </p>
           </div>
           <style>{`@media(max-width:900px){ .corp-logos { grid-template-columns: repeat(3,1fr) !important; } } @media(max-width:540px){ .corp-logos { grid-template-columns: repeat(2,1fr) !important; } }`}</style>
-        </section>
+        </section>}
 
         {/* What you get */}
         <section style={{ background: "#F5F0EA", padding: "96px 0" }}>
