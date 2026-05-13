@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { stats } from "@/data/stats";
@@ -161,17 +162,30 @@ export function HeroSection() {
           style={{ transitionDelay: "800ms" }}
         >
           <div className="grid gap-4" style={{ gridTemplateColumns: "1.4fr 1fr 1fr" }}>
-            <div className="imgph dark" style={{ height: 320 }}>
-              <div className="imgph-tag">HERO · WIDE</div>
-              <div className="imgph-caption">// candid wide shot: 4–6 kids (age 10–14) mid-build at a workshop table, daylight, real expressions of focus + joy. Horizontal.</div>
+            <div className="relative overflow-hidden rounded-lg" style={{ height: 320 }}>
+              <Image
+                src="/images/events/IMG_8856.jpg"
+                alt="Students at workshop"
+                fill
+                className="object-cover"
+                priority
+              />
             </div>
-            <div className="imgph dark" style={{ height: 320 }}>
-              <div className="imgph-tag">HERO · DETAIL</div>
-              <div className="imgph-caption">// hands close-up: kid sketching on whiteboard / sticking post-its. Tight crop. Vertical.</div>
+            <div className="relative overflow-hidden rounded-lg" style={{ height: 320 }}>
+              <Image
+                src="/images/events/entre2-shannon-1.jpg"
+                alt="Students at Entre 2 workshop"
+                fill
+                className="object-cover"
+              />
             </div>
-            <div className="imgph dark" style={{ height: 320 }}>
-              <div className="imgph-tag">HERO · ENERGY</div>
-              <div className="imgph-caption">// teen pitching to peers, mic in hand, smiling. Vertical.</div>
+            <div className="relative overflow-hidden rounded-lg" style={{ height: 320 }}>
+              <Image
+                src="/images/events/price-war-062.jpg"
+                alt="Students at Price War workshop"
+                fill
+                className="object-cover"
+              />
             </div>
           </div>
         </div>
