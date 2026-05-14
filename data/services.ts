@@ -47,15 +47,15 @@ export const servicesPage = {
 export const designServices: ServiceItem[] = [
   {
     title: "Custom Game Design",
-    body: "We build learning games and simulations from scratch — tailored to your objectives, industry, and audience. Every mechanic is designed to teach, not just entertain.",
+    body: "We build tailored simulations according to your needs and requirements, where every mechanic teaches real-world skills through lived experience.",
   },
   {
-    title: "In-House Product Licensing",
-    body: "License our proven game formats and program IP directly for your facilitators to run in-house. Battle-tested across hundreds of participants.",
+    title: "In-House Product IP Licensing",
+    body: "You can license our battle-tested game formats and IP to run sessions in-house with your own team. These tools are proven across hundreds of participants to ensure they deliver high-impact results every time.",
   },
   {
     title: "Learning Journey Development",
-    body: "We architect multi-touchpoint learning journeys — from awareness to mastery — integrating your existing curriculum or starting from a blank canvas.",
+    body: "We architect full paths that take students from their first introduction to complete mastery. Whether we are building from a blank canvas or integrating with your existing curriculum, we create a journey that truly sticks.",
   },
 ];
 
@@ -63,26 +63,26 @@ export const designServices: ServiceItem[] = [
 export const deliveryServices: ServiceItem[] = [
   {
     title: "Camps & Workshops",
-    body: "Full-service facilitation for single-day workshops up to week-long residential camps. We handle design, logistics, facilitation, and post-program reporting.",
+    body: "We facilitate everything from one day workshops to week long residential camps including all design and logistics.",
   },
   {
     title: "Competitions & Hackathons",
-    body: "End-to-end competition organising — problem design, judging frameworks, event production, and participant experience from registration to awards.",
+    body: "We handle the full experience from initial problem design to the final awards ceremony.",
   },
   {
     title: "Innovation Challenges",
-    body: "Structured challenge programs for schools and corporates that run over days, weeks, or a full semester. Real problems, real stakes, real outcomes.",
+    body: "We run structured programs for schools and companies over days or full semesters to solve real world problems.",
   },
   {
-    title: "Mentor & Speaker Services",
-    body: "We source and brief domain experts, industry practitioners, and keynote speakers matched to your program's theme and participant level.",
+    title: "Mentors & Speakers",
+    body: "We find and brief industry experts and speakers who perfectly fit your theme and audience.",
   },
   {
-    title: "Event Organising",
-    body: "Full production management — venue sourcing, logistics, AV, catering, branding, and on-the-day coordination. You show up, we run it.",
+    title: "Event Management",
+    body: "We take care of venue sourcing and on site coordination so you can just show up while we run the show.",
   },
   {
-    title: "Course Hours & Curriculum",
-    body: "Accredited or non-accredited course hours designed around your learning objectives, delivered by our trained facilitators or prepared for your own team.",
+    title: "Curriculum & Course Hours",
+    body: "We design custom course hours for your goals delivered by our facilitators or your own team.",
   },
 ];
