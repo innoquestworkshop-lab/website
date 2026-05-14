@@ -48,7 +48,7 @@ export default function TestimonialsPage() {
                   classrooms transform, to corporates who finally ran a CSR program worth talking about.
                 </p>
                 <div style={{ display: "flex", gap: 8, marginTop: 32, flexWrap: "wrap" }}>
-                  {audienceGroups.map((g) => (
+                  {audienceGroups.filter((g) => testimonials.some((t) => t.audience === g.key && !t.personTag)).map((g) => (
                     <span key={g.key} className="pill-tag" style={{ background: "rgba(245,240,234,0.08)", color: "rgba(245,240,234,0.7)" }}>
                       {g.tag}
                     </span>
@@ -85,7 +85,10 @@ export default function TestimonialsPage() {
 
         {/* Testimonial groups */}
         {audienceGroups.map(({ key, label, tag }, gi) => {
-          const items = testimonials.filter((t) => t.audience === key);
+          const items = testimonials
+            .filter((t) => t.audience === key && !t.personTag)
+            .sort((a, b) => (a.role === "Student" ? 1 : 0) - (b.role === "Student" ? 1 : 0));
+          if (items.length === 0) return null;
           const bg = gi % 2 === 0 ? "#F5F0EA" : "#FFFFFF";
           return (
             <section key={key} style={{ background: bg, padding: "96px 0" }}>
@@ -98,72 +101,62 @@ export default function TestimonialsPage() {
                   <span className="pill-tag" style={{ background: "#8A0F14", color: "#F5F0EA" }}>{tag}</span>
                 </div>
 
-                {items.length === 0 ? (
-                  <div style={{
-                    borderRadius: 14, border: "2px dashed rgba(18,18,18,0.12)",
-                    minHeight: 160, display: "flex", alignItems: "center", justifyContent: "center",
-                  }}>
-                    <p className="mono" style={{ fontSize: 12, color: "rgba(18,18,18,0.3)", letterSpacing: "0.08em" }}>
-                      // {label} testimonials coming soon
-                    </p>
-                  </div>
-                ) : (
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="test-grid">
-                    {items.map((t) => (
-                      <div key={t.id} className="card-lift" style={{
-                        background: bg === "#F5F0EA" ? "#FFFFFF" : "#F5F0EA",
-                        borderRadius: 14, padding: 28,
-                        display: "flex", flexDirection: "column", gap: 16,
-                        border: "1px solid rgba(18,18,18,0.06)",
-                      }}>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="test-grid">
+                  {items.map((t) => (
+                    <div key={t.id} className="card-lift" style={{
+                      background: bg === "#F5F0EA" ? "#FFFFFF" : "#F5F0EA",
+                      borderRadius: 14, padding: 28,
+                      display: "flex", flexDirection: "column", gap: 16,
+                      border: "1px solid rgba(18,18,18,0.06)",
+                    }}>
+                      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                         {t.stars && <StarRating stars={t.stars} />}
+                        {t.extraBadge && (
+                          <span style={{
+                            display: "inline-flex", alignItems: "center",
+                            padding: "3px 9px", borderRadius: 999,
+                            fontSize: 10, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.06em",
+                            fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace",
+                            background: ({ corporate: "#E6F1FB", school: "#EAF3DE", parent: "#FFF3CD", student: "#F3EEFF" } as Record<string, string>)[t.extraBadge],
+                            color: ({ corporate: "#185FA5", school: "#3B6D11", parent: "#856404", student: "#5B21B6" } as Record<string, string>)[t.extraBadge],
+                          }}>
+                            {t.extraBadge}
+                          </span>
+                        )}
+                      </div>
 
-                        <p style={{ fontSize: 15, lineHeight: 1.7, color: "#121212", flex: 1 }}>
-                          &ldquo;{t.quote}&rdquo;
-                        </p>
+                      <p style={{ fontSize: 15, lineHeight: 1.7, color: "#121212", flex: 1 }}>
+                        &ldquo;{t.quote}&rdquo;
+                      </p>
 
-                        <div style={{ paddingTop: 16, borderTop: "1px solid rgba(18,18,18,0.08)", display: "flex", gap: 12, alignItems: "center" }}>
-                          {t.avatar ? (
-                            /* eslint-disable-next-line @next/next/no-img-element */
-                            <img
-                              src={t.avatar}
-                              alt={t.name}
-                              style={{ width: 40, height: 40, borderRadius: "50%", objectFit: "cover", flexShrink: 0 }}
-                            />
-                          ) : (
-                            <div style={{
-                              width: 40, height: 40, borderRadius: "50%", flexShrink: 0,
-                              background: "repeating-linear-gradient(135deg, #E8E0D5 0 8px, #D9CFC0 8px 16px)",
-                              border: "1.5px dashed rgba(18,18,18,0.2)",
-                              display: "flex", alignItems: "center", justifyContent: "center",
-                            }}>
-                              <span style={{ fontSize: 9, color: "rgba(18,18,18,0.4)", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}>PIC</span>
-                            </div>
-                          )}
-                          <div>
-                            <p style={{ fontSize: 13, fontWeight: 500, color: "#121212" }}>{t.name}</p>
-                            <p style={{ fontSize: 11, color: "rgba(18,18,18,0.5)", marginTop: 2 }}>
-                              {t.role} · {t.context}
-                            </p>
+                      <div style={{ paddingTop: 16, borderTop: "1px solid rgba(18,18,18,0.08)", display: "flex", gap: 12, alignItems: "center" }}>
+                        {t.avatar ? (
+                          /* eslint-disable-next-line @next/next/no-img-element */
+                          <img
+                            src={t.avatar}
+                            alt={t.name}
+                            style={{ width: 40, height: 40, borderRadius: "50%", objectFit: "cover", flexShrink: 0 }}
+                          />
+                        ) : (
+                          <div style={{
+                            width: 40, height: 40, borderRadius: "50%", flexShrink: 0,
+                            background: "repeating-linear-gradient(135deg, #E8E0D5 0 8px, #D9CFC0 8px 16px)",
+                            border: "1.5px dashed rgba(18,18,18,0.2)",
+                            display: "flex", alignItems: "center", justifyContent: "center",
+                          }}>
+                            <span style={{ fontSize: 9, color: "rgba(18,18,18,0.4)", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}>PIC</span>
                           </div>
+                        )}
+                        <div>
+                          <p style={{ fontSize: 13, fontWeight: 500, color: "#121212" }}>{t.name}</p>
+                          <p style={{ fontSize: 11, color: "rgba(18,18,18,0.5)", marginTop: 2 }}>
+                            {t.role} · {t.context}
+                          </p>
                         </div>
                       </div>
-                    ))}
-
-                    {/* Empty placeholder card if odd number */}
-                    {items.length % 3 === 1 && (
-                      <div style={{
-                        borderRadius: 14, border: "2px dashed rgba(18,18,18,0.1)",
-                        minHeight: 200, display: "flex", alignItems: "center", justifyContent: "center",
-                        gridColumn: "span 2",
-                      }}>
-                        <p className="mono" style={{ fontSize: 11, color: "rgba(18,18,18,0.25)", letterSpacing: "0.08em" }}>
-                          // More {label.toLowerCase()} stories coming
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                )}
+                    </div>
+                  ))}
+                </div>
               </div>
               <style>{`
                 @media(max-width:900px){ .test-grid { grid-template-columns: repeat(2, 1fr) !important; } }

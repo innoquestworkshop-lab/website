@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { BLUR_DATA_URL } from "@/lib/imageBlur";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -9,6 +10,9 @@ import { customPage } from "@/data/custom";
 export const metadata: Metadata = {
   title: "Custom-Built Programs | InnoQuest Thailand",
   description: "Need something bespoke? InnoQuest designs experiential learning programs from scratch — your goals, your audience, your format. Trusted by schools and corporates across Bangkok.",
+  openGraph: {
+    images: [{ url: "/images/events/IMG_7900.jpg", width: 1200, height: 630, alt: "Custom program planning session" }],
+  },
 };
 
 export default function CustomPage() {
@@ -50,7 +54,7 @@ export default function CustomPage() {
                   borderRadius: 14, border: "2px solid #8A0F14", opacity: 0.6,
                 }} />
                 <div style={{ height: 380, borderRadius: 14, overflow: "hidden", position: "relative" }}>
-                  <Image src="/images/events/IMG_7900.jpg" alt="Custom program planning session" fill style={{ objectFit: "cover" }} priority sizes="(max-width: 900px) 100vw, 50vw" />
+                  <Image src="/images/events/IMG_7900.jpg" alt="Custom program planning session" fill style={{ objectFit: "cover" }} priority sizes="(max-width: 900px) 100vw, 50vw" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
                 </div>
               </div>
             </div>

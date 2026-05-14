@@ -341,7 +341,7 @@ export function ProgramsSection() {
               className="text-[11px] uppercase tracking-[0.14em]"
               style={{ color: "rgba(245,240,234,0.6)", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
             >
-              Don&apos;t see a fit?
+              Want something personalized?
             </p>
             <div>
               <h4

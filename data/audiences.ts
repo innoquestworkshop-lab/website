@@ -61,12 +61,6 @@ export const audienceCards = [
     cta: "Learn more",
   },
   {
-    label: "Parents & Families",
-    body: "Give your child the skills that formal education doesn't prioritise — creativity, confidence, and critical thinking.",
-    href: "/programs",
-    cta: "See programs",
-  },
-  {
     label: "Students",
     body: "Come solve real problems with real teams. No textbooks. No right answers. Just you, your ideas, and a challenge worth tackling.",
     href: "/programs",

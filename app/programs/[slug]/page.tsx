@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import { BLUR_DATA_URL } from "@/lib/imageBlur";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -84,7 +85,7 @@ export default async function ProgramPage({
                       borderRadius: 14, border: "2px solid #8A0F14", opacity: 0.6,
                     }} />
                     <div style={{ height: 380, borderRadius: 14, overflow: "hidden", position: "relative" }}>
-                      <Image src={program.heroImg} alt={program.name} fill style={{ objectFit: "cover" }} sizes="(max-width: 900px) 100vw, 50vw" />
+                      <Image src={program.heroImg} alt={program.name} fill style={{ objectFit: "cover" }} sizes="(max-width: 900px) 100vw, 50vw" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
                     </div>
                   </>
                 ) : (

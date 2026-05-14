@@ -14,6 +14,7 @@ export const heroSection = {
   headingLine1: "The skills schools",
   headingLine2: "forgot to teach.",
   sub: "Where learning looks like playing — and the skills are completely real.",
+  body: "InnoQuest runs workshops, camps, competitions, and semester-long programs for students aged 10–18. Every program teaches entrepreneurship, innovation, and business thinking — not as theory, but as lived experience. We work with schools, families, and corporate partners across Thailand.",
   cta1: { text: "Grow with us", href: "/contact" },
   cta2: { text: "Explore programs", href: "/programs" },
   images: [

@@ -20,3 +20,7 @@ export const schoolsStat = { n: 30, suf: "+", label: "Schools partnered" } as co
 
 /** Named stat for years running — used on testimonials page. */
 export const yearsRunningStat = { n: 2, suf: "+ yrs", label: "Running programs" } as const;
+
+/** Capital Minds stats — shown on What We Do page. Set to null to hide. */
+export const capitalMindsYearsStat: { n: string; suf: string; label: string } | null = null;
+export const capitalMindsStudentsStat: { n: string; suf: string; label: string } | null = null;

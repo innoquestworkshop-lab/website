@@ -15,6 +15,7 @@ import { ProgramsSection } from "@/components/sections/ProgramsSection";
 import { PartnersSection } from "@/components/sections/PartnersSection";
 import { JourneySection } from "@/components/sections/JourneySection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
+import { SignatureSection } from "@/components/sections/SignatureSection";
 import { CTASection } from "@/components/sections/CTASection";
 
 export default function HomePage() {
@@ -24,6 +25,7 @@ export default function HomePage() {
       <ScrollNav />
       <main className="h-screen overflow-y-scroll">
 <HeroSection />
+        <div id="section-our-edge"><SignatureSection /></div>
         <div id="section-who-we-serve"><AudienceSwitcher /></div>
         <div id="section-method"><MethodologySection /></div>
         <div id="section-experiences"><ProgramsSection /></div>

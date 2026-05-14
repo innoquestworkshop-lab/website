@@ -107,7 +107,7 @@ export const programsPageMeta = {
   sub: "From a single-day spark to a semester-long transformation — built around your goals.",
   popularBadge: "★ Most popular",
   customTile: {
-    heading: "Don't see a fit?",
+    heading: "Want something personalized?",
     body: "Design something custom with us.",
     cta: "Start a custom brief",
     href: "/custom",

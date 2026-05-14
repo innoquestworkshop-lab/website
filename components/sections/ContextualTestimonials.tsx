@@ -38,30 +38,27 @@ export function ContextualTestimonials({ audience, programSlug, limit = 3, label
     ? Array.isArray(audience) ? audience : [audience]
     : [];
 
-  // Priority: exact program match first, then audience match
-  const matched = testimonials.filter((t) => {
-    if (programSlug && t.programSlug === programSlug) return true;
-    if (audiences.length > 0 && audiences.includes(t.audience)) return true;
-    return false;
-  }).slice(0, limit);
+  // Priority: exact program match first, then audience match; non-Student roles float to top
+  const matched = testimonials
+    .filter((t) => {
+      if (t.personTag) return false;
+      if (programSlug && t.programSlug === programSlug) return true;
+      if (audiences.length > 0 && audiences.includes(t.audience)) return true;
+      return false;
+    })
+    .sort((a, b) => (a.role === "Student" ? 1 : 0) - (b.role === "Student" ? 1 : 0))
+    .slice(0, limit);
 
   // Render nothing if no data yet — placeholder stays invisible
   if (matched.length === 0) return null;
 
   return (
-    <div className="py-14 px-8" style={{ background: "#F5F0EA" }}>
-      <div className="max-w-7xl mx-auto">
+    <section style={{ background: "#F5F0EA", padding: "96px 0" }}>
+      <div className="max-w-[1240px] mx-auto px-8">
         {label && (
-          <p
-            className="text-[11px] font-medium uppercase tracking-[0.12em] mb-6"
-            style={{
-              color: "#8A0F14",
-              fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace",
-            }}
-          >
-            {label}
-          </p>
+          <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{label}</p>
         )}
+        <h2 className="h-section" style={{ marginBottom: 40 }}>What people say.</h2>
         <div
           className="ctx-testimonials-grid grid gap-4"
           style={{ gridTemplateColumns: `repeat(${Math.min(matched.length, 3)}, 1fr)` }}
@@ -75,17 +72,23 @@ export function ContextualTestimonials({ audience, programSlug, limit = 3, label
                 style={{ border: "1px solid rgba(18,18,18,0.06)" }}
               >
                 {/* Badge + stars */}
-                <div className="flex items-center justify-between">
-                  <span
-                    className="inline-flex items-center px-[9px] py-[4px] rounded-full text-[10px] font-medium uppercase tracking-[0.06em]"
-                    style={{
-                      background: badge.bg,
-                      color: badge.ink,
-                      fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace",
-                    }}
-                  >
-                    {t.audience}
-                  </span>
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex gap-[5px] flex-wrap">
+                    <span
+                      className="inline-flex items-center px-[9px] py-[4px] rounded-full text-[10px] font-medium uppercase tracking-[0.06em]"
+                      style={{ background: badge.bg, color: badge.ink, fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
+                    >
+                      {t.audience}
+                    </span>
+                    {t.extraBadge && (() => { const eb = badgeStyles[t.extraBadge]; return (
+                      <span
+                        className="inline-flex items-center px-[9px] py-[4px] rounded-full text-[10px] font-medium uppercase tracking-[0.06em]"
+                        style={{ background: eb.bg, color: eb.ink, fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
+                      >
+                        {t.extraBadge}
+                      </span>
+                    ); })()}
+                  </div>
                   {t.stars && <Stars count={t.stars} />}
                 </div>
 
@@ -116,7 +119,7 @@ export function ContextualTestimonials({ audience, programSlug, limit = 3, label
                   )}
                   <div>
                     <p className="text-[13px] font-medium" style={{ color: "#121212" }}>{t.name}</p>
-                    <p className="text-[11px]" style={{ color: "rgba(18,18,18,0.55)" }}>{t.role} · {t.context}</p>
+                    <p className="text-[11px]" style={{ color: "rgba(18,18,18,0.55)" }}>{t.role} · {Array.isArray(t.context) ? t.context.join(" · ") : t.context}</p>
                   </div>
                 </div>
               </div>
@@ -130,6 +133,6 @@ export function ContextualTestimonials({ audience, programSlug, limit = 3, label
           .ctx-testimonials-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
-    </div>
+    </section>
   );
 }

@@ -11,6 +11,9 @@ import { audienceCards } from "@/data/audiences";
 export const metadata: Metadata = {
   title: "What We Do | InnoQuest",
   description: "InnoQuest designs custom learning programs and delivers workshops, camps, and innovation events for schools and companies across Thailand.",
+  openGraph: {
+    images: [{ url: "/images/events/price-war-154.jpg", width: 1200, height: 630, alt: "InnoQuest in action" }],
+  },
 };
 
 export default function WhatWeDoPage() {
@@ -47,14 +50,15 @@ export default function WhatWeDoPage() {
                   </Link>
                 </div>
               </div>
-              <div style={{ position: "relative" }}>
+              <div style={{ position: "relative", paddingBottom: 14, paddingRight: 14 }}>
                 <div style={{
-                  position: "absolute", top: 12, left: 12,
-                  width: "calc(100% - 16px)", height: "calc(100% - 16px)",
-                  borderRadius: 14, border: "2px solid #8A0F14", opacity: 0.6,
+                  position: "absolute", bottom: 0, right: 0,
+                  width: "calc(100% - 14px)", height: "calc(100% - 14px)",
+                  borderRadius: 14, border: "2px solid #8A0F14", opacity: 0.5,
+                  pointerEvents: "none",
                 }} />
                 <div style={{ height: 400, borderRadius: 14, overflow: "hidden", position: "relative" }}>
-                  <Image src="/images/events/price-war-154.jpg" alt="InnoQuest in action" fill style={{ objectFit: "contain" }} priority sizes="(max-width: 900px) 100vw, 50vw" />
+                  <Image src="/images/events/price-war-154.jpg" alt="InnoQuest in action" fill style={{ objectFit: "cover" }} priority sizes="(max-width: 900px) 100vw, 50vw" />
                 </div>
               </div>
             </div>
@@ -62,8 +66,54 @@ export default function WhatWeDoPage() {
           <style>{`@media(max-width:900px){ .wwd-hero-grid { grid-template-columns: 1fr !important; } }`}</style>
         </section>
 
+        {/* Core Services */}
+        <section style={{ background: "#FFFFFF", padding: "96px 0" }}>
+          <div className="max-w-[1240px] mx-auto px-8">
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "end", marginBottom: 48 }} className="services-head">
+              <div>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{whatWeDoPage.coreServices.eyebrow}</p>
+                <h2 className="h-section">{whatWeDoPage.coreServices.heading.split("\n").map((l, i) => <span key={i}>{l}{i === 0 && <br />}</span>)}</h2>
+              </div>
+              <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(18,18,18,0.6)" }}>
+                {whatWeDoPage.coreServices.sub}
+              </p>
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }} className="services-grid">
+              {whatWeDoPage.coreServices.items.map((s) => (
+                <div key={s.title} className="card-lift" style={{
+                  background: "#F5F0EA", borderRadius: 14, padding: 36,
+                  display: "flex", flexDirection: "column", minHeight: 300,
+                }}>
+                  <span className="pill-tag" style={{ background: "#8A0F14", color: "#F5F0EA", marginBottom: 20, alignSelf: "flex-start" }}>
+                    {s.tag}
+                  </span>
+                  <h3 style={{ fontSize: 22, fontWeight: 500, letterSpacing: "-0.02em", marginBottom: 14, lineHeight: 1.2 }}>
+                    {s.title}
+                  </h3>
+                  <p style={{ fontSize: 15, lineHeight: 1.65, color: "rgba(18,18,18,0.65)", flex: 1 }}>{s.body}</p>
+                  {(s as { img?: string }).img && (
+                    <div className="relative w-full overflow-hidden rounded-[8px] mt-5" style={{ height: 180 }}>
+                      <Image src={(s as { img?: string }).img!} alt={s.title} fill className="object-cover" style={{ objectPosition: "right center", transform: `scale(${(s as { imgScale?: number }).imgScale ?? 1})` }} />
+                    </div>
+                  )}
+                  <Link href={s.href} style={{
+                    display: "inline-flex", alignItems: "center", gap: 6,
+                    marginTop: 24, color: "#8A0F14", fontWeight: 500, fontSize: 14, textDecoration: "none",
+                  }}>
+                    {s.cta} →
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+          <style>{`
+            @media(max-width:900px){ .services-head { grid-template-columns: 1fr !important; gap: 24px !important; } .services-grid { grid-template-columns: 1fr !important; } }
+          `}</style>
+        </section>
+
         {/* How we work — 3-step process */}
-        <section style={{ background: "#F5F0EA", padding: "96px 0" }}>
+        <section style={{ background: "#F5F0EA", padding: "96px 0", borderTop: "1px solid rgba(18,18,18,0.08)" }}>
           <div className="max-w-[1240px] mx-auto px-8">
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "end", marginBottom: 48 }} className="process-head">
               <div>
@@ -102,61 +152,15 @@ export default function WhatWeDoPage() {
           `}</style>
         </section>
 
-        {/* Core Services */}
-        <section style={{ background: "#FFFFFF", padding: "96px 0" }}>
-          <div className="max-w-[1240px] mx-auto px-8">
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "end", marginBottom: 48 }} className="services-head">
-              <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{whatWeDoPage.coreServices.eyebrow}</p>
-                <h2 className="h-section">{whatWeDoPage.coreServices.heading.split("\n").map((l, i) => <span key={i}>{l}{i === 0 && <br />}</span>)}</h2>
-              </div>
-              <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(18,18,18,0.6)" }}>
-                {whatWeDoPage.coreServices.sub}
-              </p>
-            </div>
-
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }} className="services-grid">
-              {whatWeDoPage.coreServices.items.map((s) => (
-                <div key={s.title} className="card-lift" style={{
-                  background: "#F5F0EA", borderRadius: 14, padding: 36,
-                  display: "flex", flexDirection: "column", minHeight: 300,
-                }}>
-                  <span className="pill-tag" style={{ background: "#8A0F14", color: "#F5F0EA", marginBottom: 20, alignSelf: "flex-start" }}>
-                    {s.tag}
-                  </span>
-                  <h3 style={{ fontSize: 22, fontWeight: 500, letterSpacing: "-0.02em", marginBottom: 14, lineHeight: 1.2 }}>
-                    {s.title}
-                  </h3>
-                  <p style={{ fontSize: 15, lineHeight: 1.65, color: "rgba(18,18,18,0.65)", flex: 1 }}>{s.body}</p>
-                  {(s as { img?: string }).img && (
-                    <div className="relative w-full overflow-hidden rounded-[8px] mt-5" style={{ height: 180 }}>
-                      <Image src={(s as { img?: string }).img!} alt={s.title} fill className="object-cover" style={{ objectPosition: 'right center', transform: `scale(${(s as { imgScale?: number }).imgScale ?? 1})` }} />
-                    </div>
-                  )}
-                  <Link href={s.href} style={{
-                    display: "inline-flex", alignItems: "center", gap: 6,
-                    marginTop: 24, color: "#8A0F14", fontWeight: 500, fontSize: 14, textDecoration: "none",
-                  }}>
-                    {s.cta} →
-                  </Link>
-                </div>
-              ))}
-            </div>
-          </div>
-          <style>{`
-            @media(max-width:900px){ .services-head { grid-template-columns: 1fr !important; gap: 24px !important; } .services-grid { grid-template-columns: 1fr !important; } }
-          `}</style>
-        </section>
-
         {/* Who we work with */}
-        <section style={{ background: "#F5F0EA", padding: "96px 0" }}>
+        <section style={{ background: "#F5F0EA", padding: "96px 0", borderTop: "1px solid rgba(18,18,18,0.08)" }}>
           <div className="max-w-[1240px] mx-auto px-8">
             <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>▸ Who we work with</p>
             <h2 className="h-section" style={{ marginBottom: 48, maxWidth: 680 }}>
               Programs for <span className="scribble">every context</span>.
             </h2>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }} className="audiences-grid">
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="audiences-grid">
               {audienceCards.map((a) => (
                 <div key={a.label} className="card-lift" style={{
                   background: "#FFFFFF", borderRadius: 14, padding: 28,
@@ -176,8 +180,7 @@ export default function WhatWeDoPage() {
             </div>
           </div>
           <style>{`
-            @media(max-width:900px){ .audiences-grid { grid-template-columns: repeat(2, 1fr) !important; } }
-            @media(max-width:540px){ .audiences-grid { grid-template-columns: 1fr !important; } }
+            @media(max-width:700px){ .audiences-grid { grid-template-columns: 1fr !important; } }
           `}</style>
         </section>
 

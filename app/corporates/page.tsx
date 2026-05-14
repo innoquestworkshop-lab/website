@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { BLUR_DATA_URL } from "@/lib/imageBlur";
 import Link from "next/link";
 /* eslint-disable @next/next/no-img-element */
 import { Navbar } from "@/components/layout/Navbar";
@@ -11,6 +12,9 @@ import { corporatesPage, corporatePartners } from "@/data/corporates";
 export const metadata: Metadata = {
   title: "Corporate CSR Programs | InnoQuest Thailand",
   description: "Power your CSR with InnoQuest — Bangkok-based youth innovation programs that deliver measurable impact for Thai students and your brand.",
+  openGraph: {
+    images: [{ url: "/images/events/price-war-071.jpg", width: 1200, height: 630, alt: "InnoQuest corporate workshop" }],
+  },
 };
 
 const iconMap = {
@@ -85,6 +89,8 @@ export default function CorporatesPage() {
                     style={{ objectFit: "cover" }}
                     sizes="(max-width: 900px) 100vw, 50vw"
                     priority
+                    placeholder="blur"
+                    blurDataURL={BLUR_DATA_URL}
                   />
                 </div>
               </div>

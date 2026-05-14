@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { BLUR_DATA_URL } from "@/lib/imageBlur";
 import { cn } from "@/lib/utils";
 import { audienceTabs } from "@/data/audiences";
 
@@ -161,10 +162,13 @@ export function AudienceSwitcher() {
                   style={{ minHeight: 420, border: "2px solid rgba(18,18,18,0.12)", boxShadow: "0 2px 12px rgba(18,18,18,0.08)" }}
                 >
                   <Image
+                    key={cur.img}
                     src={cur.img}
                     alt={cur.title}
                     fill
                     className="object-cover scale-[1.05]"
+                    placeholder="blur"
+                    blurDataURL={BLUR_DATA_URL}
                   />
                 </div>
               ) : (

@@ -6,6 +6,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 const sections = [
+  { id: "section-our-edge", label: "Our Edge" },
   { id: "section-who-we-serve", label: "Who we serve" },
   { id: "section-method", label: "Our method" },
   { id: "section-experiences", label: "Experiences" },
@@ -19,32 +20,29 @@ export function ScrollNav() {
   const [visible, setVisible] = useState(false);
   const [active, setActive] = useState("");
 
-  // Show after scrolling past hero (~80vh)
   useEffect(() => {
     const container = document.querySelector("main") as HTMLElement | null;
     const target = container ?? window;
-    const onScroll = () => {
-      const y = container ? container.scrollTop : window.scrollY;
-      setVisible(y > window.innerHeight * 0.8);
-    };
-    target.addEventListener("scroll", onScroll, { passive: true });
-    return () => target.removeEventListener("scroll", onScroll);
-  }, []);
 
-  // Track active section
-  useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-    sections.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const observer = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActive(id); },
-        { threshold: 0.4 }
-      );
-      observer.observe(el);
-      observers.push(observer);
-    });
-    return () => observers.forEach((o) => o.disconnect());
+    const onScroll = () => {
+      const scrollY = container ? container.scrollTop : window.scrollY;
+      const triggerLine = scrollY + window.innerHeight * 0.35;
+
+      // Show nav after hero
+      setVisible(scrollY > window.innerHeight * 0.8);
+
+      // Active = last section whose top is above the trigger line
+      let next = "";
+      for (const { id } of sections) {
+        const el = document.getElementById(id);
+        if (el && el.offsetTop <= triggerLine) next = id;
+      }
+      setActive(next);
+    };
+
+    target.addEventListener("scroll", onScroll, { passive: true });
+    onScroll(); // set initial state
+    return () => target.removeEventListener("scroll", onScroll);
   }, []);
 
   const scrollTo = (id: string) => {

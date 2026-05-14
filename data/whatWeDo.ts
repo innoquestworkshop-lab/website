@@ -63,6 +63,24 @@ export const whatWeDoPage = {
     ],
   },
 
+  signature: {
+    eyebrow: "▸ Our edge",
+    label: "PROPRIETARY TECHNOLOGY",
+    heading: "The one and only\nreal-time business simulation\nbuilt for teaching.",
+    headingAccent: "built for teaching.",
+    sub: "Most programs tell students about business. Ours put them inside one.",
+    body: "Capital Minds is a live, digital business simulation that InnoQuest designed and built in-house. Participants run competing companies in real time — pricing, production, marketing — and feel the consequences of every decision immediately. No other provider runs a real-time digital business simulation at this level in youth education. Because we build the technology ourselves, we can adapt it to any curriculum, any audience, and any depth of complexity.",
+    pill1: "Real-time digital simulation",
+    pill2: "Proprietary IP",
+    pill3: "Built in-house",
+    cta: { text: "See Capital Minds →", href: "/programs/capital-minds" },
+    img: "/images/events/price-war-141.jpg",
+    methodology: {
+      heading: "Learning that sticks.",
+      body: "The simulation isn't just a game — it's a structured experience. Every round is designed around a specific learning outcome: market dynamics, cost vs. price strategy, the compounding effect of small decisions. Debrief sessions convert real-time data from the simulation into classroom insights. Students don't need to be told what they learned — they already felt it.",
+    },
+  },
+
   learningPath: {
     eyebrow: "▸ Your learning path",
     heading: "We build it\naround you.",

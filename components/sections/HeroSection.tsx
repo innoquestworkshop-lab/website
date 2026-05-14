@@ -135,10 +135,18 @@ export function HeroSection() {
           {heroSection.sub}
         </p>
 
+        {/* Body */}
+        <p
+          className={`mt-5 text-[15px] leading-[1.75] max-w-[560px] transition-all duration-500 ${started ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+          style={{ color: "rgba(245,240,234,0.5)", transitionDelay: "580ms" }}
+        >
+          {heroSection.body}
+        </p>
+
         {/* CTAs */}
         <div
           className={`flex flex-wrap gap-3 mt-9 transition-all duration-500 ${started ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
-          style={{ transitionDelay: "650ms" }}
+          style={{ transitionDelay: "700ms" }}
         >
           <Link
             href={heroSection.cta1.href}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { BLUR_DATA_URL } from "@/lib/imageBlur";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -45,7 +46,7 @@ export default function OurPeoplePage() {
                     borderRadius: 14, border: "2px solid #8A0F14", opacity: 0.6,
                   }} />
                   <div style={{ height: 380, borderRadius: 14, overflow: "hidden", position: "relative" }}>
-                    <Image src="/images/events/entre1-IMG_5408.jpg" alt="InnoQuest team" fill style={{ objectFit: "cover" }} priority sizes="(max-width: 900px) 100vw, 50vw" />
+                    <Image src="/images/events/entre1-IMG_5408.jpg" alt="InnoQuest team" fill style={{ objectFit: "cover" }} priority sizes="(max-width: 900px) 100vw, 50vw" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
                   </div>
                 </div>
               </div>

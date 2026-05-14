@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { BLUR_DATA_URL } from "@/lib/imageBlur";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
+import { ContextualTestimonials } from "@/components/sections/ContextualTestimonials";
 import { programs, programsPageMeta } from "@/data/programs";
 
 export const metadata: Metadata = {
@@ -86,7 +88,7 @@ export default function ProgramsPage() {
               <div style={{ position: "relative", zIndex: 1 }}>
                 {featured.heroImg ? (
                   <div style={{ height: "100%", minHeight: 280, borderRadius: 10, overflow: "hidden", position: "relative" }}>
-                    <Image src={featured.heroImg} alt={featured.name} fill style={{ objectFit: "cover" }} sizes="(max-width: 900px) 100vw, 50vw" />
+                    <Image src={featured.heroImg} alt={featured.name} fill style={{ objectFit: "cover" }} sizes="(max-width: 900px) 100vw, 50vw" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
                   </div>
                 ) : (
                   <div className="imgph dark" style={{ height: "100%", minHeight: 280, borderRadius: 10 }}>
@@ -141,7 +143,7 @@ export default function ProgramsPage() {
               gap: 24, textDecoration: "none", marginTop: 16,
             }}>
               <div>
-                <p className="eyebrow" style={{ color: "rgba(245,240,234,0.55)", marginBottom: 10 }}>Don&apos;t see a fit?</p>
+                <p className="eyebrow" style={{ color: "rgba(245,240,234,0.55)", marginBottom: 10 }}>Want something personalized?</p>
                 <h3 style={{ fontSize: 22, fontWeight: 500, color: "#F5F0EA", letterSpacing: "-0.02em" }}>
                   Design something custom with us.
                 </h3>
@@ -160,6 +162,8 @@ export default function ProgramsPage() {
             @media(max-width:540px){ .all-progs-grid { grid-template-columns: 1fr !important; } }
           `}</style>
         </section>
+
+        <ContextualTestimonials audience="student" label="▸ What participants say" limit={3} />
 
         <CTASection />
       </main>
