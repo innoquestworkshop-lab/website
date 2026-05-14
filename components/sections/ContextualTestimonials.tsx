@@ -3,24 +3,54 @@
 import Image from "next/image";
 import { testimonials, type TestimonialAudience } from "@/data/testimonials";
 
-const badgeStyles: Record<TestimonialAudience, { bg: string; ink: string }> = {
-  corporate: { bg: "#E6F1FB", ink: "#185FA5" },
-  school:    { bg: "#EAF3DE", ink: "#3B6D11" },
-  parent:    { bg: "#FFF3CD", ink: "#856404" },
-  student:   { bg: "#F3EEFF", ink: "#5B21B6" },
+const badgeStyles: Record<TestimonialAudience, { bg: string; ink: string; label: string }> = {
+  corporate: { bg: "#E6F1FB", ink: "#185FA5", label: "Staff" },
+  school:    { bg: "#EAF3DE", ink: "#3B6D11", label: "Teacher" },
+  parent:    { bg: "#FFF3CD", ink: "#856404", label: "Parent" },
+  student:   { bg: "#F3EEFF", ink: "#5B21B6", label: "Workshop" },
 };
 
 function Stars({ count }: { count: number }) {
+  const isBeyond = count > 5;
+  const total = isBeyond ? 6 : 5;
   return (
-    <div className="flex gap-[3px]">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <svg key={i} width="13" height="13" viewBox="0 0 24 24" fill={i < count ? "#F5A623" : "#D1D5DB"}>
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-        </svg>
-      ))}
+    <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+      <div className="flex gap-[3px]">
+        {Array.from({ length: total }).map((_, i) => {
+          const fillPct = Math.round(Math.min(1, Math.max(0, count - i)) * 100);
+          return (
+            <div key={i} style={{ position: "relative", width: 13, height: 13, flexShrink: 0 }}>
+              <svg width="13" height="13" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#D1D5DB" />
+              </svg>
+              {fillPct > 0 && (
+                <div style={{ position: "absolute", top: 0, left: 0, width: `${fillPct}%`, height: "100%", overflow: "hidden" }}>
+                  <svg
+                    width="13" height="13" viewBox="0 0 24 24"
+                    style={i === 5 ? { filter: "drop-shadow(0 0 3px #F5A62399)" } : undefined}
+                  >
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#F5A623" />
+                  </svg>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+      {isBeyond && (
+        <span style={{
+          fontSize: 10, fontWeight: 700, letterSpacing: "0.04em",
+          color: "#F5A623", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace",
+          background: "rgba(245,166,35,0.12)", borderRadius: 4, padding: "1px 5px",
+        }}>
+          6/5
+        </span>
+      )}
     </div>
   );
 }
+
+
 
 type Props = {
   /** Filter by one or more audience types */
@@ -78,14 +108,14 @@ export function ContextualTestimonials({ audience, programSlug, limit = 3, label
                       className="inline-flex items-center px-[9px] py-[4px] rounded-full text-[10px] font-medium uppercase tracking-[0.06em]"
                       style={{ background: badge.bg, color: badge.ink, fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
                     >
-                      {t.audience}
+                      {badge.label}
                     </span>
                     {t.extraBadge && (() => { const eb = badgeStyles[t.extraBadge]; return (
                       <span
                         className="inline-flex items-center px-[9px] py-[4px] rounded-full text-[10px] font-medium uppercase tracking-[0.06em]"
                         style={{ background: eb.bg, color: eb.ink, fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
                       >
-                        {t.extraBadge}
+                        {eb.label}
                       </span>
                     ); })()}
                   </div>

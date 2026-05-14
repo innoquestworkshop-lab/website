@@ -56,7 +56,7 @@ export default function OurPeoplePage() {
         </section>
 
         {/* Team grid */}
-        <section style={{ background: "#F5F0EA", padding: "96px 0" }}>
+        {team.length > 0 && <section style={{ background: "#F5F0EA", padding: "96px 0" }}>
           <div className="max-w-[1240px] mx-auto px-8">
             <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>▸ The team</p>
             <h2 className="h-section" style={{ marginBottom: 48 }}>
@@ -109,7 +109,7 @@ export default function OurPeoplePage() {
             @media(max-width:900px){ .team-grid { grid-template-columns: repeat(2, 1fr) !important; } }
             @media(max-width:540px){ .team-grid { grid-template-columns: 1fr !important; } }
           `}</style>
-        </section>
+        </section>}
 
         {/* Join us */}
         <section style={{ background: "#FFFFFF", padding: "96px 0" }}>

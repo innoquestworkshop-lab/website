@@ -5,10 +5,10 @@ import { useRef, useEffect, useState } from "react";
 import { testimonials as allTestimonials } from "@/data/testimonials";
 
 const badgeStyles: Record<string, { badgeBg: string; badgeInk: string; badge: string }> = {
-  student:   { badge: "Student",   badgeBg: "#F3EEFF", badgeInk: "#5B21B6" },
-  school:    { badge: "School",    badgeBg: "#E6F1FB", badgeInk: "#185FA5" },
+  student:   { badge: "Workshop",  badgeBg: "#F3EEFF", badgeInk: "#5B21B6" },
+  school:    { badge: "Teacher",   badgeBg: "#E6F1FB", badgeInk: "#185FA5" },
   parent:    { badge: "Parent",    badgeBg: "#EAF3DE", badgeInk: "#3B6D11" },
-  corporate: { badge: "Corporate", badgeBg: "#FEF3E2", badgeInk: "#92400E" },
+  corporate: { badge: "Staff",     badgeBg: "#FEF3E2", badgeInk: "#92400E" },
 };
 
 const testimonials = allTestimonials
@@ -26,16 +26,46 @@ const VISIBLE = 3;
 const maxStart = Math.max(0, testimonials.length - VISIBLE);
 
 function Stars({ count }: { count: number }) {
+  const isBeyond = count > 5;
+  const total = isBeyond ? 6 : 5;
   return (
-    <div className="flex gap-[3px]">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill={i < count ? "#F5A623" : "#D1D5DB"}>
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-        </svg>
-      ))}
+    <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+      <div className="flex gap-[3px]">
+        {Array.from({ length: total }).map((_, i) => {
+          const fillPct = Math.round(Math.min(1, Math.max(0, count - i)) * 100);
+          return (
+            <div key={i} style={{ position: "relative", width: 14, height: 14, flexShrink: 0 }}>
+              <svg width="14" height="14" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#D1D5DB" />
+              </svg>
+              {fillPct > 0 && (
+                <div style={{ position: "absolute", top: 0, left: 0, width: `${fillPct}%`, height: "100%", overflow: "hidden" }}>
+                  <svg
+                    width="14" height="14" viewBox="0 0 24 24"
+                    style={i === 5 ? { filter: "drop-shadow(0 0 3px #F5A62399)" } : undefined}
+                  >
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#F5A623" />
+                  </svg>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+      {isBeyond && (
+        <span style={{
+          fontSize: 10, fontWeight: 700, letterSpacing: "0.04em",
+          color: "#F5A623", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace",
+          background: "rgba(245,166,35,0.12)", borderRadius: 4, padding: "1px 5px",
+        }}>
+          6/5
+        </span>
+      )}
     </div>
   );
 }
+
+
 
 function QuoteIcon() {
   return (

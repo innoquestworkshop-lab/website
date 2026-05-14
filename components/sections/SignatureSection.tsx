@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { whatWeDoPage } from "@/data/whatWeDo";
+import { signatureSection } from "@/data/signature";
 import { capitalMindsYearsStat, capitalMindsStudentsStat } from "@/data/stats";
 
 export function SignatureSection() {
@@ -27,12 +27,12 @@ export function SignatureSection() {
             <span style={{
               fontSize: 10, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.12em",
               color: "#8A0F14", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace",
-            }}>{whatWeDoPage.signature.label}</span>
+            }}>{signatureSection.label}</span>
           </div>
           <span style={{
             fontSize: 10, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.1em",
             color: "rgba(245,240,234,0.3)", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace",
-          }}>{whatWeDoPage.signature.eyebrow}</span>
+          }}>{signatureSection.eyebrow}</span>
         </div>
 
         {/* HEADLINE — 3-tier typographic statement */}
@@ -70,15 +70,15 @@ export function SignatureSection() {
               fontSize: "clamp(17px, 1.7vw, 20px)", lineHeight: 1.55,
               color: "rgba(245,240,234,0.5)", fontStyle: "italic", marginBottom: 24,
             }}>
-              &ldquo;{whatWeDoPage.signature.sub}&rdquo;
+              &ldquo;{signatureSection.sub}&rdquo;
             </p>
             <p style={{ fontSize: 15, lineHeight: 1.85, color: "rgba(245,240,234,0.65)", maxWidth: 560 }}>
-              {whatWeDoPage.signature.body}
+              {signatureSection.body}
             </p>
 
             {/* Pill tags */}
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 36 }}>
-              {[whatWeDoPage.signature.pill1, whatWeDoPage.signature.pill2, whatWeDoPage.signature.pill3].map((p) => (
+              {[signatureSection.pill1, signatureSection.pill2, signatureSection.pill3].map((p) => (
                 <span key={p} className="pill-tag" style={{
                   border: "1px solid rgba(245,240,234,0.2)",
                   color: "rgba(245,240,234,0.55)",
@@ -112,7 +112,7 @@ export function SignatureSection() {
               }} />
               <div style={{ borderRadius: 12, overflow: "hidden", position: "relative", height: 320 }}>
                 <Image
-                  src={whatWeDoPage.signature.img}
+                  src={signatureSection.img}
                   alt="Capital Minds simulation"
                   fill
                   style={{ objectFit: "cover" }}

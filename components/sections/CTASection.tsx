@@ -89,8 +89,7 @@ export function CTASection() {
           }}
         >
           {ctaSection.phoneNote.split(":")[0]}:{" "}
-          <strong style={{ color: "#F5F0EA" }}>{ctaSection.phoneNote.split(": ")[1]?.split(" · ")[0]}</strong>
-          {" · "}{ctaSection.phoneNote.split(" · ")[1]}
+          <strong style={{ color: "#F5F0EA" }}>{ctaSection.phoneNote.split(": ")[1]}</strong>
         </p>
       </div>
     </section>

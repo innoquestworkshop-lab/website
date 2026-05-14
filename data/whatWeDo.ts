@@ -4,7 +4,7 @@ export const whatWeDoPage = {
     eyebrow: "▸ Empowering innovators",
     heading: 'Turning "unteachable" skills into unforgettable experiences.',
     headingAccent: "unforgettable experiences.",
-    sub: "Whether it's a high-energy workshop, a week-long residential camp, or a national innovation competition, InnoQuest transforms complex concepts into immersive learning journeys for schools, corporations, and communities.",
+    sub: "InnoQuest provides game design and delivery logistics for student programs across Thailand. We build proprietary digital simulations that turn complex business topics into interactive challenges for ages 10 to 18. From custom tech to full event management for schools and partners, we handle every detail to ensure a seamless experience from start to finish.",
     cta1: { text: "Talk to us →", href: "/contact" },
     cta2: { text: "See programs", href: "/programs" },
     image: {
@@ -61,24 +61,6 @@ export const whatWeDoPage = {
         imgScale: 1.15,
       },
     ],
-  },
-
-  signature: {
-    eyebrow: "▸ Our edge",
-    label: "PROPRIETARY TECHNOLOGY",
-    heading: "The one and only\nreal-time business simulation\nbuilt for teaching.",
-    headingAccent: "built for teaching.",
-    sub: "Most programs tell students about business. Ours put them inside one.",
-    body: "Capital Minds is a live, digital business simulation that InnoQuest designed and built in-house. Participants run competing companies in real time — pricing, production, marketing — and feel the consequences of every decision immediately. No other provider runs a real-time digital business simulation at this level in youth education. Because we build the technology ourselves, we can adapt it to any curriculum, any audience, and any depth of complexity.",
-    pill1: "Real-time digital simulation",
-    pill2: "Proprietary IP",
-    pill3: "Built in-house",
-    cta: { text: "See Capital Minds →", href: "/programs/capital-minds" },
-    img: "/images/events/price-war-141.jpg",
-    methodology: {
-      heading: "Learning that sticks.",
-      body: "The simulation isn't just a game — it's a structured experience. Every round is designed around a specific learning outcome: market dynamics, cost vs. price strategy, the compounding effect of small decisions. Debrief sessions convert real-time data from the simulation into classroom insights. Students don't need to be told what they learned — they already felt it.",
-    },
   },
 
   learningPath: {

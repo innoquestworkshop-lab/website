@@ -26,8 +26,8 @@ export default function HomePage() {
       <main className="h-screen overflow-y-scroll">
 <HeroSection />
         <div id="section-our-edge"><SignatureSection /></div>
-        <div id="section-who-we-serve"><AudienceSwitcher /></div>
         <div id="section-method"><MethodologySection /></div>
+        <div id="section-who-we-serve"><AudienceSwitcher /></div>
         <div id="section-experiences"><ProgramsSection /></div>
         <div id="section-partners"><PartnersSection /></div>
         <div id="section-journey"><JourneySection /></div>

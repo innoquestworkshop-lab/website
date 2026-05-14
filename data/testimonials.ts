@@ -7,7 +7,7 @@ export type Testimonial = {
   name: string;
   role: string;
   context: string | string[];
-  stars?: 1 | 2 | 3 | 4 | 5;
+  stars?: 0.5 | 1 | 1.5 | 2 | 2.5 | 3 | 3.5 | 4 | 4.5 | 5 | 5.5 | 6;
   avatar?: string;
   programSlug?: string;
   personTag?: string; // e.g. "asia" — shown only on that person's bio page, not main testimonials
@@ -141,7 +141,7 @@ export const testimonials: Testimonial[] = [
     name: "Mind",
     role: "Student",
     context: "Entrepreneur in Innovation Vol.1 & 2",
-    stars: 5,
+    stars: 6,
     avatar: "/images/testimonials/mild.jpg",
     programSlug: "entrepreneur-in-innovation",
   },
@@ -153,14 +153,48 @@ export const testimonials: Testimonial[] = [
     name: "Putt",
     role: "Student",
     context: "Entrepreneur in Innovation Vol.1",
-    stars: 4,
+    stars: 4.5,
     avatar: "/images/testimonials/putt.jpg",
     programSlug: "entrepreneur-in-innovation",
+  },
+  {
+    id: "t13",
+    audience: "student",
+    quote:
+      "มา Innoquest แล้วได้รู้อะไรใหม่ๆเยอะมาก เพราะจากเดิมไม่ได้มีความรู้ด้านธุรกิจอะไรเลย แต่พอมาทำกิจกรรมได้ลองเล่นกิจกรรมแล้วก็ฟังข้อมูลจาก guest speaker คือไม่เบื่อเลยย เป็นครั้งแรกที่ฟังแล้วรู้สึกว่าได้ความรู้ที่จะนำไปใช้ต่อได้จริงๆ กิจกรรมก็เป็นอะไรที่แปลกใหม่มาก ไม่เคยเจอที่ไหน+มีกิจกรรมเยอะตลอด session แล้วพอจบกิจกรรมก็ได้ feedback จากรุ่นพี่ซึ่งชอบอันนี้มากๆเพราะเราจะได้เอาไปพัฒนาต่อด้วย ได้เจอเพื่อนใหม่ๆแล้วก็อาหารอร่อยมากเลยค่า",
+    name: "Plearn",
+    role: "Student",
+    context: "Entrepreneur in Innovation Vol.2",
+    programSlug: "entrepreneur-in-innovation",
+  },
+  {
+    id: "t14",
+    audience: "student",
+    quote:
+      "InnoQuest Sanook Mak Kub2, we do productive activities which were useful for my future. the staff were very friendly and helpful, and I made a lot of friends",
+    name: "Obi",
+    role: "Student",
+    context: "Entrepreneur in Innovation Vol.1",
+    stars: 5,
+    avatar: "/images/testimonials/Obi.jpg",
+    programSlug: "entrepreneur-in-innovation",
+  },
+  {
+    id: "t15",
+    audience: "student",
+    quote:
+      "พวกเราได้พี่เอเชียมาเป็นพี่mentorตอนเข้าค่ายincsii ความประทับใจแรกของกลุ่มเราเลยคือตั่งแต่ตอนที่พี่ๆแต่ล่ะคนให้คำแนะนำแล้วพี่เอเชียช่วยไกด์ให้ทุกคนในทีมเห็นภาพมากๆ แบบให้คิดตามหลักความเป็นไปได้บวกกับทำยังไงให้ผลงานโดดเด่นขึ้นมาได้ด้วย แล้วก็พี่เอเชียมีประสบการมาจากbusiness ของพี่มาอยู่แล้ว พวกเราเลยติดว่าพี่คงมาช่วยเราจัดการให้งานเดินไปในทางที่ควรจะเป็นได้ พอได้มาทำงานด้วยกันแล้วก็รู้สึกว่าพวกเราเลือกไม่ผิดเลยพี่พยามช่วยให้เราโฟกัสในส่วนที่ควรโฟกัสได้ดีมากๆ บรรยากาศในการทำงารชนทุกคนก็เต็มที่ผู้เอเชียก็มาช่วยพวกเราแก้งานด้วยแล้วบรรยากาศก็ไม่ได้เครียดขนาดนั้นด้วย เต็ม5ให้5ดาวไม่หักเลย",
+    name: "Shogun",
+    role: "InCSII Playground Mentee",
+    context: "InCSII Playground",
+    stars: 5,
+    avatar: "/images/testimonials/shogun.jpg",
+    personTag: "asia",
   },
 ];
 
 export const audienceGroups: { key: TestimonialAudience | "all"; label: string; tag: string }[] = [
-  { key: "student" as const, label: "Students", tag: "STUDENTS" },
+  { key: "student" as const, label: "Students", tag: "WORKSHOP" },
   { key: "school" as const, label: "Schools", tag: "SCHOOLS" },
   { key: "corporate" as const, label: "Corporates", tag: "CORPORATE" },
   { key: "parent" as const, label: "Parents", tag: "PARENTS" },

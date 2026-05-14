@@ -152,38 +152,6 @@ export default function WhatWeDoPage() {
           `}</style>
         </section>
 
-        {/* Who we work with */}
-        <section style={{ background: "#F5F0EA", padding: "96px 0", borderTop: "1px solid rgba(18,18,18,0.08)" }}>
-          <div className="max-w-[1240px] mx-auto px-8">
-            <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>▸ Who we work with</p>
-            <h2 className="h-section" style={{ marginBottom: 48, maxWidth: 680 }}>
-              Programs for <span className="scribble">every context</span>.
-            </h2>
-
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="audiences-grid">
-              {audienceCards.map((a) => (
-                <div key={a.label} className="card-lift" style={{
-                  background: "#FFFFFF", borderRadius: 14, padding: 28,
-                  display: "flex", flexDirection: "column",
-                  border: "1px solid rgba(18,18,18,0.06)", minHeight: 220,
-                }}>
-                  <h3 style={{ fontSize: 17, fontWeight: 500, letterSpacing: "-0.015em", marginBottom: 10 }}>{a.label}</h3>
-                  <p style={{ fontSize: 14, lineHeight: 1.7, color: "rgba(18,18,18,0.6)", flex: 1 }}>{a.body}</p>
-                  <Link href={a.href} style={{
-                    display: "inline-flex", alignItems: "center", gap: 6,
-                    marginTop: 20, color: "#8A0F14", fontWeight: 500, fontSize: 13, textDecoration: "none",
-                  }}>
-                    {a.cta} →
-                  </Link>
-                </div>
-              ))}
-            </div>
-          </div>
-          <style>{`
-            @media(max-width:700px){ .audiences-grid { grid-template-columns: 1fr !important; } }
-          `}</style>
-        </section>
-
         {/* Your org's learning path */}
         <section style={{ background: "#121212", color: "#F5F0EA", padding: "96px 0" }} className="dot-bg">
           <div className="max-w-[1240px] mx-auto px-8">
@@ -228,6 +196,38 @@ export default function WhatWeDoPage() {
           <style>{`
             @media(max-width:900px){ .path-head { grid-template-columns: 1fr !important; gap: 24px !important; } .path-steps { grid-template-columns: repeat(2, 1fr) !important; } }
             @media(max-width:540px){ .path-steps { grid-template-columns: 1fr !important; } }
+          `}</style>
+        </section>
+
+        {/* Who we work with */}
+        <section style={{ background: "#F5F0EA", padding: "96px 0", borderTop: "1px solid rgba(18,18,18,0.08)" }}>
+          <div className="max-w-[1240px] mx-auto px-8">
+            <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>▸ Who we work with</p>
+            <h2 className="h-section" style={{ marginBottom: 48, maxWidth: 680 }}>
+              Programs for <span className="scribble">every context</span>.
+            </h2>
+
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="audiences-grid">
+              {audienceCards.map((a) => (
+                <div key={a.label} className="card-lift" style={{
+                  background: "#FFFFFF", borderRadius: 14, padding: 28,
+                  display: "flex", flexDirection: "column",
+                  border: "1px solid rgba(18,18,18,0.06)", minHeight: 220,
+                }}>
+                  <h3 style={{ fontSize: 17, fontWeight: 500, letterSpacing: "-0.015em", marginBottom: 10 }}>{a.label}</h3>
+                  <p style={{ fontSize: 14, lineHeight: 1.7, color: "rgba(18,18,18,0.6)", flex: 1 }}>{a.body}</p>
+                  <Link href={a.href} style={{
+                    display: "inline-flex", alignItems: "center", gap: 6,
+                    marginTop: 20, color: "#8A0F14", fontWeight: 500, fontSize: 13, textDecoration: "none",
+                  }}>
+                    {a.cta} →
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+          <style>{`
+            @media(max-width:700px){ .audiences-grid { grid-template-columns: 1fr !important; } }
           `}</style>
         </section>
 

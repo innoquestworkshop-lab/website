@@ -1,7 +1,7 @@
 /** Single source of truth for company-wide information. */
 export const site = {
   name: "InnoQuest",
-  tagline: "Uplifting young human ability",
+  tagline: "Empowering Tomorrow’s Innovators",
   description:
     "Experiential learning programs for schools, corporates & institutions — science-backed, play-driven, designed for the next generation.",
   founded: 2021,

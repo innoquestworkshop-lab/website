@@ -11,16 +11,46 @@ export const metadata: Metadata = {
 };
 
 function StarRating({ stars }: { stars: number }) {
+  const isBeyond = stars > 5;
+  const total = isBeyond ? 6 : 5;
   return (
-    <div style={{ display: "flex", gap: 3 }}>
-      {Array.from({ length: 5 }).map((_, i) => (
-        <svg key={i} width="13" height="13" viewBox="0 0 24 24" fill={i < stars ? "#8A0F14" : "rgba(18,18,18,0.15)"}>
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-        </svg>
-      ))}
+    <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+      <div style={{ display: "flex", gap: 3 }}>
+        {Array.from({ length: total }).map((_, i) => {
+          const fillPct = Math.round(Math.min(1, Math.max(0, stars - i)) * 100);
+          return (
+            <div key={i} style={{ position: "relative", width: 13, height: 13, flexShrink: 0 }}>
+              <svg width="13" height="13" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="rgba(18,18,18,0.15)" />
+              </svg>
+              {fillPct > 0 && (
+                <div style={{ position: "absolute", top: 0, left: 0, width: `${fillPct}%`, height: "100%", overflow: "hidden" }}>
+                  <svg
+                    width="13" height="13" viewBox="0 0 24 24"
+                    style={i === 5 ? { filter: "drop-shadow(0 0 3px #8A0F1480)" } : undefined}
+                  >
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#8A0F14" />
+                  </svg>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+      {isBeyond && (
+        <span style={{
+          fontSize: 10, fontWeight: 700, letterSpacing: "0.04em",
+          color: "#8A0F14", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace",
+          background: "rgba(138,15,20,0.08)", borderRadius: 4, padding: "1px 5px",
+        }}>
+          6/5
+        </span>
+      )}
     </div>
   );
 }
+
+
 
 export default function TestimonialsPage() {
   return (
