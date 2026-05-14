@@ -3,12 +3,6 @@
 import Image from "next/image";
 import { testimonials, type TestimonialAudience } from "@/data/testimonials";
 
-const badgeStyles: Record<TestimonialAudience, { bg: string; ink: string; label: string }> = {
-  corporate: { bg: "#E6F1FB", ink: "#185FA5", label: "Staff" },
-  school:    { bg: "#EAF3DE", ink: "#3B6D11", label: "Teacher" },
-  parent:    { bg: "#FFF3CD", ink: "#856404", label: "Parent" },
-  student:   { bg: "#F3EEFF", ink: "#5B21B6", label: "Workshop" },
-};
 
 function Stars({ count }: { count: number }) {
   const isBeyond = count > 5;
@@ -93,31 +87,23 @@ export function ContextualTestimonials({ audience, programSlug, limit = 3, label
           className="ctx-testimonials-grid grid gap-4"
           style={{ gridTemplateColumns: `repeat(${Math.min(matched.length, 3)}, 1fr)` }}
         >
-          {matched.map((t) => {
-            const badge = badgeStyles[t.audience];
-            return (
+          {matched.map((t) => (
               <div
                 key={t.id}
                 className="bg-white rounded-[14px] p-6 flex flex-col gap-4"
                 style={{ border: "1px solid rgba(18,18,18,0.06)" }}
               >
-                {/* Badge + stars */}
+                {/* Tag + stars */}
                 <div className="flex items-center justify-between gap-2">
                   <div className="flex gap-[5px] flex-wrap">
-                    <span
-                      className="inline-flex items-center px-[9px] py-[4px] rounded-full text-[10px] font-medium uppercase tracking-[0.06em]"
-                      style={{ background: badge.bg, color: badge.ink, fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
-                    >
-                      {badge.label}
-                    </span>
-                    {t.extraBadge && (() => { const eb = badgeStyles[t.extraBadge]; return (
+                    {t.tag && (
                       <span
                         className="inline-flex items-center px-[9px] py-[4px] rounded-full text-[10px] font-medium uppercase tracking-[0.06em]"
-                        style={{ background: eb.bg, color: eb.ink, fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
+                        style={{ background: "#E6F1FB", color: "#185FA5", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
                       >
-                        {eb.label}
+                        {t.tag}
                       </span>
-                    ); })()}
+                    )}
                   </div>
                   {t.stars && <Stars count={t.stars} />}
                 </div>
@@ -153,8 +139,7 @@ export function ContextualTestimonials({ audience, programSlug, limit = 3, label
                   </div>
                 </div>
               </div>
-            );
-          })}
+          ))}
         </div>
       </div>
 

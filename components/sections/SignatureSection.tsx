@@ -48,13 +48,13 @@ export function SignatureSection() {
             fontSize: "clamp(32px, 4.4vw, 60px)", fontWeight: 500,
             letterSpacing: "-0.04em", lineHeight: 0.93, color: "#F5F0EA",
           }}>
-            real-time business simulation
+            Real-Time Business Simulation
           </div>
           <div style={{
             fontSize: "clamp(32px, 4.4vw, 60px)", fontWeight: 500,
             letterSpacing: "-0.04em", lineHeight: 0.93, color: "#8A0F14",
           }}>
-            built for teaching.
+            Built for Teaching.
           </div>
         </div>
 

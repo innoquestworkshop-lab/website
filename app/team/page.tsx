@@ -39,9 +39,9 @@ export default function OurPeoplePage() {
                 </p>
               </div>
               <div>
-                <div style={{ position: "relative" }}>
+                <div style={{ position: "relative", padding: "16px 0 0 16px" }}>
                   <div style={{
-                    position: "absolute", top: 12, left: 12,
+                    position: "absolute", top: 0, left: 0,
                     width: "calc(100% - 16px)", height: "calc(100% - 16px)",
                     borderRadius: 14, border: "2px solid #8A0F14", opacity: 0.6,
                   }} />
@@ -145,9 +145,8 @@ export default function OurPeoplePage() {
                 </div>
               </div>
               <div style={{ position: "relative", zIndex: 1 }}>
-                <div className="imgph dark" style={{ height: 300, borderRadius: 12 }}>
-                  <div className="imgph-tag">JOIN US</div>
-                  <div className="imgph-caption">// casual team photo or workshop action shot showing team culture.</div>
+                <div style={{ height: 420, borderRadius: 12, overflow: "hidden", position: "relative" }}>
+                  <Image src="/images/events/team.jpg" alt="InnoQuest team" fill style={{ objectFit: "cover" }} sizes="(max-width: 900px) 100vw, 50vw" />
                 </div>
               </div>
             </div>

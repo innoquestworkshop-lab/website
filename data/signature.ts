@@ -8,7 +8,7 @@ export const signatureSection = {
   pill1: "Real-time digital simulation",
   pill2: "Proprietary IP",
   pill3: "Built in-house",
-  img: "/images/events/price-war-141.jpg",
+  img: "/images/events/price-war-140.jpg",
   methodology: {
     heading: "Learning that sticks.",
     body: "The simulation isn't just a game — it's a structured experience. Every round is designed around a specific learning outcome: market dynamics, cost vs. price strategy, the compounding effect of small decisions. Debrief sessions convert real-time data from the simulation into classroom insights. Students don't need to be told what they learned — they already felt it.",

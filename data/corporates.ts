@@ -44,12 +44,11 @@ export const corporatesPage = {
 
   caseStudy: {
     eyebrow: "▸ Case study",
-    heading: "200 kids. One regional bank. Three months of follow-up.",
-    body: "We partnered with a regional bank to design a CSR program aligned with their financial literacy mandate. Result: 200 students trained, 87% completion, and a documented impact report that became the bank's flagship CSR story.",
+    heading: "Two Days.\nOne Seamless Corporate Experience.",
+    body: "We took full responsibility for this two-day summer camp, handling everything from the high-level moderation to the ground-level logistics. On the first day, we led the teaching during the afternoon session, breaking down complex topics for 32 students. Beyond delivering the content, we managed the entire flow of the event to ensure every transition was smooth and every participant stayed engaged. By owning both the teaching and the operations, we provided a turnkey solution that turned a corporate vision into a high-energy learning reality.",
     stats: [
-      { v: "200", l: "Students" },
-      { v: "87%", l: "Completion" },
-      { v: "3 mo.", l: "Follow-up" },
+      { v: "32", l: "Students" },
+      { v: "48 hrs.", l: "End-to-End Execution" },
     ],
     image: {
       tag: "CASE STUDY",

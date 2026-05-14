@@ -27,8 +27,8 @@ export default function HomePage() {
 <HeroSection />
         <div id="section-our-edge"><SignatureSection /></div>
         <div id="section-method"><MethodologySection /></div>
-        <div id="section-who-we-serve"><AudienceSwitcher /></div>
-        <div id="section-experiences"><ProgramsSection /></div>
+        <div id="section-who-we-serve" style={{ borderTop: "1px solid rgba(18,18,18,0.08)" }}><AudienceSwitcher /></div>
+        <div id="section-experiences" style={{ borderTop: "1px solid rgba(18,18,18,0.08)" }}><ProgramsSection /></div>
         <div id="section-partners"><PartnersSection /></div>
         <div id="section-journey"><JourneySection /></div>
         <div id="section-reviews"><TestimonialsSection /></div>

@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
 import { ContextualTestimonials } from "@/components/sections/ContextualTestimonials";
-import { pathwayStages } from "@/data/pathway";
+import { pathwayStages, pathwayMeta } from "@/data/pathway";
 
 export const metadata: Metadata = {
   title: "The Entrepreneurial Pathway | InnoQuest Thailand",
-  description: "A structured, progressive journey through the lifecycle of a business powered by our proprietary digital simulation engine.",
+  description: "A structured journey through the full lifecycle of a business. Powered by our own digital simulation engine — an exclusive standard of learning that cannot be copied.",
 };
 
 export default function PathwayPage() {
@@ -30,18 +31,18 @@ export default function PathwayPage() {
           <div className="max-w-[1240px] mx-auto px-8 relative z-10">
             <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 14px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 999, fontSize: 14, fontWeight: 500, color: "rgba(245,240,234,0.8)", marginBottom: 32 }}>
               <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#8A0F14" }} className="animate-pulse" />
-              InnoQuest Core Curriculum
+              {pathwayMeta.badge}
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "end" }} className="hero-grid">
               <div>
                 <h1 style={{ fontSize: "clamp(40px, 6vw, 72px)", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05 }}>
-                  The Entrepreneurial <span style={{ color: "#8A0F14", fontStyle: "italic" }}>Pathway.</span>
+                  {pathwayMeta.heading} <span style={{ color: "#8A0F14", fontStyle: "italic" }}>{pathwayMeta.headingAccent}</span>
                 </h1>
               </div>
               <div style={{ paddingBottom: 8 }}>
                 <p style={{ fontSize: 18, lineHeight: 1.65, color: "rgba(245,240,234,0.7)", maxWidth: 480 }}>
-                  A structured, progressive journey through the lifecycle of a business. Powered by our proprietary digital simulation engine, we deliver an uncopyable standard of learning—from the first idea to market dominance.
+                  {pathwayMeta.sub}
                 </p>
               </div>
             </div>
@@ -57,9 +58,9 @@ export default function PathwayPage() {
               {/* Left Column: Sticky Context */}
               <div style={{ width: "25%" }} className="hidden md:block">
                 <div className="sticky top-32">
-                  <h2 style={{ fontSize: 22, fontWeight: 500, letterSpacing: "-0.02em", marginBottom: 16 }}>How it works</h2>
+                  <h2 style={{ fontSize: 22, fontWeight: 500, letterSpacing: "-0.02em", marginBottom: 16 }}>{pathwayMeta.sidebarHeading}</h2>
                   <p style={{ fontSize: 14, color: "rgba(18,18,18,0.6)", lineHeight: 1.6, marginBottom: 32 }}>
-                    Programs can be run independently as standalone sprints, or linked together into a semester-long deep dive.
+                    {pathwayMeta.sidebarBody}
                   </p>
 
                   <div style={{ borderLeft: "2px solid rgba(18,18,18,0.1)", paddingLeft: 16, display: "flex", flexDirection: "column", gap: 16 }}>
@@ -112,16 +113,19 @@ export default function PathwayPage() {
                         }}>
 
                           {/* Image Placeholder Pane */}
-                          <div style={{ height: 260, background: "#121212", position: "relative" }}>
-                            {isLocked ? (
-                              <div style={{ height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", color: "rgba(245,240,234,0.4)" }}>
-                                <span style={{ fontSize: 32, marginBottom: 12 }}>🔒</span>
-                                <span style={{ fontFamily: "monospace", fontSize: 12, letterSpacing: 2 }}>ENCRYPTED MODULE</span>
-                              </div>
+                          <div style={{ height: 260, background: "#121212", position: "relative", overflow: "hidden" }}>
+                            {stage.heroImg ? (
+                              <Image src={stage.heroImg} alt={stage.name} fill style={{ objectFit: "cover", objectPosition: stage.heroImgPosition ?? "center", transform: `scale(${stage.heroImgScale ?? 1})`, filter: stage.heroImgBlur ? `blur(${stage.heroImgBlur}px)` : undefined }} sizes="(max-width: 900px) 100vw, 75vw" />
                             ) : (
                               <div className="imgph dark" style={{ height: "100%", borderRadius: 0 }}>
                                 <div className="imgph-tag">STAGE {stage.step} // {stage.engineFeature.toUpperCase()}</div>
                                 <div className="imgph-caption">{stage.imgCaption}</div>
+                              </div>
+                            )}
+                            {isLocked && (
+                              <div style={{ position: "absolute", top: 12, right: 12, background: "rgba(18,18,18,0.75)", borderRadius: 8, padding: "6px 10px", display: "flex", alignItems: "center", gap: 6, backdropFilter: "blur(4px)" }}>
+                                <span style={{ fontSize: 13 }}>🔒</span>
+                                <span style={{ fontFamily: "monospace", fontSize: 11, letterSpacing: 1, color: "rgba(245,240,234,0.7)" }}>IN DEVELOPMENT</span>
                               </div>
                             )}
                           </div>
@@ -143,24 +147,16 @@ export default function PathwayPage() {
                                 {stage.description}
                               </p>
 
-                              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                                <span className="pill-tag" style={{ background: "#F5F0EA", color: "#121212" }}>{stage.details.duration}</span>
-                                <span className="pill-tag" style={{ background: "#F5F0EA", color: "#121212" }}>Ages {stage.details.ages}</span>
-                              </div>
+
                             </div>
 
-                            {/* Footer Action Area */}
-                            <div style={{ padding: "16px 32px", background: "rgba(18,18,18,0.02)", borderTop: "1px solid rgba(18,18,18,0.06)" }}>
-                              {!isLocked ? (
-                                <Link href={`/programs/${stage.slug}`} style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 14, fontWeight: 600, color: "#121212", textDecoration: "none" }}>
-                                  View module syllabus →
-                                </Link>
-                              ) : (
+                            {isLocked && (
+                              <div style={{ padding: "16px 32px", background: "rgba(18,18,18,0.02)", borderTop: "1px solid rgba(18,18,18,0.06)" }}>
                                 <span style={{ fontSize: 14, fontWeight: 600, color: "rgba(18,18,18,0.4)" }}>
                                   Currently in development
                                 </span>
-                              )}
-                            </div>
+                              </div>
+                            )}
                           </div>
                         </div>
                       </div>

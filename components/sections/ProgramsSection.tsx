@@ -192,11 +192,6 @@ export function ProgramsSection() {
               <div className="relative overflow-hidden rounded-[10px]" style={{ height: 180, marginBottom: 22 }}>
                 <Image src="/images/events/entre-1-173.jpg" alt={featuredProgram.name} fill className="object-cover" style={{ objectPosition: "50% 61%" }} sizes="(max-width: 900px) 100vw, 40vw" />
               </div>
-              <div className="flex gap-2 flex-wrap">
-                <PillTag style={{ background: "rgba(245,240,234,0.1)", color: "#F5F0EA" }}>{featuredProgram.duration.toUpperCase()}</PillTag>
-                <PillTag style={{ background: "rgba(245,240,234,0.1)", color: "#F5F0EA" }}>AGES {featuredProgram.ages}</PillTag>
-                <PillTag style={{ background: "rgba(245,240,234,0.1)", color: "#F5F0EA" }}>{featuredProgram.groupSize.toUpperCase()}</PillTag>
-              </div>
               <Link
                 href={`/programs/${featuredProgram.slug}`}
                 className="mt-[22px] inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full transition-all active:scale-[0.97]"
@@ -317,10 +312,6 @@ export function ProgramsSection() {
                     Coming soon
                   </span>
                 )}
-              </div>
-              <div className="flex gap-[6px] flex-wrap">
-                <PillTag style={{ background: "#F5F0EA", color: "#121212" }}>{p.dur}</PillTag>
-                <PillTag style={{ background: "#F5F0EA", color: "#121212" }}>Ages {p.ages}</PillTag>
               </div>
             </Link>
           ))}

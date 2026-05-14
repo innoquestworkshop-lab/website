@@ -4,19 +4,11 @@ import Image from "next/image";
 import { useRef, useEffect, useState } from "react";
 import { testimonials as allTestimonials } from "@/data/testimonials";
 
-const badgeStyles: Record<string, { badgeBg: string; badgeInk: string; badge: string }> = {
-  student:   { badge: "Workshop",  badgeBg: "#F3EEFF", badgeInk: "#5B21B6" },
-  school:    { badge: "Teacher",   badgeBg: "#E6F1FB", badgeInk: "#185FA5" },
-  parent:    { badge: "Parent",    badgeBg: "#EAF3DE", badgeInk: "#3B6D11" },
-  corporate: { badge: "Staff",     badgeBg: "#FEF3E2", badgeInk: "#92400E" },
-};
-
 const testimonials = allTestimonials
   .filter((t) => !t.personTag)
   .sort((a, b) => (a.role === "Student" ? 1 : 0) - (b.role === "Student" ? 1 : 0))
   .map((t) => ({
     ...t,
-    ...badgeStyles[t.audience],
     stars: t.stars ?? 5,
     avatar: t.avatar ?? "",
     roleLabel: `${t.role} · ${Array.isArray(t.context) ? t.context.join(" · ") : t.context}`,
@@ -218,20 +210,14 @@ export function TestimonialsSection() {
             >
               <div className="flex justify-between items-center">
                 <div className="flex gap-[6px] flex-wrap">
-                  <span
-                    className="inline-flex items-center px-[10px] py-[5px] rounded-full text-[11px] font-medium uppercase tracking-[0.06em]"
-                    style={{ background: t.badgeBg, color: t.badgeInk, fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
-                  >
-                    {t.badge}
-                  </span>
-                  {t.extraBadge && (() => { const eb = badgeStyles[t.extraBadge!]; return (
+                  {t.tag && (
                     <span
                       className="inline-flex items-center px-[10px] py-[5px] rounded-full text-[11px] font-medium uppercase tracking-[0.06em]"
-                      style={{ background: eb.badgeBg, color: eb.badgeInk, fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
+                      style={{ background: "#E6F1FB", color: "#185FA5", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
                     >
-                      {eb.badge}
+                      {t.tag}
                     </span>
-                  ); })()}
+                  )}
                 </div>
                 <QuoteIcon />
               </div>

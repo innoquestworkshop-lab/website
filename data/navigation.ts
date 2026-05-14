@@ -9,7 +9,7 @@ export type NavItem = {
 /** Navigation links — source of truth for Navbar and Footer. */
 export const navLinks: NavItem[] = [
   { label: "What We Do", href: "/what-we-do" },
-  { label: "Experiences", href: "/programs" },
+  { label: "Programs", href: "/programs" },
   { label: "For Parents", href: "/parents" },
   { label: "For Schools", href: "/schools" },
   { label: "Corporate & CSR", href: "/corporates" },

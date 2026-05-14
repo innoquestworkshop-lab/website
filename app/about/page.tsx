@@ -51,9 +51,9 @@ export default function AboutPage() {
                   </Link>
                 </div>
               </div>
-              <div style={{ position: "relative" }}>
+              <div style={{ position: "relative", padding: "16px 0 0 16px" }}>
                 <div style={{
-                  position: "absolute", top: 12, left: 12,
+                  position: "absolute", top: 0, left: 0,
                   width: "calc(100% - 16px)", height: "calc(100% - 16px)",
                   borderRadius: 14, border: "2px solid #8A0F14", opacity: 0.6,
                 }} />

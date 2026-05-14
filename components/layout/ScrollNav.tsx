@@ -62,7 +62,7 @@ export function ScrollNav() {
         {/* Mini logo */}
         <Link href="/" className="shrink-0">
           <Image
-            src="/logos/logo-transparent.png"
+            src="/logos/logo-transparent-trimmed.png"
             alt="InnoQuest"
             width={100}
             height={28}

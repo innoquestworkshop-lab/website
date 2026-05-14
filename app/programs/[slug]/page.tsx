@@ -56,11 +56,7 @@ export default async function ProgramPage({
           <div className="max-w-[1240px] mx-auto px-8 relative z-10">
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 56, alignItems: "center" }} className="prog-hero-grid">
               <div>
-                <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 28 }}>
-                  <span className="pill-tag" style={{ background: "rgba(245,240,234,0.1)", color: "#F5F0EA" }}>Ages {program.ages}</span>
-                  <span className="pill-tag" style={{ background: "rgba(245,240,234,0.1)", color: "#F5F0EA" }}>{program.duration}</span>
-                  <span className="pill-tag" style={{ background: "rgba(245,240,234,0.1)", color: "#F5F0EA" }}>{program.groupSize}</span>
-                </div>
+
                 <h1 style={{ fontSize: "clamp(32px, 5vw, 60px)", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05 }}>
                   {program.name}
                 </h1>
@@ -85,7 +81,7 @@ export default async function ProgramPage({
                       borderRadius: 14, border: "2px solid #8A0F14", opacity: 0.6,
                     }} />
                     <div style={{ height: 380, borderRadius: 14, overflow: "hidden", position: "relative" }}>
-                      <Image src={program.heroImg} alt={program.name} fill style={{ objectFit: "cover" }} sizes="(max-width: 900px) 100vw, 50vw" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
+                      <Image src={program.heroImg} alt={program.name} fill style={{ objectFit: "cover", transform: "scale(1.15)" }} sizes="(max-width: 900px) 100vw, 50vw" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
                     </div>
                   </>
                 ) : (
@@ -202,10 +198,7 @@ export default async function ProgramPage({
                 }}>
                   <h3 style={{ fontSize: 18, fontWeight: 500, letterSpacing: "-0.015em" }}>{p.name}</h3>
                   <p style={{ fontSize: 13, lineHeight: 1.6, color: "rgba(18,18,18,0.6)", flex: 1 }}>{p.tagline}</p>
-                  <div style={{ display: "flex", gap: 8, paddingTop: 14, borderTop: "1px solid rgba(18,18,18,0.06)" }}>
-                    <span className="pill-tag" style={{ background: "#F5F0EA", color: "#121212" }}>{p.duration}</span>
-                    <span className="pill-tag" style={{ background: "#F5F0EA", color: "#121212" }}>Ages {p.ages}</span>
-                  </div>
+
                 </Link>
               ))}
             </div>

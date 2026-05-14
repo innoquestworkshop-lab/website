@@ -106,6 +106,11 @@ export default function WhatWeDoPage() {
                 </div>
               ))}
             </div>
+            <div style={{ marginTop: 40 }}>
+              <Link href="/services" className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#121212", color: "#F5F0EA" }}>
+                View all services →
+              </Link>
+            </div>
           </div>
           <style>{`
             @media(max-width:900px){ .services-head { grid-template-columns: 1fr !important; gap: 24px !important; } .services-grid { grid-template-columns: 1fr !important; } }

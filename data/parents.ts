@@ -1,7 +1,7 @@
 /** Parents page content. */
 export const parentsPage = {
   hero: {
-    eyebrow: "For parents",
+    eyebrow: "▸ For parents & families",
     heading: "Give them the skills school doesn't teach",
     sub: "InnoQuest programs build entrepreneurial thinking, creative problem-solving, and real-world confidence — the foundation every ambitious young person needs.",
     cta: { text: "Talk to us →", href: "/contact" },

@@ -12,6 +12,7 @@ export type Testimonial = {
   programSlug?: string;
   personTag?: string; // e.g. "asia" — shown only on that person's bio page, not main testimonials
   extraBadge?: TestimonialAudience; // second badge pill when person spans two audience types
+  tag?: string; // explicit badge label shown on card (e.g. "Teacher")
 };
 
 export const testimonials: Testimonial[] = [
@@ -84,6 +85,7 @@ export const testimonials: Testimonial[] = [
     context: "Founder's Talk Panel Discussion",
     stars: 5,
     avatar: "/images/testimonials/มิสธันย์ชนก.jpg",
+    tag: "Teacher",
   },
   {
     id: "t7",

@@ -83,10 +83,10 @@ export default function CorporatesPage() {
                 }} />
                 <div style={{ height: 520, borderRadius: 14, overflow: "hidden", position: "relative" }}>
                   <Image
-                    src="/images/events/price-war-071.jpg"
+                    src="/images/events/price-war-067.jpg"
                     alt="Price War Workshop"
                     fill
-                    style={{ objectFit: "cover" }}
+                    style={{ objectFit: "cover", transform: "scale(1.22)" }}
                     sizes="(max-width: 900px) 100vw, 50vw"
                     priority
                     placeholder="blur"
@@ -172,19 +172,18 @@ export default function CorporatesPage() {
         <section style={{ background: "#FFFFFF", padding: "96px 0" }}>
           <div className="max-w-[1240px] mx-auto px-8">
             <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: 48, alignItems: "center" }} className="case-grid">
-              <div className="imgph" style={{ height: 420, borderRadius: 14 }}>
-                <div className="imgph-tag">{corporatesPage.caseStudy.image.tag}</div>
-                <div className="imgph-caption">{corporatesPage.caseStudy.image.caption}</div>
+              <div style={{ height: 420, borderRadius: 14, overflow: "hidden", position: "relative" }}>
+                <Image src="/images/events/price-war-071.jpg" alt="Corporate case study" fill style={{ objectFit: "cover", transform: "scale(1.05)" }} sizes="(max-width: 900px) 100vw, 55vw" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
               </div>
               <div>
                 <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 16 }}>{corporatesPage.caseStudy.eyebrow}</p>
-                <h3 style={{ fontSize: 28, fontWeight: 500, letterSpacing: "-0.02em", lineHeight: 1.2 }}>
+                <h3 style={{ fontSize: 28, fontWeight: 500, letterSpacing: "-0.02em", lineHeight: 1.2, whiteSpace: "pre-line" }}>
                   {corporatesPage.caseStudy.heading}
                 </h3>
                 <p style={{ fontSize: 15, lineHeight: 1.65, color: "rgba(18,18,18,0.6)", marginTop: 18 }}>
                   {corporatesPage.caseStudy.body}
                 </p>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, marginTop: 28 }}>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16, marginTop: 28 }}>
                   {corporatesPage.caseStudy.stats.map((s) => (
                     <div key={s.l} style={{ paddingTop: 18, borderTop: "2px solid #8A0F14" }}>
                       <div style={{ fontSize: 32, fontWeight: 500, color: "#8A0F14", letterSpacing: "-0.02em" }}>{s.v}</div>

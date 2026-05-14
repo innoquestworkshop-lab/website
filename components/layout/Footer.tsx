@@ -1,17 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
-import { programs } from "@/data/programs";
 import { footerCols } from "@/data/navigation";
 import { audienceCards } from "@/data/audiences";
 import { site } from "@/data/site";
 
 const cols = [
   {
-    h: "Programs",
+    h: "Explore",
     items: [
-      ...programs.map((p) => ({ label: p.name, href: `/programs/${p.slug}` })),
-      { label: "All programs", href: "/programs" },
-      { label: "Custom solutions", href: "/custom" },
+      { label: "What We Do", href: "/what-we-do" },
+      { label: "Services", href: "/services" },
+      { label: "Programs", href: "/programs" },
+      { label: "The Pathway", href: "/programs/pathway" },
     ],
   },
   {
@@ -23,14 +23,14 @@ const cols = [
 
 export function Footer() {
   return (
-    <footer style={{ background: "#111111", color: "#F5F0EA", padding: "72px 0 32px" }}>
-      <div className="max-w-[1240px] mx-auto px-8">
-        <div style={{ display: "grid", gridTemplateColumns: "1.6fr 1.3fr 1fr 1fr", gap: 48 }} className="footer-grid">
+    <footer style={{ background: "#111111", color: "#F5F0EA", padding: "0 0 32px" }}>
+      <div className="max-w-[1240px] mx-auto px-8" style={{ paddingTop: 72 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1.6fr 1fr 1fr 1fr", gap: 48, alignItems: "start" }} className="footer-grid">
           {/* Brand */}
           <div>
             <Link href="/">
               <Image
-                src="/logos/logo-transparent.png"
+                src="/logos/logo-transparent-trimmed.png"
                 alt="InnoQuest"
                 width={130}
                 height={38}

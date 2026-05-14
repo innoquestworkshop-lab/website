@@ -46,7 +46,7 @@ export function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center shrink-0">
           <Image
-            src="/logos/logo-transparent.png"
+            src="/logos/logo-transparent-trimmed.png"
             alt="InnoQuest"
             width={140}
             height={40}

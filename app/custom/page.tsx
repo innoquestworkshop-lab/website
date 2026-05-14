@@ -47,9 +47,9 @@ export default function CustomPage() {
                   </Link>
                 </div>
               </div>
-              <div style={{ position: "relative" }}>
+              <div style={{ position: "relative", padding: "16px 0 0 16px" }}>
                 <div style={{
-                  position: "absolute", top: 12, left: 12,
+                  position: "absolute", top: 0, left: 0,
                   width: "calc(100% - 16px)", height: "calc(100% - 16px)",
                   borderRadius: 14, border: "2px solid #8A0F14", opacity: 0.6,
                 }} />
@@ -80,10 +80,10 @@ export default function CustomPage() {
               {customPage.process.steps.map((s) => (
                 <div key={s.num} className="card-lift" style={{
                   background: "#FFFFFF", borderRadius: 14, padding: 28,
-                  minHeight: 280, display: "flex", flexDirection: "column", justifyContent: "space-between",
+                  minHeight: 280, display: "flex", flexDirection: "column",
                   border: "1px solid rgba(18,18,18,0.06)",
                 }}>
-                  <div style={{ fontSize: 56, fontWeight: 500, color: "#8A0F14", letterSpacing: "-0.04em", lineHeight: 1 }}>
+                  <div style={{ fontSize: 56, fontWeight: 500, color: "#8A0F14", letterSpacing: "-0.04em", lineHeight: 1, marginBottom: 40 }}>
                     {s.num}
                   </div>
                   <div>

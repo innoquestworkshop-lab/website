@@ -5,7 +5,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
 import { ContextualTestimonials } from "@/components/sections/ContextualTestimonials";
-import { programs } from "@/data/programs";
+import { programs, programsPageMeta } from "@/data/programs";
 
 export const metadata: Metadata = {
   title: "Programs & Experiences | InnoQuest Thailand",
@@ -38,14 +38,29 @@ export default function ProgramsPage() {
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "end" }} className="hero-grid">
               <div>
                 <h1 style={{ fontSize: "clamp(40px, 6vw, 72px)", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05 }}>
-                  Short, long, or{" "}
-                  <span style={{ color: "#8A0F14", fontStyle: "italic" }}>fully custom.</span>
+                  {programsPageMeta.heading}
                 </h1>
-              </div>
-              <div style={{ paddingBottom: 8 }}>
-                <p style={{ fontSize: 18, lineHeight: 1.65, color: "rgba(245,240,234,0.7)", maxWidth: 480 }}>
-                  From a single-day spark to a semester-long transformation — every program is powered by our proprietary digital simulation engine and built around your goals.
+                <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(245,240,234,0.7)", maxWidth: 480, marginTop: 24, marginBottom: 32 }}>
+                  {programsPageMeta.sub}
                 </p>
+                <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+                  <Link href="/contact" className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#8A0F14", color: "#F5F0EA" }}>
+                    Enquire now →
+                  </Link>
+                  <Link href="/programs/pathway" className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border" style={{ color: "#F5F0EA", borderColor: "rgba(245,240,234,0.3)" }}>
+                    View full pathway →
+                  </Link>
+                </div>
+              </div>
+              <div style={{ position: "relative", padding: "16px 0 0 16px" }}>
+                <div style={{
+                  position: "absolute", top: 0, left: 0,
+                  width: "calc(100% - 16px)", height: "calc(100% - 16px)",
+                  borderRadius: 14, border: "2px solid #8A0F14", opacity: 0.6,
+                }} />
+                <div style={{ height: 380, borderRadius: 14, overflow: "hidden", position: "relative" }}>
+                  <Image src="/images/events/price-war-080.jpg" alt="InnoQuest Programs" fill style={{ objectFit: "cover", transform: "scale(1.15)" }} priority sizes="(max-width: 900px) 100vw, 50vw" />
+                </div>
               </div>
             </div>
           </div>
@@ -117,24 +132,14 @@ export default function ProgramsPage() {
                       }}>
 
                         {/* Image Pane */}
-                        <div style={{ height: 260, background: "#121212", position: "relative" }}>
+                        <div style={{ height: 260, background: "#121212", position: "relative", overflow: "hidden" }}>
                           {program.heroImg ? (
-                            <Image src={program.heroImg} alt={program.name} fill style={{ objectFit: "cover" }} sizes="(max-width: 900px) 100vw, 75vw" />
+                            <Image src={program.heroImg} alt={program.name} fill style={{ objectFit: "cover", objectPosition: program.heroImgPosition ?? "center", transform: `scale(${program.heroImgScale ?? 1})`, filter: program.heroImgBlur ? `blur(${program.heroImgBlur}px)` : undefined }} sizes="(max-width: 900px) 100vw, 75vw" />
                           ) : (
                             <div className="imgph dark" style={{ height: "100%", borderRadius: 0 }}>
                               <div className="imgph-tag">{program.name.toUpperCase()}</div>
                               <div className="imgph-caption">// program photo needed</div>
                             </div>
-                          )}
-                          {program.featured && (
-                            <span className="pill-tag" style={{ position: "absolute", top: 16, left: 16, background: "#8A0F14", color: "#F5F0EA" }}>
-                              ★ Most popular
-                            </span>
-                          )}
-                          {program.comingSoon && (
-                            <span className="pill-tag" style={{ position: "absolute", top: 16, left: 16, background: "rgba(18,18,18,0.7)", color: "#F5F0EA" }}>
-                              Coming soon
-                            </span>
                           )}
                         </div>
 
@@ -142,10 +147,11 @@ export default function ProgramsPage() {
                         <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
                           <div style={{ padding: 32, flex: 1 }}>
                             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
-                              <span className="eyebrow" style={{ color: "#8A0F14", margin: 0 }}>
-                                {program.format}
-                              </span>
-                              <div style={{ width: 8, height: 8, borderRadius: "50%", background: program.comingSoon ? "#D1D5DB" : "#10B981" }} />
+                              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                                {program.featured && <span className="pill-tag" style={{ background: "#8A0F14", color: "#F5F0EA" }}>★ Most popular</span>}
+                                {program.comingSoon && <span className="pill-tag" style={{ background: "rgba(18,18,18,0.08)", color: "rgba(18,18,18,0.5)" }}>Coming soon</span>}
+                              </div>
+                              <div style={{ width: 8, height: 8, borderRadius: "50%", background: program.comingSoon ? "#D1D5DB" : "#10B981", flexShrink: 0 }} />
                             </div>
 
                             <h3 style={{ fontSize: 28, fontWeight: 500, letterSpacing: "-0.02em", color: "#121212", marginBottom: 8 }}>{program.name}</h3>
@@ -155,24 +161,10 @@ export default function ProgramsPage() {
                               {program.description}
                             </p>
 
-                            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                              <span className="pill-tag" style={{ background: "#F5F0EA", color: "#121212" }}>{program.duration}</span>
-                              <span className="pill-tag" style={{ background: "#F5F0EA", color: "#121212" }}>Ages {program.ages}</span>
-                              <span className="pill-tag" style={{ background: "#F5F0EA", color: "#121212" }}>{program.groupSize}</span>
-                            </div>
+
                           </div>
 
-                          {/* Footer Action */}
-                          <div style={{ padding: "16px 32px", background: "rgba(18,18,18,0.02)", borderTop: "1px solid rgba(18,18,18,0.06)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                            <Link href={`/programs/${program.slug}`} style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 14, fontWeight: 600, color: "#121212", textDecoration: "none" }}>
-                              View program details →
-                            </Link>
-                            <div style={{ display: "flex", gap: 6 }}>
-                              {program.audiences.map((a) => (
-                                <span key={a} className="pill-tag" style={{ background: "rgba(18,18,18,0.05)", color: "rgba(18,18,18,0.5)", fontSize: 11, textTransform: "uppercase", letterSpacing: "0.05em" }}>{a}</span>
-                              ))}
-                            </div>
-                          </div>
+
                         </div>
                       </div>
                     </div>
