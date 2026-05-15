@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
-    "@marsidev/react-turnstile": "^1.5.2",
     "@tabler/icons-react": "^3.44.0",
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",

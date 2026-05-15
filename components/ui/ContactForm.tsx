@@ -1,11 +1,9 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Turnstile } from "@marsidev/react-turnstile";
-import type { TurnstileInstance } from "@marsidev/react-turnstile";
 
 const schema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -25,7 +23,39 @@ export function ContactForm() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
-  const turnstileRef = useRef<TurnstileInstance>(null);
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  const widgetId = useRef<string | null>(null);
+
+  useEffect(() => {
+    const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "1x00000000000000000000AA";
+    const load = () => {
+      if (!turnstileRef.current || widgetId.current) return;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const w = window as any;
+      if (w.turnstile) {
+        widgetId.current = w.turnstile.render(turnstileRef.current, {
+          sitekey: siteKey,
+          theme: "light",
+          callback: (token: string) => setTurnstileToken(token),
+          "expired-callback": () => setTurnstileToken(null),
+        });
+      }
+    };
+    if (document.getElementById("cf-turnstile-script")) { load(); return; }
+    const script = document.createElement("script");
+    script.id = "cf-turnstile-script";
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    script.async = true;
+    script.defer = true;
+    script.onload = load;
+    document.head.appendChild(script);
+    return () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const w = window as any;
+      if (widgetId.current && w.turnstile) w.turnstile.remove(widgetId.current);
+      widgetId.current = null;
+    };
+  }, []);
 
   const {
     register,
@@ -50,7 +80,8 @@ export function ContactForm() {
       setSubmitted(true);
     } catch {
       setError("Something went wrong. Please try again or email us directly.");
-      turnstileRef.current?.reset();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if (widgetId.current && (window as any).turnstile) (window as any).turnstile.reset(widgetId.current);
       setTurnstileToken(null);
     } finally {
       setSubmitting(false);
@@ -206,13 +237,7 @@ export function ContactForm() {
         </select>
       </div>
 
-      <Turnstile
-        ref={turnstileRef}
-        siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "1x00000000000000000000AA"}
-        onSuccess={setTurnstileToken}
-        onExpire={() => setTurnstileToken(null)}
-        options={{ theme: "light", size: "normal" }}
-      />
+      <div ref={turnstileRef} />
 
       {error && <p className="text-sm text-[#8A0F14]">{error}</p>}
 
