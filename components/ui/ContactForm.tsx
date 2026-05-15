@@ -49,12 +49,64 @@ export function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="bg-[#F5F0EA] rounded-[14px] p-10 text-center">
-        <div className="text-4xl mb-4">🎉</div>
-        <h3 className="text-xl font-medium text-[#121212] mb-2">Message received!</h3>
-        <p className="text-sm text-[#4A4A4A]">
-          The InnoQuest team will be in touch within 1–2 business days.
+      <div
+        style={{
+          padding: "48px 40px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-start",
+          gap: 0,
+          animation: "iq-fadein 0.4s ease both",
+        }}
+      >
+        <style>{`
+          @keyframes iq-fadein { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+          @keyframes iq-draw { from { stroke-dashoffset: 60; } to { stroke-dashoffset: 0; } }
+          @keyframes iq-circle { from { stroke-dashoffset: 150; } to { stroke-dashoffset: 0; } }
+        `}</style>
+
+        {/* Icon */}
+        <div style={{ marginBottom: 28 }}>
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle
+              cx="26" cy="26" r="23"
+              stroke="#8A0F14" strokeWidth="1.8"
+              strokeDasharray="150" strokeDashoffset="150"
+              style={{ animation: "iq-circle 0.6s ease forwards" }}
+            />
+            <polyline
+              points="16,27 22,34 36,19"
+              stroke="#8A0F14" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"
+              strokeDasharray="60" strokeDashoffset="60"
+              style={{ animation: "iq-draw 0.4s ease 0.5s forwards" }}
+            />
+          </svg>
+        </div>
+
+        {/* Heading */}
+        <p
+          className="eyebrow"
+          style={{ color: "#8A0F14", marginBottom: 10, letterSpacing: "0.1em" }}
+        >
+          Enquiry received
         </p>
+        <h3 style={{ fontSize: 22, fontWeight: 500, letterSpacing: "-0.02em", color: "#121212", marginBottom: 12, lineHeight: 1.2 }}>
+          We&apos;ll be in touch shortly.
+        </h3>
+        <p style={{ fontSize: 14, color: "rgba(18,18,18,0.55)", lineHeight: 1.65, maxWidth: 340 }}>
+          The InnoQuest team reviews all enquiries within 1–2 business days.
+          Expect a response at the email address you provided.
+        </p>
+
+        {/* Divider + contact fallback */}
+        <div style={{ marginTop: 28, paddingTop: 24, borderTop: "1px solid rgba(18,18,18,0.08)", width: "100%" }}>
+          <p style={{ fontSize: 12, color: "rgba(18,18,18,0.4)", letterSpacing: "0.01em" }}>
+            Need a faster response?{" "}
+            <a href="mailto:innoquestworkshop@gmail.com" style={{ color: "#8A0F14", textDecoration: "none" }}>
+              innoquestworkshop@gmail.com
+            </a>
+          </p>
+        </div>
       </div>
     );
   }
