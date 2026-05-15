@@ -100,12 +100,15 @@ export function ContactForm() {
 
         {/* Divider + contact fallback */}
         <div style={{ marginTop: 28, paddingTop: 24, borderTop: "1px solid rgba(18,18,18,0.08)", width: "100%" }}>
-          <p style={{ fontSize: 12, color: "rgba(18,18,18,0.4)", letterSpacing: "0.01em" }}>
-            Need a faster response?{" "}
-            <a href="mailto:innoquestworkshop@gmail.com" style={{ color: "#8A0F14", textDecoration: "none" }}>
+          <p style={{ fontSize: 12, color: "rgba(18,18,18,0.4)", marginBottom: 8 }}>Need a faster response?</p>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+            <a href="tel:+66970970797" style={{ fontSize: 13, color: "#8A0F14", textDecoration: "none", fontWeight: 500 }}>
+              +66 97 097 0797
+            </a>
+            <a href="mailto:innoquestworkshop@gmail.com" style={{ fontSize: 13, color: "rgba(18,18,18,0.5)", textDecoration: "none" }}>
               innoquestworkshop@gmail.com
             </a>
-          </p>
+          </div>
         </div>
       </div>
     );
