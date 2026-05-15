@@ -1,14 +1,30 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
+async function verifyTurnstile(token: string): Promise<boolean> {
+  const secret = process.env.TURNSTILE_SECRET_KEY ?? "1x0000000000000000000000000000000AA";
+  const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ secret, response: token }),
+  });
+  const data = await res.json();
+  return data.success === true;
+}
+
 export async function POST(req: NextRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);
   try {
     const body = await req.json();
-    const { name, organisation, role, email, phone, audience, message, source } = body;
+    const { name, organisation, role, email, phone, audience, message, source, turnstileToken } = body;
 
     if (!name || !organisation || !email || !audience || !message) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+    }
+
+    const humanVerified = await verifyTurnstile(turnstileToken ?? "");
+    if (!humanVerified) {
+      return NextResponse.json({ error: "Verification failed. Please try again." }, { status: 400 });
     }
 
     await resend.emails.send({

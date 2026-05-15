@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { Turnstile } from "@marsidev/react-turnstile";
+import type { TurnstileInstance } from "@marsidev/react-turnstile";
 
 const schema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -22,6 +24,8 @@ export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const turnstileRef = useRef<TurnstileInstance>(null);
 
   const {
     register,
@@ -30,18 +34,24 @@ export function ContactForm() {
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   const onSubmit = async (data: FormData) => {
+    if (!turnstileToken) {
+      setError("Please complete the verification.");
+      return;
+    }
     setSubmitting(true);
     setError(null);
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, turnstileToken }),
       });
       if (!res.ok) throw new Error("Submission failed");
       setSubmitted(true);
     } catch {
       setError("Something went wrong. Please try again or email us directly.");
+      turnstileRef.current?.reset();
+      setTurnstileToken(null);
     } finally {
       setSubmitting(false);
     }
@@ -196,11 +206,19 @@ export function ContactForm() {
         </select>
       </div>
 
+      <Turnstile
+        ref={turnstileRef}
+        siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "1x00000000000000000000AA"}
+        onSuccess={setTurnstileToken}
+        onExpire={() => setTurnstileToken(null)}
+        options={{ theme: "light", size: "normal" }}
+      />
+
       {error && <p className="text-sm text-[#8A0F14]">{error}</p>}
 
       <button
         type="submit"
-        disabled={submitting}
+        disabled={submitting || !turnstileToken}
         className="w-full sm:w-auto px-8 py-3 bg-[#8A0F14] text-white text-sm font-medium rounded-full disabled:opacity-60 transition-transform active:scale-[0.98] hover:bg-[#D63B34]"
       >
         {submitting ? "Sending…" : "Send message"}
