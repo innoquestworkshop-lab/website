@@ -9,11 +9,22 @@ import { ContextualTestimonials } from "@/components/sections/ContextualTestimon
 import { schoolsPage } from "@/data/schools";
 
 export const metadata: Metadata = {
-  title: "School Programs & Workshops | InnoQuest Thailand",
-  description: "Curriculum-aligned innovation workshops and entrepreneurship camps for Bangkok and Thailand schools. Develop student skills that go beyond the classroom.",
+  title: "School Programs for Bangkok Students | InnoQuest",
+  description: "Curriculum-aligned innovation workshops and entrepreneurship camps for Bangkok and Thailand schools. Build real-world skills in creativity, critical thinking, and business — ages 10–18.",
+  keywords: [
+    "Bangkok school programs",
+    "school workshops Thailand",
+    "curriculum-aligned activities",
+    "innovation workshops for students",
+    "entrepreneurship camps Bangkok",
+    "student development programs",
+    "Thailand school enrichment",
+    "youth innovation Thailand",
+  ],
   openGraph: {
-    images: [{ url: "/images/events/ac-w4-001.jpg", width: 1200, height: 630, alt: "InnoQuest school workshop" }],
+    images: [{ url: "/images/events/ac-w4-001.jpg", width: 1200, height: 630, alt: "Students collaborating in an InnoQuest innovation workshop at a Bangkok school" }],
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function SchoolsPage() {

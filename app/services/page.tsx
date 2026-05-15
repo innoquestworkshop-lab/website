@@ -7,8 +7,24 @@ import { ServicesNav } from "@/components/sections/ServicesNav";
 import { servicesPage, designServices, deliveryServices } from "@/data/services";
 
 export const metadata: Metadata = {
-  title: servicesPage.meta.title,
-  description: servicesPage.meta.description,
+  title: "Services | InnoQuest — Design, Delivery & Talent",
+  description: "InnoQuest offers innovation workshops, business simulations, and entrepreneurship camps for students aged 10–18. Content & Game Design Licensing, and Delivery, Coordination & Talent.",
+  keywords: [
+    "innovation workshops Bangkok",
+    "entrepreneurship camp Thailand",
+    "business simulation students",
+    "youth learning programs",
+    "school innovation programs",
+    "corporate CSR education",
+    "InnoQuest services",
+    "game-based learning",
+    "curriculum design",
+    "facilitator talent",
+  ],
+  openGraph: {
+    images: [{ url: "/images/events/entre-1-173.jpg", width: 1200, height: 630, alt: "InnoQuest entrepreneurship programme in action" }],
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function ServicesPage() {

@@ -8,8 +8,22 @@ import { CTASection } from "@/components/sections/CTASection";
 import { team, teamPage, typeConfig } from "@/data/team";
 
 export const metadata: Metadata = {
-  title: "Our Team | InnoQuest",
-  description: "Meet the facilitators, speakers, and educators driving youth development across Bangkok and Thailand — real experts who make learning transformative.",
+  title: "Meet the Team | InnoQuest",
+  description: "Meet the facilitators, educators, and speakers behind InnoQuest — Bangkok's youth innovation experts helping students aged 10–18 learn by doing.",
+  keywords: [
+    "InnoQuest team",
+    "youth facilitators Bangkok",
+    "innovation educators Thailand",
+    "entrepreneurship workshop facilitators",
+    "youth development experts",
+    "Bangkok learning facilitators",
+    "student workshop team",
+    "InnoQuest educators",
+  ],
+  openGraph: {
+    images: [{ url: "/images/events/entre2-team.jpg", width: 1200, height: 630, alt: "The InnoQuest team — facilitators and educators in action" }],
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function OurPeoplePage() {

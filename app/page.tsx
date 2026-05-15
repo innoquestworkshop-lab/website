@@ -1,8 +1,22 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "InnoQuest — Build Real Skills, Not Just Grades",
-  description: "Bangkok's leading youth learning company. Innovation workshops, business camps & entrepreneurship programs for students, schools, corporates & families across Thailand.",
+  title: "InnoQuest | Youth Innovation & Entrepreneurship Programs Bangkok",
+  description: "Bangkok's top youth learning company. Innovation workshops, entrepreneurship camps & business simulations for students aged 10–18, schools, corporates & families across Thailand.",
+  keywords: [
+    "youth innovation programs Bangkok",
+    "entrepreneurship camp Thailand",
+    "business simulation for students",
+    "innovation workshop Bangkok",
+    "youth learning company Thailand",
+    "school innovation program",
+    "CSR youth program Thailand",
+    "teen entrepreneurship Bangkok",
+  ],
+  openGraph: {
+    images: [{ url: "/images/events/price-war-080.jpg", width: 1200, height: 630, alt: "InnoQuest students in a business simulation workshop in Bangkok" }],
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 import { Navbar } from "@/components/layout/Navbar";

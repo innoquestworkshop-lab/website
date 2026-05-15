@@ -5,8 +5,22 @@ import { ContactForm } from "@/components/ui/ContactForm";
 import { contactPage } from "@/data/contact";
 
 export const metadata: Metadata = {
-  title: "Contact InnoQuest | Bangkok Youth Learning Programs",
-  description: "Have a question about InnoQuest's programs in Bangkok, Thailand? Drop us a message — no pressure, just a friendly chat to see how we can help.",
+  title: "Contact InnoQuest | Bangkok, Thailand",
+  description: "Have a question about InnoQuest's workshops or camps in Bangkok? Drop us a message — no pressure, just a friendly chat to see how we can help.",
+  keywords: [
+    "contact InnoQuest",
+    "InnoQuest Bangkok",
+    "youth learning Bangkok",
+    "innovation workshop inquiry",
+    "entrepreneurship camp Thailand",
+    "school program Bangkok",
+    "CSR youth program",
+    "student workshop contact",
+  ],
+  openGraph: {
+    images: [{ url: "/images/events/break-the-market-008.jpg", width: 1200, height: 630, alt: "InnoQuest students collaborating at a Bangkok innovation workshop" }],
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 const iconMap = {

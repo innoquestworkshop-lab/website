@@ -8,11 +8,24 @@ import { ContextualTestimonials } from "@/components/sections/ContextualTestimon
 import { programs, programsPageMeta } from "@/data/programs";
 
 export const metadata: Metadata = {
-  title: "Programs & Experiences | InnoQuest Thailand",
-  description: "Explore InnoQuest programs for students ages 10–18 in Bangkok & Thailand — from 1-day innovation workshops to semester-long entrepreneurship journeys. For schools, families & corporates.",
+  title: "Programs for Students Ages 10–18 | InnoQuest",
+  description: "Innovation workshops, business simulations & entrepreneurship camps in Bangkok for students ages 10–18. Programs for schools, families & corporates — 1-day to semester-long.",
+  keywords: [
+    "innovation workshops Bangkok",
+    "entrepreneurship camp Thailand",
+    "business simulation students",
+    "youth learning programs Bangkok",
+    "STEM workshops ages 10-18",
+    "school programs Bangkok",
+    "CSR youth programs Thailand",
+    "InnoQuest programs",
+    "entrepreneurship education Thailand",
+    "student innovation Thailand",
+  ],
   openGraph: {
-    images: [{ url: "/images/events/entre-1-173.jpg", width: 1200, height: 630, alt: "InnoQuest Programs & Experiences" }],
+    images: [{ url: "/images/events/price-war-080.jpg", width: 1200, height: 630, alt: "Students competing in an InnoQuest business simulation workshop in Bangkok" }],
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function ProgramsPage() {

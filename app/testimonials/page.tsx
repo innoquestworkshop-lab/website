@@ -6,8 +6,22 @@ import { testimonials, audienceGroups, testimonialsPageMeta } from "@/data/testi
 import { stats, schoolsStat, yearsRunningStat } from "@/data/stats";
 
 export const metadata: Metadata = {
-  title: "Testimonials | InnoQuest — What People Are Saying",
-  description: "From students who discovered what they're capable of, to schools that saw their classrooms transform, to corporates who finally ran a CSR program worth talking about.",
+  title: "Real Reviews | InnoQuest — Students, Schools & Corporates",
+  description: "Students grew, schools transformed, corporates ran CSR programs worth talking about. See what parents, teachers, and HR teams say about InnoQuest workshops in Bangkok.",
+  keywords: [
+    "InnoQuest testimonials",
+    "student workshop reviews Bangkok",
+    "school innovation program feedback",
+    "corporate CSR workshop reviews",
+    "youth entrepreneurship camp reviews",
+    "business simulation testimonials Thailand",
+    "parent reviews InnoQuest",
+    "innovation education feedback",
+  ],
+  openGraph: {
+    images: [{ url: "/images/events/break-the-market-008.jpg", width: 1200, height: 630, alt: "Students engaged in an InnoQuest innovation workshop" }],
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 function StarRating({ stars }: { stars: number }) {

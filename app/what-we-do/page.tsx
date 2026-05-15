@@ -9,11 +9,22 @@ import { whatWeDoPage } from "@/data/whatWeDo";
 import { audienceCards } from "@/data/audiences";
 
 export const metadata: Metadata = {
-  title: "What We Do | InnoQuest",
-  description: "InnoQuest designs custom learning programs and delivers workshops, camps, and innovation events for schools and companies across Thailand.",
+  title: "How We Teach Innovation | InnoQuest",
+  description: "Hands-on workshops, business simulations & camps in Bangkok. InnoQuest uses experiential learning to build entrepreneurial thinking in students aged 10–18.",
+  keywords: [
+    "innovation workshops Bangkok",
+    "experiential learning Thailand",
+    "entrepreneurship camp for students",
+    "business simulation youth",
+    "school innovation program",
+    "STEM camp Bangkok",
+    "CSR youth program",
+    "design thinking workshop",
+  ],
   openGraph: {
-    images: [{ url: "/images/events/price-war-154.jpg", width: 1200, height: 630, alt: "InnoQuest in action" }],
+    images: [{ url: "/images/events/price-war-154.jpg", width: 1200, height: 630, alt: "Students competing in InnoQuest's Price War business simulation in Bangkok" }],
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function WhatWeDoPage() {

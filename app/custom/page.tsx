@@ -8,11 +8,22 @@ import { CTASection } from "@/components/sections/CTASection";
 import { customPage } from "@/data/custom";
 
 export const metadata: Metadata = {
-  title: "Custom-Built Programs | InnoQuest Thailand",
-  description: "Need something bespoke? InnoQuest designs experiential learning programs from scratch — your goals, your audience, your format. Trusted by schools and corporates across Bangkok.",
+  title: "Bespoke Learning Programs | InnoQuest Bangkok",
+  description: "InnoQuest designs experiential learning programs from scratch — built around your goals, audience, and format. Trusted by schools and corporates across Bangkok.",
+  keywords: [
+    "bespoke learning programs Bangkok",
+    "custom innovation workshops",
+    "tailored youth programs Thailand",
+    "corporate education design",
+    "school program design Bangkok",
+    "experiential learning design",
+    "CSR program design",
+    "custom entrepreneurship camp",
+  ],
   openGraph: {
-    images: [{ url: "/images/events/IMG_7900.jpg", width: 1200, height: 630, alt: "Custom program planning session" }],
+    images: [{ url: "/images/events/IMG_7900.jpg", width: 1200, height: 630, alt: "InnoQuest team designing a custom learning program for a Bangkok school" }],
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function CustomPage() {

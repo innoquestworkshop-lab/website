@@ -10,11 +10,22 @@ import { AboutStats } from "@/components/sections/AboutStats";
 import { aboutPage } from "@/data/about";
 
 export const metadata: Metadata = {
-  title: "About InnoQuest | Youth Innovation Learning in Thailand",
-  description: "InnoQuest empowers students aged 10–18 across Thailand through hands-on innovation workshops, business simulations, and entrepreneurship camps. Discover our mission.",
+  title: "About InnoQuest | Empowering Youth in Thailand",
+  description: "InnoQuest is on a mission to empower students aged 10–18 across Thailand through innovation workshops, business simulations, and entrepreneurship camps. Learn our story.",
+  keywords: [
+    "InnoQuest",
+    "youth innovation Thailand",
+    "entrepreneurship camp Bangkok",
+    "business simulation for students",
+    "innovation workshop teens",
+    "STEM learning Thailand",
+    "student entrepreneurship program",
+    "youth learning company Bangkok",
+  ],
   openGraph: {
-    images: [{ url: "/images/events/price-war-048.jpg", width: 1200, height: 630, alt: "InnoQuest team" }],
+    images: [{ url: "/images/events/entre2-team.jpg", width: 1200, height: 630, alt: "InnoQuest team of young entrepreneurs" }],
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function AboutPage() {

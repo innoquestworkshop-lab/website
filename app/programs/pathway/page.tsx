@@ -8,8 +8,22 @@ import { ContextualTestimonials } from "@/components/sections/ContextualTestimon
 import { pathwayStages, pathwayMeta } from "@/data/pathway";
 
 export const metadata: Metadata = {
-  title: "The Entrepreneurial Pathway | InnoQuest Thailand",
-  description: "A structured journey through the full lifecycle of a business. Powered by our own digital simulation engine — an exclusive standard of learning that cannot be copied.",
+  title: "Entrepreneurial Pathway Program | InnoQuest Thailand",
+  description: "Step through every stage of building a business — ideation to pitch — via InnoQuest's exclusive digital simulation engine. A structured entrepreneurship journey for students aged 10–18.",
+  keywords: [
+    "entrepreneurship program Thailand",
+    "business simulation for students",
+    "youth entrepreneurship journey",
+    "innovation pathway Bangkok",
+    "student business program",
+    "entrepreneurship camp Thailand",
+    "InnoQuest pathway",
+    "digital business simulation",
+  ],
+  openGraph: {
+    images: [{ url: "/images/events/entre2-team.jpg", width: 1200, height: 630, alt: "InnoQuest students working through the Entrepreneurial Pathway program" }],
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function PathwayPage() {

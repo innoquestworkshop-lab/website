@@ -10,11 +10,24 @@ import { ContextualTestimonials } from "@/components/sections/ContextualTestimon
 import { corporatesPage, corporatePartners } from "@/data/corporates";
 
 export const metadata: Metadata = {
-  title: "Corporate CSR Programs | InnoQuest Thailand",
-  description: "Power your CSR with InnoQuest — Bangkok-based youth innovation programs that deliver measurable impact for Thai students and your brand.",
+  title: "CSR Youth Innovation Programs Bangkok | InnoQuest",
+  description: "Partner with InnoQuest for CSR that counts — Bangkok-based youth innovation workshops delivering measurable impact for Thai students, schools, and your brand.",
+  keywords: [
+    "CSR Thailand",
+    "corporate social responsibility Bangkok",
+    "youth innovation program",
+    "corporate CSR education",
+    "InnoQuest corporate",
+    "student innovation workshop Bangkok",
+    "CSR impact measurement",
+    "youth entrepreneurship Thailand",
+    "corporate workshop Bangkok",
+    "school CSR program",
+  ],
   openGraph: {
-    images: [{ url: "/images/events/price-war-071.jpg", width: 1200, height: 630, alt: "InnoQuest corporate workshop" }],
+    images: [{ url: "/images/events/price-war-071.jpg", width: 1200, height: 630, alt: "Students participating in InnoQuest corporate CSR innovation workshop in Bangkok" }],
   },
+  twitter: { card: "summary_large_image" },
 };
 
 const iconMap = {

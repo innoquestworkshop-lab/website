@@ -9,11 +9,22 @@ import { ContextualTestimonials } from "@/components/sections/ContextualTestimon
 import { parentsPage } from "@/data/parents";
 
 export const metadata: Metadata = {
-  title: "InnoQuest for Parents | Youth Programs Bangkok",
-  description: "Help your child ages 10–18 build entrepreneurship & innovation skills beyond the classroom. InnoQuest camps & workshops in Bangkok, Thailand — made for curious, driven kids.",
+  title: "InnoQuest for Parents | Kids Programs Bangkok",
+  description: "Give your child ages 10–18 real entrepreneurship & innovation skills. InnoQuest camps, workshops & simulations in Bangkok build creativity, teamwork, and business thinking.",
+  keywords: [
+    "youth programs Bangkok",
+    "kids entrepreneurship camp Thailand",
+    "innovation workshops for children",
+    "family learning programs Bangkok",
+    "business simulation kids",
+    "youth camps Bangkok",
+    "children entrepreneurship Thailand",
+    "InnoQuest parents",
+  ],
   openGraph: {
-    images: [{ url: "/images/events/price-war-058.jpg", width: 1200, height: 630, alt: "Parents at InnoQuest" }],
+    images: [{ url: "/images/events/price-war-058.jpg", width: 1200, height: 630, alt: "Students collaborating at an InnoQuest innovation workshop in Bangkok" }],
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function ParentsPage() {
