@@ -166,37 +166,38 @@ export function Navbar() {
         <div className="lg:hidden bg-white border-t border-gray-100 px-8 py-6 space-y-1">
           {navLinks.map((link) => (
             <div key={link.href}>
-              <button
-                onClick={() =>
-                  setOpenDropdown(openDropdown === link.label ? null : link.label)
-                }
-                className="w-full flex items-center justify-between py-3 text-sm font-medium text-[#121212]"
-              >
-                {link.label}
-                {link.dropdown && (
-                  <IconChevronDown
-                    size={14}
-                    className={cn(
-                      "transition-transform",
-                      openDropdown === link.label && "rotate-180"
-                    )}
-                  />
-                )}
-              </button>
-              {link.dropdown && openDropdown === link.label && (
-                <div className="pl-4 pb-2 space-y-1">
-                  {link.dropdown.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className="block py-2 text-sm text-[#4A4A4A] hover:text-[#8A0F14]"
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-              {!link.dropdown && (
+              {link.dropdown ? (
+                <>
+                  <button
+                    onClick={() =>
+                      setOpenDropdown(openDropdown === link.label ? null : link.label)
+                    }
+                    className="w-full flex items-center justify-between py-3 text-sm font-medium text-[#121212]"
+                  >
+                    {link.label}
+                    <IconChevronDown
+                      size={14}
+                      className={cn(
+                        "transition-transform",
+                        openDropdown === link.label && "rotate-180"
+                      )}
+                    />
+                  </button>
+                  {openDropdown === link.label && (
+                    <div className="pl-4 pb-2 space-y-1">
+                      {link.dropdown.map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className="block py-2 text-sm text-[#4A4A4A] hover:text-[#8A0F14]"
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </>
+              ) : (
                 <Link
                   href={link.href}
                   className="block py-3 text-sm font-medium text-[#121212] hover:text-[#8A0F14]"
