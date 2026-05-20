@@ -112,7 +112,7 @@ export default function ContactPage() {
                         Instagram: `https://www.instagram.com/${s.href}`,
                         TikTok: `https://www.tiktok.com/@${s.href}`,
                         Line: `https://line.me/R/ti/p/${s.href}`,
-                        Facebook: `https://www.facebook.com/${s.href}`,
+                        Facebook: s.href.startsWith("http") ? s.href : `https://www.facebook.com/${s.href}`,
                       };
                       return (
                         <a

@@ -19,11 +19,11 @@ export const site = {
     instagram: "innoquest_workshop",
     tiktok: "innoquest.labs",
     line: "@900vomzh",
-    facebook: "InnoQuest",
+    facebook: "https://www.facebook.com/people/InnoQuest/61568919342332/",
   },
   seo: {
     titleSuffix: "| InnoQuest",
     defaultDescription:
-      "InnoQuest delivers science-backed, play-driven experiential learning programs for schools, corporates, and institutions across Thailand.",
+      "InnoQuest delivers data-driven, play-driven experiential learning programs for schools, corporates, and institutions across Thailand.",
   },
 } as const;
