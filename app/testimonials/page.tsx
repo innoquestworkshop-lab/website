@@ -194,7 +194,7 @@ export default function TestimonialsPage() {
                         <div>
                           <p style={{ fontSize: 13, fontWeight: 500, color: "#121212" }}>{t.name}</p>
                           <p style={{ fontSize: 11, color: "rgba(18,18,18,0.5)", marginTop: 2 }}>
-                            {t.role} · {t.context}
+                            {t.role} · {Array.isArray(t.context) ? t.context.join(" · ") : t.context}
                           </p>
                         </div>
                       </div>

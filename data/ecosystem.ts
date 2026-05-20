@@ -32,7 +32,7 @@ export const ecosystem: EcosystemPartner[] = [
   },
   {
     id: "assumption-sriracha",
-    name: "Assumption Sriracha",
+    name: "Assumption College Sriracha",
     type: "school",
     description: "Panel Discussion",
     featured: true,
