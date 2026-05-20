@@ -13,7 +13,7 @@ export const site = {
   contact: {
     phone: "+66 97 097 0797",
     phoneHours: "Mon–Fri, 9:00–18:00",
-    email: "innoquestworkshop@gmail.com",
+    email: "admin@innoquest.tech",
   },
   social: {
     instagram: "innoquest_workshop",
