@@ -14,7 +14,7 @@ export const navLinks: NavItem[] = [
   { label: "For Schools", href: "/schools" },
   { label: "Corporate & CSR", href: "/corporates" },
   { label: "Design Yours", href: "/custom" },
-  { label: "🎮 Interactive Play", href: "https://innoquest-interactive.vercel.app", external: true, highlight: true },
+  { label: "🎮 Interactive Play", href: "https://www.interactive.innoquest.tech", external: true, highlight: true },
   {
     label: "About",
     href: "/about",
