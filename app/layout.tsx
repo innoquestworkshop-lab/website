@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import Script from "next/script";
 import "./globals.css";
 
 const inter = Inter({
@@ -52,7 +52,13 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <body className="min-h-screen antialiased">{children}</body>
       <Analytics />
-      <GoogleAnalytics gaId="G-9P1BDE0KN1" />
+      <Script src="https://www.googletagmanager.com/gtag/js?id=G-9P1BDE0KN1" strategy="afterInteractive" />
+      <Script id="google-analytics" strategy="afterInteractive">{`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-9P1BDE0KN1');
+      `}</Script>
     </html>
   );
 }
