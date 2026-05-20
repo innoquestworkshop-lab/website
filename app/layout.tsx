@@ -49,12 +49,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <head>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-9P1BDE0KN1" />
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-9P1BDE0KN1"}`} />
         <script dangerouslySetInnerHTML={{ __html: `
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'G-9P1BDE0KN1');
+          gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-9P1BDE0KN1"}');
         ` }} />
       </head>
       <body className="min-h-screen antialiased">
