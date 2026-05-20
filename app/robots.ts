@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: "/api/",
     },
-    sitemap: "https://innoquest-website.vercel.app/sitemap.xml",
+    sitemap: "https://innoquest.tech/sitemap.xml",
   };
 }

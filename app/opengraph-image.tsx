@@ -120,7 +120,7 @@ export default function Image() {
             display: "flex",
           }}
         >
-          innoquest-website.vercel.app
+          innoquest.tech
         </div>
       </div>
     ),

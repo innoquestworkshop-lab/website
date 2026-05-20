@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   },
   description:
     "Experiential learning programs for schools, corporates & institutions — science-backed, play-driven, designed for the next generation.",
-  metadataBase: new URL("https://innoquest-website.vercel.app"),
+  metadataBase: new URL("https://innoquest.tech"),
   openGraph: {
     siteName: "InnoQuest",
     locale: "en_US",
