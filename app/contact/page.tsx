@@ -106,16 +106,28 @@ export default function ContactPage() {
                 {/* Social placeholder */}
                 <div style={{ background: "#121212", color: "#F5F0EA", borderRadius: 14, padding: 24 }}>
                   <p className="eyebrow" style={{ color: "rgba(245,240,234,0.5)", marginBottom: 16 }}>Follow along</p>
-                  <div style={{ display: "flex", gap: 12 }}>
-                    {contactPage.social.platforms.map((s) => (
-                      <span key={s.label} className="pill-tag" style={{ background: "rgba(245,240,234,0.1)", color: "rgba(245,240,234,0.7)" }}>
-                        {s.label}
-                      </span>
-                    ))}
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+                    {contactPage.social.platforms.map((s) => {
+                      const hrefs: Record<string, string> = {
+                        Instagram: `https://www.instagram.com/${s.href}`,
+                        TikTok: `https://www.tiktok.com/@${s.href}`,
+                        Line: `https://line.me/R/ti/p/${s.href}`,
+                        Facebook: `https://www.facebook.com/${s.href}`,
+                      };
+                      return (
+                        <a
+                          key={s.label}
+                          href={hrefs[s.label]}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="pill-tag"
+                          style={{ background: "rgba(245,240,234,0.1)", color: "rgba(245,240,234,0.7)", textDecoration: "none", cursor: "pointer" }}
+                        >
+                          {s.label}
+                        </a>
+                      );
+                    })}
                   </div>
-                  <p className="mono" style={{ fontSize: 10, color: "rgba(245,240,234,0.3)", marginTop: 16 }}>
-                    // Add social links: Instagram, TikTok, Line OA, Facebook
-                  </p>
                 </div>
               </div>
             </div>
