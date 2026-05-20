@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
 
     await resend.emails.send({
       from: "InnoQuest Contact Form <onboarding@resend.dev>",
-      to: process.env.CONTACT_EMAIL ?? "innoquestworkshop@gmail.com",
+      to: process.env.CONTACT_EMAIL ?? "admin@innoquest.tech",
       replyTo: email,
       subject: `New enquiry from ${name} — ${organisation}`,
       html: `

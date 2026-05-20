@@ -146,8 +146,8 @@ export function ContactForm() {
             <a href="tel:+66970970797" style={{ fontSize: 13, color: "#8A0F14", textDecoration: "none", fontWeight: 500 }}>
               +66 97 097 0797
             </a>
-            <a href="mailto:innoquestworkshop@gmail.com" style={{ fontSize: 13, color: "rgba(18,18,18,0.5)", textDecoration: "none" }}>
-              innoquestworkshop@gmail.com
+            <a href="mailto:admin@innoquest.tech" style={{ fontSize: 13, color: "rgba(18,18,18,0.5)", textDecoration: "none" }}>
+              admin@innoquest.tech
             </a>
           </div>
         </div>
