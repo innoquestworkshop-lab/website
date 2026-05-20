@@ -15,7 +15,7 @@ export const aboutPage = {
 
   story: {
     eyebrow: "▸ Our story",
-    heading: "Started in 2024.\nBuilt for kids by (somewhat) a kid.",
+    heading: "Built for kids by\nsomeone who was a kid.",
     paragraphs: [
       "InnoQuest started with a simple observation: the skills that matter most in the modern world — critical thinking, creativity, collaboration, and confidence — are rarely taught in traditional classrooms.",
       "We set out to fix that. Not by replacing schools, but by building programs that complement formal education with real-world, play-based experiences that stick.",
