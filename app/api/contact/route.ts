@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-async function verifyTurnstile(token: string): Promise<boolean> {
+async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
   const secret = process.env.TURNSTILE_SECRET_KEY ?? "1x0000000000000000000000000000000AA";
   const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({ secret, response: token }),
+    body: new URLSearchParams({ secret, response: token, remoteip: ip }),
   });
   const data = await res.json();
   return data.success === true;
@@ -22,7 +22,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    const humanVerified = await verifyTurnstile(turnstileToken ?? "");
+    const visitorIp =
+      req.headers.get("cf-connecting-ip") ??
+      req.headers.get("x-forwarded-for")?.split(",")[0].trim() ??
+      "";
+    const humanVerified = await verifyTurnstile(turnstileToken ?? "", visitorIp);
     if (!humanVerified) {
       return NextResponse.json({ error: "Verification failed. Please try again." }, { status: 400 });
     }

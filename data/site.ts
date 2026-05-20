@@ -13,13 +13,13 @@ export const site = {
   contact: {
     phone: "+66 97 097 0797",
     phoneHours: "Mon–Fri, 9:00–18:00",
-    email: "admin@innoquest.tech",
+    email: "innoquestworkshop@gmail.com",
   },
   social: {
-    instagram: "",
-    tiktok: "",
-    line: "",
-    facebook: "",
+    instagram: "innoquest_workshop",
+    tiktok: "innoquest.labs",
+    line: "@900vomzh",
+    facebook: "InnoQuest",
   },
   seo: {
     titleSuffix: "| InnoQuest",
