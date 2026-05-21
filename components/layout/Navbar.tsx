@@ -65,7 +65,7 @@ export function Navbar() {
                 <>
                   <button
                     className={cn(
-                      "flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-colors",
+                      "flex items-center gap-1 px-3 py-2 text-xs font-medium rounded-lg transition-colors",
                       pathname.startsWith(link.href)
                         ? "text-[#8A0F14]"
                         : scrolled || mobileOpen
@@ -83,7 +83,7 @@ export function Navbar() {
                           key={item.href}
                           href={item.href}
                           className={cn(
-                            "block px-4 py-2 text-sm transition-colors",
+                            "block px-4 py-2 text-xs transition-colors",
                             pathname === item.href
                               ? "text-[#8A0F14] bg-[#F5F0EA]"
                               : "text-[#121212] hover:bg-[#F5F0EA] hover:text-[#8A0F14]"
@@ -101,7 +101,7 @@ export function Navbar() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cn(
-                    "block px-3 py-2 text-sm font-medium rounded-lg transition-colors",
+                    "block px-3 py-2 text-xs font-medium rounded-lg transition-colors",
                     link.highlight
                       ? "text-[#8A0F14] border border-[#8A0F14] rounded-full px-4 hover:bg-[#8A0F14] hover:text-white"
                       : scrolled || mobileOpen
@@ -115,7 +115,7 @@ export function Navbar() {
                 <Link
                   href={link.href}
                   className={cn(
-                    "block px-3 py-2 text-sm font-medium rounded-lg transition-colors",
+                    "block px-3 py-2 text-xs font-medium rounded-lg transition-colors",
                     pathname === link.href
                       ? "text-[#8A0F14]"
                       : scrolled || mobileOpen

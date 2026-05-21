@@ -18,8 +18,8 @@
   --radius-pill: 24px;
 
   /* Font */
-  --font-sans: var(--font-inter);
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --font-sans: var(--font-noto-sans-thai);
+  --font-mono: var(--font-ibm-plex-thai), ui-sans-serif, sans-serif;
 }
 
 /* ---- CSS Custom Properties (used as var(--red) etc.) ---- */
@@ -51,7 +51,7 @@
   }
 
   body {
-    font-family: var(--font-inter), system-ui, sans-serif;
+    font-family: var(--font-noto-sans-thai), system-ui, sans-serif;
     font-size: 14px;
     line-height: 1.7;
     color: #121212;
@@ -78,7 +78,7 @@
    ============================================================ */
 
 .eyebrow {
-  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-family: var(--font-ibm-plex-thai), ui-monospace, monospace;
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.14em;
@@ -122,7 +122,7 @@
 }
 
 .mono {
-  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-family: var(--font-ibm-plex-thai), ui-monospace, monospace;
 }
 
 .tabular {
@@ -214,7 +214,7 @@
   gap: 6px;
   padding: 5px 10px;
   border-radius: 999px;
-  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-family: var(--font-ibm-plex-thai), ui-monospace, monospace;
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.06em;
@@ -451,7 +451,7 @@
   position: absolute;
   top: 12px;
   left: 12px;
-  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-family: var(--font-ibm-plex-thai), ui-monospace, monospace;
   font-size: 10px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -464,7 +464,7 @@
 .imgph-caption {
   position: absolute;
   inset: auto 12px 12px 12px;
-  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-family: var(--font-ibm-plex-thai), ui-monospace, monospace;
   font-size: 10px;
   line-height: 1.45;
   padding: 8px 10px;

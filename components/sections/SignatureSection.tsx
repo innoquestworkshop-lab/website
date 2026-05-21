@@ -51,13 +51,13 @@ export function SignatureSection() {
           </div>
           <div style={{
             fontSize: "clamp(32px, 4.4vw, 60px)", fontWeight: 500,
-            letterSpacing: "-0.04em", lineHeight: 0.93, color: "#F5F0EA",
+            letterSpacing: "-0.04em", lineHeight: 1.15, color: "#F5F0EA",
           }}>
             {ss.headingLine2}
           </div>
           <div style={{
             fontSize: "clamp(32px, 4.4vw, 60px)", fontWeight: 500,
-            letterSpacing: "-0.04em", lineHeight: 0.93, color: "#8A0F14",
+            letterSpacing: "-0.04em", lineHeight: 1.15, color: "#8A0F14",
           }}>
             {ss.headingLine3}
           </div>

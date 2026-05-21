@@ -101,7 +101,7 @@ export function MethodologySection() {
                 {p.num}
               </div>
               <div>
-                <h3 className="font-medium" style={{ fontSize: 22, letterSpacing: "-0.015em", lineHeight: 1.2 }}>
+                <h3 className="font-medium" style={{ fontSize: 16, letterSpacing: "-0.015em", lineHeight: 1.2 }}>
                   {p.title}
                 </h3>
                 <p className="mt-[10px] text-[14px] leading-[1.7]" style={{ color: "rgba(18,18,18,0.6)" }}>

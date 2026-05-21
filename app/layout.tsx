@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Noto_Sans_Thai, IBM_Plex_Sans_Thai } from "next/font/google";
 import { cookies } from "next/headers";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import type { Locale } from "@/lib/i18n";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
+const notoSansThai = Noto_Sans_Thai({
+  variable: "--font-noto-sans-thai",
+  subsets: ["latin", "thai"],
   weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
+const ibmPlexThai = IBM_Plex_Sans_Thai({
+  variable: "--font-ibm-plex-thai",
+  subsets: ["latin", "thai"],
   weight: ["400", "500"],
 });
 
@@ -53,7 +53,7 @@ export default async function RootLayout({
   const locale: Locale = store.get("locale")?.value === "th" ? "th" : "en";
 
   return (
-    <html lang={locale} className={`${inter.variable} ${jetbrainsMono.variable}`}>
+    <html lang={locale} className={`${notoSansThai.variable} ${ibmPlexThai.variable}`}>
       <head>
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`} />
         <script dangerouslySetInnerHTML={{ __html: `
