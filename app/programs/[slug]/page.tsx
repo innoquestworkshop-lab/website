@@ -12,7 +12,7 @@ import { methodPillarNames } from "@/data/methodology";
 
 
 export async function generateStaticParams() {
-  return programs.map((p) => ({ slug: p.slug }));
+  return programs.en.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({
@@ -38,7 +38,7 @@ export default async function ProgramPage({
   const program = getProgramBySlug(slug);
   if (!program) notFound();
 
-  const related = programs.filter((p) => p.slug !== program.slug).slice(0, 3);
+  const related = programs.en.filter((p) => p.slug !== program.slug).slice(0, 3);
 
   return (
     <>

@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { stats } from "@/data/stats";
+import { useLocale } from "@/components/LanguageProvider";
 
 function useCountUp(to: number, active: boolean, duration = 1500) {
   const [val, setVal] = useState(0);
@@ -55,6 +56,7 @@ function StatItem({ n, suf, label, decimals = 0 }: { n: number; suf: string; lab
 
 
 export function AboutStats() {
+  const { locale } = useLocale();
   return (
     <section style={{ background: "#FFFFFF", padding: "64px 0" }}>
       <div className="max-w-[1240px] mx-auto px-8">
@@ -62,7 +64,7 @@ export function AboutStats() {
           className="about-stats"
           style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 32 }}
         >
-          {stats.map((s) => (
+          {stats[locale].map((s) => (
             <StatItem key={s.label} {...s} />
           ))}
         </div>

@@ -73,7 +73,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const programPages: MetadataRoute.Sitemap = programs.map((p) => ({
+  const programPages: MetadataRoute.Sitemap = programs.en.map((p) => ({
     url: `${baseUrl}/programs/${p.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly",
