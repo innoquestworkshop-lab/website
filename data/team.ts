@@ -9,23 +9,37 @@ export type TeamMember = {
   photo?: string;
 };
 
-export const typeConfig: Record<TeamMemberType, { label: string; color: string; bg: string }> = {
-  facilitator: { label: "Facilitator", color: "#8A0F14", bg: "#8A0F1415" },
-  speaker: { label: "Speaker", color: "#121212", bg: "#12121212" },
-  "business-development": { label: "Business Development", color: "#4A4A4A", bg: "#4A4A4A10" },
-  art: { label: "Art", color: "#7C5C3E", bg: "#7C5C3E12" },
+export const typeConfig: Record<TeamMemberType, { label: string; labelTh: string; color: string; bg: string }> = {
+  facilitator:          { label: "Facilitator",          labelTh: "วิทยากร",         color: "#8A0F14", bg: "#8A0F1415" },
+  speaker:              { label: "Speaker",               labelTh: "วิทยากรรับเชิญ", color: "#121212", bg: "#12121212" },
+  "business-development": { label: "Business Development", labelTh: "พัฒนาธุรกิจ",    color: "#4A4A4A", bg: "#4A4A4A10" },
+  art:                  { label: "Art",                   labelTh: "ศิลปะ",           color: "#7C5C3E", bg: "#7C5C3E12" },
 };
 
 export const teamPage = {
-  hero: {
-    eyebrow: "▸ Our people",
-    heading: "The people behind InnoQuest.",
-    sub: "Facilitators, speakers, designers, and builders who care deeply about the next generation.",
+  en: {
+    hero: {
+      eyebrow: "▸ Our people",
+      heading: "The people behind InnoQuest.",
+      sub: "Facilitators, speakers, designers, and builders who care deeply about the next generation.",
+    },
+    joinUs: {
+      heading: "Want to facilitate\nwith us?",
+      body: "We're always looking for passionate facilitators, speakers, and designers who believe in the power of learning through doing.",
+      cta: { text: "Get in touch →", href: "/contact" },
+    },
   },
-  joinUs: {
-    heading: "Want to facilitate\nwith us?",
-    body: "We're always looking for passionate facilitators, speakers, and designers who believe in the power of learning through doing.",
-    cta: { text: "Get in touch →", href: "/contact" },
+  th: {
+    hero: {
+      eyebrow: "▸ บุคลากรของเรา",
+      heading: "คนเบื้องหลัง InnoQuest",
+      sub: "วิทยากร วิทยากรรับเชิญ นักออกแบบ และผู้สร้างที่ใส่ใจรุ่นต่อไปอย่างลึกซึ้ง",
+    },
+    joinUs: {
+      heading: "ต้องการอำนวยความสะดวก\nกับเรา?",
+      body: "เรากำลังมองหาวิทยากร วิทยากรรับเชิญ และนักออกแบบที่มีความหลงใหลที่เชื่อในพลังของการเรียนรู้ผ่านการลงมือทำ",
+      cta: { text: "ติดต่อ →", href: "/contact" },
+    },
   },
 } as const;
 

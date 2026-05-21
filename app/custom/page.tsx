@@ -6,6 +6,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
 import { customPage } from "@/data/custom";
+import { getLocale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   title: "Bespoke Learning Programs | InnoQuest Bangkok",
@@ -26,7 +27,9 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
 };
 
-export default function CustomPage() {
+export default async function CustomPage() {
+  const locale = await getLocale();
+  const page = customPage[locale];
   return (
     <>
       <Navbar />
@@ -43,18 +46,17 @@ export default function CustomPage() {
           <div className="max-w-[1240px] mx-auto px-8 relative z-10">
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1.1fr", gap: 64, alignItems: "center" }} className="custom-hero-grid">
               <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>▸ Custom solutions</p>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>{page.hero.eyebrow}</p>
                 <h1 style={{ fontSize: "clamp(36px, 5vw, 68px)", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05 }}>
-                  Built around your goals,{" "}
-                  <span style={{ color: "#8A0F14" }}>not ours.</span>
+                  {page.hero.heading}{" "}
+                  <span style={{ color: "#8A0F14" }}>{page.hero.headingAccent}</span>
                 </h1>
                 <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(245,240,234,0.7)", maxWidth: 520, marginTop: 24 }}>
-                  Have something specific in mind? We design programs from scratch — custom themes,
-                  custom formats, custom outcomes. Tell us what you need.
+                  {page.hero.sub}
                 </p>
                 <div style={{ display: "flex", gap: 12, marginTop: 32, flexWrap: "wrap" }}>
-                  <Link href="/contact" className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#8A0F14", color: "#F5F0EA" }}>
-                    Start the conversation →
+                  <Link href={page.hero.cta.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#8A0F14", color: "#F5F0EA" }}>
+                    {page.hero.cta.text}
                   </Link>
                 </div>
               </div>
@@ -78,17 +80,16 @@ export default function CustomPage() {
           <div className="max-w-[1240px] mx-auto px-8">
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "end", marginBottom: 48 }} className="process-head">
               <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>▸ How it works</p>
-                <h2 className="h-section">Four steps from idea to impact.</h2>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{page.process.eyebrow}</p>
+                <h2 className="h-section">{page.process.heading.split("\n").map((l: string, i: number) => <span key={i}>{l}{i === 0 && <br />}</span>)}</h2>
               </div>
               <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(18,18,18,0.6)" }}>
-                Our process is designed to minimize risk and maximize fit.
-                You&apos;ll know exactly what you&apos;re getting before anything is confirmed.
+                {page.process.sub}
               </p>
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }} className="steps-grid">
-              {customPage.process.steps.map((s) => (
+              {page.process.steps.map((s) => (
                 <div key={s.num} className="card-lift" style={{
                   background: "#FFFFFF", borderRadius: 14, padding: 28,
                   minHeight: 280, display: "flex", flexDirection: "column",
@@ -112,15 +113,15 @@ export default function CustomPage() {
         </section>
 
         {/* Past custom builds — only shown when items exist in data */}
-        {customPage.pastBuilds.items.length > 0 && (
+        {page.pastBuilds.items.length > 0 && (
         <section style={{ background: "#FFFFFF", padding: "96px 0" }}>
           <div className="max-w-[1240px] mx-auto px-8">
-            <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>▸ Past custom builds</p>
+            <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{page.pastBuilds.eyebrow}</p>
             <h2 className="h-section" style={{ marginBottom: 48 }}>
-              Things we&apos;ve <span className="scribble">designed from scratch</span>.
+              {page.pastBuilds.heading} <span className="scribble">{page.pastBuilds.headingAccent}</span>{page.pastBuilds.headingSuffix}
             </h2>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }} className="builds-grid">
-              {customPage.pastBuilds.items.map((b, i) => (
+              {page.pastBuilds.items.map((b, i) => (
                 <div key={i} className="card-lift" style={{
                   background: "#F5F0EA", borderRadius: 14,
                   display: "grid", gridTemplateColumns: "1fr 1.2fr", overflow: "hidden",

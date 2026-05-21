@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
 import { ContextualTestimonials } from "@/components/sections/ContextualTestimonials";
 import { pathwayStages, pathwayMeta } from "@/data/pathway";
+import { getLocale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   title: "Entrepreneurial Pathway Program | InnoQuest Thailand",
@@ -26,7 +27,10 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
 };
 
-export default function PathwayPage() {
+export default async function PathwayPage() {
+  const locale = await getLocale();
+  const meta = pathwayMeta[locale];
+  const stages = pathwayStages[locale];
   return (
     <>
       <Navbar />
@@ -45,18 +49,18 @@ export default function PathwayPage() {
           <div className="max-w-[1240px] mx-auto px-8 relative z-10">
             <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 14px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 999, fontSize: 14, fontWeight: 500, color: "rgba(245,240,234,0.8)", marginBottom: 32 }}>
               <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#8A0F14" }} className="animate-pulse" />
-              {pathwayMeta.badge}
+              {meta.badge}
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "end" }} className="hero-grid">
               <div>
                 <h1 style={{ fontSize: "clamp(40px, 6vw, 72px)", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05 }}>
-                  {pathwayMeta.heading} <span style={{ color: "#8A0F14", fontStyle: "italic" }}>{pathwayMeta.headingAccent}</span>
+                  {meta.heading} <span style={{ color: "#8A0F14", fontStyle: "italic" }}>{meta.headingAccent}</span>
                 </h1>
               </div>
               <div style={{ paddingBottom: 8 }}>
                 <p style={{ fontSize: 18, lineHeight: 1.65, color: "rgba(245,240,234,0.7)", maxWidth: 480 }}>
-                  {pathwayMeta.sub}
+                  {meta.sub}
                 </p>
               </div>
             </div>
@@ -72,27 +76,27 @@ export default function PathwayPage() {
               {/* Left Column: Sticky Context */}
               <div style={{ width: "25%" }} className="hidden md:block">
                 <div className="sticky top-32">
-                  <h2 style={{ fontSize: 22, fontWeight: 500, letterSpacing: "-0.02em", marginBottom: 16 }}>{pathwayMeta.sidebarHeading}</h2>
+                  <h2 style={{ fontSize: 22, fontWeight: 500, letterSpacing: "-0.02em", marginBottom: 16 }}>{meta.sidebarHeading}</h2>
                   <p style={{ fontSize: 14, color: "rgba(18,18,18,0.6)", lineHeight: 1.6, marginBottom: 32 }}>
-                    {pathwayMeta.sidebarBody}
+                    {meta.sidebarBody}
                   </p>
 
                   <div style={{ borderLeft: "2px solid rgba(18,18,18,0.1)", paddingLeft: 16, display: "flex", flexDirection: "column", gap: 16 }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, fontWeight: 500, color: "#121212" }}>
                       <span style={{ color: "#8A0F14", fontSize: 16 }}>◈</span>
-                      Powered by Tech
+                      {locale === "en" ? "Powered by Tech" : "ขับเคลื่อนด้วยเทคโนโลยี"}
                     </div>
                     <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, fontWeight: 500, color: "rgba(18,18,18,0.5)" }}>
                       <span style={{ fontSize: 16 }}>◎</span>
-                      Expert Facilitation
+                      {locale === "en" ? "Expert Facilitation" : "ผู้อำนวยการผู้เชี่ยวชาญ"}
                     </div>
                     <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, fontWeight: 500, color: "rgba(18,18,18,0.5)" }}>
                       <span style={{ fontSize: 16 }}>◷</span>
-                      Real-time Competition
+                      {locale === "en" ? "Real-time Competition" : "การแข่งขันแบบเรียลไทม์"}
                     </div>
                     <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, fontWeight: 500, color: "rgba(18,18,18,0.5)" }}>
                       <span style={{ fontSize: 16 }}>◉</span>
-                      Post-workshop Analysis
+                      {locale === "en" ? "Post-workshop Analysis" : "การวิเคราะห์หลังเวิร์กชอป"}
                     </div>
                   </div>
                 </div>
@@ -105,7 +109,7 @@ export default function PathwayPage() {
                 <div className="absolute top-8 bottom-0 bg-gray-200 hidden md:block" style={{ left: 27, width: 4 }} />
 
                 <div style={{ display: "flex", flexDirection: "column", gap: 64 }}>
-                  {pathwayStages.map((stage) => {
+                  {stages.map((stage) => {
                     const isLocked = stage.status === "locked";
 
                     return (
@@ -139,7 +143,7 @@ export default function PathwayPage() {
                             {isLocked && (
                               <div style={{ position: "absolute", top: 12, right: 12, background: "rgba(18,18,18,0.75)", borderRadius: 8, padding: "6px 10px", display: "flex", alignItems: "center", gap: 6, backdropFilter: "blur(4px)" }}>
                                 <span style={{ fontSize: 13 }}>🔒</span>
-                                <span style={{ fontFamily: "monospace", fontSize: 11, letterSpacing: 1, color: "rgba(245,240,234,0.7)" }}>IN DEVELOPMENT</span>
+                                <span style={{ fontFamily: "monospace", fontSize: 11, letterSpacing: 1, color: "rgba(245,240,234,0.7)" }}>{locale === "en" ? "IN DEVELOPMENT" : "กำลังพัฒนา"}</span>
                               </div>
                             )}
                           </div>
@@ -167,7 +171,7 @@ export default function PathwayPage() {
                             {isLocked && (
                               <div style={{ padding: "16px 32px", background: "rgba(18,18,18,0.02)", borderTop: "1px solid rgba(18,18,18,0.06)" }}>
                                 <span style={{ fontSize: 14, fontWeight: 600, color: "rgba(18,18,18,0.4)" }}>
-                                  Currently in development
+                                  {locale === "en" ? "Currently in development" : "กำลังพัฒนาอยู่"}
                                 </span>
                               </div>
                             )}
@@ -188,7 +192,7 @@ export default function PathwayPage() {
           `}</style>
         </section>
 
-        <ContextualTestimonials audience="school" label="▸ Trusted by educators" limit={3} />
+        <ContextualTestimonials audience="school" label={locale === "en" ? "▸ Trusted by educators" : "▸ ที่ไว้วางใจโดยนักการศึกษา"} limit={3} />
 
         <CTASection />
       </main>

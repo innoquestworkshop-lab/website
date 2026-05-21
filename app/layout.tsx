@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import { cookies } from "next/headers";
+import { LanguageProvider } from "@/components/LanguageProvider";
+import type { Locale } from "@/lib/i18n";
 import "./globals.css";
 
 const inter = Inter({
@@ -41,13 +44,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const store = await cookies();
+  const locale: Locale = store.get("locale")?.value === "th" ? "th" : "en";
+
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
+    <html lang={locale} className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <head>
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`} />
         <script dangerouslySetInnerHTML={{ __html: `
@@ -58,10 +64,10 @@ export default function RootLayout({
         ` }} />
       </head>
       <body className="min-h-screen antialiased">
-        {children}
-        {/* Vercel Analytics */}
+        <LanguageProvider initialLocale={locale}>
+          {children}
+        </LanguageProvider>
         <script defer src="/_vercel/insights/script.js" />
-        {/* Vercel Speed Insights */}
         <script defer src="/_vercel/speed-insights/script.js" />
       </body>
     </html>

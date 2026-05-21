@@ -7,6 +7,7 @@ import { MethodologySection } from "@/components/sections/MethodologySection";
 import { CTASection } from "@/components/sections/CTASection";
 import { whatWeDoPage } from "@/data/whatWeDo";
 import { audienceCards } from "@/data/audiences";
+import { getLocale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   title: "How We Teach Innovation | InnoQuest",
@@ -27,7 +28,10 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
 };
 
-export default function WhatWeDoPage() {
+export default async function WhatWeDoPage() {
+  const locale = await getLocale();
+  const page = whatWeDoPage[locale];
+  const cards = audienceCards[locale];
   return (
     <>
       <Navbar />
@@ -44,20 +48,20 @@ export default function WhatWeDoPage() {
           <div className="max-w-[1240px] mx-auto px-8 relative z-10">
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1.1fr", gap: 64, alignItems: "center" }} className="wwd-hero-grid">
               <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>{whatWeDoPage.hero.eyebrow}</p>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>{page.hero.eyebrow}</p>
                 <h1 style={{ fontSize: "clamp(36px, 5vw, 68px)", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05 }}>
-                  {whatWeDoPage.hero.heading.replace(whatWeDoPage.hero.headingAccent, "").trimEnd()}{" "}
-                  <span style={{ color: "#8A0F14" }}>{whatWeDoPage.hero.headingAccent}</span>
+                  {page.hero.heading.replace(page.hero.headingAccent, "").trimEnd()}{" "}
+                  <span style={{ color: "#8A0F14" }}>{page.hero.headingAccent}</span>
                 </h1>
                 <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(245,240,234,0.7)", maxWidth: 520, marginTop: 24 }}>
-                  {whatWeDoPage.hero.sub}
+                  {page.hero.sub}
                 </p>
                 <div style={{ display: "flex", gap: 12, marginTop: 32, flexWrap: "wrap" }}>
-                  <Link href={whatWeDoPage.hero.cta1.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#8A0F14", color: "#F5F0EA" }}>
-                    {whatWeDoPage.hero.cta1.text}
+                  <Link href={page.hero.cta1.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#8A0F14", color: "#F5F0EA" }}>
+                    {page.hero.cta1.text}
                   </Link>
-                  <Link href={whatWeDoPage.hero.cta2.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border" style={{ color: "#F5F0EA", borderColor: "rgba(245,240,234,0.3)" }}>
-                    {whatWeDoPage.hero.cta2.text}
+                  <Link href={page.hero.cta2.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border" style={{ color: "#F5F0EA", borderColor: "rgba(245,240,234,0.3)" }}>
+                    {page.hero.cta2.text}
                   </Link>
                 </div>
               </div>
@@ -82,16 +86,16 @@ export default function WhatWeDoPage() {
           <div className="max-w-[1240px] mx-auto px-8">
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "end", marginBottom: 48 }} className="services-head">
               <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{whatWeDoPage.coreServices.eyebrow}</p>
-                <h2 className="h-section">{whatWeDoPage.coreServices.heading.split("\n").map((l, i) => <span key={i}>{l}{i === 0 && <br />}</span>)}</h2>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{page.coreServices.eyebrow}</p>
+                <h2 className="h-section">{page.coreServices.heading.split("\n").map((l, i) => <span key={i}>{l}{i === 0 && <br />}</span>)}</h2>
               </div>
               <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(18,18,18,0.6)" }}>
-                {whatWeDoPage.coreServices.sub}
+                {page.coreServices.sub}
               </p>
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }} className="services-grid">
-              {whatWeDoPage.coreServices.items.map((s) => (
+              {page.coreServices.items.map((s) => (
                 <div key={s.title} className="card-lift" style={{
                   background: "#F5F0EA", borderRadius: 14, padding: 36,
                   display: "flex", flexDirection: "column", minHeight: 300,
@@ -119,7 +123,7 @@ export default function WhatWeDoPage() {
             </div>
             <div style={{ marginTop: 40 }}>
               <Link href="/services" className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#121212", color: "#F5F0EA" }}>
-                View all services →
+                {locale === "en" ? "View all services →" : "ดูบริการทั้งหมด →"}
               </Link>
             </div>
           </div>
@@ -133,20 +137,20 @@ export default function WhatWeDoPage() {
           <div className="max-w-[1240px] mx-auto px-8">
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "end", marginBottom: 48 }} className="process-head">
               <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{whatWeDoPage.process.eyebrow}</p>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{page.process.eyebrow}</p>
                 <h2 className="h-section">
-                  {whatWeDoPage.process.heading.split("\n").map((l, i) => (
+                  {page.process.heading.split("\n").map((l, i) => (
                     <span key={i}>{i === 1 ? <><span className="scribble">{l}</span></> : l}{i === 0 && <br />}</span>
                   ))}
                 </h2>
               </div>
               <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(18,18,18,0.6)" }}>
-                {whatWeDoPage.process.sub}
+                {page.process.sub}
               </p>
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="process-grid">
-              {whatWeDoPage.process.steps.map((s) => (
+              {page.process.steps.map((s) => (
                 <div key={s.num} className="card-lift" style={{
                   background: "#FFFFFF", borderRadius: 14, padding: 28,
                   minHeight: 280, display: "flex", flexDirection: "column", justifyContent: "space-between",
@@ -173,18 +177,18 @@ export default function WhatWeDoPage() {
           <div className="max-w-[1240px] mx-auto px-8">
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "end", marginBottom: 56 }} className="path-head">
               <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{whatWeDoPage.learningPath.eyebrow}</p>
-                <h2 className="h-section">{whatWeDoPage.learningPath.heading.split("\n").map((l, i) => (
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{page.learningPath.eyebrow}</p>
+                <h2 className="h-section">{page.learningPath.heading.split("\n").map((l, i) => (
                   <span key={i}>{i === 1 ? <span style={{ color: "#8A0F14" }}>{l}</span> : l}{i === 0 && <br />}</span>
                 ))}</h2>
               </div>
               <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(245,240,234,0.65)" }}>
-                {whatWeDoPage.learningPath.sub}
+                {page.learningPath.sub}
               </p>
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 2 }} className="path-steps">
-              {whatWeDoPage.learningPath.steps.map((s, i) => (
+              {page.learningPath.steps.map((s, i) => (
                 <div key={s.num} style={{
                   padding: "32px 28px",
                   background: i % 2 === 0 ? "rgba(245,240,234,0.04)" : "rgba(245,240,234,0.02)",
@@ -201,11 +205,11 @@ export default function WhatWeDoPage() {
             </div>
 
             <div style={{ marginTop: 48, display: "flex", gap: 12, flexWrap: "wrap" }}>
-              <Link href={whatWeDoPage.learningPath.cta1.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#8A0F14", color: "#F5F0EA" }}>
-                {whatWeDoPage.learningPath.cta1.text}
+              <Link href={page.learningPath.cta1.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#8A0F14", color: "#F5F0EA" }}>
+                {page.learningPath.cta1.text}
               </Link>
-              <Link href={whatWeDoPage.learningPath.cta2.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border" style={{ color: "#F5F0EA", borderColor: "rgba(245,240,234,0.3)" }}>
-                {whatWeDoPage.learningPath.cta2.text}
+              <Link href={page.learningPath.cta2.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border" style={{ color: "#F5F0EA", borderColor: "rgba(245,240,234,0.3)" }}>
+                {page.learningPath.cta2.text}
               </Link>
             </div>
           </div>
@@ -218,13 +222,17 @@ export default function WhatWeDoPage() {
         {/* Who we work with */}
         <section style={{ background: "#F5F0EA", padding: "96px 0", borderTop: "1px solid rgba(18,18,18,0.08)" }}>
           <div className="max-w-[1240px] mx-auto px-8">
-            <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>▸ Who we work with</p>
+            <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>
+              {locale === "en" ? "▸ Who we work with" : "▸ เราทำงานกับใคร"}
+            </p>
             <h2 className="h-section" style={{ marginBottom: 48, maxWidth: 680 }}>
-              Programs for <span className="scribble">every context</span>.
+              {locale === "en"
+                ? <>Programs for <span className="scribble">every context</span>.</>
+                : <>โปรแกรมสำหรับ<span className="scribble">ทุกบริบท</span></>}
             </h2>
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="audiences-grid">
-              {audienceCards.map((a) => (
+              {cards.map((a) => (
                 <div key={a.label} className="card-lift" style={{
                   background: "#FFFFFF", borderRadius: 14, padding: 28,
                   display: "flex", flexDirection: "column",

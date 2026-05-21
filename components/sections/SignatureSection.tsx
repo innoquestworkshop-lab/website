@@ -1,8 +1,13 @@
+"use client";
+
 import Image from "next/image";
 import { signatureSection } from "@/data/signature";
 import { capitalMindsYearsStat, capitalMindsStudentsStat } from "@/data/stats";
+import { useLocale } from "@/components/LanguageProvider";
 
 export function SignatureSection() {
+  const { locale } = useLocale();
+  const ss = signatureSection[locale];
   return (
     <section style={{ background: "#121212", color: "#F5F0EA", paddingTop: 96, paddingBottom: 96 }} className="relative overflow-hidden dot-bg">
       {/* Atmospheric glow — top right */}
@@ -27,12 +32,12 @@ export function SignatureSection() {
             <span style={{
               fontSize: 10, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.12em",
               color: "#8A0F14", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace",
-            }}>{signatureSection.label}</span>
+            }}>{ss.label}</span>
           </div>
           <span style={{
             fontSize: 10, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.1em",
             color: "rgba(245,240,234,0.3)", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace",
-          }}>{signatureSection.eyebrow}</span>
+          }}>{ss.eyebrow}</span>
         </div>
 
         {/* HEADLINE — 3-tier typographic statement */}
@@ -42,19 +47,19 @@ export function SignatureSection() {
             color: "rgba(245,240,234,0.28)", letterSpacing: "-0.01em", lineHeight: 1,
             marginBottom: 6,
           }}>
-            The one and only
+            {ss.headingLine1}
           </div>
           <div style={{
             fontSize: "clamp(32px, 4.4vw, 60px)", fontWeight: 500,
             letterSpacing: "-0.04em", lineHeight: 0.93, color: "#F5F0EA",
           }}>
-            Real-Time Business Simulation
+            {ss.headingLine2}
           </div>
           <div style={{
             fontSize: "clamp(32px, 4.4vw, 60px)", fontWeight: 500,
             letterSpacing: "-0.04em", lineHeight: 0.93, color: "#8A0F14",
           }}>
-            Built for Teaching.
+            {ss.headingLine3}
           </div>
         </div>
 
@@ -70,15 +75,15 @@ export function SignatureSection() {
               fontSize: "clamp(17px, 1.7vw, 20px)", lineHeight: 1.55,
               color: "rgba(245,240,234,0.5)", fontStyle: "italic", marginBottom: 24,
             }}>
-              &ldquo;{signatureSection.sub}&rdquo;
+              &ldquo;{ss.sub}&rdquo;
             </p>
             <p style={{ fontSize: 15, lineHeight: 1.85, color: "rgba(245,240,234,0.65)", maxWidth: 560 }}>
-              {signatureSection.body}
+              {ss.body}
             </p>
 
             {/* Pill tags */}
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 36 }}>
-              {[signatureSection.pill1, signatureSection.pill2, signatureSection.pill3].map((p) => (
+              {[ss.pill1, ss.pill2, ss.pill3].map((p) => (
                 <span key={p} className="pill-tag" style={{
                   border: "1px solid rgba(245,240,234,0.2)",
                   color: "rgba(245,240,234,0.55)",
@@ -112,7 +117,7 @@ export function SignatureSection() {
               }} />
               <div style={{ borderRadius: 12, overflow: "hidden", position: "relative", height: 320 }}>
                 <Image
-                  src={signatureSection.img}
+                  src={ss.img}
                   alt="Capital Minds simulation"
                   fill
                   style={{ objectFit: "cover" }}

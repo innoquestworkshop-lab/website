@@ -3,8 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
-import { programs as allPrograms } from "@/data/programs";
+import { programs } from "@/data/programs";
 import { stats, satisfactionNote, studentsNote } from "@/data/stats";
+import { useLocale } from "@/components/LanguageProvider";
 
 function useCountUp(to: number, active: boolean, duration = 1500) {
   const [val, setVal] = useState(0);
@@ -91,17 +92,6 @@ const iconMap: Record<string, React.ComponentType<{ color: string }>> = {
   "capital-minds": LeadershipIcon,
 };
 
-const featuredProgram = allPrograms.find((p) => p.featured) ?? allPrograms[0];
-const listPrograms = allPrograms
-  .filter((p) => !p.featured)
-  .map((p) => ({
-    name: p.name,
-    dur: p.duration,
-    ages: p.ages,
-    Icon: iconMap[p.slug] ?? CreativeIcon,
-    href: `/programs/${p.slug}`,
-    comingSoon: p.comingSoon ?? false,
-  }));
 
 function PillTag({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
   return (
@@ -115,6 +105,20 @@ function PillTag({ children, style }: { children: React.ReactNode; style?: React
 }
 
 export function ProgramsSection() {
+  const { locale } = useLocale();
+  const allPrograms = programs[locale];
+  const featuredProgram = allPrograms.find((p) => p.featured) ?? allPrograms[0];
+  const listPrograms = allPrograms
+    .filter((p) => !p.featured)
+    .map((p) => ({
+      name: p.name,
+      dur: p.duration,
+      ages: p.ages,
+      Icon: iconMap[p.slug] ?? CreativeIcon,
+      href: `/programs/${p.slug}`,
+      comingSoon: p.comingSoon ?? false,
+    }));
+  const statsL = stats[locale];
   const [sectionRef, inView] = useReveal(0.1);
 
   return (
@@ -131,14 +135,13 @@ export function ProgramsSection() {
               className="text-[11px] font-medium uppercase tracking-[0.14em]"
               style={{ color: "#8A0F14", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
             >
-              ▸ Programs
+              {locale === "en" ? "▸ Programs" : "▸ โปรแกรม"}
             </p>
             <h2
               className="mt-[18px] font-medium leading-[1.05]"
               style={{ fontSize: "clamp(34px, 4.4vw, 56px)", letterSpacing: "-0.03em" }}
             >
-              Short, long, or{" "}
-              <span className="scribble">fully custom</span>.
+              {locale === "en" ? <>Short, long, or{" "}<span className="scribble">fully custom</span>.</> : <>สั้น ยาว หรือ <span className="scribble">ออกแบบเอง</span>ทั้งหมด</>}
             </h2>
           </div>
           <div
@@ -146,8 +149,9 @@ export function ProgramsSection() {
             style={{ transitionDelay: "120ms" }}
           >
             <p className="text-[17px] leading-[1.55]" style={{ color: "rgba(18,18,18,0.6)", maxWidth: 480 }}>
-              From a single-day spark to a semester-long transformation —
-              built around your goals.
+              {locale === "en"
+                ? "From a single-day spark to a semester-long transformation — built around your goals."
+                : "จากประกายในวันเดียวสู่การเปลี่ยนแปลงยาวหนึ่งภาคเรียน — สร้างรอบเป้าหมายของคุณ"}
             </p>
           </div>
         </div>
@@ -177,7 +181,7 @@ export function ProgramsSection() {
               style={{ top: -100, right: -100, width: 320, height: 320, background: "#8A0F14", opacity: 0.18, filter: "blur(2px)" }}
             />
             <div className="relative z-10">
-              <PillTag style={{ background: "#8A0F14", color: "#F5F0EA" }}>★ Most popular</PillTag>
+              <PillTag style={{ background: "#8A0F14", color: "#F5F0EA" }}>{locale === "en" ? "★ Most popular" : "★ ยอดนิยมที่สุด"}</PillTag>
               <h3
                 className="mt-5 font-medium leading-[1.1]"
                 style={{ fontSize: "clamp(28px, 3.4vw, 44px)", letterSpacing: "-0.025em", maxWidth: 460 }}
@@ -197,7 +201,7 @@ export function ProgramsSection() {
                 className="mt-[22px] inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full transition-all active:scale-[0.97]"
                 style={{ background: "#8A0F14", color: "#F5F0EA" }}
               >
-                Explore program <ArrowIcon />
+                {locale === "en" ? "Explore program" : "สำรวจโปรแกรม"} <ArrowIcon />
               </Link>
             </div>
           </div>
@@ -211,16 +215,16 @@ export function ProgramsSection() {
               className="text-[11px] uppercase tracking-[0.14em]"
               style={{ color: "rgba(18,18,18,0.6)", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
             >
-              Satisfaction score
+              {locale === "en" ? "Satisfaction score" : "คะแนนความพึงพอใจ"}
             </p>
             <div
               className="font-medium leading-none tabular-nums"
               style={{ fontSize: "clamp(64px, 7vw, 104px)", color: "#8A0F14", letterSpacing: "-0.04em" }}
             >
-              <CountUp to={stats.find(s => s.label === "Participants Satisfaction")?.n ?? 96} suffix="%" />
+              <CountUp to={stats.en.find(s => s.label === "Participants Satisfaction")?.n ?? 96} suffix="%" />
             </div>
             <p className="text-[14px] leading-[1.7]" style={{ color: "rgba(18,18,18,0.6)", maxWidth: 280 }}>
-              {satisfactionNote}
+              {satisfactionNote[locale]}
             </p>
             {/* Spinning badge */}
             <svg
@@ -257,16 +261,16 @@ export function ProgramsSection() {
               className="text-[11px] uppercase tracking-[0.14em]"
               style={{ color: "rgba(18,18,18,0.6)", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
             >
-              Students trained
+              {locale === "en" ? "Students trained" : "นักเรียนที่ฝึกอบรม"}
             </p>
             <div
               className="font-medium leading-none"
               style={{ fontSize: "clamp(64px, 7vw, 104px)", color: "#8A0F14", letterSpacing: "-0.04em" }}
             >
-              <CountUp to={stats.find(s => s.label === "Students trained")?.n ?? 400} suffix="+" />
+              <CountUp to={stats.en.find(s => s.label === "Students trained")?.n ?? 400} suffix="+" />
             </div>
             <p className="text-[14px] leading-[1.7]" style={{ color: "rgba(18,18,18,0.6)", maxWidth: 280 }}>
-              {studentsNote}
+              {studentsNote[locale]}
             </p>
           </div>
         </div>
@@ -309,7 +313,7 @@ export function ProgramsSection() {
                     className="inline-block mt-[6px] px-[8px] py-[3px] rounded-full text-[10px] font-medium uppercase tracking-[0.08em]"
                     style={{ background: "#8A0F14", color: "#F5F0EA", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
                   >
-                    Coming soon
+                    {locale === "en" ? "Coming soon" : "เร็วๆ นี้"}
                   </span>
                 )}
               </div>
@@ -332,20 +336,20 @@ export function ProgramsSection() {
               className="text-[11px] uppercase tracking-[0.14em]"
               style={{ color: "rgba(245,240,234,0.6)", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
             >
-              Want something personalized?
+              {locale === "en" ? "Want something personalized?" : "ต้องการสิ่งที่ปรับตามความต้องการ?"}
             </p>
             <div>
               <h4
                 className="font-medium mb-[14px]"
                 style={{ fontSize: 17, color: "#F5F0EA" }}
               >
-                Design something custom with us.
+                {locale === "en" ? "Design something custom with us." : "ออกแบบสิ่งที่เฉพาะเจาะจงกับเรา"}
               </h4>
               <span
                 className="text-[13px] font-medium inline-flex items-center gap-[6px]"
                 style={{ color: "#8A0F14" }}
               >
-                Start a custom brief <ArrowIcon />
+                {locale === "en" ? "Start a custom brief" : "เริ่มบรีฟเฉพาะ"} <ArrowIcon />
               </span>
             </div>
           </Link>

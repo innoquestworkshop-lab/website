@@ -6,6 +6,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
 import { team, teamPage, typeConfig } from "@/data/team";
+import { getLocale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   title: "Meet the Team | InnoQuest",
@@ -26,7 +27,9 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
 };
 
-export default function OurPeoplePage() {
+export default async function OurPeoplePage() {
+  const locale = await getLocale();
+  const page = teamPage[locale];
   return (
     <>
       <Navbar />
@@ -43,13 +46,12 @@ export default function OurPeoplePage() {
           <div className="max-w-[1240px] mx-auto px-8 relative z-10">
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1.1fr", gap: 64, alignItems: "center" }} className="team-hero-grid">
               <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>{teamPage.hero.eyebrow}</p>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>{page.hero.eyebrow}</p>
                 <h1 style={{ fontSize: "clamp(36px, 5vw, 68px)", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05 }}>
-                  The people behind{" "}
-                  <span style={{ color: "#8A0F14" }}>InnoQuest.</span>
+                  {page.hero.heading}
                 </h1>
                 <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(245,240,234,0.7)", maxWidth: 480, marginTop: 24 }}>
-                  {teamPage.hero.sub}
+                  {page.hero.sub}
                 </p>
               </div>
               <div>
@@ -72,9 +74,13 @@ export default function OurPeoplePage() {
         {/* Team grid */}
         {team.length > 0 && <section style={{ background: "#F5F0EA", padding: "96px 0" }}>
           <div className="max-w-[1240px] mx-auto px-8">
-            <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>▸ The team</p>
+            <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>
+              {locale === "en" ? "▸ The team" : "▸ ทีมงาน"}
+            </p>
             <h2 className="h-section" style={{ marginBottom: 48 }}>
-              {team.length} humans, <span className="scribble">one mission</span>.
+              {locale === "en"
+                ? <>{team.length} humans, <span className="scribble">one mission</span>.</>
+                : <>{team.length} คน, <span className="scribble">ภารกิจเดียว</span></>}
             </h2>
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }} className="team-grid">
@@ -104,7 +110,7 @@ export default function OurPeoplePage() {
                         className="pill-tag"
                         style={{ background: tag.bg, color: tag.color, alignSelf: "flex-start", marginBottom: 2 }}
                       >
-                        {tag.label}
+                        {locale === "en" ? tag.label : tag.labelTh}
                       </span>
                       <h3 style={{ fontSize: 17, fontWeight: 500, letterSpacing: "-0.015em" }}>{member.name}</h3>
                       <p className="eyebrow" style={{ color: "rgba(18,18,18,0.5)", letterSpacing: "0.04em" }}>{member.role}</p>
@@ -141,20 +147,21 @@ export default function OurPeoplePage() {
                 style={{ top: -100, right: -100, width: 320, height: 320, background: "#8A0F14", opacity: 0.15, filter: "blur(2px)" }}
               />
               <div style={{ position: "relative", zIndex: 1 }}>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 16 }}>▸ Join us</p>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 16 }}>
+                  {locale === "en" ? "▸ Join us" : "▸ ร่วมกับเรา"}
+                </p>
                 <h3 style={{ fontSize: 36, fontWeight: 500, letterSpacing: "-0.02em", lineHeight: 1.1 }}>
-                  Want to facilitate<br />with us?
+                  {page.joinUs.heading.split("\n").map((l: string, i: number) => <span key={i}>{l}{i === 0 && <br />}</span>)}
                 </h3>
                 <p style={{ fontSize: 15, lineHeight: 1.65, color: "rgba(245,240,234,0.7)", marginTop: 18, maxWidth: 380 }}>
-                  We&apos;re always looking for passionate facilitators, speakers, and designers
-                  who believe in the power of learning through doing.
+                  {page.joinUs.body}
                 </p>
                 <div style={{ display: "flex", gap: 12, marginTop: 28, flexWrap: "wrap" }}>
-                  <Link href="/contact" style={{
+                  <Link href={page.joinUs.cta.href} style={{
                     display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 22px",
                     background: "#8A0F14", color: "#F5F0EA", borderRadius: 999, fontSize: 14, fontWeight: 500, textDecoration: "none",
                   }}>
-                    Get in touch →
+                    {page.joinUs.cta.text}
                   </Link>
                 </div>
               </div>

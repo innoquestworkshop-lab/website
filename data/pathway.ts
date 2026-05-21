@@ -1,10 +1,20 @@
 export const pathwayMeta = {
-  badge: "InnoQuest Core Curriculum",
-  heading: "The Entrepreneurial",
-  headingAccent: "Pathway.",
-  sub: "This is a structured journey through the full lifecycle of a business. Powered by our own digital simulation engine we deliver an exclusive standard of learning that cannot be matched. We guide students from their initial idea all the way to market dominance.",
-  sidebarHeading: "How it works",
-  sidebarBody: "Programs can be run independently as standalone sprints, or linked together into a long term deep dive.",
+  en: {
+    badge: "InnoQuest Core Curriculum",
+    heading: "The Entrepreneurial",
+    headingAccent: "Pathway.",
+    sub: "This is a structured journey through the full lifecycle of a business. Powered by our own digital simulation engine we deliver an exclusive standard of learning that cannot be matched. We guide students from their initial idea all the way to market dominance.",
+    sidebarHeading: "How it works",
+    sidebarBody: "Programs can be run independently as standalone sprints, or linked together into a long term deep dive.",
+  },
+  th: {
+    badge: "หลักสูตรหลัก InnoQuest",
+    heading: "เส้นทาง",
+    headingAccent: "ผู้ประกอบการ",
+    sub: "นี่คือการเดินทางที่มีโครงสร้างตลอดวงจรชีวิตของธุรกิจ ขับเคลื่อนโดยเอ็นจินจำลองดิจิทัลของเรา เรานำทางนักเรียนจากไอเดียเริ่มต้นไปจนถึงการครองตลาด",
+    sidebarHeading: "วิธีการทำงาน",
+    sidebarBody: "โปรแกรมสามารถดำเนินการอิสระเป็นสปรินต์เดี่ยว หรือเชื่อมต่อกันเป็นการสำรวจเชิงลึกระยะยาว",
+  },
 } as const;
 
 export type PathwayStage = {
@@ -26,15 +36,16 @@ export type PathwayStage = {
 
 import { programs } from "@/data/programs";
 
-const p = (slug: string) => programs.find((p) => p.slug === slug)!;
+const p = (slug: string, locale: "en" | "th" = "en") =>
+  programs[locale].find((prog) => prog.slug === slug)!;
 
-export const pathwayStages: PathwayStage[] = [
+const buildStages = (locale: "en" | "th"): PathwayStage[] => [
   {
     step: "01",
-    theme: "Ideation Phase",
-    name: p("the-change-lab").name,
-    subtitle: p("the-change-lab").tagline,
-    description: p("the-change-lab").description,
+    theme: locale === "en" ? "Ideation Phase" : "เฟสไอเดีย",
+    name: p("the-change-lab", locale).name,
+    subtitle: p("the-change-lab", locale).tagline,
+    description: p("the-change-lab", locale).description,
     status: "available",
     slug: "the-change-lab",
     details: { duration: p("the-change-lab").duration, ages: p("the-change-lab").ages },
@@ -47,10 +58,10 @@ export const pathwayStages: PathwayStage[] = [
   },
   {
     step: "02",
-    theme: "Validation Phase",
-    name: p("entrepreneur-in-innovation").name,
-    subtitle: p("entrepreneur-in-innovation").tagline,
-    description: p("entrepreneur-in-innovation").description,
+    theme: locale === "en" ? "Validation Phase" : "เฟสการตรวจสอบ",
+    name: p("entrepreneur-in-innovation", locale).name,
+    subtitle: p("entrepreneur-in-innovation", locale).tagline,
+    description: p("entrepreneur-in-innovation", locale).description,
     status: "available",
     slug: "entrepreneur-in-innovation",
     details: { duration: p("entrepreneur-in-innovation").duration, ages: p("entrepreneur-in-innovation").ages },
@@ -62,10 +73,10 @@ export const pathwayStages: PathwayStage[] = [
   },
   {
     step: "03",
-    theme: "Disruption Phase",
-    name: p("break-the-market").name,
-    subtitle: p("break-the-market").tagline,
-    description: p("break-the-market").description,
+    theme: locale === "en" ? "Disruption Phase" : "เฟสการเปลี่ยนแปลง",
+    name: p("break-the-market", locale).name,
+    subtitle: p("break-the-market", locale).tagline,
+    description: p("break-the-market", locale).description,
     status: "available",
     slug: "break-the-market",
     details: { duration: p("break-the-market").duration, ages: p("break-the-market").ages },
@@ -77,10 +88,10 @@ export const pathwayStages: PathwayStage[] = [
   },
   {
     step: "04",
-    theme: "Economics Phase",
-    name: p("capital-minds").name,
-    subtitle: p("capital-minds").tagline,
-    description: p("capital-minds").description,
+    theme: locale === "en" ? "Economics Phase" : "เฟสเศรษฐศาสตร์",
+    name: p("capital-minds", locale).name,
+    subtitle: p("capital-minds", locale).tagline,
+    description: p("capital-minds", locale).description,
     status: "available",
     slug: "capital-minds",
     details: { duration: p("capital-minds").duration, ages: p("capital-minds").ages },
@@ -92,10 +103,12 @@ export const pathwayStages: PathwayStage[] = [
   },
   {
     step: "05",
-    theme: "Scale Phase",
+    theme: locale === "en" ? "Scale Phase" : "เฟสการขยาย",
     name: "The Scale-Up Lab",
-    subtitle: "Venture Capital & Global Growth",
-    description: "Navigate series funding rounds, scaling complex operations, and global expansion in a high-stakes executive simulation.",
+    subtitle: locale === "en" ? "Venture Capital & Global Growth" : "เงินร่วมลงทุนและการเติบโตระดับโลก",
+    description: locale === "en"
+      ? "Navigate series funding rounds, scaling complex operations, and global expansion in a high-stakes executive simulation."
+      : "นำทางรอบการระดมทุน การขยายการดำเนินงานที่ซับซ้อน และการขยายไปสู่ระดับโลกในการจำลองบริหารสูง",
     status: "locked",
     slug: "#",
     details: { duration: "", ages: "" },
@@ -104,3 +117,8 @@ export const pathwayStages: PathwayStage[] = [
     imgCaption: "Encrypted Module",
   },
 ];
+
+export const pathwayStages: Record<"en" | "th", PathwayStage[]> = {
+  en: buildStages("en"),
+  th: buildStages("th"),
+};

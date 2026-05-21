@@ -1,26 +1,33 @@
-/** Global proof-points used across Hero, Programs, About, and Testimonials sections. */
-export const stats = [
-  { n: 400, suf: "+", label: "Students trained" },
-  { n: 100, suf: "+", label: "Coaching Hours" },
-  { n: 96, suf: "%", label: "Participants Satisfaction" },
-  { n: 100, suf: "%", label: "Institute Conversion Rate " },
+export const stats = {
+  en: [
+    { n: 400, suf: "+", label: "Students trained" },
+    { n: 100, suf: "+", label: "Coaching Hours" },
+    { n: 96,  suf: "%", label: "Participants Satisfaction" },
+    { n: 100, suf: "%", label: "Institute Conversion Rate" },
+  ],
+  th: [
+    { n: 400, suf: "+", label: "นักเรียนที่ฝึกอบรม" },
+    { n: 100, suf: "+", label: "ชั่วโมงโค้ชชิ่ง" },
+    { n: 96,  suf: "%", label: "ความพึงพอใจของผู้เข้าร่วม" },
+    { n: 100, suf: "%", label: "อัตราการเปลี่ยนใจสถาบัน" },
+  ],
+} as const;
 
-] as const;
+export const satisfactionNote = {
+  en: "of teachers say students returned to class more engaged.",
+  th: "ของครูที่กล่าวว่านักเรียนกลับสู่ชั้นเรียนด้วยการมีส่วนร่วมที่สูงขึ้น",
+} as const;
 
-/** Sub-copy for the satisfaction stat tile in ProgramsSection. */
-export const satisfactionNote =
-  "of teachers say students returned to class more engaged.";
+export const studentsNote = {
+  en: "across Thailand since 2024.",
+  th: "ทั่วไทย ตั้งแต่ปี 2024",
+} as const;
 
-/** Sub-copy for the students stat tile in ProgramsSection. */
-export const studentsNote =
-  "across Thailand since 2024.";
-
-/** Named stat for school partnerships — used on testimonials page. */
 export const schoolsStat = { n: 30, suf: "+", label: "Schools partnered" } as const;
+export const schoolsStatTh = { n: 30, suf: "+", label: "โรงเรียนที่เป็นพันธมิตร" } as const;
 
-/** Named stat for years running — used on testimonials page. */
 export const yearsRunningStat = { n: 2, suf: "+ yrs", label: "Running programs" } as const;
+export const yearsRunningStatTh = { n: 2, suf: "+ ปี", label: "ดำเนินโปรแกรม" } as const;
 
-/** Capital Minds stats — shown on What We Do page. Set to null to hide. */
 export const capitalMindsYearsStat: { n: string; suf: string; label: string } | null = null;
 export const capitalMindsStudentsStat: { n: string; suf: string; label: string } | null = null;

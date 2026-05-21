@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { IconMenu2, IconX, IconChevronDown } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import { navLinks } from "@/data/navigation";
+import { useLocale } from "@/components/LanguageProvider";
 
 
 export function Navbar() {
@@ -15,6 +16,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const { locale, toggle } = useLocale();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
@@ -57,7 +59,7 @@ export function Navbar() {
 
         {/* Desktop nav */}
         <ul className="hidden lg:flex items-center gap-1">
-          {navLinks.filter((link) => !link.highlight).map((link) => (
+          {navLinks[locale].filter((link) => !link.highlight).map((link) => (
             <li key={link.href} className="relative group">
               {link.dropdown ? (
                 <>
@@ -133,13 +135,26 @@ export function Navbar() {
 
         {/* CTA + mobile toggle */}
         <div className="flex items-center gap-3">
+          {/* Language toggle */}
+          <button
+            onClick={toggle}
+            className={cn(
+              "hidden lg:inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-[11px] font-medium uppercase tracking-[0.08em] border transition-colors",
+              scrolled || mobileOpen
+                ? "border-[rgba(18,18,18,0.2)] text-[#121212] hover:bg-[#121212] hover:text-white"
+                : "border-[rgba(245,240,234,0.3)] text-[#F5F0EA] hover:bg-[rgba(245,240,234,0.15)]"
+            )}
+            style={{ fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
+          >
+            {locale === "en" ? "TH" : "EN"}
+          </button>
           <Link
             href="/contact"
             className="hidden lg:inline-flex items-center px-5 py-2 bg-[#8A0F14] text-white text-sm font-medium rounded-full transition-transform active:scale-[0.98] hover:bg-[#6B0A0E]"
           >
-            Talk to us →
+            {locale === "en" ? "Talk to us →" : "ติดต่อเรา →"}
           </Link>
-          {navLinks.filter((link) => link.highlight).map((link) => (
+          {navLinks[locale].filter((link) => link.highlight).map((link) => (
             <a
               key={link.href}
               href={link.href}
@@ -151,6 +166,13 @@ export function Navbar() {
               {link.label}
             </a>
           ))}
+          <button
+            onClick={toggle}
+            className={cn("lg:hidden px-2 py-1 rounded text-[11px] font-medium uppercase tracking-[0.08em] transition-colors", scrolled || mobileOpen ? "text-[#121212]" : "text-[#F5F0EA]")}
+            style={{ fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
+          >
+            {locale === "en" ? "TH" : "EN"}
+          </button>
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className={cn("lg:hidden p-2 transition-colors", scrolled || mobileOpen ? "text-[#121212]" : "text-[#F5F0EA]")}
@@ -164,7 +186,7 @@ export function Navbar() {
       {/* Mobile overlay */}
       {mobileOpen && (
         <div className="lg:hidden bg-white border-t border-gray-100 px-8 py-6 space-y-1">
-          {navLinks.map((link) => (
+          {navLinks[locale].map((link) => (
             <div key={link.href}>
               {link.dropdown ? (
                 <>
@@ -209,7 +231,7 @@ export function Navbar() {
             </div>
           ))}
           <div className="pt-4 flex flex-col gap-3">
-            {navLinks.filter((link) => link.highlight).map((link) => (
+            {navLinks[locale].filter((link) => link.highlight).map((link) => (
               <a
                 key={link.href}
                 href={link.href}
@@ -225,7 +247,7 @@ export function Navbar() {
               href="/contact"
               className="block text-center py-3 bg-[#8A0F14] text-white text-sm font-medium rounded-full"
             >
-              Talk to us →
+              {locale === "en" ? "Talk to us →" : "ติดต่อเรา →"}
             </Link>
           </div>
         </div>
