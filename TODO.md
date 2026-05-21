@@ -1,5 +1,10 @@
 # InnoQuest Website — Tweak Checklist
 
+## Pending
+- [ ] Unhide Ecosystem / Partners section on landing page (`app/page.tsx` line 46)
+
+
+
 Work through this page by page. Check off items as you finalize them.
 
 ---
