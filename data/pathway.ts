@@ -19,6 +19,9 @@ export type PathwayStage = {
   engineFeature: string;
   imgCaption: string;
   heroImg?: string;
+  heroImgPosition?: string;
+  heroImgScale?: number;
+  heroImgBlur?: number;
 };
 
 // Single source of truth: pathway pulls heroImg from program data files
