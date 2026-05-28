@@ -17,10 +17,10 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: {
     template: "%s — InnoQuest | Youth Learning Programs Thailand",
-    default: "InnoQuest | Youth Learning Programs Thailand",
+    default: "InnoQuest | Digital Gamified Education Solution",
   },
   description:
-    "Experiential learning programs for schools, corporates & institutions — science-backed, play-driven, designed for the next generation.",
+    "We design gamified, real-world simulations and custom learning programs for schools and corporate youth initiatives — play-driven experiences with measurable outcomes.",
   metadataBase: new URL("https://innoquest.tech"),
   openGraph: {
     siteName: "InnoQuest",
@@ -50,7 +50,8 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <head>
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`} />
-        <script dangerouslySetInnerHTML={{ __html: `
+        <script dangerouslySetInnerHTML={{
+          __html: `
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());

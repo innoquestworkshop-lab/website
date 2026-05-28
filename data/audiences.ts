@@ -15,7 +15,7 @@ export const audienceTabs: AudienceTab[] = [
     id: "student",
     tab: "For Students",
     title: "Hey, Students!",
-    body: "Tired of sitting and listening? Us too. Come build, create, and solve real challenges alongside other curious kids.No textbooks.No boring lectures.  Just you, your ideas, and your team.",
+    body: "Tired of sitting and listening? Us too. Come build, create, and solve real challenges alongside other curious kids.No textbooks.No boring lectures. Just you, your ideas, and your team.",
     link: { text: "See student programs", href: "/programs" },
     bullets: ["Real challenges", "Team-based", "No textbooks"],
     imgCaption:
@@ -59,6 +59,12 @@ export const audienceCards = [
     body: "Turn your CSR budget into a story worth telling. We handle everything — your team shows up, the kids leave with real skills.",
     href: "/corporates",
     cta: "Learn more",
+  },
+  {
+    label: "Parents & Families",
+    body: "Give your child the skills that formal education doesn't prioritise — creativity, confidence, and critical thinking.",
+    href: "/programs",
+    cta: "See programs",
   },
   {
     label: "Students",

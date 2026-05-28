@@ -19,7 +19,7 @@ export const site = {
     instagram: "innoquest_workshop",
     tiktok: "innoquest.labs",
     line: "@900vomzh",
-    facebook: "https://www.facebook.com/people/InnoQuest/61568919342332/",
+    facebook: "InnoQuest",
   },
   seo: {
     titleSuffix: "| InnoQuest",

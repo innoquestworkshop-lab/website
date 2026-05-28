@@ -30,11 +30,11 @@ export const teamPage = {
 } as const;
 
 export const team: TeamMember[] = [
-  /*{
+  {
     id: "founder",
     name: "Founder & CEO",
     role: "InnoQuest",
     type: "speaker",
     bio: "A youth educator and entrepreneur passionate about bridging the gap between traditional schooling and real-world skills. Built InnoQuest from a single workshop into Thailand's leading youth experiential learning company.",
-  },*/
+  },
 ];
