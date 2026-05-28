@@ -181,8 +181,8 @@ export function HeroSection() {
             </div>
             <div className="relative overflow-hidden rounded-lg" style={{ height: 320 }}>
               <Image
-                src="/images/events/entre2-shannon-1.jpg"
-                alt="Students at Entre 2 workshop"
+                src="/images/events/price-war-026.jpg"
+                alt="Students at Price War workshop"
                 fill
                 className="object-cover"
               />
