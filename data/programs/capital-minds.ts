@@ -3,6 +3,9 @@ import type { Program } from "@/data/programs";
 export const capitalMinds: Program = {
   slug: "capital-minds",
   name: "Capital Minds",
+  heroImg: "/images/events/price-war-149.jpg",
+  heroImgPosition: "center 50%",
+  heroImgScale: 1.15,
   tagline: "Price it. Trade it. Win it. Finance made real.",
   duration: "1–2 days",
   ages: "12–18",

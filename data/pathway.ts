@@ -93,6 +93,7 @@ export const pathwayStages: PathwayStage[] = [
     slug: "#",
     details: { duration: "TBA", ages: "16-18" },
     engineFeature: "Global Expansion Engine",
+    heroImg: "/logos/logo-transparent.png",
     imgCaption: "Encrypted Module",
   },
 ];

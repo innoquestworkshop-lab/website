@@ -3,7 +3,8 @@ import type { Program } from "@/data/programs";
 export const breakTheMarket: Program = {
   slug: "break-the-market",
   name: "Break the Market",
-  heroImg: "/images/events/break-the-market-5446.jpg",
+  heroImg: "/images/events/break-the-market-5758.jpg",
+  heroImgPosition: "center 73%",
   tagline: "Disrupt an industry. Build something that doesn't exist yet.",
   duration: "1–2 days",
   ages: "14–18",

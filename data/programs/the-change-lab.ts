@@ -3,6 +3,8 @@ import type { Program } from "@/data/programs";
 export const theChangeLab: Program = {
   slug: "the-change-lab",
   name: "The Change Lab",
+  heroImg: "/images/events/change-lab-9142.jpg",
+  heroImgBlur: 1,
   comingSoon: true,
   tagline: "Real-world ESG challenges. Hands-on solutions. Future-ready minds.",
   duration: "1–3 days",
