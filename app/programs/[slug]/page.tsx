@@ -75,7 +75,7 @@ export default async function ProgramPage({
                     display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 22px",
                     background: "#8A0F14", color: "#F5F0EA", borderRadius: 999, fontSize: 14, fontWeight: 500, textDecoration: "none",
                   }}>
-                    {locale === "en" ? "Enquire now →" : "สอบถามเลย →"}
+                    {locale === "en" ? "Enquire now →" : "สอบถามข้อมูล →"}
                   </Link>
                 </div>
               </div>
@@ -124,7 +124,7 @@ export default async function ProgramPage({
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "start" }} className="about-prog-grid">
               <div>
                 <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{locale === "en" ? "▸ About this program" : "▸ เกี่ยวกับโปรแกรมนี้"}</p>
-                <h2 className="h-section">{locale === "en" ? <>What it&apos;s all<br />about.</> : "โปรแกรมนี้ทำอะไรบ้าง"}</h2>
+                <h2 className="h-section">{locale === "en" ? <>What it&apos;s all<br />about.</> : "รายละเอียดโปรแกรม"}</h2>
               </div>
               <p style={{ fontSize: 17, lineHeight: 1.7, color: "rgba(18,18,18,0.75)" }}>
                 {program.description}
@@ -137,7 +137,7 @@ export default async function ProgramPage({
         {/* Learning outcomes */}
         <section style={{ background: "#F5F0EA", padding: "96px 0" }}>
           <div className="max-w-[1240px] mx-auto px-8">
-            <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{locale === "en" ? "▸ What students gain" : "▸ สิ่งที่นักเรียนจะได้"}</p>
+            <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{locale === "en" ? "▸ What students gain" : "▸ สิ่งที่นักเรียนจะได้รับ"}</p>
             <h2 className="h-section" style={{ marginBottom: 48 }}>{locale === "en" ? "Learning outcomes." : "ผลลัพธ์การเรียนรู้"}</h2>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="outcomes-grid">
               {program.outcomes.map((outcome) => (
@@ -190,7 +190,7 @@ export default async function ProgramPage({
         <section style={{ background: "#F5F0EA", padding: "96px 0" }}>
           <div className="max-w-[1240px] mx-auto px-8">
             <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{locale === "en" ? "▸ Related programs" : "▸ โปรแกรมอื่นๆ"}</p>
-            <h2 className="h-section" style={{ marginBottom: 40 }}>{locale === "en" ? "More to explore." : "ดูโปรแกรมอื่นต่อ"}</h2>
+            <h2 className="h-section" style={{ marginBottom: 40 }}>{locale === "en" ? "More to explore." : "โปรแกรมที่เกี่ยวข้อง"}</h2>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="related-grid">
               {related.map((p) => (
                 <Link key={p.slug} href={`/programs/${p.slug}`} className="card-lift" style={{

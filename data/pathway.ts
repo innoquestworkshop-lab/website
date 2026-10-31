@@ -11,9 +11,9 @@ export const pathwayMeta = {
     badge: "หลักสูตรหลัก InnoQuest",
     heading: "เส้นทาง",
     headingAccent: "ผู้ประกอบการ",
-    sub: "เส้นทางที่วางไว้ครบทุกช่วงชีวิตของธุรกิจ ในเกมจำลองดิจิทัลที่เราสร้างเอง ทุกการกระทำของนักเรียนจะกลายเป็นข้อมูลจริงและเห็นผลทันที แล้วเรานำข้อมูลนั้นมาคุยกันต่อในช่วงสรุปบทเรียน เราพานักเรียนไปตั้งแต่ไอเดียแรกจนถึงการครองตลาด",
+    sub: "เส้นทางการเรียนรู้ที่ครอบคลุมทุกช่วงของวงจรธุรกิจ ภายในเกมจำลองธุรกิจแบบดิจิทัลที่ InnoQuest พัฒนาขึ้น ทุกการกระทำของนักเรียนจะสร้างข้อมูลจริงและเห็นผลในทันที ข้อมูลดังกล่าวจะนำมาทบทวนร่วมกันในช่วงสรุปบทเรียน InnoQuest ส่งเสริมนักเรียนตั้งแต่แนวคิดแรกเริ่มจนถึงการเป็นผู้นำตลาด",
     sidebarHeading: "รูปแบบโปรแกรม",
-    sidebarBody: "จัดแต่ละโปรแกรมเป็นสปรินต์เดี่ยวๆ ก็ได้ หรือต่อกันเป็นคอร์สเจาะลึกระยะยาวก็ได้",
+    sidebarBody: "แต่ละโปรแกรมจัดเป็นกิจกรรมระยะสั้นแยกกัน หรือเชื่อมต่อเป็นการเรียนรู้เชิงลึกระยะยาวได้",
   },
 } as const;
 
@@ -42,9 +42,9 @@ const p = (slug: string, locale: "en" | "th" = "en") =>
 const buildStages = (locale: "en" | "th"): PathwayStage[] => [
   {
     step: "01",
-    theme: locale === "en" ? "Ideation Phase" : "เฟสไอเดีย",
+    theme: locale === "en" ? "Ideation Phase" : "ระยะสร้างแนวคิด",
     name: p("the-change-lab", locale).name,
-    subtitle: locale === "en" ? "Pain Point Discovery & Systems Thinking" : "ค้นหา Pain Point และการคิดเชิงระบบ",
+    subtitle: locale === "en" ? "Pain Point Discovery & Systems Thinking" : "การค้นหาปัญหาสำคัญและการคิดเชิงระบบ",
     description: p("the-change-lab", locale).description,
     status: "available",
     slug: p("the-change-lab", locale).slug,
@@ -55,7 +55,7 @@ const buildStages = (locale: "en" | "th"): PathwayStage[] => [
   },
   {
     step: "02",
-    theme: locale === "en" ? "Validation Phase" : "เฟสทดสอบตลาด",
+    theme: locale === "en" ? "Validation Phase" : "ระยะทดสอบตลาด",
     name: p("entrepreneur-in-innovation", locale).name,
     subtitle: locale === "en" ? "MVP & Market Validation" : "MVP และการทดสอบตลาด",
     description: p("entrepreneur-in-innovation", locale).description,
@@ -68,7 +68,7 @@ const buildStages = (locale: "en" | "th"): PathwayStage[] => [
   },
   {
     step: "03",
-    theme: locale === "en" ? "Disruption Phase" : "เฟสดิสรัปต์",
+    theme: locale === "en" ? "Disruption Phase" : "ระยะพลิกโฉมตลาด",
     name: p("break-the-market", locale).name,
     subtitle: locale === "en" ? "GTM & Competitive Strategy" : "GTM และกลยุทธ์การแข่งขัน",
     description: p("break-the-market", locale).description,
@@ -81,7 +81,7 @@ const buildStages = (locale: "en" | "th"): PathwayStage[] => [
   },
   {
     step: "04",
-    theme: locale === "en" ? "Economics Phase" : "เฟสเศรษฐศาสตร์",
+    theme: locale === "en" ? "Economics Phase" : "ระยะเศรษฐศาสตร์",
     name: p("capital-minds", locale).name,
     subtitle: locale === "en" ? "Pricing & Unit Economics" : "การตั้งราคาและ Unit Economics",
     description: p("capital-minds", locale).description,
@@ -94,12 +94,12 @@ const buildStages = (locale: "en" | "th"): PathwayStage[] => [
   },
   {
     step: "05",
-    theme: locale === "en" ? "Scale Phase" : "เฟสขยายธุรกิจ",
+    theme: locale === "en" ? "Scale Phase" : "ระยะขยายธุรกิจ",
     name: "The Scale-Up Lab",
     subtitle: locale === "en" ? "Venture Capital & Global Growth" : "เงินร่วมลงทุนและการเติบโตระดับโลก",
     description: locale === "en"
       ? "Work through series funding rounds, complex operations at scale, and global expansion in a high-stakes executive simulation."
-      : "รับมือการระดมทุนแต่ละซีรีส์ การบริหารงานซับซ้อนในสเกลใหญ่ และการบุกตลาดโลก ในเกมจำลองระดับผู้บริหารที่เดิมพันสูง",
+      : "การระดมทุนในแต่ละรอบ การบริหารงานที่ซับซ้อนในระดับขนาดใหญ่ และการขยายสู่ตลาดโลก ในเกมจำลองธุรกิจระดับผู้บริหาร",
     status: "locked",
     slug: "#",
     details: { duration: "TBA", ages: "16-18" },

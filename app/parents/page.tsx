@@ -90,7 +90,7 @@ export default async function ParentsPage() {
               <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(18,18,18,0.6)" }}>
                 {locale === "en"
                   ? "Every InnoQuest program builds skills that schools don't prioritise: creativity, resilience, and the confidence to back their own ideas."
-                  : "ทุกโปรแกรมของ InnoQuest ฝึกทักษะที่โรงเรียนไม่ค่อยเน้น ทั้งความคิดสร้างสรรค์ การล้มแล้วลุกได้ และความมั่นใจที่จะเชื่อในไอเดียของตัวเอง"}
+                  : "ทุกโปรแกรมของ InnoQuest ส่งเสริมทักษะเพิ่มเติมจากการเรียนในห้องเรียน ได้แก่ ความคิดสร้างสรรค์ ความสามารถในการรับมือกับอุปสรรค และความมั่นใจในแนวคิดของตนเอง"}
               </p>
             </div>
 

@@ -27,7 +27,7 @@ export const navLinks: Record<"en" | "th", NavItem[]> = {
     { label: "สิ่งที่เราทำ", href: "/what-we-do" },
     { label: "โปรแกรม", href: "/programs" },
     {
-      label: "สำหรับใคร",
+      label: "ผู้รับบริการ",
       href: "/schools",
       dropdown: [
         { label: "สำหรับผู้ปกครอง", href: "/parents" },
@@ -35,9 +35,9 @@ export const navLinks: Record<"en" | "th", NavItem[]> = {
         { label: "องค์กรและ CSR", href: "/corporates" },
       ],
     },
-    { label: "รีวิว", href: "/testimonials" },
-    { label: "เล่นอินเทอร์แอคทีฟ", href: "https://interactive.innoquest.tech", external: true, highlight: true },
-    { label: "เกี่ยวกับ", href: "/about" },
+    { label: "เสียงจากผู้เข้าร่วม", href: "/testimonials" },
+    { label: "เกมอินเทอร์แอ็กทีฟ", href: "https://interactive.innoquest.tech", external: true, highlight: true },
+    { label: "เกี่ยวกับเรา", href: "/about" },
   ],
 };
 
@@ -78,11 +78,11 @@ export const footerCols = {
         { label: "สิ่งที่เราทำ", href: "/what-we-do" },
         { label: "บริการ", href: "/what-we-do#design" },
         { label: "โปรแกรม", href: "/programs" },
-        { label: "เส้นทาง", href: "/programs#pathway" },
+        { label: "เส้นทางการเรียนรู้", href: "/programs#pathway" },
       ],
     },
     {
-      h: "สำหรับใคร",
+      h: "ผู้รับบริการ",
       items: [
         { label: "สำหรับองค์กร", href: "/corporates" },
         { label: "สำหรับโรงเรียน", href: "/schools" },
@@ -95,8 +95,8 @@ export const footerCols = {
       items: [
         { label: "เกี่ยวกับเรา", href: "/about" },
         { label: "ทีมของเรา", href: "/about#team" },
-        { label: "รีวิว", href: "/testimonials" },
-        { label: "ติดต่อ", href: "/contact" },
+        { label: "เสียงจากผู้เข้าร่วม", href: "/testimonials" },
+        { label: "ติดต่อเรา", href: "/contact" },
       ],
     },
   ],

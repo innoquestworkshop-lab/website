@@ -149,10 +149,10 @@ export function Navbar() {
             {locale === "en" ? "TH" : "EN"}
           </button>
           <Link
-            href="/contact"
+            href="/signup"
             className="hidden lg:inline-flex items-center px-5 py-2 bg-[#8A0F14] text-white text-sm font-medium rounded-full transition-transform active:scale-[0.98] hover:bg-[#6B0A0E]"
           >
-            {locale === "en" ? "Talk to us →" : "คุยกับเรา →"}
+            {locale === "en" ? "Sign up →" : "ลงทะเบียน →"}
           </Link>
           {navLinks[locale].filter((link) => link.highlight).map((link) => (
             <a
@@ -242,10 +242,10 @@ export function Navbar() {
               </a>
             ))}
             <Link
-              href="/contact"
+              href="/signup"
               className="block text-center py-3 bg-[#8A0F14] text-white text-sm font-medium rounded-full"
             >
-              {locale === "en" ? "Talk to us →" : "คุยกับเรา →"}
+              {locale === "en" ? "Sign up →" : "ลงทะเบียน →"}
             </Link>
           </div>
         </div>

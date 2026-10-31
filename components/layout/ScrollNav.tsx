@@ -7,13 +7,13 @@ import { cn } from "@/lib/utils";
 import { useLocale } from "@/components/LanguageProvider";
 
 const sections = [
-  { id: "section-reviews", label: { en: "Reviews", th: "รีวิว" } },
+  { id: "section-reviews", label: { en: "Reviews", th: "เสียงจากผู้เข้าร่วม" } },
   { id: "section-our-edge", label: { en: "Our edge", th: "จุดเด่น" } },
-  { id: "section-method", label: { en: "Our method", th: "วิธีของเรา" } },
-  { id: "section-who-we-serve", label: { en: "Who we serve", th: "สำหรับใคร" } },
+  { id: "section-method", label: { en: "Our method", th: "วิธีการของเรา" } },
+  { id: "section-who-we-serve", label: { en: "Who we serve", th: "ผู้รับบริการ" } },
   { id: "section-experiences", label: { en: "Experiences", th: "โปรแกรม" } },
   { id: "section-journey", label: { en: "How it works", th: "ขั้นตอน" } },
-  { id: "section-cta", label: { en: "Get started", th: "เริ่มเลย" } },
+  { id: "section-cta", label: { en: "Get started", th: "เริ่มต้น" } },
 ];
 
 export function ScrollNav() {
@@ -94,7 +94,7 @@ export function ScrollNav() {
           href="/contact"
           className="hidden sm:inline-flex shrink-0 items-center px-4 py-1.5 bg-[#8A0F14] text-white text-xs font-medium rounded-full hover:bg-[#D63B34] transition-colors"
         >
-          {locale === "en" ? "Talk to us →" : "คุยกับเรา →"}
+          {locale === "en" ? "Talk to us →" : "ติดต่อเรา →"}
         </Link>
       </div>
     </div>

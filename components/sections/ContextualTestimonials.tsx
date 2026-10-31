@@ -85,7 +85,7 @@ export function ContextualTestimonials({ audience, programSlug, limit = 3, label
         {label && (
           <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{label}</p>
         )}
-        <h2 className="h-section" style={{ marginBottom: 40 }}>{locale === "en" ? "What people say." : "คนที่เคยมาว่ายังไงบ้าง"}</h2>
+        <h2 className="h-section" style={{ marginBottom: 40 }}>{locale === "en" ? "What people say." : "ความคิดเห็นจากผู้เข้าร่วม"}</h2>
         <div
           className="ctx-testimonials-grid grid gap-4"
           style={{ gridTemplateColumns: `repeat(${Math.min(matched.length, 3)}, 1fr)` }}
@@ -145,7 +145,7 @@ export function ContextualTestimonials({ audience, programSlug, limit = 3, label
           ))}
         </div>
         <Link href="/testimonials" style={{ display: "inline-flex", marginTop: 28, color: "#8A0F14", fontWeight: 500, fontSize: 14, textDecoration: "none" }}>
-          {locale === "en" ? "Read all testimonials →" : "อ่านรีวิวทั้งหมด →"}
+          {locale === "en" ? "Read all testimonials →" : "ดูความคิดเห็นทั้งหมด →"}
         </Link>
       </div>
 

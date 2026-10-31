@@ -225,12 +225,12 @@ export default async function WhatWeDoPage() {
         <section style={{ background: "#F5F0EA", padding: "96px 0", borderTop: "1px solid rgba(18,18,18,0.08)" }}>
           <div className="max-w-[1240px] mx-auto px-8">
             <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>
-              {locale === "en" ? "▸ Who we work with" : "▸ เราทำงานกับใคร"}
+              {locale === "en" ? "▸ Who we work with" : "▸ กลุ่มผู้ร่วมงาน"}
             </p>
             <h2 className="h-section" style={{ marginBottom: 48, maxWidth: 680 }}>
               {locale === "en"
                 ? <>Programs for <span className="scribble">every audience</span>.</>
-                : <>โปรแกรมสำหรับ<span className="scribble">ทุกกลุ่ม</span></>}
+                : <>โปรแกรมสำหรับ<span className="scribble">ทุกกลุ่มเป้าหมาย</span></>}
             </h2>
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="audiences-grid">

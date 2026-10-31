@@ -15,10 +15,10 @@ export const journeySteps: Record<"en" | "th", JourneyStep[]> = {
     { label: "Long-term program",  state: "upcoming", iconKey: "growth" },
   ],
   th: [
-    { label: "โทรคุยโจทย์",     state: "done",     iconKey: "phone"  },
+    { label: "หารือความต้องการ",     state: "done",     iconKey: "phone"  },
     { label: "ออกแบบโปรแกรมเฉพาะ",  state: "done",     iconKey: "edit"   },
-    { label: "จัดโปรแกรมจริง",  state: "active",   iconKey: "bolt"   },
-    { label: "รายงานผลลัพธ์",  state: "upcoming", iconKey: "chart"  },
+    { label: "ดำเนินโปรแกรม",  state: "active",   iconKey: "bolt"   },
+    { label: "รายงานสรุปผลการดำเนินงาน",  state: "upcoming", iconKey: "chart"  },
     { label: "โปรแกรมระยะยาว", state: "upcoming", iconKey: "growth" },
   ],
 };
@@ -32,10 +32,10 @@ export const journeySection = {
     currentLabel: "You are here",
   },
   th: {
-    eyebrow: "▸ วิธีการทำงาน",
-    heading: "เส้นทางการเรียนรู้\nขององค์กรคุณ",
-    sub: "ตั้งแต่คุยกันครั้งแรกจนถึงการทำงานร่วมกันระยะยาว InnoQuest ดูแลให้ทุกขั้นตอน",
-    stepLabel: "ขั้นที่",
-    currentLabel: "คุณอยู่ที่นี่",
+    eyebrow: "▸ ขั้นตอนการดำเนินงาน",
+    heading: "เส้นทางการเรียนรู้\nขององค์กร",
+    sub: "ตั้งแต่การหารือครั้งแรกจนถึงความร่วมมือระยะยาว InnoQuest ดูแลทุกขั้นตอน",
+    stepLabel: "ขั้นตอนที่",
+    currentLabel: "ขั้นตอนปัจจุบัน",
   },
 } as const;

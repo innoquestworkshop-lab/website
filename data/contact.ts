@@ -26,13 +26,13 @@ export const contactPage = {
   th: {
     hero: {
       eyebrow: "▸ ติดต่อเรา",
-      heading: "คุยกันได้เลย",
-      sub: "บอกเรามาว่ากำลังมองหาอะไร แล้วเราจะดูให้ว่าช่วยอะไรได้บ้าง ไม่มีข้อผูกมัด",
+      heading: "ติดต่อ InnoQuest",
+      sub: "ผู้สนใจสามารถแจ้งความต้องการ เพื่อให้ InnoQuest พิจารณาแนวทางที่เหมาะสม โดยไม่มีข้อผูกมัด",
     },
     infoCards: [
-      { label: "โทรศัพท์", value: site.contact.phone, note: "จันทร์–ศุกร์ 9:00–18:00", iconKey: "phone" as const },
+      { label: "โทรศัพท์", value: site.contact.phone, note: "วันจันทร์–วันศุกร์ เวลา 9:00–18:00 น.", iconKey: "phone" as const },
       { label: "อีเมล", value: site.contact.email, note: "ตอบกลับภายใน 1–2 วันทำการ", iconKey: "email" as const },
-      { label: "ที่ตั้ง", value: site.location.display, note: "จัดโปรแกรมทั่วประเทศไทย", iconKey: "location" as const },
+      { label: "ที่ตั้ง", value: site.location.display, note: "ดำเนินโปรแกรมทั่วประเทศไทย", iconKey: "location" as const },
     ],
     social: {
       eyebrow: "ติดตามเรา",
@@ -59,12 +59,12 @@ export const contactForm = {
     sending: "Sending…",
   },
   th: {
-    labels: { name: "ชื่อ", organisation: "องค์กร", role: "ตำแหน่ง", email: "อีเมล", phone: "เบอร์โทร", audience: "คุณคือ…", message: "คุณกำลังมองหาอะไร?", source: "รู้จักเราจากไหน?" },
-    placeholders: { name: "ชื่อของคุณ", organisation: "ชื่อบริษัทหรือโรงเรียน", role: "เช่น หัวหน้าฝ่าย HR", message: "เล่าให้เราฟังเรื่องเป้าหมาย ช่วงเวลา หรือโปรแกรมที่คุณสนใจ…" },
+    labels: { name: "ชื่อ", organisation: "องค์กร", role: "ตำแหน่ง", email: "อีเมล", phone: "หมายเลขโทรศัพท์", audience: "ประเภทผู้ติดต่อ", message: "รายละเอียดที่ต้องการสอบถาม", source: "ทราบข้อมูลจากช่องทางใด" },
+    placeholders: { name: "ชื่อของท่าน", organisation: "ชื่อบริษัทหรือโรงเรียน", role: "เช่น หัวหน้าฝ่ายทรัพยากรบุคคล", message: "โปรดระบุเป้าหมาย ช่วงเวลา หรือโปรแกรมที่สนใจ…" },
     audiences: { Corporate: "ตัวแทนบริษัท", School: "ตัวแทนโรงเรียน", Parent: "ผู้ปกครอง", Student: "นักเรียน", Other: "อื่นๆ" },
-    sources: { select: "เลือก…", google: "Google", social: "โซเชียลมีเดีย", referral: "คนรู้จักแนะนำ", event: "งานอีเวนต์", other: "อื่นๆ" },
-    errors: { name: "กรุณากรอกชื่อ", organisation: "กรุณากรอกชื่อองค์กร", email: "กรุณากรอกอีเมลให้ถูกต้อง", message: "ช่วยเล่าเพิ่มอีกนิดนะ", verify: "กรุณายืนยันตัวตนก่อนส่ง", failed: "เกิดข้อผิดพลาด ลองใหม่อีกครั้งหรืออีเมลหาเราโดยตรง" },
-    success: { eyebrow: "ได้รับข้อความแล้ว", heading: "เราจะตอบกลับภายใน 1–2 วันทำการ", body: "เราจะตอบกลับไปที่อีเมลที่คุณให้ไว้", faster: "อยากได้คำตอบเร็วกว่านี้?" },
+    sources: { select: "เลือก…", google: "Google", social: "โซเชียลมีเดีย", referral: "การแนะนำจากผู้อื่น", event: "งานกิจกรรม", other: "อื่นๆ" },
+    errors: { name: "กรุณากรอกชื่อ", organisation: "กรุณากรอกชื่อองค์กร", email: "กรุณากรอกอีเมลให้ถูกต้อง", message: "กรุณาระบุรายละเอียดเพิ่มเติม", verify: "กรุณายืนยันตัวตนก่อนส่ง", failed: "เกิดข้อผิดพลาด กรุณาลองอีกครั้งหรือส่งอีเมลถึง InnoQuest โดยตรง" },
+    success: { eyebrow: "ได้รับข้อความแล้ว", heading: "InnoQuest จะตอบกลับภายใน 1–2 วันทำการ", body: "คำตอบจะส่งไปยังอีเมลที่ท่านระบุไว้", faster: "ต้องการติดต่อโดยเร็ว" },
     send: "ส่งข้อความ",
     sending: "กำลังส่ง…",
   },

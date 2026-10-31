@@ -96,7 +96,7 @@ export default async function TestimonialsPage() {
                 <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(245,240,234,0.7)", maxWidth: 480, marginTop: 24 }}>
                   {locale === "en"
                     ? "From students who discovered what they're capable of, to schools that saw their classrooms transform, to corporates who finally ran a CSR program worth talking about."
-                    : "จากนักเรียนที่ค้นพบศักยภาพของตนเอง สู่โรงเรียนที่เห็นการเปลี่ยนแปลงในห้องเรียน และองค์กรที่ได้จัด CSR ที่คุ้มค่าพูดถึง"}
+                    : "ตั้งแต่นักเรียนที่ค้นพบศักยภาพของตนเอง โรงเรียนที่เห็นการเปลี่ยนแปลงในห้องเรียน ไปจนถึงองค์กรที่ได้ดำเนินโครงการ CSR อันมีคุณค่า"}
                 </p>
                 <div style={{ display: "flex", gap: 8, marginTop: 32, flexWrap: "wrap" }}>
                   {groups.filter((g) => testimonials.some((t) => t.audience === g.key && !t.personTag)).map((g) => (

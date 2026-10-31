@@ -114,13 +114,13 @@ export function TestimonialsSection() {
               className={`text-[11px] font-medium uppercase tracking-[0.14em] transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
               style={{ color: "#8A0F14", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
             >
-              {locale === "en" ? "▸ Testimonials" : "▸ รีวิว"}
+              {locale === "en" ? "▸ Testimonials" : "▸ ความคิดเห็น"}
             </p>
             <h2
               className={`mt-[18px] font-medium leading-[1.05] transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
               style={{ fontSize: "clamp(34px, 4.4vw, 56px)", letterSpacing: "-0.03em", transitionDelay: "80ms" }}
             >
-              {locale === "en" ? <>What people are <span className="scribble">saying</span>.</> : <>คนที่เคยมา<span className="scribble">ว่ายังไง</span>บ้าง</>}
+              {locale === "en" ? <>What people are <span className="scribble">saying</span>.</> : <>เสียงจาก<span className="scribble">ผู้เข้าร่วม</span></>}
             </h2>
           </div>
 
@@ -257,7 +257,7 @@ export function TestimonialsSection() {
         </div>
 
         <Link href="/testimonials" className="inline-flex items-center mt-8 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#8A0F14", color: "#F5F0EA" }}>
-          {locale === "en" ? "Read all testimonials →" : "อ่านรีวิวทั้งหมด →"}
+          {locale === "en" ? "Read all testimonials →" : "ดูความคิดเห็นทั้งหมด →"}
         </Link>
       </div>
 

@@ -12,7 +12,7 @@ export function ServiceSections({ locale }: { locale: "en" | "th" }) {
       <ServicesNav anchors={[
         { label: nav.designAnchor.label, href: nav.designAnchor.href },
         { label: nav.deliveryAnchor.label, href: nav.deliveryAnchor.href },
-        { label: locale === "en" ? "Custom Programs" : "โปรแกรมตามโจทย์", href: "#custom" },
+        { label: locale === "en" ? "Custom Programs" : "โปรแกรมออกแบบเฉพาะ", href: "#custom" },
       ]} />
 
       {/* Design services */}

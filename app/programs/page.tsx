@@ -63,10 +63,10 @@ export default async function ProgramsPage() {
                 </p>
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
                   <Link href="/contact" className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#8A0F14", color: "#F5F0EA" }}>
-                    {locale === "en" ? "Enquire now →" : "สอบถามเลย →"}
+                    {locale === "en" ? "Enquire now →" : "สอบถามข้อมูล →"}
                   </Link>
                   <Link href="#pathway" className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border" style={{ color: "#F5F0EA", borderColor: "rgba(245,240,234,0.3)" }}>
-                    {locale === "en" ? "View full pathway →" : "ดูเส้นทางทั้งหมด →"}
+                    {locale === "en" ? "View full pathway →" : "ดูเส้นทางการเรียนรู้ทั้งหมด →"}
                   </Link>
                 </div>
               </div>
@@ -99,31 +99,31 @@ export default async function ProgramsPage() {
                   <p style={{ fontSize: 14, color: "rgba(18,18,18,0.6)", lineHeight: 1.6, marginBottom: 32 }}>
                     {locale === "en"
                       ? "Each program runs as a standalone sprint or links into the full entrepreneurial pathway. Every experience runs on our live simulation engine."
-                      : "แต่ละโปรแกรมจัดเป็นสปรินต์เดี่ยวๆ ก็ได้ หรือต่อกันเป็นเส้นทางผู้ประกอบการเต็มรูปแบบก็ได้ และทุกโปรแกรมเล่นบนเอนจินจำลองสดของเรา"}
+                      : "แต่ละโปรแกรมจัดเป็นกิจกรรมระยะสั้นแยกกัน หรือเชื่อมต่อเป็นเส้นทางผู้ประกอบการเต็มรูปแบบได้ ทุกโปรแกรมดำเนินการบนระบบจำลองสถานการณ์แบบเรียลไทม์ของ InnoQuest"}
                   </p>
 
                   <div style={{ borderLeft: "2px solid rgba(18,18,18,0.1)", paddingLeft: 16, display: "flex", flexDirection: "column", gap: 16 }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, fontWeight: 500, color: "#121212" }}>
                       <span style={{ color: "#8A0F14", fontSize: 16 }}>◈</span>
-                      {locale === "en" ? "Powered by Tech" : "มีเทคโนโลยีหนุนหลัง"}
+                      {locale === "en" ? "Powered by Tech" : "สนับสนุนด้วยเทคโนโลยี"}
                     </div>
                     <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, fontWeight: 500, color: "rgba(18,18,18,0.5)" }}>
                       <span style={{ fontSize: 16 }}>◎</span>
-                      {locale === "en" ? "Expert Facilitation" : "กระบวนกรผู้เชี่ยวชาญ"}
+                      {locale === "en" ? "Expert Facilitation" : "วิทยากรผู้เชี่ยวชาญ"}
                     </div>
                     <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, fontWeight: 500, color: "rgba(18,18,18,0.5)" }}>
                       <span style={{ fontSize: 16 }}>◷</span>
-                      {locale === "en" ? "Real-time Competition" : "แข่งกันแบบเรียลไทม์"}
+                      {locale === "en" ? "Real-time Competition" : "การแข่งขันแบบเรียลไทม์"}
                     </div>
                     <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, fontWeight: 500, color: "rgba(18,18,18,0.5)" }}>
                       <span style={{ fontSize: 16 }}>◉</span>
-                      {locale === "en" ? "Post-workshop Analysis" : "วิเคราะห์ผลหลังเวิร์กชอป"}
+                      {locale === "en" ? "Post-workshop Analysis" : "การวิเคราะห์ผลหลังเวิร์กช็อป"}
                     </div>
                   </div>
 
                   <div style={{ marginTop: 40 }}>
                     <Link href="#pathway" style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 600, color: "#8A0F14", textDecoration: "none" }}>
-                      {locale === "en" ? "See the full pathway →" : "ดูเส้นทางทั้งหมด →"}
+                      {locale === "en" ? "See the full pathway →" : "ดูเส้นทางการเรียนรู้ทั้งหมด →"}
                     </Link>
                   </div>
                 </div>
@@ -171,7 +171,7 @@ export default async function ProgramsPage() {
                             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
                               <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                                 {program.featured && <span className="pill-tag" style={{ background: "#8A0F14", color: "#F5F0EA" }}>{meta.popularBadge}</span>}
-                                {program.comingSoon && <span className="pill-tag" style={{ background: "rgba(18,18,18,0.08)", color: "rgba(18,18,18,0.5)" }}>{locale === "en" ? "Coming soon" : "เร็วๆ นี้"}</span>}
+                                {program.comingSoon && <span className="pill-tag" style={{ background: "rgba(18,18,18,0.08)", color: "rgba(18,18,18,0.5)" }}>{locale === "en" ? "Coming soon" : "เตรียมเปิดตัว"}</span>}
                               </div>
                               <div style={{ width: 8, height: 8, borderRadius: "50%", background: program.comingSoon ? "#D1D5DB" : "#10B981", flexShrink: 0 }} />
                             </div>

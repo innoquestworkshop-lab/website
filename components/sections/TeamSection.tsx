@@ -14,7 +14,7 @@ export function TeamSection({ locale }: { locale: "en" | "th" }) {
           <h2 className="h-section" style={{ marginBottom: 48 }}>
             {locale === "en"
               ? <>{team.length} humans, <span className="scribble">one mission</span>.</>
-              : <>{team.length} คน, <span className="scribble">ภารกิจเดียว</span></>}
+              : <>ทีมงาน {team.length} คน <span className="scribble">ภารกิจเดียวกัน</span></>}
           </h2>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }} className="team-grid">
@@ -83,7 +83,7 @@ export function TeamSection({ locale }: { locale: "en" | "th" }) {
             />
             <div style={{ position: "relative", zIndex: 1 }}>
               <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 16 }}>
-                {locale === "en" ? "▸ Join us" : "▸ ร่วมงานกับเรา"}
+                {locale === "en" ? "▸ Join us" : "▸ ร่วมงานกับ InnoQuest"}
               </p>
               <h3 style={{ fontSize: 36, fontWeight: 500, letterSpacing: "-0.02em", lineHeight: 1.1 }}>
                 {page.joinUs.heading.split("\n").map((l: string, i: number) => <span key={i}>{l}{i === 0 && <br />}</span>)}

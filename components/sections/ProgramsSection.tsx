@@ -141,7 +141,7 @@ export function ProgramsSection() {
               className="mt-[18px] font-medium leading-[1.05]"
               style={{ fontSize: "clamp(34px, 4.4vw, 56px)", letterSpacing: "-0.03em" }}
             >
-              {locale === "en" ? <>Short, long, or{" "}<span className="scribble">fully custom</span>.</> : <>สั้น ยาว หรือ<span className="scribble">ออกแบบเอง</span>ทั้งหมด</>}
+              {locale === "en" ? <>Short, long, or{" "}<span className="scribble">fully custom</span>.</> : <>ระยะสั้น ระยะยาว หรือ<span className="scribble">ออกแบบเฉพาะ</span></>}
             </h2>
           </div>
           <div
@@ -151,7 +151,7 @@ export function ProgramsSection() {
             <p className="text-[17px] leading-[1.55]" style={{ color: "rgba(18,18,18,0.6)", maxWidth: 480 }}>
               {locale === "en"
                 ? "From a single-day spark to a full semester, built around your goals."
-                : "ตั้งแต่วันเดียวที่จุดประกาย ไปจนถึงเต็มหนึ่งเทอม ออกแบบตามเป้าหมายของคุณ"}
+                : "ตั้งแต่กิจกรรมหนึ่งวันไปจนถึงโปรแกรมตลอดภาคเรียน ออกแบบให้สอดคล้องกับเป้าหมายของแต่ละโรงเรียนและองค์กร"}
             </p>
           </div>
         </div>
@@ -241,7 +241,7 @@ export function ProgramsSection() {
                 letterSpacing="2"
                 style={{ fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
               >
-                <textPath href="#circ">{locale === "en" ? "★ KIDS LOVE IT · KIDS LOVE IT · " : "★ เด็กๆ ชอบมาก · เด็กๆ ชอบมาก · "}</textPath>
+                <textPath href="#circ">{locale === "en" ? "★ KIDS LOVE IT · KIDS LOVE IT · " : "★ นักเรียนชื่นชอบ · นักเรียนชื่นชอบ · "}</textPath>
               </text>
             </svg>
           </div>
@@ -313,7 +313,7 @@ export function ProgramsSection() {
                     className="inline-block mt-[6px] px-[8px] py-[3px] rounded-full text-[10px] font-medium uppercase tracking-[0.08em]"
                     style={{ background: "#8A0F14", color: "#F5F0EA", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
                   >
-                    {locale === "en" ? "Coming soon" : "เร็วๆ นี้"}
+                    {locale === "en" ? "Coming soon" : "เตรียมเปิดตัว"}
                   </span>
                 )}
               </div>
@@ -336,20 +336,20 @@ export function ProgramsSection() {
               className="text-[11px] uppercase tracking-[0.14em]"
               style={{ color: "rgba(245,240,234,0.6)", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
             >
-              {locale === "en" ? "Want something personalized?" : "อยากได้แบบที่ทำมาเพื่อคุณโดยเฉพาะ?"}
+              {locale === "en" ? "Want something personalized?" : "โปรแกรมที่ออกแบบเฉพาะ"}
             </p>
             <div>
               <h4
                 className="font-medium mb-[14px]"
                 style={{ fontSize: 17, color: "#F5F0EA" }}
               >
-                {locale === "en" ? "Design something custom with us." : "มาออกแบบโปรแกรมของคุณกับเรา"}
+                {locale === "en" ? "Design something custom with us." : "InnoQuest ยินดีร่วมออกแบบโปรแกรมให้สอดคล้องกับความต้องการของท่าน"}
               </h4>
               <span
                 className="text-[13px] font-medium inline-flex items-center gap-[6px]"
                 style={{ color: "#8A0F14" }}
               >
-                {locale === "en" ? "Start a custom brief" : "เริ่มบรีฟโปรแกรมของคุณ"} <ArrowIcon />
+                {locale === "en" ? "Start a custom brief" : "สอบถามข้อมูล"} <ArrowIcon />
               </span>
             </div>
           </Link>

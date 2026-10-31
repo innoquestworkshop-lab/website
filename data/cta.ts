@@ -9,10 +9,10 @@ export const ctaSection = {
     phoneNote: "Or call us directly: " + site.contact.phone,
   },
   th: {
-    eyebrow: "▸ มาสร้างสิ่งดีๆ กัน",
-    heading: "พร้อมยกระดับคนรุ่นต่อไปของคุณหรือยัง?",
-    sub: "คุยกับทีม InnoQuest — ไม่มีข้อผูกมัด แค่พูดคุยกัน เราจะออกแบบสิ่งที่เหมาะกับเป้าหมาย งบประมาณ และตารางของคุณ",
-    cta: { text: "ดูว่าเราช่วยได้อย่างไร", href: "/contact" },
-    phoneNote: "หรือโทรหาเราได้เลย: " + site.contact.phone,
+    eyebrow: "▸ ร่วมงานกับ InnoQuest",
+    heading: "ร่วมส่งเสริมศักยภาพคนรุ่นใหม่กับ InnoQuest",
+    sub: "ทีมงาน InnoQuest ยินดีให้คำปรึกษาโดยไม่มีข้อผูกมัด และออกแบบโปรแกรมให้สอดคล้องกับเป้าหมาย งบประมาณ และกำหนดการของท่าน",
+    cta: { text: "สอบถามข้อมูล", href: "/contact" },
+    phoneNote: "หรือติดต่อทางโทรศัพท์: " + site.contact.phone,
   },
 } as const;
