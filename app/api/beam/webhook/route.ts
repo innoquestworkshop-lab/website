@@ -47,7 +47,21 @@ export async function POST(req: NextRequest) {
   if (!verifyBeamSignature(rawBody, req.headers.get("x-beam-signature"))) {
     return NextResponse.json({ error: "invalid signature" }, { status: 401 });
   }
-  if (req.headers.get("x-beam-event") !== "payment_link.paid") {
+  const event = req.headers.get("x-beam-event");
+
+  // A refund Beam accepted can still fail. Put the sign-up back in front of an
+  // admin instead of leaving it marked refunded.
+  if (event === "refund.failed") {
+    const { refundId } = JSON.parse(rawBody) as { refundId: string };
+    await supabaseAdmin()
+      .from("workshop_signups")
+      .update({ status: "needs_review", refunded_at: null, refunded_by: null })
+      .eq("beam_refund_id", refundId)
+      .eq("status", "refunded");
+    return NextResponse.json({ received: true });
+  }
+
+  if (event !== "payment_link.paid") {
     return NextResponse.json({ received: true });
   }
 
