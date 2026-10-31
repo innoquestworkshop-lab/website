@@ -303,6 +303,27 @@ html[lang="th"] .h-section {
   align-items: start;
 }
 
+.split--flip {
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+}
+
+.split--aside {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2.6fr);
+}
+
+.sticky-col {
+  position: sticky;
+  top: calc(var(--nav-height) + 76px);
+}
+
+.rows--single > * {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (max-width: 900px) {
+  .sticky-col { position: static; }
+}
+
 .actions {
   display: flex;
   flex-wrap: wrap;
@@ -667,6 +688,102 @@ a:focus-visible > .tile img {
   .prog-feature { grid-template-columns: minmax(0, 1fr); }
   .prog-feature-side { flex-direction: row; flex-wrap: wrap; }
   .prog-feature-side > * { flex: 1 1 240px; }
+}
+
+/* A framed tile wall inside a section; the tiles bleed off its edges */
+
+.mosaic-box {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+}
+
+.mosaic-box .masonry {
+  position: absolute;
+  inset: 0 0 auto 0;
+}
+
+@media (max-width: 900px) {
+  .mosaic-box { height: 320px !important; }
+}
+
+/* Sign-up */
+
+.workshops {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 16px;
+}
+
+.workshop[data-active] {
+  border-color: var(--innoquest-red);
+  box-shadow: inset 0 0 0 1px var(--innoquest-red);
+}
+
+/* The system's single modal-style card: the one place with a drop shadow. */
+.signup-form-card {
+  max-width: 880px;
+  margin: 32px auto 0;
+  padding: 32px;
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 24px 48px -16px rgba(38, 38, 34, 0.18), 0 4px 12px rgba(38, 38, 34, 0.06);
+}
+
+@media (max-width: 640px) {
+  .signup-form-card { padding: 24px 16px; border-radius: var(--radius); }
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .contact-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Two staggered photos */
+
+.duo {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+/* Pathway */
+
+.pathway {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pathway-link {
+  transition: border-color 0.15s ease;
+}
+
+.pathway-link:hover {
+  border-color: var(--mute);
+}
+
+.pathway-link:hover .h-sm {
+  color: var(--red-ink);
+}
+
+@media (max-width: 1000px) {
+  .pathway { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 540px) {
+  .pathway { grid-template-columns: minmax(0, 1fr); }
 }
 
 /* Journey */

@@ -30,11 +30,11 @@ export default async function ThanksPage({ searchParams }: { searchParams: Promi
     <>
       {key === "held" && <meta httpEquiv="refresh" content="5" />}
       <Navbar />
-      <main style={{ background: "#F5F0EA", padding: "160px 0 96px", minHeight: "70vh" }}>
-        <div className="max-w-[720px] mx-auto px-8">
-          <h1 className="h-section" style={{ marginBottom: 16 }}>{state.heading}</h1>
-          <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(18,18,18,0.65)", marginBottom: 32 }}>{state.body}</p>
-          <Link href="/signup" style={{ color: "#8A0F14", fontWeight: 500, fontSize: 14, textDecoration: "none" }}>
+      <main className="sec" style={{ paddingBlock: "160px 96px", minHeight: "70vh" }}>
+        <div className="wrap" style={{ maxWidth: 784 }}>
+          <h1 className="t-display" style={{ fontSize: "clamp(32px, 4vw, 44px)", marginBottom: 16 }}>{state.heading}</h1>
+          <p className="lede" style={{ marginBottom: 32 }}>{state.body}</p>
+          <Link href="/signup" className="btn btn-secondary">
             {t.back} →
           </Link>
         </div>

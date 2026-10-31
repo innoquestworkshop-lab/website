@@ -17,6 +17,11 @@ export function ArrowIcon({ size = 16 }: { size?: number }) {
   );
 }
 
+/** Link text plus an arrow icon, unless the copy already carries its own "→". */
+export function Arrowed({ text, size = 16 }: { text: string; size?: number }) {
+  return <>{text}{!text.includes("→") && <> <ArrowIcon size={size} /></>}</>;
+}
+
 export function CheckIcon({ size = 14 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

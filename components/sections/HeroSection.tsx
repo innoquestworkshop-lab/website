@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { stats } from "@/data/stats";
 import { heroSection } from "@/data/hero";
 import { useLocale } from "@/components/LanguageProvider";
-import { ArrowIcon, Masonry, type Tile } from "@/components/ui/system";
+import { Arrowed, Masonry, type Tile } from "@/components/ui/system";
 
 function useCountUp(to: number, active: boolean, duration = 1500) {
   const [val, setVal] = useState(to);
@@ -85,7 +85,7 @@ export function HeroSection() {
           <p className="lede">{hs.body}</p>
           <div className="actions">
             <Link href={hs.cta1.href} className="btn btn-primary">
-              {hs.cta1.text} <ArrowIcon />
+              <Arrowed text={hs.cta1.text} />
             </Link>
             <Link href={hs.cta2.href} className="btn btn-secondary">
               {hs.cta2.text}

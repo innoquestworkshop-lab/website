@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import { BLUR_DATA_URL } from "@/lib/imageBlur";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -8,6 +6,7 @@ import { CTASection } from "@/components/sections/CTASection";
 import { ContextualTestimonials } from "@/components/sections/ContextualTestimonials";
 import { schoolsPage } from "@/data/schools";
 import { getLocale } from "@/lib/i18n";
+import { AccentHeading, CheckIcon, Lines, PageHero, Photo, plain, SectionHead, Steps } from "@/components/ui/system";
 
 export const metadata: Metadata = {
   title: "School Programs for Bangkok Students | InnoQuest",
@@ -35,206 +34,90 @@ export default async function SchoolsPage() {
     <>
       <Navbar />
       <main>
-        {/* Hero */}
-        <section
-          style={{ background: "#121212", color: "#F5F0EA", paddingTop: 140, paddingBottom: 80 }}
-          className="relative overflow-hidden dot-bg"
-        >
-          <div
-            className="absolute rounded-full pointer-events-none"
-            style={{ top: -100, right: -80, width: 420, height: 420, background: "#8A0F14", opacity: 0.11, filter: "blur(2px)" }}
-          />
-          <div className="max-w-[1240px] mx-auto px-8 relative z-10">
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1.1fr", gap: 64, alignItems: "center" }} className="schools-hero-grid">
-              <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>{page.hero.eyebrow}</p>
-                <h1 style={{ fontSize: "clamp(36px, 5vw, 68px)", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05 }}>
-                  {page.hero.heading.replace(page.hero.headingAccent, "").trimEnd()}{" "}
-                  <span style={{ color: "#8A0F14" }}>{page.hero.headingAccent}</span>
-                </h1>
-                <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(245,240,234,0.7)", maxWidth: 520, marginTop: 24 }}>
-                  {page.hero.sub}
-                </p>
-                <div style={{ display: "flex", gap: 12, marginTop: 32, flexWrap: "wrap" }}>
-                  <Link href={page.hero.cta1.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#8A0F14", color: "#F5F0EA" }}>
-                    {page.hero.cta1.text}
-                  </Link>
-                  <Link href={page.hero.cta2.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border" style={{ color: "#F5F0EA", borderColor: "rgba(245,240,234,0.3)" }}>
-                    {page.hero.cta2.text}
-                  </Link>
-                </div>
-              </div>
-              <div style={{ position: "relative", padding: "16px 0 0 16px" }}>
-                <div style={{
-                  position: "absolute", top: 0, left: 0,
-                  width: "calc(100% - 16px)", height: "calc(100% - 16px)",
-                  borderRadius: 14, border: "2px solid #8A0F14", opacity: 0.6,
-                }} />
-                <div style={{ height: 520, borderRadius: 14, overflow: "hidden", position: "relative" }}>
-                  <Image
-                    src="/images/events/ac-w4-001.jpg"
-                    alt="AC Workshop"
-                    fill
-                    style={{ objectFit: "cover" }}
-                    sizes="(max-width: 900px) 100vw, 50vw"
-                    priority
-                    placeholder="blur"
-                    blurDataURL={BLUR_DATA_URL}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <style>{`@media(max-width:900px){ .schools-hero-grid { grid-template-columns: 1fr !important; } }`}</style>
-        </section>
+        <PageHero
+          eyebrow={plain(page.hero.eyebrow)}
+          title={<AccentHeading heading={page.hero.heading} accent={page.hero.headingAccent} />}
+          sub={page.hero.sub}
+          actions={<>
+            <Link href={page.hero.cta1.href} className="btn btn-primary">{page.hero.cta1.text}</Link>
+            <Link href={page.hero.cta2.href} className="btn btn-secondary">{page.hero.cta2.text}</Link>
+          </>}
+          columns={[
+            [
+              { src: "/images/events/ac-w4-001.jpg", alt: "AC Workshop", ratio: "3 / 4" },
+              { fill: "sand", ratio: "1 / 1" },
+              { src: "/images/events/break-the-market-5760.jpg", alt: "Students planning at a school workshop", ratio: "4 / 5" },
+              { fill: "dark", ratio: "4 / 3" },
+            ],
+            [
+              { fill: "red", ratio: "4 / 3" },
+              { src: "/images/events/acs-teachers.jpg", alt: "Teachers and the InnoQuest team at The Student Founder Roadmap", ratio: "3 / 4" },
+              { mark: true, ratio: "1 / 1" },
+              { src: "/images/events/IMG_8856.jpg", alt: "Students working through a challenge", ratio: "4 / 5" },
+            ],
+            [
+              { src: "/images/events/break-the-market-5446.jpg", alt: "Students at a Break the Market table", ratio: "4 / 5" },
+              { fill: "dark", ratio: "3 / 4" },
+              { src: "/images/events/entre1-IMG_5408.jpg", alt: "Students and teachers at an InnoQuest programme", ratio: "1 / 1" },
+              { fill: "sand", ratio: "4 / 5" },
+            ],
+          ]}
+        />
 
         {/* Three modes */}
-        <section style={{ background: "#FFFFFF", padding: "96px 0" }}>
-          <div className="max-w-[1240px] mx-auto px-8">
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "end", marginBottom: 48 }} className="modes-head">
-              <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{page.modes.eyebrow}</p>
-                <h2 className="h-section">{page.modes.heading.split("\n").map((l, i) => <span key={i}>{l}{i === 0 && <br />}</span>)}</h2>
-              </div>
-              <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(18,18,18,0.6)" }}>
-                {page.modes.sub}
-              </p>
-            </div>
-
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="modes-grid">
+        <section className="sec sec--canvas">
+          <div className="wrap">
+            <SectionHead eyebrow={plain(page.modes.eyebrow)} title={<Lines text={page.modes.heading} />} sub={page.modes.sub} />
+            <div className="grid-3">
               {page.modes.items.map((m) => (
-                <div key={m.tag} className="card-lift" style={{
-                  background: m.bg, borderRadius: 14, padding: 32,
-                  minHeight: 380, display: "flex", flexDirection: "column", justifyContent: "space-between",
-                  border: (m.bg as string) === "#FFFFFF" ? "1px solid rgba(18,18,18,0.06)" : undefined,
-                }}>
+                <div key={m.tag} className="card card--lg" style={{ background: m.bg, borderColor: m.bg === "var(--canvas)" ? "var(--hairline)" : "transparent", justifyContent: "space-between", gap: 24 }}>
                   <div>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
-                      <span className="pill-tag" style={{ background: "#8A0F14", color: "#F5F0EA" }}>{m.tag}</span>
-                      <span className="eyebrow" style={{ color: m.ink === "#F5F0EA" ? "rgba(245,240,234,0.55)" : "rgba(18,18,18,0.4)" }}>
-                        {m.duration}
-                      </span>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, flexWrap: "wrap", marginBottom: 24 }}>
+                      <span className="pill pill--red">{m.tag}</span>
+                      <span className="caption">{m.duration}</span>
                     </div>
-                    <h3 style={{ fontSize: 24, fontWeight: 500, letterSpacing: "-0.02em", color: m.ink }}>{m.title}</h3>
-                    <p style={{ fontSize: 15, lineHeight: 1.65, color: m.ink === "#F5F0EA" ? "rgba(245,240,234,0.7)" : "rgba(18,18,18,0.6)", marginTop: 14 }}>
-                      {m.desc}
-                    </p>
+                    <h3 className="h-card" style={{ color: m.ink }}>{m.title}</h3>
+                    <p className="t-small" style={{ marginTop: 12 }}>{m.desc}</p>
                   </div>
-                  <div style={{ marginTop: 24 }}>
+                  <div>
                     {m.outcomes.map((o) => (
-                      <div key={o} style={{
-                        display: "flex", alignItems: "center", gap: 8, padding: "8px 0",
-                        borderTop: `1px solid ${m.ink === "#F5F0EA" ? "rgba(245,240,234,0.12)" : "rgba(18,18,18,0.08)"}`,
-                        fontSize: 13, color: m.ink === "#F5F0EA" ? "rgba(245,240,234,0.8)" : "rgba(18,18,18,0.7)",
-                      }}>
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8A0F14" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                          <polyline points="20 6 9 17 4 12"/>
-                        </svg>
-                        {o}
-                      </div>
+                      <div key={o} className="check-row"><CheckIcon size={12} /> {o}</div>
                     ))}
                   </div>
                 </div>
               ))}
             </div>
           </div>
-          <style>{`
-            @media(max-width:900px){ .modes-head { grid-template-columns: 1fr !important; gap: 24px !important; } .modes-grid { grid-template-columns: 1fr !important; } }
-          `}</style>
         </section>
 
         {/* Teacher collaboration callout */}
-        <section style={{ background: "#F5F0EA", padding: "96px 0" }}>
-          <div className="max-w-[1240px] mx-auto px-8">
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: 64, alignItems: "center" }} className="teacher-grid">
-              <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{page.teacherCollab.eyebrow}</p>
-                <h2 className="h-section">
-                  {page.teacherCollab.heading.split("\n").map((l, i, arr) => {
-                    const parts = l.split("with ");
-                    return (
-                      <span key={i}>
-                        {parts.length > 1
-                          ? <>{parts[0]}<span className="scribble">with</span> {parts[1]}</>
-                          : l}
-                        {i < arr.length - 1 && <br />}
-                      </span>
-                    );
-                  })}
-                </h2>
-                <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(18,18,18,0.6)", marginTop: 24, maxWidth: 460 }}>
-                  {page.teacherCollab.body}
-                </p>
-                <Link href={page.teacherCollab.cta.href} style={{ display: "inline-flex", alignItems: "center", gap: 8, marginTop: 28, color: "#8A0F14", fontWeight: 500, fontSize: 14, textDecoration: "none" }}>
-                  {page.teacherCollab.cta.text}
-                </Link>
-              </div>
-              <div style={{ position: "relative", padding: "16px 0 0 16px" }}>
-                <div style={{
-                  position: "absolute", top: 0, left: 0,
-                  width: "calc(100% - 16px)", height: "calc(100% - 16px)",
-                  borderRadius: 14, border: "2px solid #8A0F14", opacity: 0.6,
-                }} />
-                <div style={{ height: 400, borderRadius: 14, overflow: "hidden", position: "relative" }}>
-                  <Image
-                    src="/images/events/acs-teachers.jpg"
-                    alt="Working with teachers"
-                    fill
-                    style={{ objectFit: "cover", filter: "brightness(1.15) contrast(1.05) saturate(1.1)" }}
-                    sizes="(max-width: 900px) 100vw, 50vw"
-                    placeholder="blur"
-                    blurDataURL={BLUR_DATA_URL}
-                  />
-                </div>
-              </div>
+        <section className="sec">
+          <div className="wrap split">
+            <div>
+              <p className="eyebrow">{plain(page.teacherCollab.eyebrow)}</p>
+              <h2 className="h-section" style={{ marginTop: 8 }}><Lines text={page.teacherCollab.heading} /></h2>
+              <p className="lede" style={{ marginTop: 16 }}>{page.teacherCollab.body}</p>
+              <Link href={page.teacherCollab.cta.href} className="link" style={{ marginTop: 24 }}>
+                {page.teacherCollab.cta.text}
+              </Link>
+            </div>
+            <div className="duo">
+              <Photo src="/images/events/acs-teachers.jpg" alt="Working with teachers" ratio="3 / 4" sizes="(max-width: 900px) 50vw, 28vw" />
+              <Photo src="/images/events/IMG_7900.jpg" alt="Students in a small-group discussion" ratio="3 / 4" sizes="(max-width: 900px) 50vw, 28vw" style={{ marginTop: 48 }} />
             </div>
           </div>
-          <style>{`@media(max-width:900px){ .teacher-grid { grid-template-columns: 1fr !important; } }`}</style>
         </section>
 
         {/* Your school's learning path */}
-        <section style={{ background: "#FFFFFF", padding: "96px 0" }}>
-          <div className="max-w-[1240px] mx-auto px-8">
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "end", marginBottom: 56 }} className="school-path-head">
-              <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{page.learningPath.eyebrow}</p>
-                <h2 className="h-section">{page.learningPath.heading.split("\n").map((l, i) => (
-                  <span key={i}>{i === 1 ? <><span className="scribble">{l}</span></> : l}{i === 0 && <br />}</span>
-                ))}</h2>
-              </div>
-              <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(18,18,18,0.6)" }}>
-                {page.learningPath.sub}
-              </p>
-            </div>
-
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }} className="school-path-grid">
-              {page.learningPath.steps.map((s) => (
-                <div key={s.num} className="card-lift" style={{
-                  background: "#F5F0EA", borderRadius: 14, padding: 28,
-                  minHeight: 240, display: "flex", flexDirection: "column", justifyContent: "space-between",
-                }}>
-                  <div style={{ fontSize: 48, fontWeight: 500, color: "#8A0F14", letterSpacing: "-0.04em", lineHeight: 1 }}>{s.num}</div>
-                  <div>
-                    <h3 style={{ fontSize: 18, fontWeight: 500, marginBottom: 8 }}>{s.title}</h3>
-                    <p style={{ fontSize: 13, lineHeight: 1.7, color: "rgba(18,18,18,0.6)" }}>{s.body}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div style={{ marginTop: 48, display: "flex", gap: 12, flexWrap: "wrap" }}>
-              <Link href={page.learningPath.cta1.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#8A0F14", color: "#F5F0EA" }}>
-                {page.learningPath.cta1.text}
-              </Link>
-              <Link href={page.learningPath.cta2.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border" style={{ color: "#121212", borderColor: "rgba(18,18,18,0.25)" }}>
-                {page.learningPath.cta2.text}
-              </Link>
+        <section className="sec sec--canvas">
+          <div className="wrap">
+            <SectionHead eyebrow={plain(page.learningPath.eyebrow)} title={<Lines text={page.learningPath.heading} />} sub={page.learningPath.sub} />
+            <Steps steps={page.learningPath.steps} columns={4} />
+            <div className="actions" style={{ marginTop: 48 }}>
+              <Link href={page.learningPath.cta1.href} className="btn btn-primary">{page.learningPath.cta1.text}</Link>
+              <Link href={page.learningPath.cta2.href} className="btn btn-secondary">{page.learningPath.cta2.text}</Link>
             </div>
           </div>
-          <style>{`
-            @media(max-width:900px){ .school-path-head { grid-template-columns: 1fr !important; gap: 24px !important; } .school-path-grid { grid-template-columns: repeat(2,1fr) !important; } }
-            @media(max-width:540px){ .school-path-grid { grid-template-columns: 1fr !important; } }
-          `}</style>
         </section>
 
         <ContextualTestimonials audience="school" label={locale === "en" ? "▸ What schools say" : "▸ เสียงจากโรงเรียน"} />

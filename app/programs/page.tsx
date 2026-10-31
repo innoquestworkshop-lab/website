@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -8,6 +7,7 @@ import { ContextualTestimonials } from "@/components/sections/ContextualTestimon
 import { PathwaySection } from "@/components/sections/PathwaySection";
 import { programs, programsPageMeta } from "@/data/programs";
 import { getLocale } from "@/lib/i18n";
+import { Arrowed, CheckIcon, PageHero, Photo } from "@/components/ui/system";
 
 export const metadata: Metadata = {
   title: "Programs for Students Ages 10–18 | InnoQuest",
@@ -30,206 +30,111 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
 };
 
+/** Alternating photo ratios give the program wall its Pinterest rhythm. */
+const ratios = ["4 / 5", "4 / 3", "4 / 3", "4 / 5"];
+
 export default async function ProgramsPage() {
   const locale = await getLocale();
   const meta = programsPageMeta[locale];
   const allPrograms = programs[locale];
+  const features = locale === "en"
+    ? ["Powered by Tech", "Expert Facilitation", "Real-time Competition", "Post-workshop Analysis"]
+    : ["สนับสนุนด้วยเทคโนโลยี", "วิทยากรผู้เชี่ยวชาญ", "การแข่งขันแบบเรียลไทม์", "การวิเคราะห์ผลหลังเวิร์กช็อป"];
+
   return (
     <>
       <Navbar />
-      <main className="bg-[#F5F0EA] selection:bg-[#8A0F14] selection:text-white">
+      <main>
+        <PageHero
+          eyebrow={locale === "en" ? "Experiences & Programs" : "ประสบการณ์และโปรแกรม"}
+          title={meta.heading}
+          sub={meta.sub}
+          actions={<>
+            <Link href="/contact" className="btn btn-primary">{locale === "en" ? "Enquire now →" : "สอบถามข้อมูล →"}</Link>
+            <Link href="#pathway" className="btn btn-secondary">{locale === "en" ? "View full pathway →" : "ดูเส้นทางการเรียนรู้ทั้งหมด →"}</Link>
+          </>}
+          columns={[
+            [
+              { src: "/images/events/price-war-080.jpg", alt: "A full room at an InnoQuest business simulation", ratio: "3 / 4" },
+              { fill: "dark", ratio: "1 / 1" },
+              { src: "/images/events/entre2-team.jpg", alt: "Entrepreneur in Innovation participants", ratio: "4 / 5" },
+              { fill: "sand", ratio: "4 / 3" },
+            ],
+            [
+              { fill: "sand", ratio: "4 / 3" },
+              { src: "/images/events/break-the-market-5758.jpg", alt: "Teams at Break the Market", ratio: "3 / 4" },
+              { fill: "red", ratio: "1 / 1" },
+              { src: "/images/events/price-war-149.jpg", alt: "Capital Minds simulation tables", ratio: "4 / 5" },
+            ],
+            [
+              { src: "/images/events/change-lab-9142.jpg", alt: "Ideas pinned to a glass wall at The Change Lab", ratio: "4 / 5" },
+              { mark: true, ratio: "1 / 1" },
+              { src: "/images/events/IMG_8695.jpg", alt: "Students sketching a business idea", ratio: "3 / 4" },
+              { fill: "dark", ratio: "4 / 5" },
+            ],
+          ]}
+        />
 
-        {/* Hero */}
-        <section
-          className="relative overflow-hidden dot-bg"
-          style={{ borderBottom: "8px solid #8A0F14", background: "#121212", color: "#F5F0EA", paddingTop: 140, paddingBottom: 96 }}
-        >
-          <div
-            className="absolute rounded-full pointer-events-none"
-            style={{ top: -80, right: -80, width: 400, height: 400, background: "#8A0F14", opacity: 0.15, filter: "blur(40px)" }}
-          />
-          <div className="max-w-[1240px] mx-auto px-8 relative z-10">
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 14px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 999, fontSize: 14, fontWeight: 500, color: "rgba(245,240,234,0.8)", marginBottom: 32 }}>
-              <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#8A0F14" }} className="animate-pulse" />
-              {locale === "en" ? "Experiences & Programs" : "ประสบการณ์และโปรแกรม"}
+        {/* Program wall */}
+        <section className="sec sec--canvas">
+          <div className="wrap split split--top split--aside">
+            <div className="sticky-col" style={{ top: "calc(var(--nav-height) + 32px)" }}>
+              <h2 className="h-card">{locale === "en" ? "Our programs" : "โปรแกรมของเรา"}</h2>
+              <p className="t-small" style={{ marginTop: 12 }}>
+                {locale === "en"
+                  ? "Each program runs as a standalone sprint or links into the full entrepreneurial pathway. Every experience runs on our live simulation engine."
+                  : "แต่ละโปรแกรมจัดเป็นกิจกรรมระยะสั้นแยกกัน หรือเชื่อมต่อเป็นเส้นทางผู้ประกอบการเต็มรูปแบบได้ ทุกโปรแกรมดำเนินการบนระบบจำลองสถานการณ์แบบเรียลไทม์ของ InnoQuest"}
+              </p>
+              <div style={{ marginTop: 24 }}>
+                {features.map((f) => (
+                  <div key={f} className="check-row"><CheckIcon size={12} /> {f}</div>
+                ))}
+              </div>
+              <Link href="#pathway" className="link" style={{ marginTop: 24 }}>
+                {locale === "en" ? "See the full pathway →" : "ดูเส้นทางการเรียนรู้ทั้งหมด →"}
+              </Link>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "end" }} className="hero-grid">
-              <div>
-                <h1 style={{ fontSize: "clamp(40px, 6vw, 72px)", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05 }}>
-                  {meta.heading}
-                </h1>
-                <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(245,240,234,0.7)", maxWidth: 480, marginTop: 24, marginBottom: 32 }}>
-                  {meta.sub}
-                </p>
-                <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-                  <Link href="/contact" className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#8A0F14", color: "#F5F0EA" }}>
-                    {locale === "en" ? "Enquire now →" : "สอบถามข้อมูล →"}
-                  </Link>
-                  <Link href="#pathway" className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border" style={{ color: "#F5F0EA", borderColor: "rgba(245,240,234,0.3)" }}>
-                    {locale === "en" ? "View full pathway →" : "ดูเส้นทางการเรียนรู้ทั้งหมด →"}
-                  </Link>
-                </div>
-              </div>
-              <div style={{ position: "relative", padding: "16px 0 0 16px" }}>
-                <div style={{
-                  position: "absolute", top: 0, left: 0,
-                  width: "calc(100% - 16px)", height: "calc(100% - 16px)",
-                  borderRadius: 14, border: "2px solid #8A0F14", opacity: 0.6,
-                }} />
-                <div style={{ height: 380, borderRadius: 14, overflow: "hidden", position: "relative" }}>
-                  <Image src="/images/events/price-war-080.jpg" alt="InnoQuest Programs" fill style={{ objectFit: "cover", transform: "scale(1.15)" }} priority sizes="(max-width: 900px) 100vw, 50vw" />
-                </div>
-              </div>
-            </div>
-          </div>
-          <style>{`@media(max-width:900px){ .hero-grid { grid-template-columns: 1fr !important; gap: 24px !important; } }`}</style>
-        </section>
 
-        {/* Program Stack */}
-        <section style={{ padding: "96px 0" }}>
-          <div className="max-w-[1240px] mx-auto px-8">
-            <div style={{ display: "flex", gap: 48 }} className="stack-container">
-
-              {/* Left Column: Sticky Context */}
-              <div style={{ width: "25%" }} className="hidden md:block">
-                <div className="sticky top-32">
-                  <h2 style={{ fontSize: 22, fontWeight: 500, letterSpacing: "-0.02em", marginBottom: 16 }}>
-                    {locale === "en" ? "Our programs" : "โปรแกรมของเรา"}
-                  </h2>
-                  <p style={{ fontSize: 14, color: "rgba(18,18,18,0.6)", lineHeight: 1.6, marginBottom: 32 }}>
-                    {locale === "en"
-                      ? "Each program runs as a standalone sprint or links into the full entrepreneurial pathway. Every experience runs on our live simulation engine."
-                      : "แต่ละโปรแกรมจัดเป็นกิจกรรมระยะสั้นแยกกัน หรือเชื่อมต่อเป็นเส้นทางผู้ประกอบการเต็มรูปแบบได้ ทุกโปรแกรมดำเนินการบนระบบจำลองสถานการณ์แบบเรียลไทม์ของ InnoQuest"}
-                  </p>
-
-                  <div style={{ borderLeft: "2px solid rgba(18,18,18,0.1)", paddingLeft: 16, display: "flex", flexDirection: "column", gap: 16 }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, fontWeight: 500, color: "#121212" }}>
-                      <span style={{ color: "#8A0F14", fontSize: 16 }}>◈</span>
-                      {locale === "en" ? "Powered by Tech" : "สนับสนุนด้วยเทคโนโลยี"}
-                    </div>
-                    <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, fontWeight: 500, color: "rgba(18,18,18,0.5)" }}>
-                      <span style={{ fontSize: 16 }}>◎</span>
-                      {locale === "en" ? "Expert Facilitation" : "วิทยากรผู้เชี่ยวชาญ"}
-                    </div>
-                    <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, fontWeight: 500, color: "rgba(18,18,18,0.5)" }}>
-                      <span style={{ fontSize: 16 }}>◷</span>
-                      {locale === "en" ? "Real-time Competition" : "การแข่งขันแบบเรียลไทม์"}
-                    </div>
-                    <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, fontWeight: 500, color: "rgba(18,18,18,0.5)" }}>
-                      <span style={{ fontSize: 16 }}>◉</span>
-                      {locale === "en" ? "Post-workshop Analysis" : "การวิเคราะห์ผลหลังเวิร์กช็อป"}
-                    </div>
-                  </div>
-
-                  <div style={{ marginTop: 40 }}>
-                    <Link href="#pathway" style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 600, color: "#8A0F14", textDecoration: "none" }}>
-                      {locale === "en" ? "See the full pathway →" : "ดูเส้นทางการเรียนรู้ทั้งหมด →"}
-                    </Link>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Column: Program Stack */}
-              <div style={{ width: "75%", position: "relative" }} className="stack-main">
-
-                {/* Structural spine */}
-                <div className="absolute top-8 bottom-0 bg-gray-200 hidden md:block" style={{ left: 27, width: 4 }} />
-
-                <div style={{ display: "flex", flexDirection: "column", gap: 64 }}>
-                  {allPrograms.map((program, i) => (
-                    <div key={program.slug} className="relative md:pl-24">
-
-                      {/* Number Node */}
-                      <div
-                        className="absolute left-0 top-6 hidden md:flex items-center justify-center rounded-xl z-10"
-                        style={{ width: 56, height: 56, background: "#121212", color: "#F5F0EA", fontSize: 18, fontWeight: 700, border: "4px solid #F5F0EA" }}
-                      >
-                        {String(i + 1).padStart(2, "0")}
+            <div className="pins pins--2">
+              {allPrograms.map((program, i) => (
+                <Link key={program.slug} href={`/programs/${program.slug}`} className="pin">
+                  {program.heroImg ? (
+                    <Photo
+                      src={program.heroImg}
+                      alt={program.name}
+                      ratio={ratios[i % ratios.length]}
+                      position={program.heroImgPosition}
+                      scale={program.heroImgScale}
+                      blur={program.heroImgBlur}
+                      sizes="(max-width: 640px) 100vw, 40vw"
+                    />
+                  ) : (
+                    <div className="tile tile--sand" style={{ aspectRatio: ratios[i % ratios.length] }} />
+                  )}
+                  <div className="pin-body">
+                    {(program.featured || program.comingSoon) && (
+                      <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 12 }}>
+                        {program.featured && <span className="pill pill--red">{meta.popularBadge}</span>}
+                        {program.comingSoon && <span className="pill">{locale === "en" ? "Coming soon" : "เตรียมเปิดตัว"}</span>}
                       </div>
-
-                      {/* Card */}
-                      <div className="card-lift" style={{
-                        display: "flex", flexDirection: "column", background: "#FFFFFF",
-                        borderRadius: 16, overflow: "hidden", border: "1px solid rgba(18,18,18,0.08)",
-                      }}>
-
-                        {/* Image Pane */}
-                        <div style={{ height: 260, background: "#121212", position: "relative", overflow: "hidden" }}>
-                          {program.heroImg ? (
-                            <Image src={program.heroImg} alt={program.name} fill style={{ objectFit: "cover", objectPosition: program.heroImgPosition ?? "center", transform: `scale(${program.heroImgScale ?? 1})`, filter: program.heroImgBlur ? `blur(${program.heroImgBlur}px)` : undefined }} sizes="(max-width: 900px) 100vw, 75vw" />
-                          ) : (
-                            <div className="imgph dark" style={{ height: "100%", borderRadius: 0 }}>
-                              <div className="imgph-tag">{program.name.toUpperCase()}</div>
-                              <div className="imgph-caption">// program photo needed</div>
-                            </div>
-                          )}
-                        </div>
-
-                        {/* Content Pane */}
-                        <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
-                          <div style={{ padding: 32, flex: 1 }}>
-                            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
-                              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                                {program.featured && <span className="pill-tag" style={{ background: "#8A0F14", color: "#F5F0EA" }}>{meta.popularBadge}</span>}
-                                {program.comingSoon && <span className="pill-tag" style={{ background: "rgba(18,18,18,0.08)", color: "rgba(18,18,18,0.5)" }}>{locale === "en" ? "Coming soon" : "เตรียมเปิดตัว"}</span>}
-                              </div>
-                              <div style={{ width: 8, height: 8, borderRadius: "50%", background: program.comingSoon ? "#D1D5DB" : "#10B981", flexShrink: 0 }} />
-                            </div>
-
-                            <h3 style={{ fontSize: 28, fontWeight: 500, letterSpacing: "-0.02em", color: "#121212", marginBottom: 8 }}>{program.name}</h3>
-                            <p style={{ fontSize: 16, fontWeight: 500, color: "rgba(18,18,18,0.8)", marginBottom: 16 }}>{program.tagline}</p>
-
-                            <p style={{ fontSize: 15, lineHeight: 1.65, color: "rgba(18,18,18,0.6)", marginBottom: 24 }}>
-                              {program.description}
-                            </p>
-
-
-                          </div>
-
-
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-
-                  {/* Custom CTA at bottom of stack */}
-                  <div className="relative md:pl-24">
-                    <div
-                      className="absolute left-0 top-6 hidden md:flex items-center justify-center rounded-xl z-10"
-                      style={{ width: 56, height: 56, background: "#8A0F14", color: "#F5F0EA", fontSize: 22, fontWeight: 700, border: "4px solid #F5F0EA" }}
-                    >
-                      +
-                    </div>
-                    <Link href={meta.customTile.href} className="card-lift" style={{
-                      background: "#121212", color: "#F5F0EA", borderRadius: 16, padding: "40px 32px",
-                      display: "flex", alignItems: "center", justifyContent: "space-between",
-                      gap: 24, textDecoration: "none",
-                    }}>
-                      <div>
-                        <p className="eyebrow" style={{ color: "rgba(245,240,234,0.55)", marginBottom: 10 }}>{meta.customTile.heading}</p>
-                        <h3 style={{ fontSize: 24, fontWeight: 500, color: "#F5F0EA", letterSpacing: "-0.02em" }}>
-                          {meta.customTile.body}
-                        </h3>
-                      </div>
-                      <span style={{
-                        display: "inline-flex", alignItems: "center", gap: 8,
-                        padding: "13px 22px", background: "#8A0F14", color: "#F5F0EA",
-                        borderRadius: 999, fontSize: 14, fontWeight: 500, whiteSpace: "nowrap", flexShrink: 0,
-                      }}>
-                        {meta.customTile.cta} →
-                      </span>
-                    </Link>
+                    )}
+                    <h3 className="h-card">{program.name}</h3>
+                    <p className="t-small" style={{ marginTop: 4, fontWeight: 500, color: "var(--ink)" }}>{program.tagline}</p>
+                    <p className="t-small" style={{ marginTop: 8 }}>{program.description}</p>
                   </div>
-                </div>
-              </div>
+                </Link>
+              ))}
+
+              {/* Custom tile at the end of the wall */}
+              <Link href={meta.customTile.href} className="card card--sand card--lg" style={{ textDecoration: "none", gap: 16 }}>
+                <p className="eyebrow" style={{ color: "var(--body)" }}>{meta.customTile.heading}</p>
+                <h3 className="h-card">{meta.customTile.body}</h3>
+                <span className="btn btn-primary" style={{ alignSelf: "flex-start" }}>
+                  <Arrowed text={meta.customTile.cta} />
+                </span>
+              </Link>
             </div>
           </div>
-          <style>{`
-            @media(max-width:900px){
-              .stack-container { flex-direction: column !important; }
-              .stack-main { width: 100% !important; }
-            }
-          `}</style>
         </section>
 
         <PathwaySection locale={locale} />

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { audienceTabs, audienceSwitcherHeading } from "@/data/audiences";
 import { useLocale } from "@/components/LanguageProvider";
-import { ArrowIcon, CheckIcon, Photo, plain } from "@/components/ui/system";
+import { Arrowed, CheckIcon, Photo, plain } from "@/components/ui/system";
 
 export function AudienceSwitcher() {
   const { locale } = useLocale();
@@ -50,7 +50,7 @@ export function AudienceSwitcher() {
               ))}
             </div>
             <Link href={cur.link.href} className="btn btn-secondary" style={{ marginTop: 32 }}>
-              {cur.link.text} <ArrowIcon size={14} />
+              <Arrowed text={cur.link.text} size={14} />
             </Link>
           </div>
           {cur.img ? (

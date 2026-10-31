@@ -117,13 +117,13 @@ export function ContactForm() {
           <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle
               cx="26" cy="26" r="23"
-              stroke="#8A0F14" strokeWidth="1.8"
+              stroke="var(--innoquest-red)" strokeWidth="1.8"
               strokeDasharray="150" strokeDashoffset="150"
               style={{ animation: "iq-circle 0.6s ease forwards" }}
             />
             <polyline
               points="16,27 22,34 36,19"
-              stroke="#8A0F14" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"
+              stroke="var(--innoquest-red)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"
               strokeDasharray="60" strokeDashoffset="60"
               style={{ animation: "iq-draw 0.4s ease 0.5s forwards" }}
             />
@@ -133,25 +133,25 @@ export function ContactForm() {
         {/* Heading */}
         <p
           className="eyebrow"
-          style={{ color: "#8A0F14", marginBottom: 10, letterSpacing: "0.1em" }}
+          style={{ color: "var(--red-ink)", marginBottom: 8 }}
         >
           {t.success.eyebrow}
         </p>
-        <h3 style={{ fontSize: 22, fontWeight: 500, letterSpacing: "-0.02em", color: "#121212", marginBottom: 12, lineHeight: 1.2 }}>
+        <h3 className="h-card" style={{ marginBottom: 12 }}>
           {t.success.heading}
         </h3>
-        <p style={{ fontSize: 14, color: "rgba(18,18,18,0.55)", lineHeight: 1.65, maxWidth: 340 }}>
+        <p className="t-small" style={{ maxWidth: 340 }}>
           {t.success.body}
         </p>
 
         {/* Divider + contact fallback */}
-        <div style={{ marginTop: 28, paddingTop: 24, borderTop: "1px solid rgba(18,18,18,0.08)", width: "100%" }}>
-          <p style={{ fontSize: 12, color: "rgba(18,18,18,0.4)", marginBottom: 8 }}>{t.success.faster}</p>
+        <div style={{ marginTop: 28, paddingTop: 24, borderTop: "1px solid var(--hairline)", width: "100%" }}>
+          <p className="caption" style={{ marginBottom: 8 }}>{t.success.faster}</p>
           <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-            <a href="tel:+66970970797" style={{ fontSize: 13, color: "#8A0F14", textDecoration: "none", fontWeight: 500 }}>
+            <a href="tel:+66970970797" className="link">
               +66 97 097 0797
             </a>
-            <a href="mailto:admin@innoquest.tech" style={{ fontSize: 13, color: "rgba(18,18,18,0.5)", textDecoration: "none" }}>
+            <a href="mailto:admin@innoquest.tech" className="t-small" style={{ textDecoration: "none", color: "var(--body)" }}>
               admin@innoquest.tech
             </a>
           </div>
@@ -160,50 +160,49 @@ export function ContactForm() {
     );
   }
 
-  const inputClass =
-    "w-full border border-gray-200 rounded-lg px-4 py-3 text-sm text-[#121212] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#8A0F14]/30 focus:border-[#8A0F14] transition-colors";
+  const inputClass = "field";
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-xs font-medium text-[#121212] mb-1.5">
-            {t.labels.name} <span className="text-[#8A0F14]">*</span>
+          <label className="field-label">
+            {t.labels.name} <span className="field-req">*</span>
           </label>
           <input {...register("name")} placeholder={t.placeholders.name} className={inputClass} />
-          {errors.name && <p className="text-xs text-[#8A0F14] mt-1">{errors.name.message}</p>}
+          {errors.name && <p className="field-error">{errors.name.message}</p>}
         </div>
         <div>
-          <label className="block text-xs font-medium text-[#121212] mb-1.5">
-            {t.labels.organisation} <span className="text-[#8A0F14]">*</span>
+          <label className="field-label">
+            {t.labels.organisation} <span className="field-req">*</span>
           </label>
           <input {...register("organisation")} placeholder={t.placeholders.organisation} className={inputClass} />
-          {errors.organisation && <p className="text-xs text-[#8A0F14] mt-1">{errors.organisation.message}</p>}
+          {errors.organisation && <p className="field-error">{errors.organisation.message}</p>}
         </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-xs font-medium text-[#121212] mb-1.5">{t.labels.role}</label>
+          <label className="field-label">{t.labels.role}</label>
           <input {...register("role")} placeholder={t.placeholders.role} className={inputClass} />
         </div>
         <div>
-          <label className="block text-xs font-medium text-[#121212] mb-1.5">
-            {t.labels.email} <span className="text-[#8A0F14]">*</span>
+          <label className="field-label">
+            {t.labels.email} <span className="field-req">*</span>
           </label>
           <input {...register("email")} type="email" placeholder="you@company.com" className={inputClass} />
-          {errors.email && <p className="text-xs text-[#8A0F14] mt-1">{errors.email.message}</p>}
+          {errors.email && <p className="field-error">{errors.email.message}</p>}
         </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-xs font-medium text-[#121212] mb-1.5">{t.labels.phone}</label>
+          <label className="field-label">{t.labels.phone}</label>
           <input {...register("phone")} placeholder="+66 XX-XXXX-XXXX" className={inputClass} />
         </div>
         <div>
-          <label className="block text-xs font-medium text-[#121212] mb-1.5">
-            {t.labels.audience} <span className="text-[#8A0F14]">*</span>
+          <label className="field-label">
+            {t.labels.audience} <span className="field-req">*</span>
           </label>
           <select {...register("audience")} className={inputClass}>
             <option value="Corporate">{t.audiences.Corporate}</option>
@@ -216,8 +215,8 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label className="block text-xs font-medium text-[#121212] mb-1.5">
-          {t.labels.message} <span className="text-[#8A0F14]">*</span>
+        <label className="field-label">
+          {t.labels.message} <span className="field-req">*</span>
         </label>
         <textarea
           {...register("message")}
@@ -225,11 +224,11 @@ export function ContactForm() {
           placeholder={t.placeholders.message}
           className={inputClass}
         />
-        {errors.message && <p className="text-xs text-[#8A0F14] mt-1">{errors.message.message}</p>}
+        {errors.message && <p className="field-error">{errors.message.message}</p>}
       </div>
 
       <div>
-        <label className="block text-xs font-medium text-[#121212] mb-1.5">
+        <label className="field-label">
           {t.labels.source}
         </label>
         <select {...register("source")} className={inputClass}>
@@ -244,12 +243,12 @@ export function ContactForm() {
 
       <div ref={turnstileRef} />
 
-      {error && <p className="text-sm text-[#8A0F14]">{error}</p>}
+      {error && <p className="text-sm field-error" role="alert">{error}</p>}
 
       <button
         type="submit"
         disabled={submitting || !turnstileToken}
-        className="w-full sm:w-auto px-8 py-3 bg-[#8A0F14] text-white text-sm font-medium rounded-full disabled:opacity-60 transition-transform active:scale-[0.98] hover:bg-[#D63B34]"
+        className="btn btn-primary w-full sm:w-auto"
       >
         {submitting ? t.sending : t.send}
       </button>

@@ -38,18 +38,8 @@ function StatItem({ n, suf, label, decimals = 0 }: { n: number; suf: string; lab
   const display = decimals ? val.toFixed(decimals) : Math.round(val);
   return (
     <div ref={ref}>
-      <div
-        className="font-medium leading-none tabular-nums"
-        style={{ fontSize: "clamp(40px, 4.4vw, 64px)", color: "#8A0F14", letterSpacing: "-0.03em" }}
-      >
-        {display}{suf}
-      </div>
-      <div
-        className="mt-[10px] uppercase tracking-[0.1em] text-[11px]"
-        style={{ color: "rgba(18,18,18,0.6)", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
-      >
-        {label}
-      </div>
+      <div className="num">{display}{suf}</div>
+      <p className="t-small" style={{ marginTop: 4, color: "var(--mute)" }}>{label}</p>
     </div>
   );
 }
@@ -58,20 +48,12 @@ function StatItem({ n, suf, label, decimals = 0 }: { n: number; suf: string; lab
 export function AboutStats() {
   const { locale } = useLocale();
   return (
-    <section style={{ background: "#FFFFFF", padding: "64px 0" }}>
-      <div className="max-w-[1240px] mx-auto px-8">
-        <div
-          className="about-stats"
-          style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 32 }}
-        >
-          {stats[locale].map((s) => (
-            <StatItem key={s.label} {...s} />
-          ))}
-        </div>
+    <section className="sec sec--canvas" style={{ paddingBlock: 48 }}>
+      <div className="wrap stat-row">
+        {stats[locale].map((s) => (
+          <StatItem key={s.label} {...s} />
+        ))}
       </div>
-      <style>{`
-        @media (max-width: 900px) { .about-stats { grid-template-columns: repeat(2, 1fr) !important; } }
-      `}</style>
     </section>
   );
 }

@@ -17,19 +17,19 @@ function CustomField({ field, value, onChange, label, selectText, fileNote }: {
   selectText: string;
   fileNote: string;
 }) {
-  const inputClass = "w-full border border-gray-200 rounded-lg px-4 py-3 text-sm text-[#121212] focus:outline-none focus:ring-2 focus:ring-[#8A0F14]/30 focus:border-[#8A0F14]";
+  const inputClass = "field";
   const text = typeof value === "string" ? value : "";
   const picked = Array.isArray(value) ? value : [];
 
   return (
     <div>
-      <label className="block text-xs font-medium text-[#121212] mb-1.5">
-        {label} {field.required && <span className="text-[#8A0F14]">*</span>}
+      <label className="field-label">
+        {label} {field.required && <span className="field-req">*</span>}
       </label>
       {field.type === "short" && <input className={inputClass} value={text} onChange={(e) => onChange(e.target.value)} />}
       {field.type === "paragraph" && <textarea className={inputClass} rows={3} value={text} onChange={(e) => onChange(e.target.value)} />}
       {field.type === "date" && <input type="date" className={inputClass} value={text} onChange={(e) => onChange(e.target.value)} />}
-      {field.type === "file" && <p className="text-sm text-[rgba(18,18,18,0.6)]">{fileNote}</p>}
+      {field.type === "file" && <p className="t-small">{fileNote}</p>}
       {field.type === "dropdown" && (
         <select className={inputClass} value={text} onChange={(e) => onChange(e.target.value)}>
           <option value="">{selectText}</option>
@@ -37,12 +37,12 @@ function CustomField({ field, value, onChange, label, selectText, fileNote }: {
         </select>
       )}
       {field.type === "multiple_choice" && field.options?.map((o) => (
-        <label key={o} className="flex items-center gap-2 text-sm py-1">
+        <label key={o} className="flex items-center gap-2 text-sm py-1 text-body">
           <input type="radio" name={field.id} checked={text === o} onChange={() => onChange(o)} /> {o}
         </label>
       ))}
       {field.type === "checkboxes" && field.options?.map((o) => (
-        <label key={o} className="flex items-center gap-2 text-sm py-1">
+        <label key={o} className="flex items-center gap-2 text-sm py-1 text-body">
           <input
             type="checkbox"
             checked={picked.includes(o)}
@@ -94,7 +94,7 @@ export function SignupForm({ workshop }: { workshop: Workshop }) {
 
   const isStudent = form.filled_by === "student";
   const needsParentConsent = isStudent && Number(form.student_age) < 20;
-  const inputClass = "w-full border border-gray-200 rounded-lg px-4 py-3 text-sm text-[#121212] focus:outline-none focus:ring-2 focus:ring-[#8A0F14]/30 focus:border-[#8A0F14]";
+  const inputClass = "field";
   const set = (key: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
     setForm((f) => ({ ...f, [key]: e.target.value }));
 
@@ -128,14 +128,14 @@ export function SignupForm({ workshop }: { workshop: Workshop }) {
   };
 
   const label = (text: string, required = true) => (
-    <label className="block text-xs font-medium text-[#121212] mb-1.5">
-      {text} {required && <span className="text-[#8A0F14]">*</span>}
+    <label className="field-label">
+      {text} {required && <span className="field-req">*</span>}
     </label>
   );
 
   return (
     <form onSubmit={onSubmit} className="space-y-5">
-      <h3 style={{ fontSize: 22, fontWeight: 500, letterSpacing: "-0.02em" }}>{t.formHeading}</h3>
+      <h3 className="h-card">{t.formHeading}</h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           {label(t.filledBy)}
@@ -186,25 +186,25 @@ export function SignupForm({ workshop }: { workshop: Workshop }) {
         />
       ))}
 
-      <p className="text-sm text-[rgba(18,18,18,0.65)]">{t.refundPolicy}</p>
-      <label className="flex items-start gap-2 text-sm">
+      <p className="t-small">{t.refundPolicy}</p>
+      <label className="flex items-start gap-2 text-sm text-body">
         <input type="checkbox" className="mt-1" checked={consent} onChange={(e) => setConsent(e.target.checked)} required />
         <span>{t.consent}</span>
       </label>
       {needsParentConsent && (
-        <label className="flex items-start gap-2 text-sm">
+        <label className="flex items-start gap-2 text-sm text-body">
           <input type="checkbox" className="mt-1" checked={parentConsent} onChange={(e) => setParentConsent(e.target.checked)} required />
           <span>{t.parentConsent}</span>
         </label>
       )}
 
       <div ref={turnstileRef} />
-      {error && <p className="text-sm text-[#8A0F14]">{error}</p>}
-      <p className="text-xs text-[rgba(18,18,18,0.5)]">{t.holdNote}</p>
+      {error && <p className="text-sm field-error" role="alert">{error}</p>}
+      <p className="caption">{t.holdNote}</p>
       <button
         type="submit"
         disabled={submitting || !turnstileToken || !consent}
-        className="w-full sm:w-auto px-8 py-3 bg-[#8A0F14] text-white text-sm font-medium rounded-full disabled:opacity-60"
+        className="btn btn-primary w-full sm:w-auto"
       >
         {submitting ? t.submitting : `${t.submit} ฿${baht(workshop.price_satang)}`}
       </button>

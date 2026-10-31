@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import { BLUR_DATA_URL } from "@/lib/imageBlur";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -8,6 +6,7 @@ import { CTASection } from "@/components/sections/CTASection";
 import { ContextualTestimonials } from "@/components/sections/ContextualTestimonials";
 import { parentsPage } from "@/data/parents";
 import { getLocale } from "@/lib/i18n";
+import { PageHero, Photo, plain, SectionHead } from "@/components/ui/system";
 
 export const metadata: Metadata = {
   title: "InnoQuest for Parents | Kids Programs Bangkok",
@@ -28,6 +27,13 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
 };
 
+const whyPhotos = [
+  "/images/events/price-war-030.jpg",
+  "/images/events/entre-1-090.jpg",
+  "/images/events/price-war-153.jpg",
+  "/images/events/IMG_8695.jpg",
+];
+
 export default async function ParentsPage() {
   const locale = await getLocale();
   const { hero, whyItMatters } = parentsPage[locale];
@@ -36,90 +42,59 @@ export default async function ParentsPage() {
     <>
       <Navbar />
       <main>
-        {/* Hero */}
-        <section
-          style={{ background: "#121212", color: "#F5F0EA", paddingTop: 140, paddingBottom: 80 }}
-          className="relative overflow-hidden dot-bg"
-        >
-          <div
-            className="absolute rounded-full pointer-events-none"
-            style={{ top: -100, right: -80, width: 420, height: 420, background: "#8A0F14", opacity: 0.11, filter: "blur(2px)" }}
-          />
-          <div className="max-w-[1240px] mx-auto px-8 relative z-10">
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1.1fr", gap: 64, alignItems: "center" }} className="parents-hero-grid">
-              <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>{hero.eyebrow}</p>
-                <h1 style={{ fontSize: "clamp(36px, 5vw, 68px)", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05 }}>
-                  {hero.heading}
-                </h1>
-                <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(245,240,234,0.7)", maxWidth: 520, marginTop: 24 }}>
-                  {hero.sub}
-                </p>
-                <div style={{ display: "flex", gap: 12, marginTop: 32, flexWrap: "wrap" }}>
-                  <Link href={hero.cta.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#8A0F14", color: "#F5F0EA" }}>
-                    {hero.cta.text}
-                  </Link>
-                  <Link href="/programs" className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border" style={{ color: "#F5F0EA", borderColor: "rgba(245,240,234,0.3)" }}>
-                    {locale === "en" ? "See all programs" : "ดูโปรแกรมทั้งหมด"}
-                  </Link>
-                </div>
-              </div>
-              <div style={{ position: "relative", padding: "16px 0 0 16px" }}>
-                <div style={{
-                  position: "absolute", top: 0, left: 0,
-                  width: "calc(100% - 16px)", height: "calc(100% - 16px)",
-                  borderRadius: 14, border: "2px solid #8A0F14", opacity: 0.6,
-                }} />
-                <div style={{ height: 520, borderRadius: 14, overflow: "hidden", position: "relative" }}>
-                  <Image src="/images/events/price-war-058.jpg" alt="Parents at InnoQuest" fill style={{ objectFit: "cover" }} priority sizes="(max-width: 900px) 100vw, 50vw" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
-                </div>
-              </div>
-            </div>
-          </div>
-          <style>{`@media(max-width:900px){ .parents-hero-grid { grid-template-columns: 1fr !important; } }`}</style>
-        </section>
+        <PageHero
+          eyebrow={plain(hero.eyebrow)}
+          title={hero.heading}
+          sub={hero.sub}
+          actions={<>
+            <Link href={hero.cta.href} className="btn btn-primary">{hero.cta.text}</Link>
+            <Link href="/programs" className="btn btn-secondary">{locale === "en" ? "See all programs" : "ดูโปรแกรมทั้งหมด"}</Link>
+          </>}
+          columns={[
+            [
+              { src: "/images/events/price-war-058.jpg", alt: "Parents at InnoQuest", ratio: "3 / 4" },
+              { fill: "red", ratio: "1 / 1" },
+              { src: "/images/events/entre2-team.jpg", alt: "Students together after a programme", ratio: "4 / 5" },
+              { fill: "sand", ratio: "4 / 3" },
+            ],
+            [
+              { fill: "sand", ratio: "4 / 3" },
+              { src: "/images/events/price-war-030.jpg", alt: "Students celebrating during a simulation", ratio: "3 / 4" },
+              { mark: true, ratio: "1 / 1" },
+              { src: "/images/events/IMG_7900.jpg", alt: "Students talking through ideas", ratio: "4 / 5" },
+            ],
+            [
+              { src: "/images/events/price-war-146.jpg", alt: "Students laughing together", ratio: "4 / 5" },
+              { fill: "dark", ratio: "3 / 4" },
+              { src: "/images/events/entre2-shannon-1.jpg", alt: "A student presenting to the room", ratio: "3 / 4" },
+            ],
+          ]}
+        />
 
-        {/* Why it matters */}
-        <section style={{ background: "#FFFFFF", padding: "96px 0" }}>
-          <div className="max-w-[1240px] mx-auto px-8">
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "end", marginBottom: 48 }} className="parents-why-head">
-              <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>▸ {whyItMatters.heading}</p>
-                <h2 className="h-section">{whyItMatters.heading}</h2>
-              </div>
-              <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(18,18,18,0.6)" }}>
-                {locale === "en"
-                  ? "Every InnoQuest program builds skills that schools don't prioritise: creativity, resilience, and the confidence to back their own ideas."
-                  : "ทุกโปรแกรมของ InnoQuest ส่งเสริมทักษะเพิ่มเติมจากการเรียนในห้องเรียน ได้แก่ ความคิดสร้างสรรค์ ความสามารถในการรับมือกับอุปสรรค และความมั่นใจในแนวคิดของตนเอง"}
-              </p>
-            </div>
-
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }} className="parents-why-grid">
+        {/* Why it matters: each reason pinned next to a photo */}
+        <section className="sec sec--canvas">
+          <div className="wrap">
+            <SectionHead
+              title={whyItMatters.heading}
+              sub={locale === "en"
+                ? "Every InnoQuest program builds skills that schools don't prioritise: creativity, resilience, and the confidence to back their own ideas."
+                : "ทุกโปรแกรมของ InnoQuest ส่งเสริมทักษะเพิ่มเติมจากการเรียนในห้องเรียน ได้แก่ ความคิดสร้างสรรค์ ความสามารถในการรับมือกับอุปสรรค และความมั่นใจในแนวคิดของตนเอง"}
+            />
+            <div className="pins pins--2">
               {whyItMatters.items.map((item, i) => (
-                <div key={item.title} className="card-lift" style={{
-                  background: i === 0 ? "#121212" : "#F5F0EA",
-                  borderRadius: 14, padding: 36,
-                  minHeight: 240, display: "flex", flexDirection: "column", justifyContent: "space-between",
-                  border: i !== 0 ? "1px solid rgba(18,18,18,0.06)" : undefined,
-                }}>
-                  <div style={{ fontSize: 36, fontWeight: 500, color: "#8A0F14", letterSpacing: "-0.04em", lineHeight: 1 }}>
-                    {String(i + 1).padStart(2, "0")}
-                  </div>
-                  <div>
-                    <h3 style={{ fontSize: 20, fontWeight: 500, letterSpacing: "-0.015em", marginBottom: 10, color: i === 0 ? "#F5F0EA" : "#121212" }}>
-                      {item.title}
-                    </h3>
-                    <p style={{ fontSize: 15, lineHeight: 1.65, color: i === 0 ? "rgba(245,240,234,0.65)" : "rgba(18,18,18,0.6)" }}>
-                      {item.body}
-                    </p>
+                <div key={item.title}>
+                  <Photo src={whyPhotos[i % whyPhotos.length]} alt={item.title} ratio={i % 2 ? "4 / 3" : "4 / 5"} sizes="(max-width: 640px) 100vw, 50vw" />
+                  <div className="pin-body" style={{ display: "flex", gap: 16 }}>
+                    <span className="num-sm" style={{ flex: "none" }}>{String(i + 1).padStart(2, "0")}</span>
+                    <div>
+                      <h3 className="h-sm">{item.title}</h3>
+                      <p className="t-small" style={{ marginTop: 4 }}>{item.body}</p>
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-          <style>{`
-            @media(max-width:900px){ .parents-why-head { grid-template-columns: 1fr !important; gap: 24px !important; } .parents-why-grid { grid-template-columns: 1fr !important; } }
-          `}</style>
         </section>
 
         <ContextualTestimonials audience={["parent", "student"]} label={locale === "en" ? "▸ What parents & students say" : "▸ เสียงจากผู้ปกครองและนักเรียน"} />

@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import { BLUR_DATA_URL } from "@/lib/imageBlur";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -10,6 +8,7 @@ import { AboutStats } from "@/components/sections/AboutStats";
 import { TeamSection } from "@/components/sections/TeamSection";
 import { aboutPage } from "@/data/about";
 import { getLocale } from "@/lib/i18n";
+import { AccentHeading, Lines, PageHero, plain } from "@/components/ui/system";
 
 export const metadata: Metadata = {
   title: "About InnoQuest | Experiential Learning for Ages 10–18",
@@ -39,112 +38,70 @@ export default async function AboutPage() {
     <>
       <Navbar />
       <main>
-        {/* Hero */}
-        <section
-          style={{ background: "#121212", color: "#F5F0EA", paddingTop: 140, paddingBottom: 80 }}
-          className="relative overflow-hidden dot-bg"
-        >
-          <div
-            className="absolute rounded-full pointer-events-none"
-            style={{ top: -120, right: -80, width: 480, height: 480, background: "#8A0F14", opacity: 0.11, filter: "blur(2px)" }}
-          />
-          <div className="max-w-[1240px] mx-auto px-8 relative z-10">
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1.1fr", gap: 64, alignItems: "center" }} className="about-hero-grid">
-              <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>{page.hero.eyebrow}</p>
-                <h1 style={{ fontSize: "clamp(36px, 5vw, 68px)", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05 }}>
-                  {page.hero.heading.replace(page.hero.headingAccent, "").trimEnd()}{" "}
-                  <span style={{ color: "#8A0F14" }}>{page.hero.headingAccent}</span>
-                </h1>
-                <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(245,240,234,0.7)", maxWidth: 520, marginTop: 24 }}>
-                  {page.hero.sub}
-                </p>
-                <div style={{ marginTop: 32 }}>
-                  <Link href={page.hero.cta.href} style={{
-                    display: "inline-flex", alignItems: "center", gap: 8,
-                    color: "#8A0F14", textDecoration: "none", fontWeight: 500, fontSize: 14,
-                  }}>
-                    {page.hero.cta.text}
-                  </Link>
-                </div>
-              </div>
-              <div style={{ position: "relative", padding: "16px 0 0 16px" }}>
-                <div style={{
-                  position: "absolute", top: 0, left: 0,
-                  width: "calc(100% - 16px)", height: "calc(100% - 16px)",
-                  borderRadius: 14, border: "2px solid #8A0F14", opacity: 0.6,
-                }} />
-                <div style={{ height: 380, borderRadius: 14, overflow: "hidden", position: "relative" }}>
-                  <Image src="/images/events/price-war-048.jpg" alt="InnoQuest team" fill style={{ objectFit: "cover" }} priority sizes="(max-width: 900px) 100vw, 50vw" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
-                </div>
-              </div>
-            </div>
-          </div>
-          <style>{`@media(max-width:900px){ .about-hero-grid { grid-template-columns: 1fr !important; } }`}</style>
-        </section>
+        <PageHero
+          eyebrow={plain(page.hero.eyebrow)}
+          title={<AccentHeading heading={page.hero.heading} accent={page.hero.headingAccent} />}
+          sub={page.hero.sub}
+          actions={<Link href={page.hero.cta.href} className="btn btn-secondary">{page.hero.cta.text}</Link>}
+          columns={[
+            [
+              { src: "/images/events/price-war-048.jpg", alt: "InnoQuest team", ratio: "3 / 4" },
+              { fill: "sand", ratio: "1 / 1" },
+              { src: "/images/events/entre-1-052.jpg", alt: "A full InnoQuest cohort", ratio: "4 / 3" },
+              { fill: "dark", ratio: "4 / 5" },
+            ],
+            [
+              { fill: "red", ratio: "4 / 3" },
+              { src: "/images/events/team.jpg", alt: "The InnoQuest team", ratio: "3 / 4" },
+              { mark: true, ratio: "1 / 1" },
+              { src: "/images/events/price-war-080.jpg", alt: "A full room at an InnoQuest simulation", ratio: "4 / 5" },
+            ],
+            [
+              { src: "/images/events/entre2-shannon-1.jpg", alt: "A speaker at an InnoQuest programme", ratio: "3 / 4" },
+              { fill: "dark", ratio: "1 / 1" },
+              { src: "/images/events/acs-teachers.jpg", alt: "The team with teachers on stage", ratio: "4 / 5" },
+              { fill: "sand", ratio: "3 / 4" },
+            ],
+          ]}
+        />
 
         {/* Our story */}
-        <section style={{ background: "#F5F0EA", padding: "96px 0" }}>
-          <div className="max-w-[1240px] mx-auto px-8">
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "start" }} className="story-grid">
-              <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{page.story.eyebrow}</p>
-                <h2 className="h-section">
-                  {page.story.heading.split("\n").map((line, i) => (
-                    <span key={i}>{line}{i === 0 && <br />}</span>
-                  ))}
-                </h2>
-              </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-                {page.story.paragraphs.map((p, i) => (
-                  <p key={i} style={{ fontSize: 17, lineHeight: 1.65, color: i === 0 ? undefined : "rgba(18,18,18,0.6)" }}>
-                    {p}
-                  </p>
-                ))}
-                <div style={{ marginTop: 8 }}>
-                  <Link href={page.story.cta.href} style={{
-                    display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 22px",
-                    border: "1px solid rgba(18,18,18,0.25)", borderRadius: 999,
-                    color: "#121212", textDecoration: "none", fontWeight: 500, fontSize: 14,
-                  }}>
-                    {page.story.cta.text}
-                  </Link>
-                </div>
+        <section className="sec sec--canvas sec--line">
+          <div className="wrap split split--top">
+            <div>
+              <p className="eyebrow">{plain(page.story.eyebrow)}</p>
+              <h2 className="h-section" style={{ marginTop: 8 }}><Lines text={page.story.heading} /></h2>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+              {page.story.paragraphs.map((p, i) => (
+                <p key={i} className="lede" style={i === 0 ? { fontSize: 18, color: "var(--ink)" } : undefined}>{p}</p>
+              ))}
+              <div style={{ marginTop: 8 }}>
+                <Link href={page.story.cta.href} className="btn btn-secondary">{page.story.cta.text}</Link>
               </div>
             </div>
           </div>
-          <style>{`@media(max-width:900px){ .story-grid { grid-template-columns: 1fr !important; gap: 32px !important; } }`}</style>
         </section>
 
-        {/* Stats band */}
         <AboutStats />
 
         {/* Values */}
-        <section style={{ background: "#F5F0EA", padding: "96px 0" }}>
-          <div className="max-w-[1240px] mx-auto px-8">
-            <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{page.values.eyebrow}</p>
-            <h2 className="h-section" style={{ maxWidth: 780, marginBottom: 48 }}>{page.values.heading}</h2>
-
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }} className="values-grid">
+        <section className="sec">
+          <div className="wrap">
+            <p className="eyebrow">{plain(page.values.eyebrow)}</p>
+            <h2 className="h-section" style={{ marginTop: 8, marginBottom: 32, maxWidth: 780 }}>{page.values.heading}</h2>
+            <div className="rows">
               {page.values.items.map((v) => (
-                <div key={v.n} className="card-lift" style={{
-                  background: "#FFFFFF", borderRadius: 14, padding: 32,
-                  display: "flex", gap: 24, alignItems: "flex-start",
-                  border: "1px solid rgba(18,18,18,0.06)", minHeight: 200,
-                }}>
-                  <span style={{
-                    fontSize: 32, fontWeight: 500, color: "#8A0F14",
-                    letterSpacing: "-0.03em", lineHeight: 1, flexShrink: 0,
-                  }}>{v.n}</span>
-                  <div>
-                    <h3 style={{ fontSize: 19, fontWeight: 500, letterSpacing: "-0.015em", lineHeight: 1.3 }}>{v.title}</h3>
-                    <p style={{ fontSize: 14, lineHeight: 1.6, color: "rgba(18,18,18,0.6)", marginTop: 10 }}>{v.body}</p>
+                <div key={v.n}>
+                  <div style={{ display: "flex", gap: 16, alignItems: "baseline" }}>
+                    <span className="num-sm">{v.n}</span>
+                    <h3 className="h-sm">{v.title}</h3>
                   </div>
+                  <p className="t-small">{v.body}</p>
                 </div>
               ))}
             </div>
           </div>
-          <style>{`@media(max-width:900px){ .values-grid { grid-template-columns: 1fr !important; } }`}</style>
         </section>
 
         <MethodologySection />

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { ctaSection } from "@/data/cta";
 import { useLocale } from "@/components/LanguageProvider";
-import { ArrowIcon, Masonry, plain, type Tile } from "@/components/ui/system";
+import { Arrowed, Masonry, plain, type Tile } from "@/components/ui/system";
 
 const columns: Tile[][] = [
   [
@@ -33,7 +33,7 @@ export function CTASection() {
             <p className="lede" style={{ marginTop: 16 }}>{cta.sub}</p>
             <div className="actions" style={{ marginTop: 32 }}>
               <Link href={cta.cta.href} className="btn btn-primary">
-                {cta.cta.text} <ArrowIcon />
+                <Arrowed text={cta.cta.text} />
               </Link>
             </div>
             <p className="t-small" style={{ marginTop: 24, color: "var(--mute)" }}>
