@@ -4,7 +4,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
 import { testimonials, audienceGroups, testimonialsPageMeta } from "@/data/testimonials";
-import { stats, schoolsStat, schoolsStatTh, yearsRunningStat, yearsRunningStatTh } from "@/data/stats";
+import { stats, yearsRunningStat, yearsRunningStatTh } from "@/data/stats";
 import { getLocale } from "@/lib/i18n";
 import { PageHero, Photo, plain, QuoteCard } from "@/components/ui/system";
 
@@ -39,13 +39,14 @@ export default async function TestimonialsPage() {
   const locale = await getLocale();
   const page = testimonialsPageMeta[locale];
   const groups = audienceGroups[locale];
-  const schoolsS = locale === "en" ? schoolsStat : schoolsStatTh;
+  const hoursIndex = stats.en.findIndex((s) => s.label === "Session hours");
+  const hoursS = stats[locale][hoursIndex];
   const yearsS = locale === "en" ? yearsRunningStat : yearsRunningStatTh;
   const studentsStat = stats.en.find((s) => s.label === "Students trained")!;
   const satisfactionStat = stats.en.find((s) => s.label === "Participants Satisfaction")!;
   const heroStats = [
     { num: `${studentsStat.n}${studentsStat.suf}`, label: locale === "en" ? studentsStat.label : "นักเรียนที่ผ่านการอบรม" },
-    { num: `${schoolsS.n}${schoolsS.suf}`, label: schoolsS.label },
+    { num: `${hoursS.n}${hoursS.suf}`, label: hoursS.label },
     { num: `${satisfactionStat.n}${satisfactionStat.suf}`, label: locale === "en" ? satisfactionStat.label : "ความพึงพอใจของผู้เข้าร่วม" },
     { num: `${yearsS.n}${yearsS.suf}`, label: yearsS.label },
   ];

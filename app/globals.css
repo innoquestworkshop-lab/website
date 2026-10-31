@@ -856,22 +856,25 @@ html[lang="th"] .cta-title {
   line-height: 1.4;
 }
 
-.cta-mosaic {
-  position: relative;
+.cta-photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
   min-height: 420px;
-  overflow: hidden;
+  padding: 16px 16px 16px 0;
 }
 
-.cta-mosaic .masonry {
-  position: absolute;
-  inset: 0 -48px auto 0;
+.cta-photos img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius);
 }
 
 @media (max-width: 900px) {
   .cta-card { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .cta-copy { padding: 32px 24px 24px; }
-  .cta-mosaic { min-height: 260px; }
-  .cta-mosaic .masonry { inset: 0 -48px auto 24px; }
+  .cta-photos { min-height: 220px; height: 220px; padding: 0 16px 16px; }
 }
 
 /* ============================================================
