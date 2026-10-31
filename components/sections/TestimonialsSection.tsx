@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 import { testimonials as allTestimonials } from "@/data/testimonials";
 import { useLocale } from "@/components/LanguageProvider";
@@ -255,6 +256,9 @@ export function TestimonialsSection() {
           ))}
         </div>
 
+        <Link href="/testimonials" className="inline-flex items-center mt-8 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#8A0F14", color: "#F5F0EA" }}>
+          {locale === "en" ? "Read all testimonials →" : "อ่านรีวิวทั้งหมด →"}
+        </Link>
       </div>
 
       <style>{`

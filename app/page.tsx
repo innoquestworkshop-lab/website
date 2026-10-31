@@ -39,13 +39,13 @@ export default function HomePage() {
       <ScrollNav />
       <main className="h-screen overflow-y-scroll">
 <HeroSection />
+        <div id="section-reviews"><TestimonialsSection /></div>
         <div id="section-our-edge"><SignatureSection /></div>
         <div id="section-method"><MethodologySection /></div>
         <div id="section-who-we-serve" style={{ borderTop: "1px solid rgba(18,18,18,0.08)" }}><AudienceSwitcher /></div>
         <div id="section-experiences" style={{ borderTop: "1px solid rgba(18,18,18,0.08)" }}><ProgramsSection /></div>
         {/* <div id="section-partners"><PartnersSection /></div> */}
         <div id="section-journey"><JourneySection /></div>
-        <div id="section-reviews"><TestimonialsSection /></div>
         <div id="section-cta"><CTASection /></div>
         <Footer />
       </main>

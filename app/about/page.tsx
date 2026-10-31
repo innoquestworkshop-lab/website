@@ -7,6 +7,7 @@ import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
 import { MethodologySection } from "@/components/sections/MethodologySection";
 import { AboutStats } from "@/components/sections/AboutStats";
+import { TeamSection } from "@/components/sections/TeamSection";
 import { aboutPage } from "@/data/about";
 import { getLocale } from "@/lib/i18n";
 
@@ -22,6 +23,8 @@ export const metadata: Metadata = {
     "STEM learning Thailand",
     "student entrepreneurship program",
     "youth learning company Bangkok",
+    "InnoQuest team",
+    "youth facilitators Bangkok",
   ],
   openGraph: {
     images: [{ url: "/images/events/entre2-team.jpg", width: 1200, height: 630, alt: "InnoQuest team of young entrepreneurs" }],
@@ -145,6 +148,7 @@ export default async function AboutPage() {
         </section>
 
         <MethodologySection />
+        <TeamSection locale={locale} />
         <CTASection />
       </main>
       <Footer />

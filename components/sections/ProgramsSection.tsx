@@ -241,7 +241,7 @@ export function ProgramsSection() {
                 letterSpacing="2"
                 style={{ fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
               >
-                <textPath href="#circ">★ KIDS LOVE IT · KIDS LOVE IT · </textPath>
+                <textPath href="#circ">{locale === "en" ? "★ KIDS LOVE IT · KIDS LOVE IT · " : "★ เด็กๆ ชอบมาก · เด็กๆ ชอบมาก · "}</textPath>
               </text>
             </svg>
           </div>
@@ -321,7 +321,7 @@ export function ProgramsSection() {
           ))}
           {/* Custom CTA tile */}
           <Link
-            href="/custom"
+            href="/what-we-do#custom"
             className={`card-lift rounded-[14px] flex flex-col justify-between transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
             style={{
               background: "#121212",

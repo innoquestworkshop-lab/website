@@ -1,24 +1,30 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useLocale } from "@/components/LanguageProvider";
+import { contactForm } from "@/data/contact";
 
-const schema = z.object({
-  name: z.string().min(2, "Name is required"),
-  organisation: z.string().min(1, "Organisation is required"),
-  role: z.string().optional(),
-  email: z.string().email("Enter a valid email"),
-  phone: z.string().optional(),
-  audience: z.enum(["Corporate", "School", "Parent", "Student", "Other"]),
-  message: z.string().min(10, "Please tell us a bit more"),
-  source: z.string().optional(),
-});
+const buildSchema = (errors: Record<"name" | "organisation" | "email" | "message", string>) =>
+  z.object({
+    name: z.string().min(2, errors.name),
+    organisation: z.string().min(1, errors.organisation),
+    role: z.string().optional(),
+    email: z.string().email(errors.email),
+    phone: z.string().optional(),
+    audience: z.enum(["Corporate", "School", "Parent", "Student", "Other"]),
+    message: z.string().min(10, errors.message),
+    source: z.string().optional(),
+  });
 
-type FormData = z.infer<typeof schema>;
+type FormData = z.infer<ReturnType<typeof buildSchema>>;
 
 export function ContactForm() {
+  const { locale } = useLocale();
+  const t = contactForm[locale];
+  const schema = useMemo(() => buildSchema(t.errors), [t]);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -65,7 +71,7 @@ export function ContactForm() {
 
   const onSubmit = async (data: FormData) => {
     if (!turnstileToken) {
-      setError("Please complete the verification.");
+      setError(t.errors.verify);
       return;
     }
     setSubmitting(true);
@@ -79,7 +85,7 @@ export function ContactForm() {
       if (!res.ok) throw new Error("Submission failed");
       setSubmitted(true);
     } catch {
-      setError("Something went wrong. Please try again or email us directly.");
+      setError(t.errors.failed);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       if (widgetId.current && (window as any).turnstile) (window as any).turnstile.reset(widgetId.current);
       setTurnstileToken(null);
@@ -129,18 +135,18 @@ export function ContactForm() {
           className="eyebrow"
           style={{ color: "#8A0F14", marginBottom: 10, letterSpacing: "0.1em" }}
         >
-          Enquiry received
+          {t.success.eyebrow}
         </p>
         <h3 style={{ fontSize: 22, fontWeight: 500, letterSpacing: "-0.02em", color: "#121212", marginBottom: 12, lineHeight: 1.2 }}>
-          We&apos;ll reply within 1–2 business days.
+          {t.success.heading}
         </h3>
         <p style={{ fontSize: 14, color: "rgba(18,18,18,0.55)", lineHeight: 1.65, maxWidth: 340 }}>
-          Our reply will go to the email address you gave us.
+          {t.success.body}
         </p>
 
         {/* Divider + contact fallback */}
         <div style={{ marginTop: 28, paddingTop: 24, borderTop: "1px solid rgba(18,18,18,0.08)", width: "100%" }}>
-          <p style={{ fontSize: 12, color: "rgba(18,18,18,0.4)", marginBottom: 8 }}>Need a faster response?</p>
+          <p style={{ fontSize: 12, color: "rgba(18,18,18,0.4)", marginBottom: 8 }}>{t.success.faster}</p>
           <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
             <a href="tel:+66970970797" style={{ fontSize: 13, color: "#8A0F14", textDecoration: "none", fontWeight: 500 }}>
               +66 97 097 0797
@@ -162,28 +168,28 @@ export function ContactForm() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label className="block text-xs font-medium text-[#121212] mb-1.5">
-            Name <span className="text-[#8A0F14]">*</span>
+            {t.labels.name} <span className="text-[#8A0F14]">*</span>
           </label>
-          <input {...register("name")} placeholder="Your name" className={inputClass} />
+          <input {...register("name")} placeholder={t.placeholders.name} className={inputClass} />
           {errors.name && <p className="text-xs text-[#8A0F14] mt-1">{errors.name.message}</p>}
         </div>
         <div>
           <label className="block text-xs font-medium text-[#121212] mb-1.5">
-            Organisation <span className="text-[#8A0F14]">*</span>
+            {t.labels.organisation} <span className="text-[#8A0F14]">*</span>
           </label>
-          <input {...register("organisation")} placeholder="Company or school name" className={inputClass} />
+          <input {...register("organisation")} placeholder={t.placeholders.organisation} className={inputClass} />
           {errors.organisation && <p className="text-xs text-[#8A0F14] mt-1">{errors.organisation.message}</p>}
         </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-xs font-medium text-[#121212] mb-1.5">Role / Title</label>
-          <input {...register("role")} placeholder="e.g. Head of HR" className={inputClass} />
+          <label className="block text-xs font-medium text-[#121212] mb-1.5">{t.labels.role}</label>
+          <input {...register("role")} placeholder={t.placeholders.role} className={inputClass} />
         </div>
         <div>
           <label className="block text-xs font-medium text-[#121212] mb-1.5">
-            Email <span className="text-[#8A0F14]">*</span>
+            {t.labels.email} <span className="text-[#8A0F14]">*</span>
           </label>
           <input {...register("email")} type="email" placeholder="you@company.com" className={inputClass} />
           {errors.email && <p className="text-xs text-[#8A0F14] mt-1">{errors.email.message}</p>}
@@ -192,31 +198,31 @@ export function ContactForm() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-xs font-medium text-[#121212] mb-1.5">Phone</label>
+          <label className="block text-xs font-medium text-[#121212] mb-1.5">{t.labels.phone}</label>
           <input {...register("phone")} placeholder="+66 XX-XXXX-XXXX" className={inputClass} />
         </div>
         <div>
           <label className="block text-xs font-medium text-[#121212] mb-1.5">
-            I am a… <span className="text-[#8A0F14]">*</span>
+            {t.labels.audience} <span className="text-[#8A0F14]">*</span>
           </label>
           <select {...register("audience")} className={inputClass}>
-            <option value="Corporate">Company representative</option>
-            <option value="School">School representative</option>
-            <option value="Parent">Parent</option>
-            <option value="Student">Student</option>
-            <option value="Other">Other</option>
+            <option value="Corporate">{t.audiences.Corporate}</option>
+            <option value="School">{t.audiences.School}</option>
+            <option value="Parent">{t.audiences.Parent}</option>
+            <option value="Student">{t.audiences.Student}</option>
+            <option value="Other">{t.audiences.Other}</option>
           </select>
         </div>
       </div>
 
       <div>
         <label className="block text-xs font-medium text-[#121212] mb-1.5">
-          What are you looking for? <span className="text-[#8A0F14]">*</span>
+          {t.labels.message} <span className="text-[#8A0F14]">*</span>
         </label>
         <textarea
           {...register("message")}
           rows={4}
-          placeholder="Tell us about your goals, timeline, or the program you have in mind…"
+          placeholder={t.placeholders.message}
           className={inputClass}
         />
         {errors.message && <p className="text-xs text-[#8A0F14] mt-1">{errors.message.message}</p>}
@@ -224,15 +230,15 @@ export function ContactForm() {
 
       <div>
         <label className="block text-xs font-medium text-[#121212] mb-1.5">
-          How did you hear about us?
+          {t.labels.source}
         </label>
         <select {...register("source")} className={inputClass}>
-          <option value="">Select…</option>
-          <option value="Google">Google</option>
-          <option value="Social media">Social media</option>
-          <option value="Referral">Referral</option>
-          <option value="Event">Event</option>
-          <option value="Other">Other</option>
+          <option value="">{t.sources.select}</option>
+          <option value="Google">{t.sources.google}</option>
+          <option value="Social media">{t.sources.social}</option>
+          <option value="Referral">{t.sources.referral}</option>
+          <option value="Event">{t.sources.event}</option>
+          <option value="Other">{t.sources.other}</option>
         </select>
       </div>
 
@@ -245,7 +251,7 @@ export function ContactForm() {
         disabled={submitting || !turnstileToken}
         className="w-full sm:w-auto px-8 py-3 bg-[#8A0F14] text-white text-sm font-medium rounded-full disabled:opacity-60 transition-transform active:scale-[0.98] hover:bg-[#D63B34]"
       >
-        {submitting ? "Sending…" : "Send message"}
+        {submitting ? t.sending : t.send}
       </button>
     </form>
   );

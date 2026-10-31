@@ -41,7 +41,7 @@ export const corporatesPage = {
         { num: "04", title: "Document", body: "You receive a branded impact report with photos, skill data, and a story your board can share." },
       ],
       cta1: { text: "Start your CSR program →", href: "/contact" },
-      cta2: { text: "Custom solutions", href: "/custom" },
+      cta2: { text: "Custom solutions", href: "/what-we-do#custom" },
     },
   },
   th: {
@@ -86,7 +86,7 @@ export const corporatesPage = {
         { num: "04", title: "สรุปผล", body: "คุณได้รับรายงานผลลัพธ์ในแบรนด์ของคุณ พร้อมรูปถ่าย ข้อมูลทักษะ และเรื่องราวที่บอร์ดนำไปเล่าต่อได้" },
       ],
       cta1: { text: "เริ่มโปรแกรม CSR →", href: "/contact" },
-      cta2: { text: "โซลูชันเฉพาะ", href: "/custom" },
+      cta2: { text: "โซลูชันเฉพาะ", href: "/what-we-do#custom" },
     },
   },
 } as const;

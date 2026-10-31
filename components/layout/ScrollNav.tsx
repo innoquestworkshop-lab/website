@@ -4,19 +4,20 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { useLocale } from "@/components/LanguageProvider";
 
 const sections = [
-  { id: "section-our-edge", label: "Our edge" },
-  { id: "section-who-we-serve", label: "Who we serve" },
-  { id: "section-method", label: "Our method" },
-  { id: "section-experiences", label: "Experiences" },
-  { id: "section-partners", label: "Partners" },
-  { id: "section-journey", label: "How it works" },
-  { id: "section-reviews", label: "Reviews" },
-  { id: "section-cta", label: "Get started" },
+  { id: "section-reviews", label: { en: "Reviews", th: "รีวิว" } },
+  { id: "section-our-edge", label: { en: "Our edge", th: "จุดเด่น" } },
+  { id: "section-method", label: { en: "Our method", th: "วิธีของเรา" } },
+  { id: "section-who-we-serve", label: { en: "Who we serve", th: "สำหรับใคร" } },
+  { id: "section-experiences", label: { en: "Experiences", th: "โปรแกรม" } },
+  { id: "section-journey", label: { en: "How it works", th: "ขั้นตอน" } },
+  { id: "section-cta", label: { en: "Get started", th: "เริ่มเลย" } },
 ];
 
 export function ScrollNav() {
+  const { locale } = useLocale();
   const [visible, setVisible] = useState(false);
   const [active, setActive] = useState("");
 
@@ -83,7 +84,7 @@ export function ScrollNav() {
                   : "text-white/40 hover:text-white/80"
               )}
             >
-              {s.label}
+              {s.label[locale]}
             </button>
           ))}
         </div>
@@ -93,7 +94,7 @@ export function ScrollNav() {
           href="/contact"
           className="hidden sm:inline-flex shrink-0 items-center px-4 py-1.5 bg-[#8A0F14] text-white text-xs font-medium rounded-full hover:bg-[#D63B34] transition-colors"
         >
-          Talk to us →
+          {locale === "en" ? "Talk to us →" : "คุยกับเรา →"}
         </Link>
       </div>
     </div>

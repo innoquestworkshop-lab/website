@@ -19,8 +19,6 @@ export const methodPillars = {
   ],
 } as const;
 
-export const methodPillarNames = methodPillars.en.map((p) => p.title) as string[];
-
 export const methodologySection = {
   en: {
     eyebrow: "▸ Our learning framework",

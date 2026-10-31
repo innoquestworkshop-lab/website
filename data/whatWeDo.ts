@@ -24,8 +24,8 @@ export const whatWeDoPage = {
       heading: "Two ways to\nwork with us.",
       sub: "We can build fully custom IP, run the whole program for you, or do both.",
       items: [
-        { tag: "DESIGN", title: "Content, Game Design & Licensing", body: "Build your own learning program using our battle-tested IP. This covers Custom Game Design, In-House Product IP Licensing for our proven formats, and Learning Journey Development. We help you design a curriculum from scratch that builds innovation into how your organisation works.", cta: "View Design services", href: "/services#design", img: "/images/events/price-war-141.jpg", imgScale: 1.30 },
-        { tag: "DELIVERY", title: "Delivery, Coordination & Talent", body: "We run programs of any size, from camps and workshops to competitions and hackathons. We also cover Event Organising, Mentor and Speaker Services, and Course Hours.", cta: "View Event services", href: "/services#delivery", img: "/images/events/sme-business-016.jpg", imgScale: 1.15 },
+        { tag: "DESIGN", title: "Content, Game Design & Licensing", body: "Build your own learning program using our battle-tested IP. This covers Custom Game Design, In-House Product IP Licensing for our proven formats, and Learning Journey Development. We help you design a curriculum from scratch that builds innovation into how your organisation works.", cta: "View Design services", href: "/what-we-do#design", img: "/images/events/price-war-141.jpg", imgScale: 1.30 },
+        { tag: "DELIVERY", title: "Delivery, Coordination & Talent", body: "We run programs of any size, from camps and workshops to competitions and hackathons. We also cover Event Organising, Mentor and Speaker Services, and Course Hours.", cta: "View Event services", href: "/what-we-do#delivery", img: "/images/events/sme-business-016.jpg", imgScale: 1.15 },
       ],
     },
     learningPath: {
@@ -39,7 +39,7 @@ export const whatWeDoPage = {
         { num: "04", title: "Measure", body: "You get an impact report with data on skill growth, engagement, and ROI." },
       ],
       cta1: { text: "Start the conversation →", href: "/contact" },
-      cta2: { text: "Custom solutions", href: "/custom" },
+      cta2: { text: "Custom solutions", href: "/what-we-do#custom" },
     },
   },
   th: {
@@ -67,8 +67,8 @@ export const whatWeDoPage = {
       heading: "ทำงานกับเรา\nได้สองแบบ",
       sub: "เราสร้าง IP เฉพาะให้คุณได้ จัดทั้งโปรแกรมให้ก็ได้ หรือจะทำทั้งสองอย่างเลยก็ได้",
       items: [
-        { tag: "ออกแบบ", title: "เนื้อหา ออกแบบเกม และไลเซนส์", body: "สร้างโปรแกรมการเรียนรู้ของคุณเองจาก IP ของเราที่ผ่านสนามจริงมาแล้ว ครอบคลุมการออกแบบเกมตามโจทย์ การไลเซนส์ IP ไปใช้ในองค์กรสำหรับรูปแบบเกมที่พิสูจน์แล้ว และการพัฒนาเส้นทางการเรียนรู้ เราช่วยออกแบบหลักสูตรตั้งแต่ศูนย์ ให้นวัตกรรมกลายเป็นส่วนหนึ่งของวิธีทำงานในองค์กรคุณ", cta: "ดูบริการออกแบบ", href: "/services#design", img: "/images/events/price-war-141.jpg", imgScale: 1.30 },
-        { tag: "จัดงาน", title: "จัดงาน ประสานงาน และทีมวิทยากร", body: "เราจัดโปรแกรมได้ทุกขนาด ตั้งแต่ค่ายและเวิร์กชอปไปจนถึงการแข่งขันและแฮ็กกาธอน พร้อมดูแลการจัดอีเวนต์ หาที่ปรึกษาและวิทยากร และชั่วโมงเรียน", cta: "ดูบริการจัดงาน", href: "/services#delivery", img: "/images/events/sme-business-016.jpg", imgScale: 1.15 },
+        { tag: "ออกแบบ", title: "เนื้อหา ออกแบบเกม และไลเซนส์", body: "สร้างโปรแกรมการเรียนรู้ของคุณเองจาก IP ของเราที่ผ่านสนามจริงมาแล้ว ครอบคลุมการออกแบบเกมตามโจทย์ การไลเซนส์ IP ไปใช้ในองค์กรสำหรับรูปแบบเกมที่พิสูจน์แล้ว และการพัฒนาเส้นทางการเรียนรู้ เราช่วยออกแบบหลักสูตรตั้งแต่ศูนย์ ให้นวัตกรรมกลายเป็นส่วนหนึ่งของวิธีทำงานในองค์กรคุณ", cta: "ดูบริการออกแบบ", href: "/what-we-do#design", img: "/images/events/price-war-141.jpg", imgScale: 1.30 },
+        { tag: "จัดงาน", title: "จัดงาน ประสานงาน และทีมวิทยากร", body: "เราจัดโปรแกรมได้ทุกขนาด ตั้งแต่ค่ายและเวิร์กชอปไปจนถึงการแข่งขันและแฮ็กกาธอน พร้อมดูแลการจัดอีเวนต์ หาที่ปรึกษาและวิทยากร และชั่วโมงเรียน", cta: "ดูบริการจัดงาน", href: "/what-we-do#delivery", img: "/images/events/sme-business-016.jpg", imgScale: 1.15 },
       ],
     },
     learningPath: {
@@ -82,7 +82,7 @@ export const whatWeDoPage = {
         { num: "04", title: "วัดผล", body: "คุณจะได้รายงานผลลัพธ์พร้อมข้อมูลพัฒนาการด้านทักษะ การมีส่วนร่วม และ ROI" },
       ],
       cta1: { text: "เริ่มคุยกันเลย →", href: "/contact" },
-      cta2: { text: "โซลูชันตามโจทย์", href: "/custom" },
+      cta2: { text: "โซลูชันตามโจทย์", href: "/what-we-do#custom" },
     },
   },
 } as const;

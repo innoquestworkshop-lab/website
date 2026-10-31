@@ -4,6 +4,8 @@ import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { MethodologySection } from "@/components/sections/MethodologySection";
+import { ServiceSections } from "@/components/sections/ServiceSections";
+import { CustomSection } from "@/components/sections/CustomSection";
 import { CTASection } from "@/components/sections/CTASection";
 import { whatWeDoPage } from "@/data/whatWeDo";
 import { audienceCards } from "@/data/audiences";
@@ -21,6 +23,8 @@ export const metadata: Metadata = {
     "STEM camp Bangkok",
     "CSR youth program",
     "design thinking workshop",
+    "bespoke learning programs Bangkok",
+    "custom innovation workshops",
   ],
   openGraph: {
     images: [{ url: "/images/events/price-war-154.jpg", width: 1200, height: 630, alt: "Students competing in InnoQuest's Price War business simulation in Bangkok" }],
@@ -121,16 +125,14 @@ export default async function WhatWeDoPage() {
                 </div>
               ))}
             </div>
-            <div style={{ marginTop: 40 }}>
-              <Link href="/services" className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#121212", color: "#F5F0EA" }}>
-                {locale === "en" ? "View all services →" : "ดูบริการทั้งหมด →"}
-              </Link>
-            </div>
           </div>
           <style>{`
             @media(max-width:900px){ .services-head { grid-template-columns: 1fr !important; gap: 24px !important; } .services-grid { grid-template-columns: 1fr !important; } }
           `}</style>
         </section>
+
+        <ServiceSections locale={locale} />
+        <CustomSection locale={locale} />
 
         {/* How we work — 3-step process */}
         <section style={{ background: "#F5F0EA", padding: "96px 0", borderTop: "1px solid rgba(18,18,18,0.08)" }}>

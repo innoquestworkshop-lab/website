@@ -89,7 +89,7 @@ export function JourneySection() {
               style={{ fontSize: "clamp(34px, 4.4vw, 56px)", letterSpacing: "-0.03em" }}
             >
               {js.heading.split("\n")[0]}<br />
-              <span className="scribble">{js.heading.split("\n")[1].replace(".", "")}</span>.
+              <span className="scribble">{js.heading.split("\n")[1].replace(".", "")}</span>{locale === "en" ? "." : ""}
             </h2>
           </div>
           <div

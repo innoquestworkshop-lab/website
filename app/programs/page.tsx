@@ -5,6 +5,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
 import { ContextualTestimonials } from "@/components/sections/ContextualTestimonials";
+import { PathwaySection } from "@/components/sections/PathwaySection";
 import { programs, programsPageMeta } from "@/data/programs";
 import { getLocale } from "@/lib/i18n";
 
@@ -64,7 +65,7 @@ export default async function ProgramsPage() {
                   <Link href="/contact" className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#8A0F14", color: "#F5F0EA" }}>
                     {locale === "en" ? "Enquire now →" : "สอบถามเลย →"}
                   </Link>
-                  <Link href="/programs/pathway" className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border" style={{ color: "#F5F0EA", borderColor: "rgba(245,240,234,0.3)" }}>
+                  <Link href="#pathway" className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border" style={{ color: "#F5F0EA", borderColor: "rgba(245,240,234,0.3)" }}>
                     {locale === "en" ? "View full pathway →" : "ดูเส้นทางทั้งหมด →"}
                   </Link>
                 </div>
@@ -121,7 +122,7 @@ export default async function ProgramsPage() {
                   </div>
 
                   <div style={{ marginTop: 40 }}>
-                    <Link href="/programs/pathway" style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 600, color: "#8A0F14", textDecoration: "none" }}>
+                    <Link href="#pathway" style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 600, color: "#8A0F14", textDecoration: "none" }}>
                       {locale === "en" ? "See the full pathway →" : "ดูเส้นทางทั้งหมด →"}
                     </Link>
                   </div>
@@ -230,6 +231,8 @@ export default async function ProgramsPage() {
             }
           `}</style>
         </section>
+
+        <PathwaySection locale={locale} />
 
         <ContextualTestimonials audience="student" label={locale === "en" ? "▸ What participants say" : "▸ เสียงจากผู้เข้าร่วม"} limit={3} />
 

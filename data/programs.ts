@@ -200,8 +200,8 @@ const programsTh: Program[] = [
 
 export const programs: Record<"en" | "th", Program[]> = { en: programsEn, th: programsTh };
 
-export function getProgramBySlug(slug: string): Program | undefined {
-  return programsEn.find((p) => p.slug === slug);
+export function getProgramBySlug(slug: string, locale: "en" | "th" = "en"): Program | undefined {
+  return programs[locale].find((p) => p.slug === slug);
 }
 
 export const programsPageMeta = {
@@ -214,7 +214,7 @@ export const programsPageMeta = {
       heading: "Want something personalized?",
       body: "Design something custom with us.",
       cta: "Start a custom brief",
-      href: "/custom",
+      href: "/what-we-do#custom",
     },
   },
   th: {
@@ -226,7 +226,7 @@ export const programsPageMeta = {
       heading: "อยากได้แบบที่ทำมาเพื่อคุณโดยเฉพาะ?",
       body: "มาออกแบบโปรแกรมของคุณกับเรา",
       cta: "เริ่มบรีฟโปรแกรมของคุณ",
-      href: "/custom",
+      href: "/what-we-do#custom",
     },
   },
 } as const;

@@ -37,7 +37,7 @@ export const schoolsPage = {
         { num: "04", title: "Report", body: "You receive learning outcome data, facilitator observations, and a report you can use in your own school reporting." },
       ],
       cta1: { text: "Talk to our team →", href: "/contact" },
-      cta2: { text: "Custom solutions", href: "/custom" },
+      cta2: { text: "Custom solutions", href: "/what-we-do#custom" },
     },
   },
   th: {
@@ -78,7 +78,7 @@ export const schoolsPage = {
         { num: "04", title: "รายงาน", body: "โรงเรียนได้รับข้อมูลผลการเรียนรู้ บันทึกการสังเกตจากวิทยากร และรายงานที่นำไปใช้ต่อในงานรายงานของโรงเรียนได้" },
       ],
       cta1: { text: "คุยกับทีมของเรา →", href: "/contact" },
-      cta2: { text: "โซลูชันเฉพาะ", href: "/custom" },
+      cta2: { text: "โซลูชันเฉพาะ", href: "/what-we-do#custom" },
     },
   },
 } as const;

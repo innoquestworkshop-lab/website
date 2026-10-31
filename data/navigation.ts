@@ -10,38 +10,34 @@ export const navLinks: Record<"en" | "th", NavItem[]> = {
   en: [
     { label: "What We Do", href: "/what-we-do" },
     { label: "Programs", href: "/programs" },
-    { label: "For Parents", href: "/parents" },
-    { label: "For Schools", href: "/schools" },
-    { label: "Corporate & CSR", href: "/corporates" },
-    { label: "Design Yours", href: "/custom" },
-    { label: "Interactive Play", href: "https://interactive.innoquest.tech", external: true, highlight: true },
     {
-      label: "About",
-      href: "/about",
+      label: "Who It's For",
+      href: "/schools",
       dropdown: [
-        { label: "About us", href: "/about" },
-        { label: "Our people", href: "/team" },
-        { label: "Testimonials", href: "/testimonials" },
+        { label: "For Parents", href: "/parents" },
+        { label: "For Schools", href: "/schools" },
+        { label: "Corporate & CSR", href: "/corporates" },
       ],
     },
+    { label: "Testimonials", href: "/testimonials" },
+    { label: "Interactive Play", href: "https://interactive.innoquest.tech", external: true, highlight: true },
+    { label: "About", href: "/about" },
   ],
   th: [
     { label: "สิ่งที่เราทำ", href: "/what-we-do" },
     { label: "โปรแกรม", href: "/programs" },
-    { label: "สำหรับผู้ปกครอง", href: "/parents" },
-    { label: "สำหรับโรงเรียน", href: "/schools" },
-    { label: "องค์กรและ CSR", href: "/corporates" },
-    { label: "ออกแบบเอง", href: "/custom" },
-    { label: "เล่นอินเทอร์แอคทีฟ", href: "https://interactive.innoquest.tech", external: true, highlight: true },
     {
-      label: "เกี่ยวกับ",
-      href: "/about",
+      label: "สำหรับใคร",
+      href: "/schools",
       dropdown: [
-        { label: "เกี่ยวกับเรา", href: "/about" },
-        { label: "ทีมของเรา", href: "/team" },
-        { label: "รีวิว", href: "/testimonials" },
+        { label: "สำหรับผู้ปกครอง", href: "/parents" },
+        { label: "สำหรับโรงเรียน", href: "/schools" },
+        { label: "องค์กรและ CSR", href: "/corporates" },
       ],
     },
+    { label: "รีวิว", href: "/testimonials" },
+    { label: "เล่นอินเทอร์แอคทีฟ", href: "https://interactive.innoquest.tech", external: true, highlight: true },
+    { label: "เกี่ยวกับ", href: "/about" },
   ],
 };
 
@@ -51,9 +47,9 @@ export const footerCols = {
       h: "Explore",
       items: [
         { label: "What We Do", href: "/what-we-do" },
-        { label: "Services", href: "/services" },
+        { label: "Services", href: "/what-we-do#design" },
         { label: "Programs", href: "/programs" },
-        { label: "The Pathway", href: "/programs/pathway" },
+        { label: "The Pathway", href: "/programs#pathway" },
       ],
     },
     {
@@ -69,7 +65,7 @@ export const footerCols = {
       h: "Company",
       items: [
         { label: "About us", href: "/about" },
-        { label: "Our people", href: "/team" },
+        { label: "Our people", href: "/about#team" },
         { label: "Testimonials", href: "/testimonials" },
         { label: "Contact", href: "/contact" },
       ],
@@ -80,9 +76,9 @@ export const footerCols = {
       h: "ดูเพิ่มเติม",
       items: [
         { label: "สิ่งที่เราทำ", href: "/what-we-do" },
-        { label: "บริการ", href: "/services" },
+        { label: "บริการ", href: "/what-we-do#design" },
         { label: "โปรแกรม", href: "/programs" },
-        { label: "เส้นทาง", href: "/programs/pathway" },
+        { label: "เส้นทาง", href: "/programs#pathway" },
       ],
     },
     {
@@ -98,7 +94,7 @@ export const footerCols = {
       h: "บริษัท",
       items: [
         { label: "เกี่ยวกับเรา", href: "/about" },
-        { label: "ทีมของเรา", href: "/team" },
+        { label: "ทีมของเรา", href: "/about#team" },
         { label: "รีวิว", href: "/testimonials" },
         { label: "ติดต่อ", href: "/contact" },
       ],

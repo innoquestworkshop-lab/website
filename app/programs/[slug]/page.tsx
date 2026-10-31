@@ -8,8 +8,8 @@ import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
 import { ContextualTestimonials } from "@/components/sections/ContextualTestimonials";
 import { programs, getProgramBySlug } from "@/data/programs";
-import { methodPillarNames } from "@/data/methodology";
-
+import { methodPillars } from "@/data/methodology";
+import { getLocale } from "@/lib/i18n";
 
 export async function generateStaticParams() {
   return programs.en.map((p) => ({ slug: p.slug }));
@@ -21,7 +21,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const program = getProgramBySlug(slug);
+  const program = getProgramBySlug(slug, await getLocale());
   if (!program) return {};
   return {
     title: program.name,
@@ -35,10 +35,17 @@ export default async function ProgramPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const program = getProgramBySlug(slug);
+  const locale = await getLocale();
+  const program = getProgramBySlug(slug, locale);
   if (!program) notFound();
 
-  const related = programs.en.filter((p) => p.slug !== program.slug).slice(0, 3);
+  const related = programs[locale].filter((p) => p.slug !== program.slug).slice(0, 3);
+  const facts = [
+    { label: locale === "en" ? "Age range" : "ช่วงอายุ", value: program.ages },
+    { label: locale === "en" ? "Duration" : "ระยะเวลา", value: program.duration },
+    { label: locale === "en" ? "Group size" : "ขนาดกลุ่ม", value: program.groupSize },
+    { label: locale === "en" ? "Format" : "รูปแบบ", value: program.format },
+  ].filter((f) => f.value);
 
   return (
     <>
@@ -68,7 +75,7 @@ export default async function ProgramPage({
                     display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 22px",
                     background: "#8A0F14", color: "#F5F0EA", borderRadius: 999, fontSize: 14, fontWeight: 500, textDecoration: "none",
                   }}>
-                    Enquire now →
+                    {locale === "en" ? "Enquire now →" : "สอบถามเลย →"}
                   </Link>
                 </div>
               </div>
@@ -97,15 +104,10 @@ export default async function ProgramPage({
         </section>
 
         {/* Quick facts strip */}
-        <section style={{ background: "#F5F0EA", padding: "48px 0", borderBottom: "1px solid rgba(18,18,18,0.06)" }}>
+        {facts.length > 0 && <section style={{ background: "#F5F0EA", padding: "48px 0", borderBottom: "1px solid rgba(18,18,18,0.06)" }}>
           <div className="max-w-[1240px] mx-auto px-8">
             <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 24 }} className="facts-grid">
-              {[
-                { label: "Age range", value: program.ages },
-                { label: "Duration", value: program.duration },
-                { label: "Group size", value: program.groupSize },
-                { label: "Format", value: program.format },
-              ].map(({ label, value }) => (
+              {facts.map(({ label, value }) => (
                 <div key={label} style={{ paddingTop: 20, borderTop: "2px solid #8A0F14" }}>
                   <div className="eyebrow" style={{ color: "rgba(18,18,18,0.5)", marginBottom: 8 }}>{label}</div>
                   <div style={{ fontSize: 18, fontWeight: 500, letterSpacing: "-0.015em" }}>{value}</div>
@@ -114,15 +116,15 @@ export default async function ProgramPage({
             </div>
           </div>
           <style>{`@media(max-width:900px){ .facts-grid { grid-template-columns: repeat(2, 1fr) !important; } }`}</style>
-        </section>
+        </section>}
 
         {/* About the program */}
         <section style={{ background: "#FFFFFF", padding: "96px 0" }}>
           <div className="max-w-[1240px] mx-auto px-8">
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "start" }} className="about-prog-grid">
               <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>▸ About this program</p>
-                <h2 className="h-section">What it&apos;s all<br />about.</h2>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{locale === "en" ? "▸ About this program" : "▸ เกี่ยวกับโปรแกรมนี้"}</p>
+                <h2 className="h-section">{locale === "en" ? <>What it&apos;s all<br />about.</> : "โปรแกรมนี้ทำอะไรบ้าง"}</h2>
               </div>
               <p style={{ fontSize: 17, lineHeight: 1.7, color: "rgba(18,18,18,0.75)" }}>
                 {program.description}
@@ -135,8 +137,8 @@ export default async function ProgramPage({
         {/* Learning outcomes */}
         <section style={{ background: "#F5F0EA", padding: "96px 0" }}>
           <div className="max-w-[1240px] mx-auto px-8">
-            <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>▸ What students gain</p>
-            <h2 className="h-section" style={{ marginBottom: 48 }}>Learning outcomes.</h2>
+            <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{locale === "en" ? "▸ What students gain" : "▸ สิ่งที่นักเรียนจะได้"}</p>
+            <h2 className="h-section" style={{ marginBottom: 48 }}>{locale === "en" ? "Learning outcomes." : "ผลลัพธ์การเรียนรู้"}</h2>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="outcomes-grid">
               {program.outcomes.map((outcome) => (
                 <div key={outcome.title} className="card-lift" style={{
@@ -158,11 +160,11 @@ export default async function ProgramPage({
         {/* Method pillars */}
         <section style={{ background: "#FFFFFF", padding: "96px 0" }}>
           <div className="max-w-[1240px] mx-auto px-8">
-            <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>▸ Our methodology</p>
+            <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{locale === "en" ? "▸ Our methodology" : "▸ วิธีการของเรา"}</p>
             <h2 className="h-section" style={{ marginBottom: 40 }}>
-              The InnoQuest <span className="scribble">Method</span>
+              {locale === "en" ? <>The InnoQuest <span className="scribble">Method</span></> : <><span className="scribble">วิธีการ</span> InnoQuest</>}
               <sup style={{ fontSize: "0.4em", verticalAlign: "super", marginLeft: 4, color: "#8A0F14" }}>©</sup>
-              {" "}in this program.
+              {" "}{locale === "en" ? "in this program." : "ในโปรแกรมนี้"}
             </h2>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
               {program.methodPillars.map((n) => (
@@ -171,7 +173,7 @@ export default async function ProgramPage({
                   display: "flex", alignItems: "center", gap: 10,
                 }}>
                   <span style={{ fontSize: 18, fontWeight: 500, color: "#8A0F14", letterSpacing: "-0.02em" }}>0{n}</span>
-                  <span style={{ fontSize: 15, fontWeight: 500 }}>{methodPillarNames[n - 1]}</span>
+                  <span style={{ fontSize: 15, fontWeight: 500 }}>{methodPillars[locale][n - 1].title}</span>
                 </div>
               ))}
             </div>
@@ -181,14 +183,14 @@ export default async function ProgramPage({
         <ContextualTestimonials
           programSlug={program.slug}
           audience={program.audiences as ("corporate" | "school" | "parent" | "student")[]}
-          label="▸ What participants say"
+          label={locale === "en" ? "▸ What participants say" : "▸ เสียงจากผู้เข้าร่วม"}
         />
 
         {/* Related programs */}
         <section style={{ background: "#F5F0EA", padding: "96px 0" }}>
           <div className="max-w-[1240px] mx-auto px-8">
-            <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>▸ Related programs</p>
-            <h2 className="h-section" style={{ marginBottom: 40 }}>More to explore.</h2>
+            <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{locale === "en" ? "▸ Related programs" : "▸ โปรแกรมอื่นๆ"}</p>
+            <h2 className="h-section" style={{ marginBottom: 40 }}>{locale === "en" ? "More to explore." : "ดูโปรแกรมอื่นต่อ"}</h2>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="related-grid">
               {related.map((p) => (
                 <Link key={p.slug} href={`/programs/${p.slug}`} className="card-lift" style={{
