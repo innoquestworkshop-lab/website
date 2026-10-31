@@ -3,17 +3,17 @@ export const pathwayMeta = {
     badge: "InnoQuest Core Curriculum",
     heading: "The Entrepreneurial",
     headingAccent: "Pathway.",
-    sub: "This is a structured journey through the full lifecycle of a business. Powered by our own digital simulation engine we deliver an exclusive standard of learning that cannot be matched. We guide students from their initial idea all the way to market dominance.",
+    sub: "A structured path through the full lifecycle of a business. In our own digital simulation, every student action creates real data and an immediate consequence, and we unpack that data in the debrief. We guide students from their first idea all the way to market dominance.",
     sidebarHeading: "How it works",
-    sidebarBody: "Programs can be run independently as standalone sprints, or linked together into a long term deep dive.",
+    sidebarBody: "Run any program as a standalone sprint, or link them into a long-term deep dive.",
   },
   th: {
     badge: "หลักสูตรหลัก InnoQuest",
     heading: "เส้นทาง",
     headingAccent: "ผู้ประกอบการ",
-    sub: "นี่คือการเดินทางที่มีโครงสร้างตลอดวงจรชีวิตของธุรกิจ ขับเคลื่อนโดยเอ็นจินจำลองดิจิทัลของเรา เรานำทางนักเรียนจากไอเดียเริ่มต้นไปจนถึงการครองตลาด",
-    sidebarHeading: "วิธีการทำงาน",
-    sidebarBody: "โปรแกรมสามารถดำเนินการอิสระเป็นสปรินต์เดี่ยว หรือเชื่อมต่อกันเป็นการสำรวจเชิงลึกระยะยาว",
+    sub: "เส้นทางที่วางไว้ครบทุกช่วงชีวิตของธุรกิจ ในเกมจำลองดิจิทัลที่เราสร้างเอง ทุกการกระทำของนักเรียนจะกลายเป็นข้อมูลจริงและเห็นผลทันที แล้วเรานำข้อมูลนั้นมาคุยกันต่อในช่วงสรุปบทเรียน เราพานักเรียนไปตั้งแต่ไอเดียแรกจนถึงการครองตลาด",
+    sidebarHeading: "รูปแบบโปรแกรม",
+    sidebarBody: "จัดแต่ละโปรแกรมเป็นสปรินต์เดี่ยวๆ ก็ได้ หรือต่อกันเป็นคอร์สเจาะลึกระยะยาวก็ได้",
   },
 } as const;
 
@@ -44,7 +44,7 @@ const buildStages = (locale: "en" | "th"): PathwayStage[] => [
     step: "01",
     theme: locale === "en" ? "Ideation Phase" : "เฟสไอเดีย",
     name: p("the-change-lab", locale).name,
-    subtitle: locale === "en" ? "Painpoint Discovery & Systems Thinking" : p("the-change-lab", locale).tagline,
+    subtitle: locale === "en" ? "Pain Point Discovery & Systems Thinking" : p("the-change-lab", locale).tagline,
     description: p("the-change-lab", locale).description,
     status: "available",
     slug: p("the-change-lab", locale).slug,
@@ -55,7 +55,7 @@ const buildStages = (locale: "en" | "th"): PathwayStage[] => [
   },
   {
     step: "02",
-    theme: locale === "en" ? "Validation Phase" : "เฟสการตรวจสอบ",
+    theme: locale === "en" ? "Validation Phase" : "เฟสทดสอบตลาด",
     name: p("entrepreneur-in-innovation", locale).name,
     subtitle: locale === "en" ? "MVP & Market Validation" : p("entrepreneur-in-innovation", locale).tagline,
     description: p("entrepreneur-in-innovation", locale).description,
@@ -68,7 +68,7 @@ const buildStages = (locale: "en" | "th"): PathwayStage[] => [
   },
   {
     step: "03",
-    theme: locale === "en" ? "Disruption Phase" : "เฟสการเปลี่ยนแปลง",
+    theme: locale === "en" ? "Disruption Phase" : "เฟสดิสรัปต์",
     name: p("break-the-market", locale).name,
     subtitle: locale === "en" ? "GTM & Competitive Strategy" : p("break-the-market", locale).tagline,
     description: p("break-the-market", locale).description,
@@ -94,12 +94,12 @@ const buildStages = (locale: "en" | "th"): PathwayStage[] => [
   },
   {
     step: "05",
-    theme: locale === "en" ? "Scale Phase" : "เฟสการขยาย",
+    theme: locale === "en" ? "Scale Phase" : "เฟสขยายธุรกิจ",
     name: "The Scale-Up Lab",
     subtitle: locale === "en" ? "Venture Capital & Global Growth" : "เงินร่วมลงทุนและการเติบโตระดับโลก",
     description: locale === "en"
-      ? "Navigate series funding rounds, scaling complex operations, and global expansion in a high-stakes executive simulation."
-      : "นำทางรอบการระดมทุน การขยายการดำเนินงานที่ซับซ้อน และการขยายไปสู่ระดับโลกในการจำลองบริหารสูง",
+      ? "Work through series funding rounds, complex operations at scale, and global expansion in a high-stakes executive simulation."
+      : "รับมือการระดมทุนแต่ละซีรีส์ การบริหารงานซับซ้อนในสเกลใหญ่ และการบุกตลาดโลก ในเกมจำลองระดับผู้บริหารที่เดิมพันสูง",
     status: "locked",
     slug: "#",
     details: { duration: "TBA", ages: "16-18" },

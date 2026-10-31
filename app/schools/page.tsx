@@ -11,7 +11,7 @@ import { getLocale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   title: "School Programs for Bangkok Students | InnoQuest",
-  description: "Curriculum-aligned innovation workshops and entrepreneurship camps for Bangkok and Thailand schools. Build real-world skills in creativity, critical thinking, and business — ages 10–18.",
+  description: "Curriculum-aligned innovation workshops and entrepreneurship camps for schools in Bangkok and across Thailand. Students aged 10–18 build real-world skills in creativity, critical thinking, and business.",
   keywords: [
     "Bangkok school programs",
     "school workshops Thailand",
@@ -237,7 +237,7 @@ export default async function SchoolsPage() {
           `}</style>
         </section>
 
-        <ContextualTestimonials audience="school" label={locale === "en" ? "▸ What schools say" : "▸ สิ่งที่โรงเรียนพูด"} />
+        <ContextualTestimonials audience="school" label={locale === "en" ? "▸ What schools say" : "▸ เสียงจากโรงเรียน"} />
         <CTASection />
       </main>
       <Footer />

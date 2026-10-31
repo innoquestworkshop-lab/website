@@ -41,7 +41,7 @@ export const ecosystem: EcosystemPartner[] = [
     id: "CSII",
     name: "CSII",
     type: "university",
-    description: "Startup Sandox",
+    description: "Startup Sandbox",
     featured: true,
   },
 

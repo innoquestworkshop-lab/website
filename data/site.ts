@@ -1,9 +1,9 @@
 /** Single source of truth for company-wide information. */
 export const site = {
   name: "InnoQuest",
-  tagline: "Empowering Tomorrow’s Innovators",
+  tagline: "The skills schools forgot to teach.",
   description:
-    "Experiential learning programs for schools, corporates & institutions — science-backed, play-driven, designed for the next generation.",
+    "Business simulations and live workshops for ages 10 to 18, run with schools, corporates and institutions across Thailand.",
   founded: 2021,
   location: {
     city: "Bangkok",
@@ -24,6 +24,6 @@ export const site = {
   seo: {
     titleSuffix: "| InnoQuest",
     defaultDescription:
-      "InnoQuest delivers data-driven, play-driven experiential learning programs for schools, corporates, and institutions across Thailand.",
+      "InnoQuest runs business simulations and live workshops for ages 10 to 18, with schools, corporates and institutions across Thailand.",
   },
 } as const;

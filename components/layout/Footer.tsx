@@ -27,8 +27,8 @@ export function Footer() {
             </Link>
             <p style={{ marginTop: 18, fontSize: 14, lineHeight: 1.6, color: "rgba(245,240,234,0.6)", maxWidth: 300 }}>
               {locale === "en"
-                ? "Uplifting young human ability through play-based, science-backed learning experiences."
-                : "ยกระดับความสามารถของเยาวชนผ่านประสบการณ์การเรียนรู้แบบเล่นและมีพื้นฐานทางวิทยาศาสตร์"}
+                ? "We build young people's abilities through play-based, science-backed learning."
+                : "เราปั้นความสามารถของเยาวชนด้วยการเรียนรู้ผ่านการเล่น ที่มีหลักวิทยาศาสตร์รองรับ"}
             </p>
             <div style={{ marginTop: 24, display: "flex", gap: 8, flexWrap: "wrap" }}>
               <span className="pill-tag" style={{ background: "rgba(245,240,234,0.06)", color: "rgba(245,240,234,0.7)" }}>

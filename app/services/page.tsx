@@ -8,8 +8,8 @@ import { servicesPage, designServices, deliveryServices } from "@/data/services"
 import { getLocale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
-  title: "Services | InnoQuest — Design, Delivery & Talent",
-  description: "InnoQuest offers innovation workshops, business simulations, and entrepreneurship camps for students aged 10–18. Content & Game Design Licensing, and Delivery, Coordination & Talent.",
+  title: "Services | InnoQuest: Design, Delivery & Talent",
+  description: "InnoQuest offers innovation workshops, business simulations, and entrepreneurship camps for students aged 10–18, plus Content, Game Design & Licensing, and Delivery, Coordination & Talent.",
   keywords: [
     "innovation workshops Bangkok",
     "entrepreneurship camp Thailand",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     "facilitator talent",
   ],
   openGraph: {
-    images: [{ url: "/images/events/entre-1-173.jpg", width: 1200, height: 630, alt: "InnoQuest entrepreneurship programme in action" }],
+    images: [{ url: "/images/events/entre-1-173.jpg", width: 1200, height: 630, alt: "InnoQuest entrepreneurship program in action" }],
   },
   twitter: { card: "summary_large_image" },
 };
@@ -57,7 +57,7 @@ export default async function ServicesPage() {
             </p>
             <div style={{ marginTop: 32 }}>
               <Link href="/contact" className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#8A0F14", color: "#F5F0EA" }}>
-                {locale === "en" ? "Talk to us →" : "ติดต่อเรา →"}
+                {locale === "en" ? "Talk to us →" : "คุยกับเรา →"}
               </Link>
             </div>
           </div>

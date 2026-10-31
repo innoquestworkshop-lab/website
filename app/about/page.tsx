@@ -11,8 +11,8 @@ import { aboutPage } from "@/data/about";
 import { getLocale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
-  title: "About InnoQuest | Empowering Youth in Thailand",
-  description: "InnoQuest is on a mission to empower students aged 10–18 across Thailand through innovation workshops, business simulations, and entrepreneurship camps. Learn our story.",
+  title: "About InnoQuest | Experiential Learning for Ages 10–18",
+  description: "InnoQuest runs innovation workshops, business simulations, and entrepreneurship camps for students aged 10–18 across Thailand. Read our story.",
   keywords: [
     "InnoQuest",
     "youth innovation Thailand",

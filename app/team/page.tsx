@@ -10,7 +10,7 @@ import { getLocale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   title: "Meet the Team | InnoQuest",
-  description: "Meet the facilitators, educators, and speakers behind InnoQuest — Bangkok's youth innovation experts helping students aged 10–18 learn by doing.",
+  description: "Meet the Bangkok facilitators, educators, and speakers behind InnoQuest, who help students aged 10–18 learn by doing.",
   keywords: [
     "InnoQuest team",
     "youth facilitators Bangkok",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     "InnoQuest educators",
   ],
   openGraph: {
-    images: [{ url: "/images/events/entre2-team.jpg", width: 1200, height: 630, alt: "The InnoQuest team — facilitators and educators in action" }],
+    images: [{ url: "/images/events/entre2-team.jpg", width: 1200, height: 630, alt: "InnoQuest facilitators and educators in action" }],
   },
   twitter: { card: "summary_large_image" },
 };
@@ -146,7 +146,7 @@ export default async function OurPeoplePage() {
               />
               <div style={{ position: "relative", zIndex: 1 }}>
                 <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 16 }}>
-                  {locale === "en" ? "▸ Join us" : "▸ ร่วมกับเรา"}
+                  {locale === "en" ? "▸ Join us" : "▸ ร่วมงานกับเรา"}
                 </p>
                 <h3 style={{ fontSize: 36, fontWeight: 500, letterSpacing: "-0.02em", lineHeight: 1.1 }}>
                   {page.joinUs.heading.split("\n").map((l: string, i: number) => <span key={i}>{l}{i === 0 && <br />}</span>)}

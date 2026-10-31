@@ -6,7 +6,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 const sections = [
-  { id: "section-our-edge", label: "Our Edge" },
+  { id: "section-our-edge", label: "Our edge" },
   { id: "section-who-we-serve", label: "Who we serve" },
   { id: "section-method", label: "Our method" },
   { id: "section-experiences", label: "Experiences" },

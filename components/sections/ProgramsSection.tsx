@@ -141,7 +141,7 @@ export function ProgramsSection() {
               className="mt-[18px] font-medium leading-[1.05]"
               style={{ fontSize: "clamp(34px, 4.4vw, 56px)", letterSpacing: "-0.03em" }}
             >
-              {locale === "en" ? <>Short, long, or{" "}<span className="scribble">fully custom</span>.</> : <>สั้น ยาว หรือ <span className="scribble">ออกแบบเอง</span>ทั้งหมด</>}
+              {locale === "en" ? <>Short, long, or{" "}<span className="scribble">fully custom</span>.</> : <>สั้น ยาว หรือ<span className="scribble">ออกแบบเอง</span>ทั้งหมด</>}
             </h2>
           </div>
           <div
@@ -150,8 +150,8 @@ export function ProgramsSection() {
           >
             <p className="text-[17px] leading-[1.55]" style={{ color: "rgba(18,18,18,0.6)", maxWidth: 480 }}>
               {locale === "en"
-                ? "From a single-day spark to a semester-long transformation — built around your goals."
-                : "จากประกายในวันเดียวสู่การเปลี่ยนแปลงยาวหนึ่งภาคเรียน — สร้างรอบเป้าหมายของคุณ"}
+                ? "From a single-day spark to a full semester, built around your goals."
+                : "ตั้งแต่วันเดียวที่จุดประกาย ไปจนถึงเต็มหนึ่งเทอม ออกแบบตามเป้าหมายของคุณ"}
             </p>
           </div>
         </div>
@@ -181,7 +181,7 @@ export function ProgramsSection() {
               style={{ top: -100, right: -100, width: 320, height: 320, background: "#8A0F14", opacity: 0.18, filter: "blur(2px)" }}
             />
             <div className="relative z-10">
-              <PillTag style={{ background: "#8A0F14", color: "#F5F0EA" }}>{locale === "en" ? "★ Most popular" : "★ ยอดนิยมที่สุด"}</PillTag>
+              <PillTag style={{ background: "#8A0F14", color: "#F5F0EA" }}>{locale === "en" ? "★ Most popular" : "★ ยอดนิยม"}</PillTag>
               <h3
                 className="mt-5 font-medium leading-[1.1]"
                 style={{ fontSize: "clamp(28px, 3.4vw, 44px)", letterSpacing: "-0.025em", maxWidth: 460 }}
@@ -201,7 +201,7 @@ export function ProgramsSection() {
                 className="mt-[22px] inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full transition-all active:scale-[0.97]"
                 style={{ background: "#8A0F14", color: "#F5F0EA" }}
               >
-                {locale === "en" ? "Explore program" : "สำรวจโปรแกรม"} <ArrowIcon />
+                {locale === "en" ? "Explore program" : "ดูรายละเอียดโปรแกรม"} <ArrowIcon />
               </Link>
             </div>
           </div>
@@ -261,7 +261,7 @@ export function ProgramsSection() {
               className="text-[11px] uppercase tracking-[0.14em]"
               style={{ color: "rgba(18,18,18,0.6)", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
             >
-              {locale === "en" ? "Students trained" : "นักเรียนที่ฝึกอบรม"}
+              {locale === "en" ? "Students trained" : "นักเรียนที่ผ่านการอบรม"}
             </p>
             <div
               className="font-medium leading-none"
@@ -336,20 +336,20 @@ export function ProgramsSection() {
               className="text-[11px] uppercase tracking-[0.14em]"
               style={{ color: "rgba(245,240,234,0.6)", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
             >
-              {locale === "en" ? "Want something personalized?" : "ต้องการสิ่งที่ปรับตามความต้องการ?"}
+              {locale === "en" ? "Want something personalized?" : "อยากได้แบบที่ทำมาเพื่อคุณโดยเฉพาะ?"}
             </p>
             <div>
               <h4
                 className="font-medium mb-[14px]"
                 style={{ fontSize: 17, color: "#F5F0EA" }}
               >
-                {locale === "en" ? "Design something custom with us." : "ออกแบบสิ่งที่เฉพาะเจาะจงกับเรา"}
+                {locale === "en" ? "Design something custom with us." : "มาออกแบบโปรแกรมของคุณกับเรา"}
               </h4>
               <span
                 className="text-[13px] font-medium inline-flex items-center gap-[6px]"
                 style={{ color: "#8A0F14" }}
               >
-                {locale === "en" ? "Start a custom brief" : "เริ่มบรีฟเฉพาะ"} <ArrowIcon />
+                {locale === "en" ? "Start a custom brief" : "เริ่มบรีฟโปรแกรมของคุณ"} <ArrowIcon />
               </span>
             </div>
           </Link>

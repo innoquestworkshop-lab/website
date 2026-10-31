@@ -1,21 +1,21 @@
 export const stats = {
   en: [
     { n: 400, suf: "+", label: "Students trained" },
-    { n: 100, suf: "+", label: "Coaching Hours" },
+    { n: 100, suf: "+", label: "Session hours" },
     { n: 96,  suf: "%", label: "Participants Satisfaction" },
-    { n: 100, suf: "%", label: "Institute Conversion Rate" },
+    { n: 100, suf: "%", label: "Pilot institutions rebooked" },
   ],
   th: [
-    { n: 400, suf: "+", label: "นักเรียนที่ฝึกอบรม" },
-    { n: 100, suf: "+", label: "ชั่วโมงโค้ชชิ่ง" },
+    { n: 400, suf: "+", label: "นักเรียนที่ผ่านการอบรม" },
+    { n: 100, suf: "+", label: "ชั่วโมงการอบรม" },
     { n: 96,  suf: "%", label: "ความพึงพอใจของผู้เข้าร่วม" },
-    { n: 100, suf: "%", label: "อัตราการใช้ซ้ำของสถาบัน" },
+    { n: 100, suf: "%", label: "สถาบันนำร่องที่กลับมาจองซ้ำ" },
   ],
 } as const;
 
 export const satisfactionNote = {
-  en: "of teachers say students returned to class more engaged.",
-  th: "ของครูที่กล่าวว่านักเรียนกลับสู่ชั้นเรียนด้วยการมีส่วนร่วมที่สูงขึ้น",
+  en: "from student ratings.",
+  th: "จากคะแนนที่นักเรียนให้",
 } as const;
 
 export const studentsNote = {
@@ -23,11 +23,11 @@ export const studentsNote = {
   th: "ทั่วไทย ตั้งแต่ปี 2024",
 } as const;
 
-export const schoolsStat = { n: 30, suf: "+", label: "Schools partnered" } as const;
-export const schoolsStatTh = { n: 30, suf: "+", label: "โรงเรียนที่เป็นพันธมิตร" } as const;
+export const schoolsStat = { n: 30, suf: "+", label: "Schools reached" } as const;
+export const schoolsStatTh = { n: 30, suf: "+", label: "โรงเรียนที่เราไปถึง" } as const;
 
 export const yearsRunningStat = { n: 2, suf: "+ yrs", label: "Running programs" } as const;
-export const yearsRunningStatTh = { n: 2, suf: "+ ปี", label: "ดำเนินโปรแกรม" } as const;
+export const yearsRunningStatTh = { n: 2, suf: "+ ปี", label: "ที่จัดโปรแกรมมา" } as const;
 
 export const capitalMindsYearsStat: { n: string; suf: string; label: string } | null = null;
 export const capitalMindsStudentsStat: { n: string; suf: string; label: string } | null = null;

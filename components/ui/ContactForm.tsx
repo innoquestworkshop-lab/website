@@ -9,7 +9,7 @@ const schema = z.object({
   name: z.string().min(2, "Name is required"),
   organisation: z.string().min(1, "Organisation is required"),
   role: z.string().optional(),
-  email: z.string().email("Valid email required"),
+  email: z.string().email("Enter a valid email"),
   phone: z.string().optional(),
   audience: z.enum(["Corporate", "School", "Parent", "Student", "Other"]),
   message: z.string().min(10, "Please tell us a bit more"),
@@ -132,11 +132,10 @@ export function ContactForm() {
           Enquiry received
         </p>
         <h3 style={{ fontSize: 22, fontWeight: 500, letterSpacing: "-0.02em", color: "#121212", marginBottom: 12, lineHeight: 1.2 }}>
-          We&apos;ll be in touch shortly.
+          We&apos;ll reply within 1–2 business days.
         </h3>
         <p style={{ fontSize: 14, color: "rgba(18,18,18,0.55)", lineHeight: 1.65, maxWidth: 340 }}>
-          The InnoQuest team reviews all enquiries within 1–2 business days.
-          Expect a response at the email address you provided.
+          Our reply will go to the email address you gave us.
         </p>
 
         {/* Divider + contact fallback */}
@@ -201,8 +200,8 @@ export function ContactForm() {
             I am a… <span className="text-[#8A0F14]">*</span>
           </label>
           <select {...register("audience")} className={inputClass}>
-            <option value="Corporate">Corporate</option>
-            <option value="School">School</option>
+            <option value="Corporate">Company representative</option>
+            <option value="School">School representative</option>
             <option value="Parent">Parent</option>
             <option value="Student">Student</option>
             <option value="Other">Other</option>

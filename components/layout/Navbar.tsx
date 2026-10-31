@@ -152,7 +152,7 @@ export function Navbar() {
             href="/contact"
             className="hidden lg:inline-flex items-center px-5 py-2 bg-[#8A0F14] text-white text-sm font-medium rounded-full transition-transform active:scale-[0.98] hover:bg-[#6B0A0E]"
           >
-            {locale === "en" ? "Talk to us →" : "ติดต่อเรา →"}
+            {locale === "en" ? "Talk to us →" : "คุยกับเรา →"}
           </Link>
           {navLinks[locale].filter((link) => link.highlight).map((link) => (
             <a
@@ -160,8 +160,7 @@ export function Navbar() {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden lg:inline-flex items-center gap-1.5 px-5 py-2 text-sm font-medium rounded-full text-white transition-all active:scale-[0.98] hover:opacity-90 hover:shadow-lg"
-              style={{ background: "linear-gradient(135deg, #7C3AED 0%, #2563EB 100%)" }}
+              className="hidden lg:inline-flex items-center gap-1.5 px-5 py-2 text-sm font-medium rounded-full bg-[#D9CFC0] text-[#121212] transition-all active:scale-[0.98] hover:bg-[#E8E0D5] hover:shadow-lg"
             >
               {link.label}
             </a>
@@ -237,8 +236,7 @@ export function Navbar() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-center py-3 text-white text-sm font-medium rounded-full"
-              style={{ background: "linear-gradient(135deg, #7C3AED 0%, #2563EB 100%)" }}
+                className="block text-center py-3 bg-[#D9CFC0] text-[#121212] text-sm font-medium rounded-full"
               >
                 {link.label}
               </a>
@@ -247,7 +245,7 @@ export function Navbar() {
               href="/contact"
               className="block text-center py-3 bg-[#8A0F14] text-white text-sm font-medium rounded-full"
             >
-              {locale === "en" ? "Talk to us →" : "ติดต่อเรา →"}
+              {locale === "en" ? "Talk to us →" : "คุยกับเรา →"}
             </Link>
           </div>
         </div>

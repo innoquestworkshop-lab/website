@@ -7,7 +7,7 @@ import { getLocale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   title: "Contact InnoQuest | Bangkok, Thailand",
-  description: "Have a question about InnoQuest's workshops or camps in Bangkok? Drop us a message — no pressure, just a friendly chat to see how we can help.",
+  description: "Ask about InnoQuest's workshops and camps in Bangkok. Send us a message and we'll reply within 1–2 business days.",
   keywords: [
     "contact InnoQuest",
     "InnoQuest Bangkok",

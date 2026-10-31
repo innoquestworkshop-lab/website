@@ -12,10 +12,10 @@ export const theChangeLab: Program = {
   groupSize: "20–150 students",
   format: "In-person",
   description:
-    "Students step into the role of sustainability consultants tasked with solving a real environmental or social challenge. Through research, ideation, and prototyping, they design solutions that are both impactful and commercially viable — then pitch them to a panel.",
+    "Students step into the role of sustainability consultants tasked with solving a real environmental or social challenge. Through research, ideation, and prototyping, they design solutions that are both impactful and commercially viable, then pitch them to a panel.",
   audiences: ["school", "corporate"],
   outcomes: [
-    { icon: "leaf", title: "ESG literacy", description: "Understanding environmental, social, and governance issues that matter today" },
+    { icon: "leaf", title: "ESG literacy", description: "Understanding environmental, social, and governance issues" },
     { icon: "bulb", title: "Systems thinking", description: "Seeing how decisions ripple through ecosystems, communities, and economies" },
     { icon: "presentation", title: "Sustainable innovation", description: "Designing solutions that balance impact with feasibility" },
     { icon: "chart-bar", title: "Evidence-based pitching", description: "Making the case for change with data and storytelling" },

@@ -10,7 +10,7 @@ import { getLocale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   title: "Programs for Students Ages 10–18 | InnoQuest",
-  description: "Innovation workshops, business simulations & entrepreneurship camps in Bangkok for students ages 10–18. Programs for schools, families & corporates — 1-day to semester-long.",
+  description: "Innovation workshops, business simulations & entrepreneurship camps in Bangkok for students ages 10–18. Programs for schools, families & corporates, from 1-day to semester-long.",
   keywords: [
     "innovation workshops Bangkok",
     "entrepreneurship camp Thailand",
@@ -65,7 +65,7 @@ export default async function ProgramsPage() {
                     {locale === "en" ? "Enquire now →" : "สอบถามเลย →"}
                   </Link>
                   <Link href="/programs/pathway" className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border" style={{ color: "#F5F0EA", borderColor: "rgba(245,240,234,0.3)" }}>
-                    {locale === "en" ? "View full pathway →" : "ดูเส้นทางเต็ม →"}
+                    {locale === "en" ? "View full pathway →" : "ดูเส้นทางทั้งหมด →"}
                   </Link>
                 </div>
               </div>
@@ -97,32 +97,32 @@ export default async function ProgramsPage() {
                   </h2>
                   <p style={{ fontSize: 14, color: "rgba(18,18,18,0.6)", lineHeight: 1.6, marginBottom: 32 }}>
                     {locale === "en"
-                      ? "Each program runs as a standalone sprint or links into a full entrepreneurial pathway. Every experience is powered by our live simulation engine."
-                      : "แต่ละโปรแกรมสามารถรันเป็นสปรินต์เดี่ยวหรือเชื่อมต่อเป็นเส้นทางผู้ประกอบการเต็มรูปแบบ ทุกประสบการณ์ขับเคลื่อนด้วยเครื่องมือจำลองสดของเรา"}
+                      ? "Each program runs as a standalone sprint or links into the full entrepreneurial pathway. Every experience runs on our live simulation engine."
+                      : "แต่ละโปรแกรมจัดเป็นสปรินต์เดี่ยวๆ ก็ได้ หรือต่อกันเป็นเส้นทางผู้ประกอบการเต็มรูปแบบก็ได้ และทุกโปรแกรมเล่นบนเอนจินจำลองสดของเรา"}
                   </p>
 
                   <div style={{ borderLeft: "2px solid rgba(18,18,18,0.1)", paddingLeft: 16, display: "flex", flexDirection: "column", gap: 16 }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, fontWeight: 500, color: "#121212" }}>
                       <span style={{ color: "#8A0F14", fontSize: 16 }}>◈</span>
-                      {locale === "en" ? "Powered by Tech" : "ขับเคลื่อนด้วยเทคโนโลยี"}
+                      {locale === "en" ? "Powered by Tech" : "มีเทคโนโลยีหนุนหลัง"}
                     </div>
                     <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, fontWeight: 500, color: "rgba(18,18,18,0.5)" }}>
                       <span style={{ fontSize: 16 }}>◎</span>
-                      {locale === "en" ? "Expert Facilitation" : "ผู้อำนวยการผู้เชี่ยวชาญ"}
+                      {locale === "en" ? "Expert Facilitation" : "กระบวนกรผู้เชี่ยวชาญ"}
                     </div>
                     <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, fontWeight: 500, color: "rgba(18,18,18,0.5)" }}>
                       <span style={{ fontSize: 16 }}>◷</span>
-                      {locale === "en" ? "Real-time Competition" : "การแข่งขันแบบเรียลไทม์"}
+                      {locale === "en" ? "Real-time Competition" : "แข่งกันแบบเรียลไทม์"}
                     </div>
                     <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, fontWeight: 500, color: "rgba(18,18,18,0.5)" }}>
                       <span style={{ fontSize: 16 }}>◉</span>
-                      {locale === "en" ? "Post-workshop Analysis" : "การวิเคราะห์หลังเวิร์กชอป"}
+                      {locale === "en" ? "Post-workshop Analysis" : "วิเคราะห์ผลหลังเวิร์กชอป"}
                     </div>
                   </div>
 
                   <div style={{ marginTop: 40 }}>
                     <Link href="/programs/pathway" style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 600, color: "#8A0F14", textDecoration: "none" }}>
-                      {locale === "en" ? "See the full pathway →" : "ดูเส้นทางเต็ม →"}
+                      {locale === "en" ? "See the full pathway →" : "ดูเส้นทางทั้งหมด →"}
                     </Link>
                   </div>
                 </div>
@@ -231,7 +231,7 @@ export default async function ProgramsPage() {
           `}</style>
         </section>
 
-        <ContextualTestimonials audience="student" label={locale === "en" ? "▸ What participants say" : "▸ สิ่งที่ผู้เข้าร่วมพูด"} limit={3} />
+        <ContextualTestimonials audience="student" label={locale === "en" ? "▸ What participants say" : "▸ เสียงจากผู้เข้าร่วม"} limit={3} />
 
         <CTASection />
       </main>

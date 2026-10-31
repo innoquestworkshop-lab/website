@@ -11,7 +11,7 @@ import { getLocale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   title: "InnoQuest for Parents | Kids Programs Bangkok",
-  description: "Give your child ages 10–18 real entrepreneurship & innovation skills. InnoQuest camps, workshops & simulations in Bangkok build creativity, teamwork, and business thinking.",
+  description: "Give your child real entrepreneurship and innovation skills. InnoQuest camps, workshops, and simulations in Bangkok build creativity, teamwork, and business thinking for ages 10–18.",
   keywords: [
     "youth programs Bangkok",
     "kids entrepreneurship camp Thailand",
@@ -89,8 +89,8 @@ export default async function ParentsPage() {
               </div>
               <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(18,18,18,0.6)" }}>
                 {locale === "en"
-                  ? "Every InnoQuest program is designed to develop skills that schools don't prioritise — creativity, resilience, and the confidence to back your own ideas."
-                  : "ทุกโปรแกรม InnoQuest ออกแบบมาเพื่อพัฒนาทักษะที่โรงเรียนไม่ได้ให้ความสำคัญ — ความคิดสร้างสรรค์ ความยืดหยุ่น และความมั่นใจที่จะสนับสนุนแนวคิดของตนเอง"}
+                  ? "Every InnoQuest program builds skills that schools don't prioritise: creativity, resilience, and the confidence to back their own ideas."
+                  : "ทุกโปรแกรมของ InnoQuest ฝึกทักษะที่โรงเรียนไม่ค่อยเน้น ทั้งความคิดสร้างสรรค์ การล้มแล้วลุกได้ และความมั่นใจที่จะเชื่อในไอเดียของตัวเอง"}
               </p>
             </div>
 
@@ -122,7 +122,7 @@ export default async function ParentsPage() {
           `}</style>
         </section>
 
-        <ContextualTestimonials audience={["parent", "student"]} label={locale === "en" ? "▸ What parents & students say" : "▸ สิ่งที่ผู้ปกครองและนักเรียนพูด"} />
+        <ContextualTestimonials audience={["parent", "student"]} label={locale === "en" ? "▸ What parents & students say" : "▸ เสียงจากผู้ปกครองและนักเรียน"} />
         <CTASection />
       </main>
       <Footer />

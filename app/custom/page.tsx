@@ -10,7 +10,7 @@ import { getLocale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   title: "Bespoke Learning Programs | InnoQuest Bangkok",
-  description: "InnoQuest designs experiential learning programs from scratch — built around your goals, audience, and format. Trusted by schools and corporates across Bangkok.",
+  description: "InnoQuest designs experiential learning programs from scratch, built around your goals, audience, and format, for schools and corporates.",
   keywords: [
     "bespoke learning programs Bangkok",
     "custom innovation workshops",

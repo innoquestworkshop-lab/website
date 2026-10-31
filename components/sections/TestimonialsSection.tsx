@@ -113,13 +113,13 @@ export function TestimonialsSection() {
               className={`text-[11px] font-medium uppercase tracking-[0.14em] transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
               style={{ color: "#8A0F14", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
             >
-              {locale === "en" ? "▸ Testimonials" : "▸ คำรีวิว"}
+              {locale === "en" ? "▸ Testimonials" : "▸ รีวิว"}
             </p>
             <h2
               className={`mt-[18px] font-medium leading-[1.05] transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
               style={{ fontSize: "clamp(34px, 4.4vw, 56px)", letterSpacing: "-0.03em", transitionDelay: "80ms" }}
             >
-              {locale === "en" ? <>What people are <span className="scribble">saying</span>.</> : <>สิ่งที่ผู้คน<span className="scribble">พูดถึง</span></>}
+              {locale === "en" ? <>What people are <span className="scribble">saying</span>.</> : <>คนที่เคยมา<span className="scribble">ว่ายังไง</span>บ้าง</>}
             </h2>
           </div>
 

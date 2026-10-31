@@ -12,7 +12,7 @@ import { getLocale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   title: "CSR Youth Innovation Programs Bangkok | InnoQuest",
-  description: "Partner with InnoQuest for CSR that counts — Bangkok-based youth innovation workshops delivering measurable impact for Thai students, schools, and your brand.",
+  description: "Partner with InnoQuest for CSR that counts. Our Bangkok-based youth innovation workshops deliver measurable impact for Thai students, schools, and your brand.",
   keywords: [
     "CSR Thailand",
     "corporate social responsibility Bangkok",
@@ -257,7 +257,7 @@ export default async function CorporatesPage() {
           `}</style>
         </section>
 
-        <ContextualTestimonials audience="corporate" label={locale === "en" ? "▸ What corporates say" : "▸ สิ่งที่องค์กรพูด"} />
+        <ContextualTestimonials audience="corporate" label={locale === "en" ? "▸ What corporates say" : "▸ เสียงจากองค์กร"} />
         <CTASection />
       </main>
       <Footer />

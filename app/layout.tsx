@@ -19,11 +19,11 @@ const ibmPlexThai = IBM_Plex_Sans_Thai({
 
 export const metadata: Metadata = {
   title: {
-    template: "%s — InnoQuest | Youth Learning Programs Thailand",
-    default: "InnoQuest | Digital Gamified Education Solution",
+    template: "%s | InnoQuest Youth Learning Programs Thailand",
+    default: "InnoQuest | Business Simulations and Workshops for Ages 10 to 18",
   },
   description:
-    "We design gamified, real-world simulations and custom learning programs for schools and corporate youth initiatives — play-driven experiences with measurable outcomes.",
+    "We design gamified simulations and custom learning programs for schools and corporate youth initiatives, and we measure the results.",
   metadataBase: new URL("https://innoquest.tech"),
   openGraph: {
     siteName: "InnoQuest",

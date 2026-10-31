@@ -104,7 +104,7 @@ export default function Image() {
               display: "flex",
             }}
           >
-            Experiential learning programs for schools, corporates &amp; institutions — science-backed, play-driven, designed for the next generation.
+            The skills schools forgot to teach. Business simulations and live workshops for ages 10 to 18.
           </div>
         </div>
 

@@ -7,7 +7,7 @@ import { stats, schoolsStat, schoolsStatTh, yearsRunningStat, yearsRunningStatTh
 import { getLocale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
-  title: "Real Reviews | InnoQuest — Students, Schools & Corporates",
+  title: "Real Reviews from Students, Schools & Corporates",
   description: "Students grew, schools transformed, corporates ran CSR programs worth talking about. See what parents, teachers, and HR teams say about InnoQuest workshops in Bangkok.",
   keywords: [
     "InnoQuest testimonials",
@@ -112,7 +112,7 @@ export default async function TestimonialsPage() {
                     const studentsStat = stats.en.find((s) => s.label === "Students trained")!;
                     const satisfactionStat = stats.en.find((s) => s.label === "Participants Satisfaction")!;
                     return [
-                      { num: `${studentsStat.n}${studentsStat.suf}`, label: locale === "en" ? studentsStat.label : "นักเรียนที่ผ่านการฝึก" },
+                      { num: `${studentsStat.n}${studentsStat.suf}`, label: locale === "en" ? studentsStat.label : "นักเรียนที่ผ่านการอบรม" },
                       { num: `${schoolsS.n}${schoolsS.suf}`,         label: schoolsS.label },
                       { num: `${satisfactionStat.n}${satisfactionStat.suf}`, label: locale === "en" ? satisfactionStat.label : "ความพึงพอใจของผู้เข้าร่วม" },
                       { num: `${yearsS.n}${yearsS.suf}`,             label: yearsS.label },

@@ -21,24 +21,24 @@ export const teamPage = {
     hero: {
       eyebrow: "▸ Our people",
       heading: "The people behind InnoQuest.",
-      sub: "Facilitators, speakers, designers, and builders who care deeply about the next generation.",
+      sub: "Facilitators, speakers, designers, and builders who care about the next generation.",
     },
     joinUs: {
       heading: "Want to facilitate\nwith us?",
-      body: "We're always looking for passionate facilitators, speakers, and designers who believe in the power of learning through doing.",
+      body: "We're always looking for facilitators, speakers, and designers who believe kids learn by doing.",
       cta: { text: "Get in touch →", href: "/contact" },
     },
   },
   th: {
     hero: {
-      eyebrow: "▸ บุคลากรของเรา",
+      eyebrow: "▸ ทีมของเรา",
       heading: "คนเบื้องหลัง InnoQuest",
-      sub: "วิทยากร วิทยากรรับเชิญ นักออกแบบ และผู้สร้างที่ใส่ใจรุ่นต่อไปอย่างลึกซึ้ง",
+      sub: "วิทยากร วิทยากรรับเชิญ นักออกแบบ และคนลงมือสร้าง ที่ใส่ใจคนรุ่นต่อไป",
     },
     joinUs: {
-      heading: "ต้องการอำนวยความสะดวก\nกับเรา?",
-      body: "เรากำลังมองหาวิทยากร วิทยากรรับเชิญ และนักออกแบบที่มีความหลงใหลที่เชื่อในพลังของการเรียนรู้ผ่านการลงมือทำ",
-      cta: { text: "ติดต่อ →", href: "/contact" },
+      heading: "อยากเป็นวิทยากร\nกับเราไหม?",
+      body: "เราเปิดรับวิทยากร วิทยากรรับเชิญ และนักออกแบบอยู่เสมอ ถ้าคุณเชื่อว่าเด็กเรียนรู้จากการลงมือทำ",
+      cta: { text: "ติดต่อเรา →", href: "/contact" },
     },
   },
 } as const;
@@ -49,6 +49,6 @@ export const team: TeamMember[] = [
     name: "Founder & CEO",
     role: "InnoQuest",
     type: "speaker",
-    bio: "A youth educator and entrepreneur passionate about bridging the gap between traditional schooling and real-world skills. Built InnoQuest from a single workshop into Thailand's leading youth experiential learning company.",
+    bio: "A youth educator and entrepreneur closing the gap between traditional schooling and real-world skills. Built InnoQuest from a single workshop into Thailand's leading youth experiential learning company.",
   },
 ];

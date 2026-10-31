@@ -78,7 +78,7 @@ export function PartnersSection() {
             fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace",
           }}
         >
-          ▸ Our Ecosystem
+          ▸ Who we work with
         </p>
       </div>
 

@@ -11,7 +11,7 @@ export const breakTheMarket: Program = {
   groupSize: "20–80 students",
   format: "In-person",
   description:
-    "Teams are assigned a legacy industry and challenged to break it — reinventing its core assumptions using design thinking, technology, and creative disruption frameworks. Think: what would you build if you had to kill your own company? Fast, competitive, and full of energy.",
+    "Teams are assigned a legacy industry and challenged to break it, reinventing its core assumptions using design thinking, technology, and creative disruption frameworks. Think: what would you build if you had to kill your own company? Fast, competitive, and full of energy.",
   audiences: ["school", "student", "corporate"],
   outcomes: [
     { icon: "bolt", title: "Disruptive thinking", description: "Challenging assumptions that everyone else takes for granted" },

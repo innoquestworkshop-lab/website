@@ -227,8 +227,8 @@ export default async function WhatWeDoPage() {
             </p>
             <h2 className="h-section" style={{ marginBottom: 48, maxWidth: 680 }}>
               {locale === "en"
-                ? <>Programs for <span className="scribble">every context</span>.</>
-                : <>โปรแกรมสำหรับ<span className="scribble">ทุกบริบท</span></>}
+                ? <>Programs for <span className="scribble">every audience</span>.</>
+                : <>โปรแกรมสำหรับ<span className="scribble">ทุกกลุ่ม</span></>}
             </h2>
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="audiences-grid">

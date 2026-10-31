@@ -10,7 +10,7 @@ import { getLocale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   title: "Entrepreneurial Pathway Program | InnoQuest Thailand",
-  description: "Step through every stage of building a business — ideation to pitch — via InnoQuest's exclusive digital simulation engine. A structured entrepreneurship journey for students aged 10–18.",
+  description: "Step through every stage of building a business, from ideation to pitch, on InnoQuest's own digital simulation engine. A structured entrepreneurship pathway for students aged 10–18.",
   keywords: [
     "entrepreneurship program Thailand",
     "business simulation for students",
@@ -84,19 +84,19 @@ export default async function PathwayPage() {
                   <div style={{ borderLeft: "2px solid rgba(18,18,18,0.1)", paddingLeft: 16, display: "flex", flexDirection: "column", gap: 16 }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, fontWeight: 500, color: "#121212" }}>
                       <span style={{ color: "#8A0F14", fontSize: 16 }}>◈</span>
-                      {locale === "en" ? "Powered by Tech" : "ขับเคลื่อนด้วยเทคโนโลยี"}
+                      {locale === "en" ? "Powered by Tech" : "มีเทคโนโลยีหนุนหลัง"}
                     </div>
                     <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, fontWeight: 500, color: "rgba(18,18,18,0.5)" }}>
                       <span style={{ fontSize: 16 }}>◎</span>
-                      {locale === "en" ? "Expert Facilitation" : "ผู้อำนวยการผู้เชี่ยวชาญ"}
+                      {locale === "en" ? "Expert Facilitation" : "กระบวนกรผู้เชี่ยวชาญ"}
                     </div>
                     <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, fontWeight: 500, color: "rgba(18,18,18,0.5)" }}>
                       <span style={{ fontSize: 16 }}>◷</span>
-                      {locale === "en" ? "Real-time Competition" : "การแข่งขันแบบเรียลไทม์"}
+                      {locale === "en" ? "Real-time Competition" : "แข่งกันแบบเรียลไทม์"}
                     </div>
                     <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, fontWeight: 500, color: "rgba(18,18,18,0.5)" }}>
                       <span style={{ fontSize: 16 }}>◉</span>
-                      {locale === "en" ? "Post-workshop Analysis" : "การวิเคราะห์หลังเวิร์กชอป"}
+                      {locale === "en" ? "Post-workshop Analysis" : "วิเคราะห์ผลหลังเวิร์กชอป"}
                     </div>
                   </div>
                 </div>
@@ -192,7 +192,7 @@ export default async function PathwayPage() {
           `}</style>
         </section>
 
-        <ContextualTestimonials audience="school" label={locale === "en" ? "▸ Trusted by educators" : "▸ ที่ไว้วางใจโดยนักการศึกษา"} limit={3} />
+        <ContextualTestimonials audience="school" label={locale === "en" ? "▸ Trusted by educators" : "▸ นักการศึกษาไว้วางใจเรา"} limit={3} />
 
         <CTASection />
       </main>

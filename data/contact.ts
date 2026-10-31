@@ -5,7 +5,7 @@ export const contactPage = {
     hero: {
       eyebrow: "▸ Get in touch",
       heading: "Let's talk.",
-      sub: "No commitment, just a conversation. Tell us what you're looking for and we'll figure out the best way to help.",
+      sub: "Tell us what you're looking for and we'll work out how we can help. No commitment.",
     },
     infoCards: [
       { label: "Phone", value: site.contact.phone, note: site.contact.phoneHours, iconKey: "phone" as const },
@@ -27,7 +27,7 @@ export const contactPage = {
     hero: {
       eyebrow: "▸ ติดต่อเรา",
       heading: "คุยกันได้เลย",
-      sub: "ไม่ต้องตัดสินใจล่วงหน้า แค่พูดคุยกัน บอกเราว่าคุณกำลังมองหาอะไร แล้วเราจะหาวิธีช่วยที่ดีที่สุด",
+      sub: "บอกเรามาว่ากำลังมองหาอะไร แล้วเราจะดูให้ว่าช่วยอะไรได้บ้าง ไม่มีข้อผูกมัด",
     },
     infoCards: [
       { label: "โทรศัพท์", value: site.contact.phone, note: "จันทร์–ศุกร์ 9:00–18:00", iconKey: "phone" as const },

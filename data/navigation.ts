@@ -14,7 +14,7 @@ export const navLinks: Record<"en" | "th", NavItem[]> = {
     { label: "For Schools", href: "/schools" },
     { label: "Corporate & CSR", href: "/corporates" },
     { label: "Design Yours", href: "/custom" },
-    { label: "🎮 Interactive Play", href: "https://interactive.innoquest.tech", external: true, highlight: true },
+    { label: "Interactive Play", href: "https://interactive.innoquest.tech", external: true, highlight: true },
     {
       label: "About",
       href: "/about",
@@ -32,14 +32,14 @@ export const navLinks: Record<"en" | "th", NavItem[]> = {
     { label: "สำหรับโรงเรียน", href: "/schools" },
     { label: "องค์กรและ CSR", href: "/corporates" },
     { label: "ออกแบบเอง", href: "/custom" },
-    { label: "🎮 เล่นอินเทอร์แอคทีฟ", href: "https://interactive.innoquest.tech", external: true, highlight: true },
+    { label: "เล่นอินเทอร์แอคทีฟ", href: "https://interactive.innoquest.tech", external: true, highlight: true },
     {
       label: "เกี่ยวกับ",
       href: "/about",
       dropdown: [
         { label: "เกี่ยวกับเรา", href: "/about" },
-        { label: "บุคลากรของเรา", href: "/team" },
-        { label: "คำรีวิว", href: "/testimonials" },
+        { label: "ทีมของเรา", href: "/team" },
+        { label: "รีวิว", href: "/testimonials" },
       ],
     },
   ],
@@ -57,7 +57,7 @@ export const footerCols = {
       ],
     },
     {
-      h: "Audiences",
+      h: "Who it's for",
       items: [
         { label: "For corporates", href: "/corporates" },
         { label: "For schools", href: "/schools" },
@@ -77,7 +77,7 @@ export const footerCols = {
   ],
   th: [
     {
-      h: "สำรวจ",
+      h: "ดูเพิ่มเติม",
       items: [
         { label: "สิ่งที่เราทำ", href: "/what-we-do" },
         { label: "บริการ", href: "/services" },
@@ -86,7 +86,7 @@ export const footerCols = {
       ],
     },
     {
-      h: "กลุ่มเป้าหมาย",
+      h: "สำหรับใคร",
       items: [
         { label: "สำหรับองค์กร", href: "/corporates" },
         { label: "สำหรับโรงเรียน", href: "/schools" },
@@ -98,8 +98,8 @@ export const footerCols = {
       h: "บริษัท",
       items: [
         { label: "เกี่ยวกับเรา", href: "/about" },
-        { label: "บุคลากรของเรา", href: "/team" },
-        { label: "คำรีวิว", href: "/testimonials" },
+        { label: "ทีมของเรา", href: "/team" },
+        { label: "รีวิว", href: "/testimonials" },
         { label: "ติดต่อ", href: "/contact" },
       ],
     },
