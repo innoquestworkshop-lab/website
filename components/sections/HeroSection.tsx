@@ -1,22 +1,22 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { stats } from "@/data/stats";
 import { heroSection } from "@/data/hero";
 import { useLocale } from "@/components/LanguageProvider";
+import { ArrowIcon, Masonry, type Tile } from "@/components/ui/system";
 
 function useCountUp(to: number, active: boolean, duration = 1500) {
-  const [val, setVal] = useState(0);
+  const [val, setVal] = useState(to);
   useEffect(() => {
     if (!active) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setVal(to); return; }
     const start = performance.now();
     let raf: number;
     const tick = (t: number) => {
       const p = Math.min(1, (t - start) / duration);
-      const eased = 1 - Math.pow(1 - p, 3);
-      setVal(Math.round(to * eased));
+      setVal(Math.round(to * (1 - Math.pow(1 - p, 3))));
       if (p < 1) raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
@@ -40,189 +40,70 @@ function StatItem({ n, suf, label }: { n: number; suf: string; label: string }) 
   const val = useCountUp(n, active);
   return (
     <div ref={ref}>
-      <div
-        className="font-medium leading-none tabular-nums"
-        style={{ fontSize: "clamp(40px, 4.4vw, 64px)", color: "#8A0F14", letterSpacing: "-0.03em" }}
-      >
-        {val}{suf}
-      </div>
-      <div
-        className="mt-[10px] uppercase tracking-[0.1em] text-[11px]"
-        style={{ color: "rgba(245,240,234,0.65)", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
-      >
-        {label}
-      </div>
+      <div className="num">{val}{suf}</div>
+      <p className="t-small">{label}</p>
     </div>
   );
 }
 
-function ArrowIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <line x1="5" y1="12" x2="19" y2="12" />
-      <polyline points="12 5 19 12 12 19" />
-    </svg>
-  );
-}
-
+const columns: Tile[][] = [
+  [
+    { src: "/images/events/IMG_8856.jpg", alt: "Students working through a challenge at an InnoQuest workshop", ratio: "3 / 4" },
+    { fill: "red", ratio: "1 / 1" },
+    { src: "/images/events/price-war-030.jpg", alt: "Students celebrating during the Price War simulation", ratio: "4 / 5" },
+    { fill: "sand", ratio: "3 / 4" },
+  ],
+  [
+    { fill: "sand", ratio: "4 / 3" },
+    { src: "/images/events/price-war-026.jpg", alt: "A facilitator leading the Price War simulation", ratio: "3 / 4" },
+    { mark: true, ratio: "1 / 1" },
+    { src: "/images/events/IMG_7900.jpg", alt: "Students talking through ideas in a small group", ratio: "4 / 5" },
+  ],
+  [
+    { src: "/images/events/price-war-062.jpg", alt: "Teams at their tables during a live simulation", ratio: "4 / 5" },
+    { fill: "dark", ratio: "3 / 4" },
+    { src: "/images/events/break-the-market-5760.jpg", alt: "Students planning at Break the Market", ratio: "1 / 1" },
+    { fill: "sand", ratio: "4 / 5" },
+    { src: "/images/events/price-war-141.jpg", alt: "A student reading results on a laptop", ratio: "3 / 4" },
+  ],
+];
 
 export function HeroSection() {
   const { locale } = useLocale();
   const hs = heroSection[locale];
-  const statsL = stats[locale];
-  const [started, setStarted] = useState(false);
-  useEffect(() => {
-    const t = setTimeout(() => setStarted(true), 100);
-    return () => clearTimeout(t);
-  }, []);
 
   return (
-    <section
-      id="top"
-      className="relative overflow-hidden dot-bg"
-      style={{
-        background: "#121212",
-        color: "#F5F0EA",
-        paddingTop: 140,
-        paddingBottom: 96,
-      }}
-    >
-      {/* Decorative circles */}
-      <div
-        className="absolute pointer-events-none rounded-full animate-float-slow"
-        style={{
-          top: -160, right: -120, width: 560, height: 560,
-          background: "#8A0F14", opacity: 0.11, filter: "blur(2px)",
-        }}
-      />
-      <div
-        className="absolute pointer-events-none rounded-full animate-float-slower"
-        style={{
-          bottom: -260, left: "40%", width: 640, height: 640,
-          background: "#8A0F14", opacity: 0.07,
-        }}
-      />
-
-      <div className="relative z-10 max-w-[1240px] mx-auto px-8">
-        {/* Eyebrow */}
-        <p
-          className={`text-[11px] font-medium uppercase tracking-[0.14em] mb-7 transition-all duration-500 ${started ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
-          style={{ color: "#8A0F14", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
-        >
-          {hs.eyebrow}
-        </p>
-
-        {/* Headline */}
-        <h1
-          className="font-medium leading-[0.98] tracking-[-0.035em]"
-          style={{ fontSize: "clamp(44px, 7.2vw, 96px)" }}
-        >
-          <span
-            className={`block text-[#F5F0EA] transition-all duration-700 ${started ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
-            style={{ transitionDelay: "80ms" }}
-          >
-            {hs.headingLine1}
-          </span>
-          <span
-            className={`block transition-all duration-700 ${started ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
-            style={{ color: "#8A0F14", transitionDelay: "240ms" }}
-          >
-            {hs.headingLine2}
-          </span>
-        </h1>
-
-        {/* Sub */}
-        <p
-          className={`mt-8 text-[18px] leading-[1.55] max-w-[640px] transition-all duration-500 ${started ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
-          style={{ color: "rgba(245,240,234,0.7)", transitionDelay: "500ms" }}
-        >
-          {hs.sub}
-        </p>
-
-        {/* Body */}
-        <p
-          className={`mt-5 text-[15px] leading-[1.75] max-w-[560px] transition-all duration-500 ${started ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
-          style={{ color: "rgba(245,240,234,0.5)", transitionDelay: "580ms" }}
-        >
-          {hs.body}
-        </p>
-
-        {/* CTAs */}
-        <div
-          className={`flex flex-wrap gap-3 mt-9 transition-all duration-500 ${started ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
-          style={{ transitionDelay: "700ms" }}
-        >
-          <Link
-            href={hs.cta1.href}
-            className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full transition-all active:scale-[0.97]"
-            style={{ background: "#8A0F14", color: "#F5F0EA" }}
-          >
-            {hs.cta1.text} <ArrowIcon />
-          </Link>
-          <Link
-            href={hs.cta2.href}
-            className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border transition-colors"
-            style={{ color: "#F5F0EA", borderColor: "rgba(245,240,234,0.5)" }}
-          >
-            {hs.cta2.text}
-          </Link>
-        </div>
-
-        {/* Hero image grid */}
-        <div
-          className={`mt-16 transition-all duration-700 ${started ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
-          style={{ transitionDelay: "800ms" }}
-        >
-          <div className="grid gap-4" style={{ gridTemplateColumns: "1.4fr 1fr 1fr" }}>
-            <div className="relative overflow-hidden rounded-lg" style={{ height: 320 }}>
-              <Image
-                src="/images/events/IMG_8856.jpg"
-                alt="Students at workshop"
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-            <div className="relative overflow-hidden rounded-lg" style={{ height: 320 }}>
-              <Image
-                src="/images/events/price-war-026.jpg"
-                alt="Students at Price War workshop"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="relative overflow-hidden rounded-lg" style={{ height: 320 }}>
-              <Image
-                src="/images/events/price-war-062.jpg"
-                alt="Students at Price War workshop"
-                fill
-                className="object-cover"
-              />
-            </div>
+    <section id="top" className="hero">
+      <div className="hero-grid">
+        <div className="hero-copy">
+          <p className="eyebrow">{hs.eyebrow.replace(/^▸\s*/, "")}</p>
+          <h1 className="t-display">
+            <span style={{ display: "block" }}>{hs.headingLine1}</span>
+            <span className="accent" style={{ display: "block" }}>{hs.headingLine2}</span>
+          </h1>
+          <p className="lede" style={{ fontSize: 18, color: "var(--ink)" }}>{hs.sub}</p>
+          <p className="lede">{hs.body}</p>
+          <div className="actions">
+            <Link href={hs.cta1.href} className="btn btn-primary">
+              {hs.cta1.text} <ArrowIcon />
+            </Link>
+            <Link href={hs.cta2.href} className="btn btn-secondary">
+              {hs.cta2.text}
+            </Link>
           </div>
         </div>
+        <div className="hero-mosaic">
+          <Masonry columns={columns} offsets={[-64, -160, -24]} enter priority />
+        </div>
+      </div>
 
-        {/* Stats */}
-        <div
-          className="mt-16 pt-8 grid"
-          style={{
-            borderTop: "1px solid rgba(245,240,234,0.15)",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: 24,
-          }}
-        >
-          {statsL.map((s) => (
+      <div className="wrap" style={{ paddingBlock: "32px 64px" }}>
+        <div className="stat-row" style={{ paddingTop: 32, borderTop: "1px solid var(--hairline)" }}>
+          {stats[locale].map((s) => (
             <StatItem key={s.label} {...s} />
           ))}
         </div>
       </div>
-
-      <style>{`
-        @media (max-width: 900px) {
-          #top .hero-img-grid { grid-template-columns: 1fr !important; }
-          #top .stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
-        }
-      `}</style>
     </section>
   );
 }

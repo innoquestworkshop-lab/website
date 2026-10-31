@@ -5,6 +5,9 @@ import type { Testimonial } from "@/data/testimonials";
 /** Originals are up to 8 MB. Every event photo has a 1200px copy in /web. */
 export const web = (src: string) => src.replace("/images/events/", "/images/events/web/");
 
+/** Drops the decorative "▸ " marker some data strings carry. The words stay as written. */
+export const plain = (s: string) => s.replace(/^▸\s*/, "");
+
 export function ArrowIcon({ size = 16 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

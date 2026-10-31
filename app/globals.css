@@ -129,6 +129,8 @@
   }
 }
 
+@layer components {
+
 /* ============================================================
    Type scale
    ============================================================ */
@@ -276,6 +278,14 @@ html[lang="th"] .h-section {
 
 .sec-head .eyebrow {
   margin-bottom: 8px;
+}
+
+.sec-head-aside {
+  justify-self: end;
+}
+
+@media (max-width: 900px) {
+  .sec-head-aside { justify-self: start; }
 }
 
 .sec-head--stack {
@@ -639,6 +649,112 @@ a:focus-visible > .tile img {
 .pin:hover .h-sm,
 .pin:hover .h-card {
   color: var(--red-ink);
+}
+
+.prog-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+  gap: 16px;
+}
+
+.prog-feature-side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .prog-feature { grid-template-columns: minmax(0, 1fr); }
+  .prog-feature-side { flex-direction: row; flex-wrap: wrap; }
+  .prog-feature-side > * { flex: 1 1 240px; }
+}
+
+/* Journey */
+
+.journey {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.journey-step {
+  position: relative;
+}
+
+.journey-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 28px;
+  left: 72px;
+  right: -16px;
+  height: 1px;
+  background: var(--hairline);
+}
+
+.journey-icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius);
+}
+
+@media (max-width: 900px) {
+  .journey { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .journey-step::after { display: none; }
+}
+
+@media (max-width: 480px) {
+  .journey { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* CTA: a large card with a tile wall bleeding off its right edge */
+
+.cta-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 32px;
+  overflow: hidden;
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+}
+
+.cta-copy {
+  padding: 64px 0 64px 64px;
+  align-self: center;
+}
+
+.cta-title {
+  margin-top: 8px;
+  font-size: clamp(28px, 3.2vw, 44px);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+html[lang="th"] .cta-title {
+  line-height: 1.4;
+}
+
+.cta-mosaic {
+  position: relative;
+  min-height: 420px;
+  overflow: hidden;
+}
+
+.cta-mosaic .masonry {
+  position: absolute;
+  inset: 0 -48px auto 0;
+}
+
+@media (max-width: 900px) {
+  .cta-card { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .cta-copy { padding: 32px 24px 24px; }
+  .cta-mosaic { min-height: 260px; }
+  .cta-mosaic .masonry { inset: 0 -48px auto 24px; }
 }
 
 /* ============================================================
@@ -1080,3 +1196,5 @@ a:focus-visible > .tile img {
     transform: none;
   }
 }
+
+} /* end @layer components */
