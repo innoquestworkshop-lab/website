@@ -115,14 +115,14 @@ export default async function TestimonialsPage() {
                   <h2 className="h-section">{label}.</h2>
                   <span className="pill pill--red">{tag}</span>
                 </div>
-                <div className={items.length >= 2 ? "pins" : "pins pins--2"}>
+                <div className={items.length >= 4 ? "pins" : "grid-3"} style={{ alignItems: "start" }}>
                   {items.map((t, i) => (
                     <Fragment key={t.id}>
                       {i === 1 && photo && <Photo src={photo.src} alt={photo.alt} ratio="4 / 5" />}
                       <QuoteCard t={t} badge={t.extraBadge} soft={canvas} />
                     </Fragment>
                   ))}
-                  {items.length === 1 && photo && <Photo src={photo.src} alt={photo.alt} ratio="4 / 3" />}
+                  {items.length === 1 && photo && <Photo src={photo.src} alt={photo.alt} ratio="4 / 5" />}
                 </div>
               </div>
             </section>

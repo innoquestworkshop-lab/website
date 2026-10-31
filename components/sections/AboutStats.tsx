@@ -5,9 +5,11 @@ import { stats } from "@/data/stats";
 import { useLocale } from "@/components/LanguageProvider";
 
 function useCountUp(to: number, active: boolean, duration = 1500) {
-  const [val, setVal] = useState(0);
+  // Starts at the real value so no-JS and reduced-motion visitors see the true number.
+  const [val, setVal] = useState(to);
   useEffect(() => {
     if (!active) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setVal(to); return; }
     const start = performance.now();
     let raf: number;
     const tick = (t: number) => {
