@@ -24,6 +24,8 @@
 
 /* ---- CSS Custom Properties (used as var(--red) etc.) ---- */
 :root {
+  --font-noto-sans-thai: "Noto Sans Thai Variable";
+  --font-ibm-plex-thai: "IBM Plex Sans Thai";
   --red: #8A0F14;
   --black: #121212;
   --warm-white: #F5F0EA;

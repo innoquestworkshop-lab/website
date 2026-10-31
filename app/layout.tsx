@@ -1,21 +1,11 @@
 import type { Metadata } from "next";
-import { Noto_Sans_Thai, IBM_Plex_Sans_Thai } from "next/font/google";
 import { cookies } from "next/headers";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import type { Locale } from "@/lib/i18n";
+import "@fontsource-variable/noto-sans-thai";
+import "@fontsource/ibm-plex-sans-thai/400.css";
+import "@fontsource/ibm-plex-sans-thai/500.css";
 import "./globals.css";
-
-const notoSansThai = Noto_Sans_Thai({
-  variable: "--font-noto-sans-thai",
-  subsets: ["latin", "thai"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
-});
-
-const ibmPlexThai = IBM_Plex_Sans_Thai({
-  variable: "--font-ibm-plex-thai",
-  subsets: ["latin", "thai"],
-  weight: ["400", "500"],
-});
 
 export const metadata: Metadata = {
   title: {
@@ -53,7 +43,7 @@ export default async function RootLayout({
   const locale: Locale = store.get("locale")?.value === "th" ? "th" : "en";
 
   return (
-    <html lang={locale} className={`${notoSansThai.variable} ${ibmPlexThai.variable}`}>
+    <html lang={locale}>
       <head>
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`} />
         <script dangerouslySetInnerHTML={{
