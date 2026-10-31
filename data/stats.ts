@@ -1,13 +1,13 @@
 export const stats = {
   en: [
-    { n: 400, suf: "+", label: "Students trained" },
-    { n: 100, suf: "+", label: "Session hours" },
+    { n: 440, suf: "+", label: "Students trained" },
+    { n: 200, suf: "+", label: "Session hours" },
     { n: 96,  suf: "%", label: "Participants Satisfaction" },
     { n: 100, suf: "%", label: "Pilot institutions rebooked" },
   ],
   th: [
-    { n: 400, suf: "+", label: "นักเรียนที่ผ่านการอบรม" },
-    { n: 100, suf: "+", label: "ชั่วโมงการอบรม" },
+    { n: 440, suf: "+", label: "นักเรียนที่ผ่านการอบรม" },
+    { n: 200, suf: "+", label: "ชั่วโมงการอบรม" },
     { n: 96,  suf: "%", label: "ความพึงพอใจของผู้เข้าร่วม" },
     { n: 100, suf: "%", label: "สถาบันนำร่องที่กลับมาใช้บริการอีกครั้ง" },
   ],

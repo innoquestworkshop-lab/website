@@ -37,7 +37,7 @@ export function ProgramsSection() {
   const featured = allPrograms.find((p) => p.featured) ?? allPrograms[0];
   const rest = allPrograms.filter((p) => p.slug !== featured.slug);
   const sat = stats.en.find((s) => s.label === "Participants Satisfaction")?.n ?? 96;
-  const students = stats.en.find((s) => s.label === "Students trained")?.n ?? 400;
+  const students = stats.en.find((s) => s.label === "Students trained")?.n ?? 440;
 
   return (
     <section className="sec">
