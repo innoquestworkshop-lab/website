@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
 import { ServicesNav } from "@/components/sections/ServicesNav";
 import { servicesPage, designServices, deliveryServices } from "@/data/services";
+import { getLocale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   title: "Services | InnoQuest — Design, Delivery & Talent",
@@ -27,8 +28,11 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
 };
 
-export default function ServicesPage() {
-  const { hero, nav, design, delivery } = servicesPage;
+export default async function ServicesPage() {
+  const locale = await getLocale();
+  const { hero, nav, design, delivery } = servicesPage[locale];
+  const designSvcs = designServices[locale];
+  const deliverySvcs = deliveryServices[locale];
 
   return (
     <>
@@ -46,15 +50,14 @@ export default function ServicesPage() {
           <div className="max-w-[1240px] mx-auto px-8 relative z-10">
             <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>▸ {hero.eyebrow}</p>
             <h1 style={{ fontSize: "clamp(36px, 5vw, 68px)", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05, maxWidth: 720 }}>
-              Design what you need.{" "}
-              <span style={{ color: "#8A0F14" }}>Deliver what you have.</span>
+              {hero.heading}
             </h1>
             <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(245,240,234,0.7)", maxWidth: 520, marginTop: 24 }}>
               {hero.sub}
             </p>
             <div style={{ marginTop: 32 }}>
               <Link href="/contact" className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#8A0F14", color: "#F5F0EA" }}>
-                Talk to us →
+                {locale === "en" ? "Talk to us →" : "ติดต่อเรา →"}
               </Link>
             </div>
           </div>
@@ -74,7 +77,7 @@ export default function ServicesPage() {
               {design.sub}
             </p>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="design-svc-grid">
-              {designServices.map((s) => (
+              {designSvcs.map((s) => (
                 <div key={s.title} className="card-lift" style={{
                   background: "#FFFFFF", borderRadius: 14, padding: 28,
                   minHeight: 220, display: "flex", flexDirection: "column", gap: 14,
@@ -103,7 +106,7 @@ export default function ServicesPage() {
               {delivery.sub}
             </p>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="delivery-svc-grid">
-              {deliveryServices.map((s) => (
+              {deliverySvcs.map((s) => (
                 <div key={s.title} className="card-lift" style={{
                   background: "#F5F0EA", borderRadius: 14, padding: 28,
                   minHeight: 200, display: "flex", flexDirection: "column", gap: 14,

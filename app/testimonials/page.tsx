@@ -3,7 +3,8 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
 import { testimonials, audienceGroups, testimonialsPageMeta } from "@/data/testimonials";
-import { stats, schoolsStat, yearsRunningStat } from "@/data/stats";
+import { stats, schoolsStat, schoolsStatTh, yearsRunningStat, yearsRunningStatTh } from "@/data/stats";
+import { getLocale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   title: "Real Reviews | InnoQuest — Students, Schools & Corporates",
@@ -66,7 +67,12 @@ function StarRating({ stars }: { stars: number }) {
 
 
 
-export default function TestimonialsPage() {
+export default async function TestimonialsPage() {
+  const locale = await getLocale();
+  const page = testimonialsPageMeta[locale];
+  const groups = audienceGroups[locale];
+  const schoolsS = locale === "en" ? schoolsStat : schoolsStatTh;
+  const yearsS = locale === "en" ? yearsRunningStat : yearsRunningStatTh;
   return (
     <>
       <Navbar />
@@ -83,16 +89,17 @@ export default function TestimonialsPage() {
           <div className="max-w-[1240px] mx-auto px-8 relative z-10">
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "center" }} className="test-hero-grid">
               <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>{testimonialsPageMeta.eyebrow}</p>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>{page.eyebrow}</p>
                 <h1 style={{ fontSize: "clamp(36px, 5vw, 68px)", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05 }}>
-                  {testimonialsPageMeta.heading}
+                  {page.heading}
                 </h1>
                 <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(245,240,234,0.7)", maxWidth: 480, marginTop: 24 }}>
-                  From students who discovered what they&apos;re capable of, to schools that saw their
-                  classrooms transform, to corporates who finally ran a CSR program worth talking about.
+                  {locale === "en"
+                    ? "From students who discovered what they're capable of, to schools that saw their classrooms transform, to corporates who finally ran a CSR program worth talking about."
+                    : "จากนักเรียนที่ค้นพบศักยภาพของตนเอง สู่โรงเรียนที่เห็นการเปลี่ยนแปลงในห้องเรียน และองค์กรที่ได้จัด CSR ที่คุ้มค่าพูดถึง"}
                 </p>
                 <div style={{ display: "flex", gap: 8, marginTop: 32, flexWrap: "wrap" }}>
-                  {audienceGroups.filter((g) => testimonials.some((t) => t.audience === g.key && !t.personTag)).map((g) => (
+                  {groups.filter((g) => testimonials.some((t) => t.audience === g.key && !t.personTag)).map((g) => (
                     <span key={g.key} className="pill-tag" style={{ background: "rgba(245,240,234,0.08)", color: "rgba(245,240,234,0.7)" }}>
                       {g.tag}
                     </span>
@@ -102,13 +109,13 @@ export default function TestimonialsPage() {
               <div>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                   {(() => {
-                    const studentsStat = stats.find((s) => s.label === "Students trained")!;
-                    const satisfactionStat = stats.find((s) => s.label === "Participants Satisfaction")!;
+                    const studentsStat = stats.en.find((s) => s.label === "Students trained")!;
+                    const satisfactionStat = stats.en.find((s) => s.label === "Participants Satisfaction")!;
                     return [
-                      { num: `${studentsStat.n}${studentsStat.suf}`, label: studentsStat.label },
-                      { num: `${schoolsStat.n}${schoolsStat.suf}`,   label: schoolsStat.label },
-                      { num: `${satisfactionStat.n}${satisfactionStat.suf}`, label: satisfactionStat.label },
-                      { num: `${yearsRunningStat.n}${yearsRunningStat.suf}`, label: yearsRunningStat.label },
+                      { num: `${studentsStat.n}${studentsStat.suf}`, label: locale === "en" ? studentsStat.label : "นักเรียนที่ผ่านการฝึก" },
+                      { num: `${schoolsS.n}${schoolsS.suf}`,         label: schoolsS.label },
+                      { num: `${satisfactionStat.n}${satisfactionStat.suf}`, label: locale === "en" ? satisfactionStat.label : "ความพึงพอใจของผู้เข้าร่วม" },
+                      { num: `${yearsS.n}${yearsS.suf}`,             label: yearsS.label },
                     ];
                   })().map((s) => (
                     <div key={s.label} style={{
@@ -128,7 +135,7 @@ export default function TestimonialsPage() {
         </section>
 
         {/* Testimonial groups */}
-        {audienceGroups.map(({ key, label, tag }, gi) => {
+        {groups.map(({ key, label, tag }, gi) => {
           const items = testimonials
             .filter((t) => t.audience === key && !t.personTag)
             .sort((a, b) => (a.role === "Student" ? 1 : 0) - (b.role === "Student" ? 1 : 0));

@@ -7,6 +7,7 @@ import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
 import { ContextualTestimonials } from "@/components/sections/ContextualTestimonials";
 import { parentsPage } from "@/data/parents";
+import { getLocale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   title: "InnoQuest for Parents | Kids Programs Bangkok",
@@ -27,8 +28,9 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
 };
 
-export default function ParentsPage() {
-  const { hero, whyItMatters } = parentsPage;
+export default async function ParentsPage() {
+  const locale = await getLocale();
+  const { hero, whyItMatters } = parentsPage[locale];
 
   return (
     <>
@@ -48,8 +50,7 @@ export default function ParentsPage() {
               <div>
                 <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>{hero.eyebrow}</p>
                 <h1 style={{ fontSize: "clamp(36px, 5vw, 68px)", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05 }}>
-                  Give them the skills{" "}
-                  <span style={{ color: "#8A0F14" }}>school doesn&apos;t teach.</span>
+                  {hero.heading}
                 </h1>
                 <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(245,240,234,0.7)", maxWidth: 520, marginTop: 24 }}>
                   {hero.sub}
@@ -59,7 +60,7 @@ export default function ParentsPage() {
                     {hero.cta.text}
                   </Link>
                   <Link href="/programs" className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border" style={{ color: "#F5F0EA", borderColor: "rgba(245,240,234,0.3)" }}>
-                    See all programs
+                    {locale === "en" ? "See all programs" : "ดูโปรแกรมทั้งหมด"}
                   </Link>
                 </div>
               </div>
@@ -83,11 +84,13 @@ export default function ParentsPage() {
           <div className="max-w-[1240px] mx-auto px-8">
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "end", marginBottom: 48 }} className="parents-why-head">
               <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>▸ Why it matters</p>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>▸ {whyItMatters.heading}</p>
                 <h2 className="h-section">{whyItMatters.heading}</h2>
               </div>
               <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(18,18,18,0.6)" }}>
-                Every InnoQuest program is designed to develop skills that schools don&apos;t prioritise — creativity, resilience, and the confidence to back your own ideas.
+                {locale === "en"
+                  ? "Every InnoQuest program is designed to develop skills that schools don't prioritise — creativity, resilience, and the confidence to back your own ideas."
+                  : "ทุกโปรแกรม InnoQuest ออกแบบมาเพื่อพัฒนาทักษะที่โรงเรียนไม่ได้ให้ความสำคัญ — ความคิดสร้างสรรค์ ความยืดหยุ่น และความมั่นใจที่จะสนับสนุนแนวคิดของตนเอง"}
               </p>
             </div>
 
@@ -119,7 +122,7 @@ export default function ParentsPage() {
           `}</style>
         </section>
 
-        <ContextualTestimonials audience={["parent", "student"]} label="▸ What parents & students say" />
+        <ContextualTestimonials audience={["parent", "student"]} label={locale === "en" ? "▸ What parents & students say" : "▸ สิ่งที่ผู้ปกครองและนักเรียนพูด"} />
         <CTASection />
       </main>
       <Footer />

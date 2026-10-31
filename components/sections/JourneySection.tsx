@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { journeySteps, journeySection } from "@/data/journey";
+import { useLocale } from "@/components/LanguageProvider";
 
 const iconMap = {
   phone: () => (
@@ -31,7 +32,6 @@ const iconMap = {
   ),
 } as const;
 
-const steps = journeySteps.map((s) => ({ ...s, Icon: iconMap[s.iconKey] }));
 
 function useReveal(threshold = 0.15) {
   const ref = useRef<HTMLElement>(null);
@@ -49,6 +49,9 @@ function useReveal(threshold = 0.15) {
 }
 
 export function JourneySection() {
+  const { locale } = useLocale();
+  const js = journeySection[locale];
+  const steps = journeySteps[locale].map((s) => ({ ...s, Icon: iconMap[s.iconKey] }));
   const [sectionRef, inView] = useReveal(0.1);
   const trackRef = useRef<HTMLDivElement>(null);
   const [trackVisible, setTrackVisible] = useState(false);
@@ -79,14 +82,14 @@ export function JourneySection() {
               className="text-[11px] font-medium uppercase tracking-[0.14em]"
               style={{ color: "#8A0F14", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
             >
-              {journeySection.eyebrow}
+              {js.eyebrow}
             </p>
             <h2
               className="mt-[18px] font-medium leading-[1.05]"
               style={{ fontSize: "clamp(34px, 4.4vw, 56px)", letterSpacing: "-0.03em" }}
             >
-              {journeySection.heading.split("\n")[0]}<br />
-              <span className="scribble">{journeySection.heading.split("\n")[1].replace(".", "")}</span>.
+              {js.heading.split("\n")[0]}<br />
+              <span className="scribble">{js.heading.split("\n")[1].replace(".", "")}</span>.
             </h2>
           </div>
           <div
@@ -94,7 +97,7 @@ export function JourneySection() {
             style={{ transitionDelay: "120ms" }}
           >
             <p className="text-[17px] leading-[1.55]" style={{ color: "rgba(18,18,18,0.6)", maxWidth: 480 }}>
-              {journeySection.sub}
+              {js.sub}
             </p>
           </div>
         </div>
@@ -163,7 +166,7 @@ export function JourneySection() {
                       fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace",
                     }}
                   >
-                    Step 0{i + 1}
+                    {js.stepLabel} 0{i + 1}
                   </p>
                   <p
                     className="text-[15px] font-medium"
@@ -180,7 +183,7 @@ export function JourneySection() {
                         fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace",
                       }}
                     >
-                      You are here
+                      {js.currentLabel}
                     </span>
                   )}
                 </div>

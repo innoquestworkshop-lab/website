@@ -7,6 +7,7 @@ import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
 import { ContextualTestimonials } from "@/components/sections/ContextualTestimonials";
 import { schoolsPage } from "@/data/schools";
+import { getLocale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   title: "School Programs for Bangkok Students | InnoQuest",
@@ -27,7 +28,9 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
 };
 
-export default function SchoolsPage() {
+export default async function SchoolsPage() {
+  const locale = await getLocale();
+  const page = schoolsPage[locale];
   return (
     <>
       <Navbar />
@@ -44,20 +47,20 @@ export default function SchoolsPage() {
           <div className="max-w-[1240px] mx-auto px-8 relative z-10">
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1.1fr", gap: 64, alignItems: "center" }} className="schools-hero-grid">
               <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>{schoolsPage.hero.eyebrow}</p>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>{page.hero.eyebrow}</p>
                 <h1 style={{ fontSize: "clamp(36px, 5vw, 68px)", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05 }}>
-                  {schoolsPage.hero.heading.replace(schoolsPage.hero.headingAccent, "").trimEnd()}{" "}
-                  <span style={{ color: "#8A0F14" }}>{schoolsPage.hero.headingAccent}</span>
+                  {page.hero.heading.replace(page.hero.headingAccent, "").trimEnd()}{" "}
+                  <span style={{ color: "#8A0F14" }}>{page.hero.headingAccent}</span>
                 </h1>
                 <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(245,240,234,0.7)", maxWidth: 520, marginTop: 24 }}>
-                  {schoolsPage.hero.sub}
+                  {page.hero.sub}
                 </p>
                 <div style={{ display: "flex", gap: 12, marginTop: 32, flexWrap: "wrap" }}>
-                  <Link href={schoolsPage.hero.cta1.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#8A0F14", color: "#F5F0EA" }}>
-                    {schoolsPage.hero.cta1.text}
+                  <Link href={page.hero.cta1.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#8A0F14", color: "#F5F0EA" }}>
+                    {page.hero.cta1.text}
                   </Link>
-                  <Link href={schoolsPage.hero.cta2.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border" style={{ color: "#F5F0EA", borderColor: "rgba(245,240,234,0.3)" }}>
-                    {schoolsPage.hero.cta2.text}
+                  <Link href={page.hero.cta2.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border" style={{ color: "#F5F0EA", borderColor: "rgba(245,240,234,0.3)" }}>
+                    {page.hero.cta2.text}
                   </Link>
                 </div>
               </div>
@@ -90,16 +93,16 @@ export default function SchoolsPage() {
           <div className="max-w-[1240px] mx-auto px-8">
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "end", marginBottom: 48 }} className="modes-head">
               <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{schoolsPage.modes.eyebrow}</p>
-                <h2 className="h-section">{schoolsPage.modes.heading.split("\n").map((l, i) => <span key={i}>{l}{i === 0 && <br />}</span>)}</h2>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{page.modes.eyebrow}</p>
+                <h2 className="h-section">{page.modes.heading.split("\n").map((l, i) => <span key={i}>{l}{i === 0 && <br />}</span>)}</h2>
               </div>
               <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(18,18,18,0.6)" }}>
-                {schoolsPage.modes.sub}
+                {page.modes.sub}
               </p>
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="modes-grid">
-              {schoolsPage.modes.items.map((m) => (
+              {page.modes.items.map((m) => (
                 <div key={m.tag} className="card-lift" style={{
                   background: m.bg, borderRadius: 14, padding: 32,
                   minHeight: 380, display: "flex", flexDirection: "column", justifyContent: "space-between",
@@ -145,9 +148,9 @@ export default function SchoolsPage() {
           <div className="max-w-[1240px] mx-auto px-8">
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: 64, alignItems: "center" }} className="teacher-grid">
               <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{schoolsPage.teacherCollab.eyebrow}</p>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{page.teacherCollab.eyebrow}</p>
                 <h2 className="h-section">
-                  {schoolsPage.teacherCollab.heading.split("\n").map((l, i, arr) => {
+                  {page.teacherCollab.heading.split("\n").map((l, i, arr) => {
                     const parts = l.split("with ");
                     return (
                       <span key={i}>
@@ -160,10 +163,10 @@ export default function SchoolsPage() {
                   })}
                 </h2>
                 <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(18,18,18,0.6)", marginTop: 24, maxWidth: 460 }}>
-                  {schoolsPage.teacherCollab.body}
+                  {page.teacherCollab.body}
                 </p>
-                <Link href={schoolsPage.teacherCollab.cta.href} style={{ display: "inline-flex", alignItems: "center", gap: 8, marginTop: 28, color: "#8A0F14", fontWeight: 500, fontSize: 14, textDecoration: "none" }}>
-                  {schoolsPage.teacherCollab.cta.text}
+                <Link href={page.teacherCollab.cta.href} style={{ display: "inline-flex", alignItems: "center", gap: 8, marginTop: 28, color: "#8A0F14", fontWeight: 500, fontSize: 14, textDecoration: "none" }}>
+                  {page.teacherCollab.cta.text}
                 </Link>
               </div>
               <div style={{ position: "relative", padding: "16px 0 0 16px" }}>
@@ -194,18 +197,18 @@ export default function SchoolsPage() {
           <div className="max-w-[1240px] mx-auto px-8">
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "end", marginBottom: 56 }} className="school-path-head">
               <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{schoolsPage.learningPath.eyebrow}</p>
-                <h2 className="h-section">{schoolsPage.learningPath.heading.split("\n").map((l, i) => (
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{page.learningPath.eyebrow}</p>
+                <h2 className="h-section">{page.learningPath.heading.split("\n").map((l, i) => (
                   <span key={i}>{i === 1 ? <><span className="scribble">{l}</span></> : l}{i === 0 && <br />}</span>
                 ))}</h2>
               </div>
               <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(18,18,18,0.6)" }}>
-                {schoolsPage.learningPath.sub}
+                {page.learningPath.sub}
               </p>
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }} className="school-path-grid">
-              {schoolsPage.learningPath.steps.map((s) => (
+              {page.learningPath.steps.map((s) => (
                 <div key={s.num} className="card-lift" style={{
                   background: "#F5F0EA", borderRadius: 14, padding: 28,
                   minHeight: 240, display: "flex", flexDirection: "column", justifyContent: "space-between",
@@ -220,11 +223,11 @@ export default function SchoolsPage() {
             </div>
 
             <div style={{ marginTop: 48, display: "flex", gap: 12, flexWrap: "wrap" }}>
-              <Link href={schoolsPage.learningPath.cta1.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#8A0F14", color: "#F5F0EA" }}>
-                {schoolsPage.learningPath.cta1.text}
+              <Link href={page.learningPath.cta1.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#8A0F14", color: "#F5F0EA" }}>
+                {page.learningPath.cta1.text}
               </Link>
-              <Link href={schoolsPage.learningPath.cta2.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border" style={{ color: "#121212", borderColor: "rgba(18,18,18,0.25)" }}>
-                {schoolsPage.learningPath.cta2.text}
+              <Link href={page.learningPath.cta2.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border" style={{ color: "#121212", borderColor: "rgba(18,18,18,0.25)" }}>
+                {page.learningPath.cta2.text}
               </Link>
             </div>
           </div>
@@ -234,7 +237,7 @@ export default function SchoolsPage() {
           `}</style>
         </section>
 
-        <ContextualTestimonials audience="school" label="▸ What schools say" />
+        <ContextualTestimonials audience="school" label={locale === "en" ? "▸ What schools say" : "▸ สิ่งที่โรงเรียนพูด"} />
         <CTASection />
       </main>
       <Footer />

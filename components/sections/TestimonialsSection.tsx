@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useRef, useEffect, useState } from "react";
 import { testimonials as allTestimonials } from "@/data/testimonials";
+import { useLocale } from "@/components/LanguageProvider";
 
 const testimonials = allTestimonials
   .filter((t) => !t.personTag)
@@ -83,6 +84,7 @@ function useReveal(threshold = 0.15) {
 }
 
 export function TestimonialsSection() {
+  const { locale } = useLocale();
   const [sectionRef, inView] = useReveal(0.1);
   const [start, setStart] = useState(0);
   const [fading, setFading] = useState(false);
@@ -111,13 +113,13 @@ export function TestimonialsSection() {
               className={`text-[11px] font-medium uppercase tracking-[0.14em] transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
               style={{ color: "#8A0F14", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
             >
-              ▸ Testimonials
+              {locale === "en" ? "▸ Testimonials" : "▸ คำรีวิว"}
             </p>
             <h2
               className={`mt-[18px] font-medium leading-[1.05] transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
               style={{ fontSize: "clamp(34px, 4.4vw, 56px)", letterSpacing: "-0.03em", transitionDelay: "80ms" }}
             >
-              What people are <span className="scribble">saying</span>.
+              {locale === "en" ? <>What people are <span className="scribble">saying</span>.</> : <>สิ่งที่ผู้คน<span className="scribble">พูดถึง</span></>}
             </h2>
           </div>
 

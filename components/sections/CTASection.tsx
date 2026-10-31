@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 import { ctaSection } from "@/data/cta";
+import { useLocale } from "@/components/LanguageProvider";
 
 function ArrowIcon() {
   return (
@@ -29,6 +30,8 @@ function useReveal(threshold = 0.15) {
 }
 
 export function CTASection() {
+  const { locale } = useLocale();
+  const cta = ctaSection[locale];
   const [sectionRef, inView] = useReveal(0.2);
 
   return (
@@ -45,7 +48,7 @@ export function CTASection() {
             fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace",
           }}
         >
-          {ctaSection.eyebrow}
+          {cta.eyebrow}
         </p>
         <h2
           className={`mt-[18px] font-medium leading-[1.05] mx-auto transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
@@ -56,7 +59,7 @@ export function CTASection() {
             transitionDelay: "80ms",
           }}
         >
-          {ctaSection.heading}
+          {cta.heading}
         </h2>
         <p
           className={`mt-6 text-[17px] leading-[1.55] mx-auto transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
@@ -66,18 +69,18 @@ export function CTASection() {
             transitionDelay: "160ms",
           }}
         >
-          {ctaSection.sub}
+          {cta.sub}
         </p>
         <div
           className={`mt-9 flex justify-center transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
           style={{ transitionDelay: "240ms" }}
         >
           <Link
-            href={ctaSection.cta.href}
+            href={cta.cta.href}
             className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full transition-all active:scale-[0.97] hover:bg-white/90"
             style={{ background: "#F5F0EA", color: "#8A0F14" }}
           >
-            {ctaSection.cta.text} <ArrowIcon />
+            {cta.cta.text} <ArrowIcon />
           </Link>
         </div>
         <p
@@ -88,8 +91,8 @@ export function CTASection() {
             transitionDelay: "320ms",
           }}
         >
-          {ctaSection.phoneNote.split(":")[0]}:{" "}
-          <strong style={{ color: "#F5F0EA" }}>{ctaSection.phoneNote.split(": ")[1]}</strong>
+          {cta.phoneNote.split(":")[0]}:{" "}
+          <strong style={{ color: "#F5F0EA" }}>{cta.phoneNote.split(": ")[1]}</strong>
         </p>
       </div>
     </section>

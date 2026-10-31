@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { stats } from "@/data/stats";
 import { heroSection } from "@/data/hero";
+import { useLocale } from "@/components/LanguageProvider";
 
 function useCountUp(to: number, active: boolean, duration = 1500) {
   const [val, setVal] = useState(0);
@@ -66,6 +67,9 @@ function ArrowIcon() {
 
 
 export function HeroSection() {
+  const { locale } = useLocale();
+  const hs = heroSection[locale];
+  const statsL = stats[locale];
   const [started, setStarted] = useState(false);
   useEffect(() => {
     const t = setTimeout(() => setStarted(true), 100);
@@ -105,7 +109,7 @@ export function HeroSection() {
           className={`text-[11px] font-medium uppercase tracking-[0.14em] mb-7 transition-all duration-500 ${started ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
           style={{ color: "#8A0F14", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
         >
-          {heroSection.eyebrow}
+          {hs.eyebrow}
         </p>
 
         {/* Headline */}
@@ -117,13 +121,13 @@ export function HeroSection() {
             className={`block text-[#F5F0EA] transition-all duration-700 ${started ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
             style={{ transitionDelay: "80ms" }}
           >
-            {heroSection.headingLine1}
+            {hs.headingLine1}
           </span>
           <span
             className={`block transition-all duration-700 ${started ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
             style={{ color: "#8A0F14", transitionDelay: "240ms" }}
           >
-            {heroSection.headingLine2}
+            {hs.headingLine2}
           </span>
         </h1>
 
@@ -132,7 +136,7 @@ export function HeroSection() {
           className={`mt-8 text-[18px] leading-[1.55] max-w-[640px] transition-all duration-500 ${started ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
           style={{ color: "rgba(245,240,234,0.7)", transitionDelay: "500ms" }}
         >
-          {heroSection.sub}
+          {hs.sub}
         </p>
 
         {/* Body */}
@@ -140,7 +144,7 @@ export function HeroSection() {
           className={`mt-5 text-[15px] leading-[1.75] max-w-[560px] transition-all duration-500 ${started ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
           style={{ color: "rgba(245,240,234,0.5)", transitionDelay: "580ms" }}
         >
-          {heroSection.body}
+          {hs.body}
         </p>
 
         {/* CTAs */}
@@ -149,18 +153,18 @@ export function HeroSection() {
           style={{ transitionDelay: "700ms" }}
         >
           <Link
-            href={heroSection.cta1.href}
+            href={hs.cta1.href}
             className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full transition-all active:scale-[0.97]"
             style={{ background: "#8A0F14", color: "#F5F0EA" }}
           >
-            {heroSection.cta1.text} <ArrowIcon />
+            {hs.cta1.text} <ArrowIcon />
           </Link>
           <Link
-            href={heroSection.cta2.href}
+            href={hs.cta2.href}
             className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border transition-colors"
             style={{ color: "#F5F0EA", borderColor: "rgba(245,240,234,0.5)" }}
           >
-            {heroSection.cta2.text}
+            {hs.cta2.text}
           </Link>
         </div>
 
@@ -207,7 +211,7 @@ export function HeroSection() {
             gap: 24,
           }}
         >
-          {stats.map((s) => (
+          {statsL.map((s) => (
             <StatItem key={s.label} {...s} />
           ))}
         </div>

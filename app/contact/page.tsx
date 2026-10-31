@@ -3,6 +3,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ContactForm } from "@/components/ui/ContactForm";
 import { contactPage } from "@/data/contact";
+import { getLocale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   title: "Contact InnoQuest | Bangkok, Thailand",
@@ -43,7 +44,9 @@ const iconMap = {
   ),
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const locale = await getLocale();
+  const page = contactPage[locale];
   return (
     <>
       <Navbar />
@@ -58,13 +61,12 @@ export default function ContactPage() {
             style={{ top: -100, right: -80, width: 400, height: 400, background: "#8A0F14", opacity: 0.11, filter: "blur(2px)" }}
           />
           <div className="max-w-[1240px] mx-auto px-8 relative z-10">
-            <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>▸ Get in touch</p>
+            <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>{page.hero.eyebrow}</p>
             <h1 style={{ fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05 }}>
-              Let&apos;s talk.
+              {page.hero.heading}
             </h1>
             <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(245,240,234,0.7)", maxWidth: 480, marginTop: 20 }}>
-              No commitment, just a conversation. Tell us what you&apos;re looking for
-              and we&apos;ll figure out the best way to help.
+              {page.hero.sub}
             </p>
           </div>
         </section>
@@ -76,14 +78,14 @@ export default function ContactPage() {
               {/* Form */}
               <div style={{ background: "#FFFFFF", borderRadius: 14, padding: 40, border: "1px solid rgba(18,18,18,0.06)" }}>
                 <h2 style={{ fontSize: 22, fontWeight: 500, letterSpacing: "-0.02em", marginBottom: 32 }}>
-                  Send us a message
+                  {page.form.heading}
                 </h2>
                 <ContactForm />
               </div>
 
               {/* Info cards */}
               <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                {contactPage.infoCards.map((card) => (
+                {page.infoCards.map((card) => (
                   <div key={card.label} className="card-lift" style={{
                     background: "#FFFFFF", borderRadius: 14, padding: 24,
                     display: "flex", gap: 16, alignItems: "flex-start",
@@ -105,9 +107,9 @@ export default function ContactPage() {
 
                 {/* Social placeholder */}
                 <div style={{ background: "#121212", color: "#F5F0EA", borderRadius: 14, padding: 24 }}>
-                  <p className="eyebrow" style={{ color: "rgba(245,240,234,0.5)", marginBottom: 16 }}>Follow along</p>
+                  <p className="eyebrow" style={{ color: "rgba(245,240,234,0.5)", marginBottom: 16 }}>{page.social.eyebrow}</p>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
-                    {contactPage.social.platforms.map((s) => {
+                    {page.social.platforms.map((s) => {
                       const hrefs: Record<string, string> = {
                         Instagram: `https://www.instagram.com/${s.href}`,
                         TikTok: `https://www.tiktok.com/@${s.href}`,

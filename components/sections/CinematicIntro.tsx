@@ -2,8 +2,11 @@
 
 import { useEffect, useState, useRef } from "react";
 import { cinematicIntro } from "@/data/hero";
+import { useLocale } from "@/components/LanguageProvider";
 
 export function CinematicIntro() {
+  const { locale } = useLocale();
+  const c = cinematicIntro[locale];
   const [started, setStarted] = useState(false);
   const [progress, setProgress] = useState(0); // 0 → 1 as user scrolls through
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -64,7 +67,7 @@ export function CinematicIntro() {
               fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace",
             }}
           >
-            {cinematicIntro.eyebrow}
+            {c.eyebrow}
           </p>
 
           {/* Headline */}
@@ -76,7 +79,7 @@ export function CinematicIntro() {
               className={`block text-white transition-all duration-700 ${started ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
               style={{ transitionDelay: "100ms" }}
             >
-              {cinematicIntro.line1}
+              {c.line1}
             </span>
             <span
               className={`block transition-all duration-700 ${started ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
@@ -88,13 +91,13 @@ export function CinematicIntro() {
                 backgroundClip: "text",
               }}
             >
-              {cinematicIntro.line2}
+              {c.line2}
             </span>
             <span
               className={`block transition-all duration-700 ${started ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
               style={{ color: "#8A0F14", transitionDelay: "360ms" }}
             >
-              {cinematicIntro.line3}
+              {c.line3}
             </span>
           </h1>
 
@@ -107,7 +110,7 @@ export function CinematicIntro() {
               transitionDelay: "520ms",
             }}
           >
-            {cinematicIntro.sub}
+            {c.sub}
           </p>
         </div>
 
@@ -123,7 +126,7 @@ export function CinematicIntro() {
             className="text-[10px] tracking-widest uppercase animate-bounce"
             style={{ color: "#c8c6c6", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
           >
-            {cinematicIntro.scrollLabel}
+            {c.scrollLabel}
           </span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8c6c6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M19 14l-7 7m0 0l-7-7m7 7V3" />

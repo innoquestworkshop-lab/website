@@ -1,27 +1,15 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { footerCols } from "@/data/navigation";
-import { audienceCards } from "@/data/audiences";
 import { site } from "@/data/site";
-
-const cols = [
-  {
-    h: "Explore",
-    items: [
-      { label: "What We Do", href: "/what-we-do" },
-      { label: "Services", href: "/services" },
-      { label: "Programs", href: "/programs" },
-      { label: "The Pathway", href: "/programs/pathway" },
-    ],
-  },
-  {
-    h: "Audiences",
-    items: audienceCards.map((a) => ({ label: a.label, href: a.href })),
-  },
-  footerCols[1],
-];
+import { useLocale } from "@/components/LanguageProvider";
 
 export function Footer() {
+  const { locale } = useLocale();
+  const cols = footerCols[locale];
+
   return (
     <footer style={{ background: "#111111", color: "#F5F0EA", padding: "0 0 32px" }}>
       <div className="max-w-[1240px] mx-auto px-8" style={{ paddingTop: 72 }}>
@@ -38,7 +26,9 @@ export function Footer() {
               />
             </Link>
             <p style={{ marginTop: 18, fontSize: 14, lineHeight: 1.6, color: "rgba(245,240,234,0.6)", maxWidth: 300 }}>
-              Uplifting young human ability through play-based, science-backed learning experiences.
+              {locale === "en"
+                ? "Uplifting young human ability through play-based, science-backed learning experiences."
+                : "ยกระดับความสามารถของเยาวชนผ่านประสบการณ์การเรียนรู้แบบเล่นและมีพื้นฐานทางวิทยาศาสตร์"}
             </p>
             <div style={{ marginTop: 24, display: "flex", gap: 8, flexWrap: "wrap" }}>
               <span className="pill-tag" style={{ background: "rgba(245,240,234,0.06)", color: "rgba(245,240,234,0.7)" }}>
@@ -68,7 +58,7 @@ export function Footer() {
           display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 12,
           fontSize: 12, color: "rgba(245,240,234,0.5)",
         }}>
-          <span>© {new Date().getFullYear()} {site.name}. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} {site.name}. {locale === "en" ? "All rights reserved." : "สงวนลิขสิทธิ์"}</span>
           <span>{site.location.display} · {site.contact.email}</span>
         </div>
       </div>

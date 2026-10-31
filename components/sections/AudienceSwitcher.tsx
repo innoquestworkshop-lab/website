@@ -5,7 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { BLUR_DATA_URL } from "@/lib/imageBlur";
 import { cn } from "@/lib/utils";
-import { audienceTabs } from "@/data/audiences";
+import { audienceTabs, audienceSwitcherHeading } from "@/data/audiences";
+import { useLocale } from "@/components/LanguageProvider";
 
 function CheckIcon() {
   return (
@@ -40,10 +41,13 @@ function useReveal(threshold = 0.15) {
 }
 
 export function AudienceSwitcher() {
+  const { locale } = useLocale();
+  const tabs = audienceTabs[locale];
+  const heading = audienceSwitcherHeading[locale];
   const [active, setActive] = useState(0);
   const [fading, setFading] = useState(false);
   const [sectionRef, inView] = useReveal(0.1);
-  const cur = audienceTabs[active];
+  const cur = tabs[active];
 
   const switchTo = (i: number) => {
     if (i === active) return;
@@ -62,13 +66,13 @@ export function AudienceSwitcher() {
           className={`text-[11px] font-medium uppercase tracking-[0.14em] transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
           style={{ color: "#8A0F14", fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
         >
-          ▸ Find your fit
+          {heading.eyebrow}
         </p>
         <h2
           className={`mt-[18px] font-medium leading-[1.05] max-w-[760px] transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
           style={{ fontSize: "clamp(34px, 4.4vw, 56px)", letterSpacing: "-0.03em", transitionDelay: "80ms" }}
         >
-          I&apos;m looking for programs<span style={{ color: "#8A0F14" }}>…</span>
+          {heading.heading}<span style={{ color: "#8A0F14" }}>…</span>
         </h2>
 
         {/* Tabs */}
@@ -76,7 +80,7 @@ export function AudienceSwitcher() {
           className={`mt-9 flex flex-wrap transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
           style={{ borderBottom: "1px solid rgba(18,18,18,0.12)", transitionDelay: "160ms" }}
         >
-          {audienceTabs.map((t, i) => (
+          {tabs.map((t, i) => (
             <button
               key={t.id}
               onClick={() => switchTo(i)}

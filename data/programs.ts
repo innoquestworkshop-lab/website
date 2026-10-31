@@ -18,7 +18,7 @@ export type Program = {
   methodPillars: (1 | 2 | 3 | 4)[];
 };
 
-export const programs: Program[] = [
+const programsEn: Program[] = [
   {
     slug: "the-change-lab",
     name: "The Change Lab",
@@ -108,19 +108,125 @@ export const programs: Program[] = [
   },
 ];
 
+const programsTh: Program[] = [
+  {
+    slug: "the-change-lab",
+    name: "The Change Lab",
+    heroImg: "/images/events/change-lab-9142.jpg",
+    heroImgBlur: 1,
+    comingSoon: true,
+    tagline: "ผลกระทบที่ใช้งานได้จริง",
+    duration: "",
+    ages: "",
+    groupSize: "",
+    format: "",
+    description:
+      "นักเรียนก้าวเข้าสู่บทบาทที่ปรึกษาด้านความยั่งยืนเพื่อเชื่อมช่องว่างระหว่างแนวคิดยิ่งใหญ่กับการนำไปปฏิบัติจริง ผ่านการวิจัยและสร้างต้นแบบ ทีมใช้บอร์ดเกมที่เราสร้างขึ้นเองเพื่อนำทางความตึงเครียดระหว่างผลกระทบทางสังคมและความเป็นไปได้เชิงพาณิชย์ ทุกการเคลื่อนไหวมีผลที่ตามมา บังคับให้ผู้เข้าร่วมคิดอย่างมีวิจารณญาณ",
+    audiences: ["school", "corporate"],
+    outcomes: [
+      { icon: "leaf", title: "ความรู้ด้าน ESG", description: "เข้าใจประเด็นด้านสิ่งแวดล้อม สังคม และธรรมาภิบาลที่สำคัญในปัจจุบัน" },
+      { icon: "bulb", title: "การคิดเชิงระบบ", description: "มองเห็นว่าการตัดสินใจส่งผลกระทบต่อระบบนิเวศ ชุมชน และเศรษฐกิจอย่างไร" },
+      { icon: "presentation", title: "นวัตกรรมที่ยั่งยืน", description: "ออกแบบโซลูชันที่สมดุลระหว่างผลกระทบและความเป็นไปได้" },
+      { icon: "chart-bar", title: "การนำเสนอด้วยหลักฐาน", description: "โต้แย้งเพื่อการเปลี่ยนแปลงด้วยข้อมูลและการเล่าเรื่อง" },
+    ],
+    methodPillars: [1, 2, 3, 4],
+  },
+  {
+    slug: "entrepreneur-in-innovation",
+    name: "Entrepreneur in Innovation",
+    heroImg: "/images/events/IMG_8695.jpg",
+    heroImgPosition: "center 45%",
+    tagline: "จากปัญหาสู่โซลูชัน",
+    duration: "",
+    ages: "",
+    groupSize: "",
+    format: "",
+    featured: true,
+    description:
+      "นักเรียนผ่านวงจรชีวิต Startup ทั้งหมดในเซสชันเดียวที่เปี่ยมพลังงาน ด้วยกรอบการทำงานระดับมืออาชีพ เรานำทางทีมผ่านการทำความเข้าใจปัญหาเชิงลึกและการสร้างแนวคิดเพื่อค้นหาความสอดคล้องระหว่างปัญหาและโซลูชัน เป็นการแข่งขันเพื่อเปลี่ยนผืนผ้าว่างเปล่าเป็นผลิตภัณฑ์ที่ผ่านการตรวจสอบพร้อมสำหรับการนำเสนอต่อนักลงทุน",
+    audiences: ["school", "student", "parent"],
+    outcomes: [
+      { icon: "rocket", title: "มายด์เซ็ตผู้ประกอบการ", description: "การจดจำโอกาส การรับความเสี่ยงอย่างรอบคอบ และความกล้าลงมือทำ" },
+      { icon: "users", title: "พลวัตของทีม", description: "บทบาท ความเท่าเทียม ความขัดแย้ง และวิธีที่ทีมประสิทธิภาพสูงทำงานจริงๆ" },
+      { icon: "puzzle", title: "การตรวจสอบปัญหา", description: "การวิจัยผู้ใช้จริงก่อนสร้างสิ่งใด" },
+      { icon: "coin", title: "การคิดแบบโมเดลธุรกิจ", description: "รายได้ อัตรากำไร และสิ่งที่ทำให้ธุรกิจยั่งยืน" },
+    ],
+    methodPillars: [1, 2, 3, 4],
+  },
+  {
+    slug: "break-the-market",
+    name: "Break the Market",
+    heroImg: "/images/events/break-the-market-5758.jpg",
+    heroImgPosition: "center 73%",
+    tagline: "ทำลายอุตสาหกรรม สร้างสิ่งที่ยังไม่มี",
+    duration: "",
+    ages: "",
+    groupSize: "",
+    format: "",
+    description:
+      "นักเรียนทำหน้าที่เป็นผู้เชี่ยวชาญการเข้าตลาดบริหารวงจรชีวิตทั้งหมดของการเปิดตัวผลิตภัณฑ์ แทนที่จะเดาสุ่ม พวกเขาต้องสมดุลงบประมาณ R&D และความเสี่ยงในขณะที่จ่ายเงินเพื่อวิเคราะห์พฤติกรรมผู้บริโภคแบบเรียลไทม์ เป็นการแข่งขันที่มีเดิมพันสูงเพื่อครองตลาดก่อนที่คู่แข่งจะนำหน้า",
+    audiences: ["school", "student", "corporate"],
+    outcomes: [
+      { icon: "bolt", title: "การคิดแบบสร้างการเปลี่ยนแปลง", description: "ท้าทายสมมติฐานที่คนอื่นถือว่าเป็นเรื่องธรรมดา" },
+      { icon: "trending-up", title: "กลยุทธ์การแข่งขัน", description: "เข้าใจพลวัตตลาด การวางตำแหน่ง และการสร้างความแตกต่าง" },
+      { icon: "tool", title: "การสร้างต้นแบบรวดเร็ว", description: "เปลี่ยนแนวคิดเป็นคอนเซ็ปต์ที่จับต้องได้ภายใต้แรงกดดันเรียลไทม์" },
+      { icon: "users", title: "การนำเสนอในสถานการณ์ตึงเครียด", description: "ปกป้องแนวคิดที่กล้าหาญต่อหน้าผู้ฟังที่สงสัย" },
+    ],
+    methodPillars: [1, 3, 4],
+  },
+  {
+    slug: "capital-minds",
+    name: "Capital Minds",
+    heroImg: "/images/events/price-war-149.jpg",
+    heroImgPosition: "center 50%",
+    heroImgScale: 1.15,
+    tagline: "เชี่ยวชาญตลาด",
+    duration: "",
+    ages: "",
+    groupSize: "",
+    format: "",
+    description:
+      "โปรแกรมที่ขับเคลื่อนด้วยการจำลองซึ่งนักเรียนบริหารธุรกิจที่แข่งขันกันและตัดสินใจด้านราคาสดในตลาดที่มีพลวัต แต่ละรอบเปลี่ยนกฎบังคับให้ทีมคิดแบบ CFO ไม่ใช่แบบนักเรียน กลยุทธ์ราคาที่ดีที่สุดชนะ",
+    audiences: ["school", "student", "corporate"],
+    outcomes: [
+      { icon: "coin", title: "กลยุทธ์ด้านราคา", description: "ต้นทุนบวก คุณค่า การแข่งขัน — เมื่อไหร่จะใช้แต่ละแบบและทำไม" },
+      { icon: "chart-bar", title: "ความรู้ทางการเงิน", description: "รายได้ กำไร อัตรากำไร และสิ่งที่ตัวเลขหมายความว่าอย่างไร" },
+      { icon: "arrows-exchange", title: "พลวัตตลาด", description: "อุปทาน อุปสงค์ และการแข่งขันมีปฏิสัมพันธ์กันแบบเรียลไทม์อย่างไร" },
+      { icon: "brain", title: "การตัดสินใจภายใต้แรงกดดัน", description: "มุ่งมั่นกับกลยุทธ์เมื่อข้อมูลไม่ครบและเวลาจำกัด" },
+    ],
+    methodPillars: [1, 2, 3, 4],
+  },
+];
+
+export const programs: Record<"en" | "th", Program[]> = { en: programsEn, th: programsTh };
+
 export function getProgramBySlug(slug: string): Program | undefined {
-  return programs.find((p) => p.slug === slug);
+  return programsEn.find((p) => p.slug === slug);
 }
 
 export const programsPageMeta = {
-  eyebrow: "▸ Our experiences",
-  heading: "Short, long, or fully custom.",
-  sub: "From a single-day spark to a semester-long transformation — built around your goals.",
-  popularBadge: "★ Most popular",
-  customTile: {
-    heading: "Want something personalized?",
-    body: "Design something custom with us.",
-    cta: "Start a custom brief",
-    href: "/custom",
+  en: {
+    eyebrow: "▸ Our experiences",
+    heading: "Short, long, or fully custom.",
+    sub: "From a single-day spark to a semester-long transformation — built around your goals.",
+    popularBadge: "★ Most popular",
+    customTile: {
+      heading: "Want something personalized?",
+      body: "Design something custom with us.",
+      cta: "Start a custom brief",
+      href: "/custom",
+    },
+  },
+  th: {
+    eyebrow: "▸ ประสบการณ์ของเรา",
+    heading: "กระชั้บ ระยะยาว หรือ custom สำหรับคุณ",
+    sub: "ตั้งแต่ประกายจากวันเดียวถึงการเปลี่ยนแปลงตลอดภาคเรียน — สร้างสรรค์รอบเป้าหมายของคุณ",
+    popularBadge: "★ ยอดนิยมที่สุด",
+    customTile: {
+      heading: "ต้องการอะไรเฉพาะสำหรับคุณ?",
+      body: "ออกแบบสิ่งเฉพาะกับเรา",
+      cta: "เริ่มบรีฟ แบบ custom",
+      href: "/custom",
+    },
   },
 } as const;

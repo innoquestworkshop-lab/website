@@ -8,6 +8,7 @@ import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
 import { ContextualTestimonials } from "@/components/sections/ContextualTestimonials";
 import { corporatesPage, corporatePartners } from "@/data/corporates";
+import { getLocale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   title: "CSR Youth Innovation Programs Bangkok | InnoQuest",
@@ -53,7 +54,9 @@ const iconMap = {
   ),
 } as const;
 
-export default function CorporatesPage() {
+export default async function CorporatesPage() {
+  const locale = await getLocale();
+  const page = corporatesPage[locale];
   return (
     <>
       <Navbar />
@@ -70,20 +73,20 @@ export default function CorporatesPage() {
           <div className="max-w-[1240px] mx-auto px-8 relative z-10">
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1.1fr", gap: 64, alignItems: "center" }} className="corp-hero-grid">
               <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>{corporatesPage.hero.eyebrow}</p>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>{page.hero.eyebrow}</p>
                 <h1 style={{ fontSize: "clamp(36px, 5vw, 68px)", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05, color: "#F5F0EA" }}>
-                  {corporatesPage.hero.heading.replace(corporatesPage.hero.headingAccent, "").trimEnd()}{" "}
-                  <span style={{ color: "#8A0F14" }}>{corporatesPage.hero.headingAccent}</span>
+                  {page.hero.heading.replace(page.hero.headingAccent, "").trimEnd()}{" "}
+                  <span style={{ color: "#8A0F14" }}>{page.hero.headingAccent}</span>
                 </h1>
                 <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(245,240,234,0.7)", maxWidth: 520, marginTop: 24 }}>
-                  {corporatesPage.hero.sub}
+                  {page.hero.sub}
                 </p>
                 <div style={{ display: "flex", gap: 12, marginTop: 32, flexWrap: "wrap" }}>
-                  <Link href={corporatesPage.hero.cta1.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#8A0F14", color: "#F5F0EA" }}>
-                    {corporatesPage.hero.cta1.text}
+                  <Link href={page.hero.cta1.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#8A0F14", color: "#F5F0EA" }}>
+                    {page.hero.cta1.text}
                   </Link>
-                  <Link href={corporatesPage.hero.cta2.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border" style={{ color: "#F5F0EA", borderColor: "rgba(245,240,234,0.3)" }}>
-                    {corporatesPage.hero.cta2.text}
+                  <Link href={page.hero.cta2.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border" style={{ color: "#F5F0EA", borderColor: "rgba(245,240,234,0.3)" }}>
+                    {page.hero.cta2.text}
                   </Link>
                 </div>
               </div>
@@ -150,16 +153,16 @@ export default function CorporatesPage() {
           <div className="max-w-[1240px] mx-auto px-8">
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "end", marginBottom: 48 }} className="corp-head">
               <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{corporatesPage.benefits.eyebrow}</p>
-                <h2 className="h-section">{corporatesPage.benefits.heading.split("\n").map((l, i) => <span key={i}>{l}{i === 0 && <br />}</span>)}</h2>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{page.benefits.eyebrow}</p>
+                <h2 className="h-section">{page.benefits.heading.split("\n").map((l, i) => <span key={i}>{l}{i === 0 && <br />}</span>)}</h2>
               </div>
               <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(18,18,18,0.6)", maxWidth: 520 }}>
-                {corporatesPage.benefits.sub}
+                {page.benefits.sub}
               </p>
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }} className="benefits-grid">
-              {corporatesPage.benefits.items.map((b) => (
+              {page.benefits.items.map((b) => (
                 <div key={b.title} className="card-lift" style={{
                   background: "#FFFFFF", borderRadius: 14, padding: 32,
                   display: "flex", gap: 20, alignItems: "flex-start",
@@ -189,15 +192,15 @@ export default function CorporatesPage() {
                 <Image src="/images/events/price-war-071.jpg" alt="Corporate case study" fill style={{ objectFit: "cover", transform: "scale(1.05)" }} sizes="(max-width: 900px) 100vw, 55vw" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
               </div>
               <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 16 }}>{corporatesPage.caseStudy.eyebrow}</p>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 16 }}>{page.caseStudy.eyebrow}</p>
                 <h3 style={{ fontSize: 28, fontWeight: 500, letterSpacing: "-0.02em", lineHeight: 1.2, whiteSpace: "pre-line" }}>
-                  {corporatesPage.caseStudy.heading}
+                  {page.caseStudy.heading}
                 </h3>
                 <p style={{ fontSize: 15, lineHeight: 1.65, color: "rgba(18,18,18,0.6)", marginTop: 18 }}>
-                  {corporatesPage.caseStudy.body}
+                  {page.caseStudy.body}
                 </p>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16, marginTop: 28 }}>
-                  {corporatesPage.caseStudy.stats.map((s) => (
+                  {page.caseStudy.stats.map((s) => (
                     <div key={s.l} style={{ paddingTop: 18, borderTop: "2px solid #8A0F14" }}>
                       <div style={{ fontSize: 32, fontWeight: 500, color: "#8A0F14", letterSpacing: "-0.02em" }}>{s.v}</div>
                       <div className="eyebrow" style={{ color: "rgba(18,18,18,0.6)", marginTop: 4 }}>{s.l}</div>
@@ -215,16 +218,16 @@ export default function CorporatesPage() {
           <div className="max-w-[1240px] mx-auto px-8">
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "end", marginBottom: 56 }} className="corp-path-head">
               <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{corporatesPage.learningPath.eyebrow}</p>
-                <h2 className="h-section">{corporatesPage.learningPath.heading.split("\n").map((l, i) => <span key={i}>{l}{i === 0 && <br />}</span>)}</h2>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{page.learningPath.eyebrow}</p>
+                <h2 className="h-section">{page.learningPath.heading.split("\n").map((l, i) => <span key={i}>{l}{i === 0 && <br />}</span>)}</h2>
               </div>
               <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(18,18,18,0.6)" }}>
-                {corporatesPage.learningPath.sub}
+                {page.learningPath.sub}
               </p>
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }} className="corp-path-grid">
-              {corporatesPage.learningPath.steps.map((s) => (
+              {page.learningPath.steps.map((s) => (
                 <div key={s.num} className="card-lift" style={{
                   background: "#FFFFFF", borderRadius: 14, padding: 28,
                   minHeight: 240, display: "flex", flexDirection: "column", justifyContent: "space-between",
@@ -240,11 +243,11 @@ export default function CorporatesPage() {
             </div>
 
             <div style={{ marginTop: 48, display: "flex", gap: 12, flexWrap: "wrap" }}>
-              <Link href={corporatesPage.learningPath.cta1.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#8A0F14", color: "#F5F0EA" }}>
-                {corporatesPage.learningPath.cta1.text}
+              <Link href={page.learningPath.cta1.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full" style={{ background: "#8A0F14", color: "#F5F0EA" }}>
+                {page.learningPath.cta1.text}
               </Link>
-              <Link href={corporatesPage.learningPath.cta2.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border" style={{ color: "#121212", borderColor: "rgba(18,18,18,0.25)" }}>
-                {corporatesPage.learningPath.cta2.text}
+              <Link href={page.learningPath.cta2.href} className="inline-flex items-center gap-2 px-[22px] py-[13px] text-[14px] font-medium rounded-full border" style={{ color: "#121212", borderColor: "rgba(18,18,18,0.25)" }}>
+                {page.learningPath.cta2.text}
               </Link>
             </div>
           </div>
@@ -254,7 +257,7 @@ export default function CorporatesPage() {
           `}</style>
         </section>
 
-        <ContextualTestimonials audience="corporate" label="▸ What corporates say" />
+        <ContextualTestimonials audience="corporate" label={locale === "en" ? "▸ What corporates say" : "▸ สิ่งที่องค์กรพูด"} />
         <CTASection />
       </main>
       <Footer />

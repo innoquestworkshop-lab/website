@@ -8,6 +8,7 @@ import { CTASection } from "@/components/sections/CTASection";
 import { MethodologySection } from "@/components/sections/MethodologySection";
 import { AboutStats } from "@/components/sections/AboutStats";
 import { aboutPage } from "@/data/about";
+import { getLocale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   title: "About InnoQuest | Empowering Youth in Thailand",
@@ -28,7 +29,9 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const locale = await getLocale();
+  const page = aboutPage[locale];
   return (
     <>
       <Navbar />
@@ -45,20 +48,20 @@ export default function AboutPage() {
           <div className="max-w-[1240px] mx-auto px-8 relative z-10">
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1.1fr", gap: 64, alignItems: "center" }} className="about-hero-grid">
               <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>{aboutPage.hero.eyebrow}</p>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 24 }}>{page.hero.eyebrow}</p>
                 <h1 style={{ fontSize: "clamp(36px, 5vw, 68px)", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.05 }}>
-                  {aboutPage.hero.heading.replace(aboutPage.hero.headingAccent, "").trimEnd()}{" "}
-                  <span style={{ color: "#8A0F14" }}>{aboutPage.hero.headingAccent}</span>
+                  {page.hero.heading.replace(page.hero.headingAccent, "").trimEnd()}{" "}
+                  <span style={{ color: "#8A0F14" }}>{page.hero.headingAccent}</span>
                 </h1>
                 <p style={{ fontSize: 17, lineHeight: 1.65, color: "rgba(245,240,234,0.7)", maxWidth: 520, marginTop: 24 }}>
-                  {aboutPage.hero.sub}
+                  {page.hero.sub}
                 </p>
                 <div style={{ marginTop: 32 }}>
-                  <Link href={aboutPage.hero.cta.href} style={{
+                  <Link href={page.hero.cta.href} style={{
                     display: "inline-flex", alignItems: "center", gap: 8,
                     color: "#8A0F14", textDecoration: "none", fontWeight: 500, fontSize: 14,
                   }}>
-                    {aboutPage.hero.cta.text}
+                    {page.hero.cta.text}
                   </Link>
                 </div>
               </div>
@@ -82,26 +85,26 @@ export default function AboutPage() {
           <div className="max-w-[1240px] mx-auto px-8">
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "start" }} className="story-grid">
               <div>
-                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{aboutPage.story.eyebrow}</p>
+                <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{page.story.eyebrow}</p>
                 <h2 className="h-section">
-                  {aboutPage.story.heading.split("\n").map((line, i) => (
+                  {page.story.heading.split("\n").map((line, i) => (
                     <span key={i}>{line}{i === 0 && <br />}</span>
                   ))}
                 </h2>
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-                {aboutPage.story.paragraphs.map((p, i) => (
+                {page.story.paragraphs.map((p, i) => (
                   <p key={i} style={{ fontSize: 17, lineHeight: 1.65, color: i === 0 ? undefined : "rgba(18,18,18,0.6)" }}>
                     {p}
                   </p>
                 ))}
                 <div style={{ marginTop: 8 }}>
-                  <Link href={aboutPage.story.cta.href} style={{
+                  <Link href={page.story.cta.href} style={{
                     display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 22px",
                     border: "1px solid rgba(18,18,18,0.25)", borderRadius: 999,
                     color: "#121212", textDecoration: "none", fontWeight: 500, fontSize: 14,
                   }}>
-                    {aboutPage.story.cta.text}
+                    {page.story.cta.text}
                   </Link>
                 </div>
               </div>
@@ -116,11 +119,11 @@ export default function AboutPage() {
         {/* Values */}
         <section style={{ background: "#F5F0EA", padding: "96px 0" }}>
           <div className="max-w-[1240px] mx-auto px-8">
-            <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{aboutPage.values.eyebrow}</p>
-            <h2 className="h-section" style={{ maxWidth: 780, marginBottom: 48 }}>{aboutPage.values.heading}</h2>
+            <p className="eyebrow" style={{ color: "#8A0F14", marginBottom: 18 }}>{page.values.eyebrow}</p>
+            <h2 className="h-section" style={{ maxWidth: 780, marginBottom: 48 }}>{page.values.heading}</h2>
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }} className="values-grid">
-              {aboutPage.values.items.map((v) => (
+              {page.values.items.map((v) => (
                 <div key={v.n} className="card-lift" style={{
                   background: "#FFFFFF", borderRadius: 14, padding: 32,
                   display: "flex", gap: 24, alignItems: "flex-start",
