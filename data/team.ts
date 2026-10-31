@@ -10,10 +10,10 @@ export type TeamMember = {
 };
 
 export const typeConfig: Record<TeamMemberType, { label: string; labelTh: string; color: string; bg: string }> = {
-  facilitator:          { label: "Facilitator",          labelTh: "วิทยากร",         color: "#8A0F14", bg: "#8A0F1415" },
-  speaker:              { label: "Speaker",               labelTh: "วิทยากรรับเชิญ", color: "#121212", bg: "#12121212" },
-  "business-development": { label: "Business Development", labelTh: "พัฒนาธุรกิจ",    color: "#4A4A4A", bg: "#4A4A4A10" },
-  art:                  { label: "Art",                   labelTh: "ศิลปะ",           color: "#7C5C3E", bg: "#7C5C3E12" },
+  facilitator:          { label: "Facilitator",          labelTh: "วิทยากร",         color: "var(--red-ink)", bg: "var(--surface-card)" },
+  speaker:              { label: "Speaker",               labelTh: "วิทยากรรับเชิญ", color: "var(--ink)", bg: "var(--surface-card)" },
+  "business-development": { label: "Business Development", labelTh: "พัฒนาธุรกิจ",    color: "var(--body)", bg: "var(--surface-card)" },
+  art:                  { label: "Art",                   labelTh: "ศิลปะ",           color: "var(--mute)", bg: "var(--surface-card)" },
 };
 
 export const teamPage = {

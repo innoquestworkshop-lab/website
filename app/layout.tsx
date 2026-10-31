@@ -2,9 +2,12 @@ import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import type { Locale } from "@/lib/i18n";
-import "@fontsource-variable/noto-sans-thai";
+import "@fontsource/chakra-petch/600.css";
+import "@fontsource/chakra-petch/700.css";
 import "@fontsource/ibm-plex-sans-thai/400.css";
 import "@fontsource/ibm-plex-sans-thai/500.css";
+import "@fontsource/ibm-plex-sans-thai/600.css";
+import "@fontsource/ibm-plex-sans-thai/700.css";
 import "./globals.css";
 
 export const metadata: Metadata = {

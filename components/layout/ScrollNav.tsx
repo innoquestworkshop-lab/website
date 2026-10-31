@@ -54,14 +54,13 @@ export function ScrollNav() {
   return (
     <div
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50 bg-canvas border-b border-hairline transition-all duration-300",
         visible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"
       )}
-      style={{ background: "#111111", borderBottom: "1px solid rgba(255,255,255,0.08)" }}
     >
-      <div className="max-w-7xl mx-auto px-8 h-12 flex items-center justify-between gap-4">
+      <div className="wrap h-16 flex items-center justify-between gap-4">
         {/* Mini logo */}
-        <Link href="/" className="shrink-0">
+        <Link href="/" className="shrink-0 hidden sm:block">
           <Image
             src="/logos/logo-transparent-trimmed.png"
             alt="InnoQuest"
@@ -71,17 +70,16 @@ export function ScrollNav() {
           />
         </Link>
 
-        {/* Section pills — scrollable on mobile */}
-        <div className="flex items-center gap-1 overflow-x-auto scrollbar-hide">
+        {/* Section pills, scrollable on mobile */}
+        <div className="flex items-center gap-1 overflow-x-auto scrollbar-hide min-w-0">
           {sections.map((s) => (
             <button
               key={s.id}
               onClick={() => scrollTo(s.id)}
+              aria-current={active === s.id ? "true" : undefined}
               className={cn(
-                "shrink-0 px-3 py-1 rounded-full text-[11px] font-medium transition-all whitespace-nowrap",
-                active === s.id
-                  ? "bg-[#8A0F14] text-white"
-                  : "text-white/40 hover:text-white/80"
+                "shrink-0 px-3 py-1.5 rounded-full text-xs font-medium transition-colors whitespace-nowrap",
+                active === s.id ? "bg-secondary-bg text-ink" : "text-mute hover:text-ink"
               )}
             >
               {s.label[locale]}
@@ -90,10 +88,7 @@ export function ScrollNav() {
         </div>
 
         {/* CTA */}
-        <Link
-          href="/contact"
-          className="hidden sm:inline-flex shrink-0 items-center px-4 py-1.5 bg-[#8A0F14] text-white text-xs font-medium rounded-full hover:bg-[#D63B34] transition-colors"
-        >
+        <Link href="/contact" className="btn btn-primary hidden sm:inline-flex shrink-0 whitespace-nowrap" style={{ minHeight: 40, paddingInline: 16 }}>
           {locale === "en" ? "Talk to us →" : "ติดต่อเรา →"}
         </Link>
       </div>

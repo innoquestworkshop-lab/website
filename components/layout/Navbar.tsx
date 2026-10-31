@@ -9,6 +9,8 @@ import { cn } from "@/lib/utils";
 import { navLinks } from "@/data/navigation";
 import { useLocale } from "@/components/LanguageProvider";
 
+const linkBase = "block px-2 xl:px-3 py-2 text-sm font-medium whitespace-nowrap rounded-lg transition-colors";
+const linkIdle = "text-ink hover:text-red-ink";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -32,150 +34,97 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isHome
-          ? scrolled && !mobileOpen
-            ? "-translate-y-full opacity-0 pointer-events-none"
-            : mobileOpen
-              ? "bg-white shadow-sm"
-              : "bg-transparent"
-          : scrolled || mobileOpen
-            ? "bg-white shadow-sm"
-            : "bg-transparent"
+        "fixed top-0 left-0 right-0 z-50 bg-canvas border-b border-hairline transition-all duration-300",
+        isHome && scrolled && !mobileOpen && "-translate-y-full opacity-0 pointer-events-none"
       )}
     >
-      <nav className="max-w-7xl mx-auto px-8 h-16 flex items-center justify-between">
-        {/* Logo */}
+      <nav className="wrap h-16 flex items-center justify-between gap-3">
         <Link href="/" className="flex items-center shrink-0">
           <Image
             src="/logos/logo-transparent-trimmed.png"
             alt="InnoQuest"
             width={140}
             height={40}
-            className="h-8 w-auto object-contain"
+            className="h-7 xl:h-8 w-auto object-contain"
             priority
           />
         </Link>
 
         {/* Desktop nav */}
-        <ul className="hidden lg:flex items-center gap-1">
-          {navLinks[locale].filter((link) => !link.highlight).map((link) => (
-            <li key={link.href} className="relative group">
-              {link.dropdown ? (
-                <>
-                  <button
-                    className={cn(
-                      "flex items-center gap-1 px-3 py-2 text-xs font-medium rounded-lg transition-colors",
-                      pathname.startsWith(link.href)
-                        ? "text-[#8A0F14]"
-                        : scrolled || mobileOpen
-                          ? "text-[#121212] hover:text-[#8A0F14]"
-                          : "text-[#F5F0EA] hover:text-[#8A0F14]"
-                    )}
-                  >
-                    {link.label}
-                    <IconChevronDown size={14} className="transition-transform group-hover:rotate-180" />
-                  </button>
-                  <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150">
-                    <div className="bg-white rounded-[14px] shadow-lg border border-gray-100 py-2 min-w-[180px]">
-                      {link.dropdown.map((item) => (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          className={cn(
-                            "block px-4 py-2 text-xs transition-colors",
-                            pathname === item.href
-                              ? "text-[#8A0F14] bg-[#F5F0EA]"
-                              : "text-[#121212] hover:bg-[#F5F0EA] hover:text-[#8A0F14]"
-                          )}
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
+        <ul className="hidden lg:flex items-center m-0 p-0 list-none">
+          {navLinks[locale].filter((link) => !link.highlight).map((link) => {
+            const active = link.dropdown
+              ? link.dropdown.some((d) => pathname === d.href)
+              : pathname === link.href;
+            return (
+              <li key={link.href} className="relative group">
+                {link.dropdown ? (
+                  <>
+                    <button
+                      className={cn(linkBase, "flex items-center gap-1", active ? "text-red-ink" : linkIdle)}
+                      aria-haspopup="true"
+                    >
+                      {link.label}
+                      <IconChevronDown size={14} className="transition-transform group-hover:rotate-180 group-focus-within:rotate-180" />
+                    </button>
+                    <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-150">
+                      <div className="bg-canvas rounded-2xl border border-hairline py-2 min-w-[200px]">
+                        {link.dropdown.map((item) => (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            className={cn(
+                              "block px-4 py-2 text-sm whitespace-nowrap transition-colors",
+                              pathname === item.href
+                                ? "text-red-ink bg-surface-card"
+                                : "text-ink hover:bg-surface-card hover:text-red-ink"
+                            )}
+                          >
+                            {item.label}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                </>
-              ) : link.external ? (
-                <a
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={cn(
-                    "block px-3 py-2 text-xs font-medium rounded-lg transition-colors",
-                    link.highlight
-                      ? "text-[#8A0F14] border border-[#8A0F14] rounded-full px-4 hover:bg-[#8A0F14] hover:text-white"
-                      : scrolled || mobileOpen
-                        ? "text-[#121212] hover:text-[#8A0F14]"
-                        : "text-[#F5F0EA] hover:text-[#8A0F14]"
-                  )}
-                >
-                  {link.label}
-                </a>
-              ) : (
-                <Link
-                  href={link.href}
-                  className={cn(
-                    "block px-3 py-2 text-xs font-medium rounded-lg transition-colors",
-                    pathname === link.href
-                      ? "text-[#8A0F14]"
-                      : scrolled || mobileOpen
-                        ? "text-[#121212] hover:text-[#8A0F14]"
-                        : "text-[#F5F0EA] hover:text-[#8A0F14]"
-                  )}
-                >
-                  {link.label}
-                  {pathname === link.href && (
-                    <span className="block h-0.5 bg-[#8A0F14] rounded-full mt-0.5" />
-                  )}
-                </Link>
-              )}
-            </li>
-          ))}
+                  </>
+                ) : (
+                  <Link href={link.href} className={cn(linkBase, active ? "text-red-ink" : linkIdle)}>
+                    {link.label}
+                  </Link>
+                )}
+                {active && <span className="absolute left-2 right-2 xl:left-3 xl:right-3 bottom-0 h-0.5 bg-innoquest-red" aria-hidden="true" />}
+              </li>
+            );
+          })}
         </ul>
 
-        {/* CTA + mobile toggle */}
-        <div className="flex items-center gap-3">
-          {/* Language toggle */}
+        {/* Actions + mobile toggle */}
+        <div className="flex items-center gap-2 shrink-0">
           <button
             onClick={toggle}
-            className={cn(
-              "hidden lg:inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-[11px] font-medium uppercase tracking-[0.08em] border transition-colors",
-              scrolled || mobileOpen
-                ? "border-[rgba(18,18,18,0.2)] text-[#121212] hover:bg-[#121212] hover:text-white"
-                : "border-[rgba(245,240,234,0.3)] text-[#F5F0EA] hover:bg-[rgba(245,240,234,0.15)]"
-            )}
-            style={{ fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
+            className="inline-flex items-center justify-center min-w-10 h-10 px-2 rounded-full text-xs font-medium text-ink hover:bg-surface-card transition-colors"
           >
             {locale === "en" ? "TH" : "EN"}
           </button>
-          <Link
-            href="/signup"
-            className="hidden lg:inline-flex items-center px-5 py-2 bg-[#8A0F14] text-white text-sm font-medium rounded-full transition-transform active:scale-[0.98] hover:bg-[#6B0A0E]"
-          >
-            {locale === "en" ? "Sign up →" : "ลงทะเบียน →"}
-          </Link>
           {navLinks[locale].filter((link) => link.highlight).map((link) => (
             <a
               key={link.href}
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden lg:inline-flex items-center gap-1.5 px-5 py-2 text-sm font-medium rounded-full bg-[#D9CFC0] text-[#121212] transition-all active:scale-[0.98] hover:bg-[#E8E0D5] hover:shadow-lg"
+              className="btn btn-secondary hidden lg:inline-flex whitespace-nowrap"
+              style={{ minHeight: 40, paddingInline: 12 }}
             >
               {link.label}
             </a>
           ))}
-          <button
-            onClick={toggle}
-            className={cn("lg:hidden px-2 py-1 rounded text-[11px] font-medium uppercase tracking-[0.08em] transition-colors", scrolled || mobileOpen ? "text-[#121212]" : "text-[#F5F0EA]")}
-            style={{ fontFamily: "var(--font-jetbrains-mono), ui-monospace, monospace" }}
-          >
-            {locale === "en" ? "TH" : "EN"}
-          </button>
+          <Link href="/signup" className="btn btn-primary hidden lg:inline-flex whitespace-nowrap" style={{ minHeight: 40, paddingInline: 16 }}>
+            {locale === "en" ? "Sign up →" : "ลงทะเบียน →"}
+          </Link>
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className={cn("lg:hidden p-2 transition-colors", scrolled || mobileOpen ? "text-[#121212]" : "text-[#F5F0EA]")}
+            className="lg:hidden grid place-items-center w-10 h-10 text-ink"
             aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
           >
             {mobileOpen ? <IconX size={22} /> : <IconMenu2 size={22} />}
           </button>
@@ -184,34 +133,23 @@ export function Navbar() {
 
       {/* Mobile overlay */}
       {mobileOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-100 px-8 py-6 space-y-1">
-          {navLinks[locale].map((link) => (
+        <div className="lg:hidden bg-canvas border-t border-hairline wrap py-4 max-h-[calc(100svh-64px)] overflow-y-auto">
+          {navLinks[locale].filter((link) => !link.highlight).map((link) => (
             <div key={link.href}>
               {link.dropdown ? (
                 <>
                   <button
-                    onClick={() =>
-                      setOpenDropdown(openDropdown === link.label ? null : link.label)
-                    }
-                    className="w-full flex items-center justify-between py-3 text-sm font-medium text-[#121212]"
+                    onClick={() => setOpenDropdown(openDropdown === link.label ? null : link.label)}
+                    aria-expanded={openDropdown === link.label}
+                    className="w-full flex items-center justify-between py-3 text-sm font-medium text-ink"
                   >
                     {link.label}
-                    <IconChevronDown
-                      size={14}
-                      className={cn(
-                        "transition-transform",
-                        openDropdown === link.label && "rotate-180"
-                      )}
-                    />
+                    <IconChevronDown size={14} className={cn("transition-transform", openDropdown === link.label && "rotate-180")} />
                   </button>
                   {openDropdown === link.label && (
-                    <div className="pl-4 pb-2 space-y-1">
+                    <div className="pl-4 pb-2">
                       {link.dropdown.map((item) => (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          className="block py-2 text-sm text-[#4A4A4A] hover:text-[#8A0F14]"
-                        >
+                        <Link key={item.href} href={item.href} className="block py-2 text-sm text-body hover:text-red-ink">
                           {item.label}
                         </Link>
                       ))}
@@ -221,7 +159,7 @@ export function Navbar() {
               ) : (
                 <Link
                   href={link.href}
-                  className="block py-3 text-sm font-medium text-[#121212] hover:text-[#8A0F14]"
+                  className="block py-3 text-sm font-medium text-ink hover:text-red-ink"
                   onClick={() => setMobileOpen(false)}
                 >
                   {link.label}
@@ -230,23 +168,14 @@ export function Navbar() {
             </div>
           ))}
           <div className="pt-4 flex flex-col gap-3">
+            <Link href="/signup" className="btn btn-primary btn-block">
+              {locale === "en" ? "Sign up →" : "ลงทะเบียน →"}
+            </Link>
             {navLinks[locale].filter((link) => link.highlight).map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block text-center py-3 bg-[#D9CFC0] text-[#121212] text-sm font-medium rounded-full"
-              >
+              <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-block">
                 {link.label}
               </a>
             ))}
-            <Link
-              href="/signup"
-              className="block text-center py-3 bg-[#8A0F14] text-white text-sm font-medium rounded-full"
-            >
-              {locale === "en" ? "Sign up →" : "ลงทะเบียน →"}
-            </Link>
           </div>
         </div>
       )}

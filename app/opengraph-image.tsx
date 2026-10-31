@@ -1,11 +1,19 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
 export const alt = "InnoQuest | Youth Learning Programs Thailand";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function Image() {
+const tile = (left: number, top: number, height: number, background: string) => (
+  <div style={{ position: "absolute", left, top, width: 170, height, borderRadius: 16, background, display: "flex" }} />
+);
+
+export default async function Image() {
+  const logo = await readFile(join(process.cwd(), "public/logos/logo-transparent-trimmed.png"), "base64");
+  const photo = await readFile(join(process.cwd(), "public/images/events/web/IMG_7900.jpg"), "base64");
+
   return new ImageResponse(
     (
       <div
@@ -14,114 +22,34 @@ export default function Image() {
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          alignItems: "flex-start",
-          justifyContent: "flex-end",
-          background: "#121212",
-          padding: "72px 80px",
+          justifyContent: "center",
+          background: "#FBFBF9",
+          padding: "0 72px",
           position: "relative",
           fontFamily: "sans-serif",
         }}
       >
-        {/* Dot grid pattern overlay */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage:
-              "radial-gradient(circle, rgba(245,240,234,0.06) 1px, transparent 1px)",
-            backgroundSize: "28px 28px",
-          }}
+        {/* Masonry motif, bleeding off the right edge */}
+        {tile(690, -60, 300, "#E5E5E0")}
+        {tile(690, 256, 200, "#FF0F0F")}
+        {tile(690, 472, 220, "#262622")}
+        {tile(876, 90, 220, "#262622")}
+        <img
+          src={`data:image/jpeg;base64,${photo}`}
+          alt=""
+          width={170}
+          height={260}
+          style={{ position: "absolute", left: 876, top: 326, width: 170, height: 260, objectFit: "cover", borderRadius: 16 }}
         />
+        {tile(1062, -30, 240, "#FF0F0F")}
+        {tile(1062, 226, 280, "#E5E5E0")}
+        {tile(1062, 522, 160, "#262622")}
 
-        {/* Red glow orb */}
-        <div
-          style={{
-            position: "absolute",
-            top: -120,
-            right: -80,
-            width: 560,
-            height: 560,
-            borderRadius: "50%",
-            background: "#8A0F14",
-            opacity: 0.18,
-            filter: "blur(2px)",
-          }}
-        />
-
-        {/* Red accent bar */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: 6,
-            height: "100%",
-            background: "#8A0F14",
-          }}
-        />
-
-        {/* Content */}
-        <div style={{ position: "relative", display: "flex", flexDirection: "column", gap: 0 }}>
-          {/* Eyebrow */}
-          <div
-            style={{
-              fontSize: 14,
-              fontWeight: 500,
-              color: "#8A0F14",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              marginBottom: 20,
-              display: "flex",
-            }}
-          >
-            ▸ Youth Learning Programs · Thailand
-          </div>
-
-          {/* Wordmark */}
-          <div
-            style={{
-              fontSize: 96,
-              fontWeight: 700,
-              color: "#F5F0EA",
-              letterSpacing: "-0.04em",
-              lineHeight: 1,
-              display: "flex",
-            }}
-          >
-            Inno
-            <span style={{ color: "#8A0F14" }}>Quest</span>
-          </div>
-
-          {/* Tagline */}
-          <div
-            style={{
-              fontSize: 22,
-              fontWeight: 400,
-              color: "rgba(245,240,234,0.6)",
-              marginTop: 24,
-              maxWidth: 680,
-              lineHeight: 1.5,
-              display: "flex",
-            }}
-          >
-            The skills schools forgot to teach. Business simulations and live workshops for ages 10 to 18.
-          </div>
+        <img src={`data:image/png;base64,${logo}`} alt="" width={378} height={84} style={{ width: 378, height: 84 }} />
+        <div style={{ fontSize: 28, fontWeight: 400, color: "#33332E", marginTop: 32, maxWidth: 560, lineHeight: 1.4, display: "flex" }}>
+          The skills schools forgot to teach. Business simulations and live workshops for ages 10 to 18.
         </div>
-
-        {/* Domain */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: 36,
-            right: 80,
-            fontSize: 13,
-            color: "rgba(245,240,234,0.3)",
-            letterSpacing: "0.06em",
-            display: "flex",
-          }}
-        >
-          innoquest.tech
-        </div>
+        <div style={{ fontSize: 20, color: "#62625B", marginTop: 24, display: "flex" }}>innoquest.tech</div>
       </div>
     ),
     { ...size }
