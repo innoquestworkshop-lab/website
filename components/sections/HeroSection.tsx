@@ -49,21 +49,21 @@ function StatItem({ n, suf, label }: { n: number; suf: string; label: string }) 
 const columns: Tile[][] = [
   [
     { src: "/images/events/IMG_8856.jpg", alt: "Students working through a challenge at an InnoQuest workshop", ratio: "3 / 4" },
-    { fill: "red", ratio: "1 / 1" },
+    { fill: "red", ratio: "5 / 2" },
     { src: "/images/events/price-war-030.jpg", alt: "Students celebrating during the Price War simulation", ratio: "4 / 5" },
-    { fill: "sand", ratio: "3 / 4" },
+    { fill: "sand", ratio: "2 / 1" },
   ],
   [
-    { fill: "sand", ratio: "4 / 3" },
+    { fill: "sand", ratio: "2 / 1" },
     { src: "/images/events/price-war-026.jpg", alt: "A facilitator leading the Price War simulation", ratio: "3 / 4" },
     { mark: true, ratio: "1 / 1" },
     { src: "/images/events/IMG_7900.jpg", alt: "Students talking through ideas in a small group", ratio: "4 / 5" },
   ],
   [
     { src: "/images/events/price-war-062.jpg", alt: "Teams at their tables during a live simulation", ratio: "4 / 5" },
-    { fill: "dark", ratio: "3 / 4" },
+    { fill: "dark", ratio: "5 / 2" },
     { src: "/images/events/break-the-market-5760.jpg", alt: "Students planning at Break the Market", ratio: "1 / 1" },
-    { fill: "sand", ratio: "4 / 5" },
+    { fill: "sand", ratio: "2 / 1" },
     { src: "/images/events/price-war-141.jpg", alt: "A student reading results on a laptop", ratio: "3 / 4" },
   ],
 ];

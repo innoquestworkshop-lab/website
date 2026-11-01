@@ -858,7 +858,8 @@ html[lang="th"] .cta-title {
 
 .cta-photos {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 1fr 1fr;
   gap: 8px;
   min-height: 420px;
   padding: 16px 16px 16px 0;
