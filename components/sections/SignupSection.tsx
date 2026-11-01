@@ -59,7 +59,7 @@ export function SignupSection({ workshops }: { workshops: Workshop[] }) {
                 const active = w.id === selectedId;
                 return (
                   <div key={w.id} className="card workshop" data-active={active || undefined}>
-                    <p className="caption">{when(w.starts_at)}{place && ` · ${place}`}</p>
+                    <p className="caption">{when(w.starts_at)}{place && ` @ ${place}`}</p>
                     <h2 className="h-card">{title}</h2>
                     <p className="t-small" style={{ flex: 1 }}>{description}</p>
                     <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 8, flexWrap: "wrap", marginTop: 8 }}>
