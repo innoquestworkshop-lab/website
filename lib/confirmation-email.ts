@@ -23,7 +23,7 @@ const dayKey = (iso: string) => new Date(iso).toLocaleDateString("en-CA", { time
 const timeOnly = (iso: string, th: boolean) =>
   new Date(iso).toLocaleTimeString(th ? "th-TH" : "en-GB", { timeZone: TZ, timeStyle: "short" });
 
-function whenText(startsAt: string, endsAt: string | null, th: boolean) {
+export function whenText(startsAt: string, endsAt: string | null, th: boolean) {
   if (!endsAt) return dateTime(startsAt, th);
   // Same day: show the end as a time only.
   const end = dayKey(startsAt) === dayKey(endsAt) ? timeOnly(endsAt, th) : dateTime(endsAt, th);

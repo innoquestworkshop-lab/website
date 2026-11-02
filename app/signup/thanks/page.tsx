@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { signupThanks } from "@/data/signup";
 import { getLocale } from "@/lib/i18n";
 import { supabaseAdmin } from "@/lib/workshops";
+import { formatBaht, whenText } from "@/lib/confirmation-email";
 import { lineQrUrl } from "@/lib/workshop-line";
 
 export const metadata: Metadata = { title: "Sign-up status | InnoQuest", robots: { index: false } };
@@ -48,17 +49,10 @@ export default async function ThanksPage({ searchParams }: { searchParams: Promi
   const w: PaidWorkshop | null = Array.isArray(rel) ? (rel[0] ?? null) : (rel ?? null);
   const pv = t.paidView;
   const th = locale === "th";
-  const fmt = (d: string, opts: Intl.DateTimeFormatOptions) =>
-    new Intl.DateTimeFormat(th ? "th-TH" : "en-GB", { timeZone: "Asia/Bangkok", ...opts }).format(new Date(d));
-  let when = "";
-  if (paid && w?.starts_at) {
-    const day = fmt(w.starts_at, { dateStyle: "long" });
-    const tm = (d: string) => fmt(d, { hour: "2-digit", minute: "2-digit", hour12: false });
-    when = `${day}, ${tm(w.starts_at)}${w.ends_at ? ` - ${tm(w.ends_at)}` : ""}`;
-  }
+  const when = paid && w?.starts_at ? whenText(w.starts_at, w.ends_at, th) : "";
   const title = w ? ((th ? w.title_th || w.title_en : w.title_en || w.title_th) ?? "") : "";
   const location = w ? ((th ? w.location_th || w.location_en : w.location_en || w.location_th) ?? "") : "";
-  const amount = paid && data?.amount_satang != null ? `฿${(data.amount_satang / 100).toLocaleString("en-US")}` : "";
+  const amount = paid && data?.amount_satang != null ? formatBaht(data.amount_satang) : "";
   const qr = paid && w ? lineQrUrl(w.line_qr_path) : null;
   const lineUrl = paid && w ? w.line_group_url : null;
   const rows: [string, string][] = ([[pv.workshop, title], [pv.when, when], [pv.location, location], [pv.amount, amount]] as [string, string][]).filter(([, v]) => v);
