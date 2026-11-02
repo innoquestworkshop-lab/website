@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { createPaymentLink, disablePaymentLink } from "@/lib/beam";
 import { escapeHtml, supabaseAdmin } from "@/lib/workshops";
+import { emailFooter } from "@/lib/email-footer";
 import { site } from "@/data/site";
 
 const RECOVERY_HOURS = 24;
@@ -15,6 +16,50 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://innoquest.tech";
 const UNPAID = ["held", "expired"];
 
 export const maxDuration = 60;
+
+const dateText = (iso: string, th: boolean, withTime: boolean) =>
+  new Date(iso).toLocaleString(th ? "th-TH" : "en-GB", {
+    timeZone: "Asia/Bangkok",
+    dateStyle: "long",
+    ...(withTime ? { timeStyle: "short" as const } : {}),
+  });
+
+function recoveryEmail(p: { th: boolean; plainTitle: string; name: string; startsAt: string; payBy: string; url: string }) {
+  const title = escapeHtml(p.plainTitle);
+  const name = escapeHtml(p.name);
+  const starts = escapeHtml(dateText(p.startsAt, p.th, false));
+  const payBy = escapeHtml(dateText(p.payBy, p.th, true));
+  const url = escapeHtml(p.url);
+  const t = p.th
+    ? {
+        subject: `ยังไม่ได้ชำระเงิน: ${p.plainTitle}`,
+        heading: "อีกขั้นเดียวก็ลงทะเบียนเสร็จ",
+        body: `เราได้รับใบสมัครของ <strong>${name}</strong> สำหรับ <strong>${title}</strong> (${starts}) แล้ว แต่ยังไม่ได้รับการชำระเงิน`,
+        button: "ชำระเงิน",
+        deadline: `ลิงก์นี้ใช้ได้ถึง ${payBy} ที่นั่งจะยืนยันเมื่อชำระเงินแล้วเท่านั้น`,
+        help: `หากมีข้อสงสัย โทร ${site.contact.phone}`,
+      }
+    : {
+        subject: `Finish signing up for ${p.plainTitle}`,
+        heading: "One step left",
+        body: `We have <strong>${name}</strong>'s sign-up for <strong>${title}</strong> (${starts}), but the payment hasn't come through yet.`,
+        button: "Complete payment",
+        deadline: `This link works until ${payBy}. The seat is confirmed once payment goes through.`,
+        help: `Questions? Call ${site.contact.phone}.`,
+      };
+  return {
+    subject: t.subject,
+    html: `<div style="max-width:520px;margin:0 auto;padding:32px 16px;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6;color:#000000;">
+<p style="margin:0 0 24px;font-size:20px;font-weight:bold;">InnoQuest</p>
+<h1 style="margin:0 0 12px;font-size:24px;line-height:1.3;">${t.heading}</h1>
+<p style="margin:0 0 24px;">${t.body}</p>
+<p style="margin:0 0 24px;"><a href="${url}" style="display:inline-block;background:#E63946;color:#ffffff;text-decoration:none;font-weight:bold;padding:12px 24px;border-radius:6px;">${t.button}</a></p>
+<p style="margin:0 0 8px;font-size:14px;color:#444444;">${t.deadline}</p>
+<p style="margin:0;font-size:14px;color:#444444;">${t.help}</p>
+${emailFooter(p.th)}
+</div>`,
+  };
+}
 
 const sameName = (a: string, b: string) => a.trim().toLowerCase() === b.trim().toLowerCase();
 
@@ -104,7 +149,6 @@ export async function GET(req: NextRequest) {
       const title = escapeHtml(plainTitle);
       const name = escapeHtml(s.student_name);
       const expiresAt = new Date(Math.min(Date.now() + RECOVERY_HOURS * 60 * 60 * 1000, Date.parse(workshop.starts_at)));
-      const hours = Math.floor((expiresAt.getTime() - Date.now()) / (60 * 60 * 1000));
 
       const link = await createPaymentLink({
         amountSatang: s.amount_satang,
@@ -132,10 +176,14 @@ export async function GET(req: NextRequest) {
       const { error: emailError } = await resend.emails.send({
         from: "InnoQuest <no-reply@innoquest.tech>",
         to: s.email,
-        subject: th ? `ชำระเงินให้เสร็จสิ้น: ${plainTitle}` : `Finish your sign-up: ${plainTitle}`,
-        html: th
-          ? `<p>การลงทะเบียนของ ${name} ใน ${title} ยังไม่เสร็จสมบูรณ์ โปรดชำระเงินภายใน ${hours} ชั่วโมงเพื่อยืนยันที่นั่ง</p><p><a href="${link.url}">ชำระเงินที่นี่</a></p><p>ที่นั่งจะถูกจองเมื่อชำระเงินสำเร็จเท่านั้น หากมีข้อสงสัย โปรดติดต่อ ${site.contact.phone}</p>`
-          : `<p>${name}'s sign-up for ${title} isn't finished yet. Pay within ${hours} hours to confirm the seat.</p><p><a href="${link.url}">Pay here</a></p><p>The seat is reserved only once payment is complete. Questions? Contact ${site.contact.phone}.</p>`,
+        ...recoveryEmail({
+          th,
+          plainTitle,
+          name: s.student_name,
+          startsAt: workshop.starts_at,
+          payBy: expiresAt.toISOString(),
+          url: link.url,
+        }),
       });
       // Resend reports failures in its return value rather than by throwing.
       if (emailError) throw new Error(`Resend: ${emailError.message}`);
