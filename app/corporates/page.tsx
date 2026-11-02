@@ -10,8 +10,9 @@ import { getLocale } from "@/lib/i18n";
 import { AccentHeading, Lines, PageHero, Photo, plain, SectionHead, Steps } from "@/components/ui/system";
 
 export const metadata: Metadata = {
-  title: "CSR Youth Innovation Programs Bangkok | InnoQuest",
-  description: "Partner with InnoQuest for CSR that counts. Our Bangkok-based youth innovation workshops deliver measurable impact for Thai students, schools, and your brand.",
+  title: "CSR Youth Innovation Programs, Bangkok",
+  description: "Partner with InnoQuest for youth-focused CSR in Bangkok — entrepreneurship and innovation workshops that deliver measurable impact for Thai students and your brand.",
+  alternates: { canonical: "/corporates" },
   keywords: [
     "CSR Thailand",
     "corporate social responsibility Bangkok",

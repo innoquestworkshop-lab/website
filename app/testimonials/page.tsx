@@ -9,8 +9,9 @@ import { getLocale } from "@/lib/i18n";
 import { PageHero, Photo, plain, QuoteCard } from "@/components/ui/system";
 
 export const metadata: Metadata = {
-  title: "Real Reviews from Students, Schools & Corporates",
-  description: "Students grew, schools transformed, corporates ran CSR programs worth talking about. See what parents, teachers, and HR teams say about InnoQuest workshops in Bangkok.",
+  title: "Student, School & Corporate Reviews",
+  description: "See what parents, teachers and HR teams say about InnoQuest's entrepreneurship workshops, camps and business simulations for students in Bangkok.",
+  alternates: { canonical: "/testimonials" },
   keywords: [
     "InnoQuest testimonials",
     "student workshop reviews Bangkok",

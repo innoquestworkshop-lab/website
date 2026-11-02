@@ -9,8 +9,9 @@ import { getLocale } from "@/lib/i18n";
 import { AccentHeading, CheckIcon, Lines, PageHero, Photo, plain, SectionHead, Steps } from "@/components/ui/system";
 
 export const metadata: Metadata = {
-  title: "School Programs for Bangkok Students | InnoQuest",
-  description: "Curriculum-aligned innovation workshops and entrepreneurship camps for schools in Bangkok and across Thailand. Students aged 10–18 build real-world skills in creativity, critical thinking, and business.",
+  title: "Entrepreneurship Programs for Schools, Bangkok",
+  description: "Curriculum-aligned entrepreneurship and innovation workshops for Bangkok schools — students aged 10–18 build creativity, critical thinking and business skills.",
+  alternates: { canonical: "/schools" },
   keywords: [
     "Bangkok school programs",
     "school workshops Thailand",

@@ -12,8 +12,9 @@ import { getLocale } from "@/lib/i18n";
 import { AccentHeading, Arrowed, Lines, PageHero, Photo, plain, SectionHead, Steps } from "@/components/ui/system";
 
 export const metadata: Metadata = {
-  title: "How We Teach Innovation | InnoQuest",
-  description: "Hands-on workshops, business simulations & camps in Bangkok. InnoQuest uses experiential learning to build entrepreneurial thinking in students aged 10–18.",
+  title: "How We Teach Entrepreneurship & Innovation",
+  description: "Hands-on, gamified workshops, business simulations and camps in Bangkok — InnoQuest's experiential method builds entrepreneurial thinking in students aged 10–18.",
+  alternates: { canonical: "/what-we-do" },
   keywords: [
     "innovation workshops Bangkok",
     "experiential learning Thailand",

@@ -6,8 +6,9 @@ import { SignupSection } from "@/components/sections/SignupSection";
 import { getOpenWorkshops } from "@/lib/workshops";
 
 export const metadata: Metadata = {
-  title: "Workshop Sign-up | InnoQuest",
-  description: "See open InnoQuest workshops for students aged 10 to 18, sign up, and pay online.",
+  title: "Workshop Sign-up — Ages 10–18, Bangkok",
+  description: "Browse open InnoQuest entrepreneurship and innovation workshops in Bangkok for students aged 10–18, see dates and prices, and sign up and pay online in minutes.",
+  alternates: { canonical: "/signup" },
 };
 
 export default async function SignupPage() {

@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: "/api/",
     },
-    sitemap: "https://innoquest.tech/sitemap.xml",
+    sitemap: "https://www.innoquest.tech/sitemap.xml",
   };
 }

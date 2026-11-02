@@ -9,8 +9,9 @@ import { getLocale } from "@/lib/i18n";
 import { PageHero, Photo, plain, SectionHead } from "@/components/ui/system";
 
 export const metadata: Metadata = {
-  title: "InnoQuest for Parents | Kids Programs Bangkok",
-  description: "Give your child real entrepreneurship and innovation skills. InnoQuest camps, workshops, and simulations in Bangkok build creativity, teamwork, and business thinking for ages 10–18.",
+  title: "Kids & Teen Entrepreneurship Camps, Bangkok",
+  description: "Give your child real entrepreneurship, finance and innovation skills. InnoQuest camps, workshops and business simulations in Bangkok for ages 10–18.",
+  alternates: { canonical: "/parents" },
   keywords: [
     "youth programs Bangkok",
     "kids entrepreneurship camp Thailand",
