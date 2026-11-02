@@ -5,9 +5,10 @@ import { escapeHtml, supabaseAdmin } from "@/lib/workshops";
 import { site } from "@/data/site";
 
 const RECOVERY_HOURS = 24;
-// A slow payer may still be finishing on the first link (a scanned QR, say).
-const GRACE_MINUTES = 30;
-// The job runs hourly, so a link any shorter could arrive too late to use.
+// Soon after the first link expires, while the person is still interested. If they
+// were finishing on that link, the webhook keeps the payment and disables this one.
+const GRACE_MINUTES = 5;
+// A link any shorter would be too little time to act on the email.
 const MIN_HOURS_BEFORE_START = 1;
 const BATCH = 10;
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://innoquest.tech";
@@ -18,7 +19,7 @@ export const maxDuration = 60;
 const sameName = (a: string, b: string) => a.trim().toLowerCase() === b.trim().toLowerCase();
 
 /**
- * Hourly recovery of abandoned workshop sign-ups, called by pg_cron (the website's
+ * Recovery of abandoned workshop sign-ups, called every 5 minutes by pg_cron (the website's
  * Vercel plan allows only daily crons): see scripts/60 in the InnoQuest app repo.
  *
  * A sign-up whose hold lapsed unpaid gets one fresh link, valid 24h or until the
