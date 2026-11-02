@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { normalizeAffiliateCode } from "@/lib/affiliate";
 import { createPaymentLink } from "@/lib/beam";
 import { HOLD_MINUTES, supabaseAdmin, type FormField } from "@/lib/workshops";
 
@@ -17,6 +18,9 @@ const schema = z.object({
   consent: z.literal(true),
   parent_consent: z.boolean().default(false),
   locale: z.enum(["th", "en"]).default("th"),
+  affiliate_code: z.string().max(40).optional(),
+  share_first_name: z.boolean().default(false),
+  expected_satang: z.number().int().min(0).max(100_000_000).optional(),
   turnstileToken: z.string(),
 });
 
@@ -34,7 +38,13 @@ async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
 export async function POST(req: NextRequest) {
   const parsed = schema.safeParse(await req.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ error: "invalid" }, { status: 400 });
-  const { workshopId, turnstileToken, consent: _consent, ...signup } = parsed.data;
+  const { workshopId, turnstileToken, consent: _consent, affiliate_code, share_first_name, expected_satang, ...base } = parsed.data;
+  const code = normalizeAffiliateCode(affiliate_code);
+  const signup = {
+    ...base,
+    ...(code ? { affiliate_code: code, share_first_name } : {}),
+    ...(expected_satang !== undefined ? { expected_satang } : {}),
+  };
 
   if (signup.filled_by === "student" && signup.student_age < 20 && !signup.parent_consent) {
     return NextResponse.json({ error: "parent_consent" }, { status: 400 });
@@ -68,7 +78,11 @@ export async function POST(req: NextRequest) {
     p_hold_minutes: HOLD_MINUTES,
     p_signup: signup,
   });
-  if (error) return NextResponse.json({ error: "failed" }, { status: 500 });
+  if (error) {
+    const m = /price_changed:\s*(\d+)/.exec(error.message ?? "");
+    if (m) return NextResponse.json({ error: "price_changed", priceSatang: Number(m[1]) }, { status: 409 });
+    return NextResponse.json({ error: "failed" }, { status: 500 });
+  }
   if (!signupId) return NextResponse.json({ error: "full" }, { status: 409 });
 
   const { data: row } = await db.from("workshop_signups").select("amount_satang, hold_expires_at").eq("id", signupId).single();

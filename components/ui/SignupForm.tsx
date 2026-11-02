@@ -3,11 +3,30 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocale } from "@/components/LanguageProvider";
 import { signupPage } from "@/data/signup";
+import { normalizeAffiliateCode, REF_COOKIE } from "@/lib/affiliate";
 import type { FormField, Workshop } from "@/lib/workshops";
 
 const baht = (satang: number) => (satang / 100).toLocaleString("en-US");
 
 type Answer = string | string[];
+
+type Quote = {
+  valid: boolean;
+  reason: string | null;
+  affiliateName: string | null;
+  code: string | null;
+  listSatang: number;
+  priceSatang: number;
+  discountSatang: number;
+};
+
+function initialRefCode(): string {
+  if (typeof window === "undefined") return "";
+  const fromUrl = normalizeAffiliateCode(new URLSearchParams(window.location.search).get("ref"));
+  if (fromUrl) return fromUrl;
+  const m = document.cookie.match(new RegExp(`(?:^|; )${REF_COOKIE}=([^;]*)`));
+  return (m && normalizeAffiliateCode(decodeURIComponent(m[1]))) || "";
+}
 
 function CustomField({ field, value, onChange, label, selectText, fileNote }: {
   field: FormField;
@@ -62,6 +81,11 @@ export function SignupForm({ workshop }: { workshop: Workshop }) {
   const [consent, setConsent] = useState(false);
   const [parentConsent, setParentConsent] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [refCode, setRefCode] = useState("");
+  const [quote, setQuote] = useState<Quote | null>(null);
+  const [quoting, setQuoting] = useState(false);
+  const [shareName, setShareName] = useState(false);
+  const [priceNote, setPriceNote] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const turnstileRef = useRef<HTMLDivElement>(null);
@@ -92,6 +116,32 @@ export function SignupForm({ workshop }: { workshop: Workshop }) {
     document.head.appendChild(script);
   }, []);
 
+  useEffect(() => { setRefCode(initialRefCode()); }, []);
+
+  const normalized = normalizeAffiliateCode(refCode);
+  const typedButBad = refCode.trim() !== "" && !normalized;
+
+  useEffect(() => {
+    setQuote(null);
+    setPriceNote(null);
+    if (!normalized) { setQuoting(false); return; }
+    const ctrl = new AbortController();
+    setQuoting(true);
+    const timer = setTimeout(async () => {
+      try {
+        const res = await fetch(`/api/affiliate/quote?workshopId=${workshop.id}&code=${normalized}`, { signal: ctrl.signal });
+        if (res.ok) setQuote(await res.json());
+      } catch { /* ignored, normal price shown */ }
+      if (!ctrl.signal.aborted) setQuoting(false);
+    }, 400);
+    return () => { clearTimeout(timer); ctrl.abort(); };
+  }, [normalized, workshop.id]);
+
+  const codeValid = !!(normalized && quote?.valid);
+  const listPrice = workshop.price_satang;
+  const price = codeValid && quote ? quote.priceSatang : listPrice;
+  const discounted = price < listPrice;
+
   const isStudent = form.filled_by === "student";
   const needsParentConsent = isStudent && Number(form.student_age) < 20;
   const inputClass = "field";
@@ -115,10 +165,19 @@ export function SignupForm({ workshop }: { workshop: Workshop }) {
           parent_consent: parentConsent,
           locale,
           turnstileToken,
+          affiliate_code: normalized ?? undefined,
+          share_first_name: codeValid && shareName,
+          expected_satang: price,
         }),
       });
       const data = await res.json();
       if (res.ok && data.url) { window.location.href = data.url; return; }
+      if (res.status === 409 && data.error === "price_changed" && typeof data.priceSatang === "number") {
+        setQuote((q) => (q ? { ...q, priceSatang: data.priceSatang, discountSatang: Math.max(0, q.listSatang - data.priceSatang) } : q));
+        setPriceNote(t.priceChangedNote(baht(data.priceSatang)));
+        setSubmitting(false);
+        return;
+      }
       const code = data.error as keyof typeof t.errors;
       setError(t.errors[code] ?? t.errors.failed);
     } catch {
@@ -186,6 +245,37 @@ export function SignupForm({ workshop }: { workshop: Workshop }) {
         />
       ))}
 
+      <div>
+        <label className="field-label" htmlFor="affiliate-code">{t.affiliateLabel}</label>
+        <input
+          id="affiliate-code"
+          className={inputClass}
+          value={refCode}
+          maxLength={20}
+          autoComplete="off"
+          autoCapitalize="characters"
+          onChange={(e) => setRefCode(e.target.value.toUpperCase())}
+        />
+        <p className="t-small mt-1 break-words" aria-live="polite">
+          {typedButBad || (normalized && !quoting && quote && !quote.valid)
+            ? t.affiliateInvalid
+            : quoting
+              ? t.affiliateChecking
+              : codeValid && quote
+                ? discounted
+                  ? t.affiliateApplied(quote.code ?? normalized!, baht(quote.discountSatang), baht(quote.priceSatang))
+                  : t.affiliateNoted(quote.code ?? normalized!)
+                : t.affiliateHint}
+        </p>
+        {priceNote && <p className="text-sm field-error mt-1" role="status">{priceNote}</p>}
+      </div>
+      {codeValid && quote?.affiliateName && (
+        <label className="flex items-start gap-2 text-sm text-body">
+          <input type="checkbox" className="mt-1" checked={shareName} onChange={(e) => setShareName(e.target.checked)} />
+          <span>{t.shareName(quote.affiliateName)}</span>
+        </label>
+      )}
+
       <p className="t-small">{t.refundPolicy}</p>
       <label className="flex items-start gap-2 text-sm text-body">
         <input type="checkbox" className="mt-1" checked={consent} onChange={(e) => setConsent(e.target.checked)} required />
@@ -203,10 +293,14 @@ export function SignupForm({ workshop }: { workshop: Workshop }) {
       <p className="caption">{t.holdNote}</p>
       <button
         type="submit"
-        disabled={submitting || !turnstileToken || !consent}
+        disabled={submitting || quoting || !turnstileToken || !consent}
         className="btn btn-primary w-full sm:w-auto"
       >
-        {submitting ? t.submitting : `${t.submit} ฿${baht(workshop.price_satang)}`}
+        {submitting ? t.submitting : (
+          <>
+            {t.submit} {discounted && <s className="opacity-70">฿{baht(listPrice)}</s>} ฿{baht(price)}
+          </>
+        )}
       </button>
     </form>
   );
