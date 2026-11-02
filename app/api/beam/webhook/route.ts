@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { disablePaymentLink, findPaidChargeId, verifyBeamSignature } from "@/lib/beam";
 import { escapeHtml, supabaseAdmin } from "@/lib/workshops";
+import { emailFooter } from "@/lib/email-footer";
 import { site } from "@/data/site";
 
 async function sendConfirmation(signupId: string) {
@@ -28,8 +29,8 @@ async function sendConfirmation(signupId: string) {
     to: claimed.email,
     subject: th ? `ยืนยันการลงทะเบียน ${workshop.title_th}` : `Registration confirmed: ${workshop.title_en ?? workshop.title_th}`,
     html: th
-      ? `<p>InnoQuest ได้รับการชำระเงินเรียบร้อยแล้ว และขอยืนยันการลงทะเบียนของ ${name} ใน ${title}</p><p>หากมีข้อสงสัย โปรดติดต่อ ${site.contact.phone} หรือ ${site.contact.email}</p>`
-      : `<p>InnoQuest has received your payment and confirmed ${name}'s place in ${title}.</p><p>Questions? Contact ${site.contact.phone} or ${site.contact.email}.</p>`,
+      ? `<p>InnoQuest ได้รับการชำระเงินเรียบร้อยแล้ว และขอยืนยันการลงทะเบียนของ ${name} ใน ${title}</p><p>หากมีข้อสงสัย โปรดติดต่อ ${site.contact.phone} หรือ ${site.contact.email}</p>${emailFooter(true)}`
+      : `<p>InnoQuest has received your payment and confirmed ${name}'s place in ${title}.</p><p>Questions? Contact ${site.contact.phone} or ${site.contact.email}.</p>${emailFooter(false)}`,
   });
   await resend.emails.send({
     from,
@@ -77,8 +78,8 @@ async function handleOverflow(signupId: string) {
     to: s.email,
     subject: th ? `ได้รับการชำระเงินแล้ว: ${workshop.title_th}` : `Payment received: ${workshop.title_en ?? workshop.title_th}`,
     html: th
-      ? `<p>InnoQuest ได้รับการชำระเงินของ ${name} สำหรับ ${title} แล้ว เรากำลังยืนยันที่นั่งและจะติดต่อกลับโดยเร็วที่สุด</p>`
-      : `<p>InnoQuest has received your payment for ${name} (${title}). We're confirming the seat and will be in touch shortly.</p>`,
+      ? `<p>InnoQuest ได้รับการชำระเงินของ ${name} สำหรับ ${title} แล้ว เรากำลังยืนยันที่นั่งและจะติดต่อกลับโดยเร็วที่สุด</p>${emailFooter(true)}`
+      : `<p>InnoQuest has received your payment for ${name} (${title}). We're confirming the seat and will be in touch shortly.</p>${emailFooter(false)}`,
   });
 }
 

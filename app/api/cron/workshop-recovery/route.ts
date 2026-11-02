@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { createPaymentLink, disablePaymentLink } from "@/lib/beam";
 import { escapeHtml, supabaseAdmin } from "@/lib/workshops";
+import { emailFooter } from "@/lib/email-footer";
 import { site } from "@/data/site";
 
 const RECOVERY_HOURS = 24;
@@ -55,6 +56,7 @@ function recoveryEmail(p: { th: boolean; plainTitle: string; name: string; start
 <p style="margin:0 0 24px;"><a href="${url}" style="display:inline-block;background:#E63946;color:#ffffff;text-decoration:none;font-weight:bold;padding:12px 24px;border-radius:6px;">${t.button}</a></p>
 <p style="margin:0 0 8px;font-size:14px;color:#444444;">${t.deadline}</p>
 <p style="margin:0;font-size:14px;color:#444444;">${t.help}</p>
+${emailFooter(p.th)}
 </div>`,
   };
 }
