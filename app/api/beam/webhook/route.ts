@@ -76,10 +76,16 @@ export async function POST(req: NextRequest) {
     .select("id, amount_satang")
     .eq("beam_payment_link_id", paymentLinkId)
     .maybeSingle();
-  if (!signup) return NextResponse.json({ error: "unknown link" }, { status: 404 });
+  // Beam retries any non-2xx up to 10x with backoff. The two cases below can
+  // never succeed on a retry, so acknowledge (2xx) to stop the retries; the
+  // error log is the signal. Neither path confirms payment or emails anyone.
+  if (!signup) {
+    console.error("Beam webhook for unknown payment link", paymentLinkId);
+    return NextResponse.json({ received: true, ignored: "unknown link" });
+  }
   if (order.netAmount !== signup.amount_satang || order.referenceId !== signup.id) {
     console.error("Beam webhook mismatch for sign-up", signup.id);
-    return NextResponse.json({ error: "mismatch" }, { status: 400 });
+    return NextResponse.json({ received: true, ignored: "mismatch" });
   }
 
   const chargeId = await findPaidChargeId(paymentLinkId);
