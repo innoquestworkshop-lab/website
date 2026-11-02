@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
+import { AffiliateRef } from "@/components/AffiliateRef";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import type { Locale } from "@/lib/i18n";
 import "@fontsource/chakra-petch/600.css";
@@ -59,6 +60,7 @@ export default async function RootLayout({
       </head>
       <body className="min-h-screen antialiased">
         <LanguageProvider initialLocale={locale}>
+          <AffiliateRef />
           {children}
         </LanguageProvider>
         <script defer src="/_vercel/insights/script.js" />
