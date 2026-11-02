@@ -47,7 +47,8 @@
 
   /* Layout */
   --gutter: clamp(16px, 4vw, 32px);
-  --content: 1240px;
+  /* Fluid: fill the screen on any monitor with a small gutter, cap on ultrawide. */
+  --content: min(85vw, 1920px);
   --nav-height: 64px;
 }
 
