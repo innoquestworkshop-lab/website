@@ -11,8 +11,9 @@ import { getLocale } from "@/lib/i18n";
 import { AccentHeading, Lines, PageHero, plain } from "@/components/ui/system";
 
 export const metadata: Metadata = {
-  title: "About InnoQuest | Experiential Learning for Ages 10–18",
-  description: "InnoQuest runs innovation workshops, business simulations, and entrepreneurship camps for students aged 10–18 across Thailand. Read our story.",
+  title: "About Us — Youth Entrepreneurship Education",
+  description: "InnoQuest runs entrepreneurship workshops, business simulations and innovation camps for students aged 10–18 across Thailand. Meet the team and our story.",
+  alternates: { canonical: "/about" },
   keywords: [
     "InnoQuest",
     "youth innovation Thailand",

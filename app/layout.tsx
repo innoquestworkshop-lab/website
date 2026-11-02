@@ -12,15 +12,16 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | InnoQuest Youth Learning Programs Thailand",
+    template: "%s | InnoQuest",
     default: "InnoQuest | Business Simulations and Workshops for Ages 10 to 18",
   },
   description:
     "We design gamified simulations and custom learning programs for schools and corporate youth initiatives, and we measure the results.",
-  metadataBase: new URL("https://innoquest.tech"),
+  metadataBase: new URL("https://www.innoquest.tech"),
   openGraph: {
     siteName: "InnoQuest",
     locale: "en_US",
+    alternateLocale: ["th_TH"],
     type: "website",
     images: [
       {

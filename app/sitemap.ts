@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { programs } from "@/data/programs";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://innoquest.tech";
+  const baseUrl = "https://www.innoquest.tech";
 
   const staticPages: MetadataRoute.Sitemap = [
     {

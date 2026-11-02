@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "InnoQuest | Youth Innovation & Entrepreneurship Programs Bangkok",
-  description: "Bangkok-based InnoQuest runs innovation workshops, entrepreneurship camps and business simulations for ages 10 to 18, with schools, corporates and families across Thailand.",
+  title: "InnoQuest | Youth Entrepreneurship Programs Bangkok",
+  description: "Bangkok youth entrepreneurship workshops, business simulations and innovation camps for ages 10–18 — for schools, corporates and families across Thailand.",
+  alternates: { canonical: "/" },
   keywords: [
     "youth innovation programs Bangkok",
     "entrepreneurship camp Thailand",

@@ -7,8 +7,9 @@ import { getLocale } from "@/lib/i18n";
 import { PageHero, plain } from "@/components/ui/system";
 
 export const metadata: Metadata = {
-  title: "Contact InnoQuest | Bangkok, Thailand",
-  description: "Ask about InnoQuest's workshops and camps in Bangkok. Send us a message and we'll reply within 1–2 business days.",
+  title: "Contact Us — Bangkok, Thailand",
+  description: "Ask about InnoQuest's entrepreneurship workshops and camps in Bangkok for ages 10–18. Send a message and we'll reply within 1–2 business days.",
+  alternates: { canonical: "/contact" },
   keywords: [
     "contact InnoQuest",
     "InnoQuest Bangkok",

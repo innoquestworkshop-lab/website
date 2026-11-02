@@ -10,8 +10,9 @@ import { getLocale } from "@/lib/i18n";
 import { Arrowed, CheckIcon, PageHero, Photo } from "@/components/ui/system";
 
 export const metadata: Metadata = {
-  title: "Programs for Students Ages 10–18 | InnoQuest",
-  description: "Innovation workshops, business simulations & entrepreneurship camps in Bangkok for students ages 10–18. Programs for schools, families & corporates, from 1-day to semester-long.",
+  title: "Entrepreneurship Programs for Ages 10–18",
+  description: "Entrepreneurship workshops, business simulations and innovation camps in Bangkok for ages 10–18 — for schools, families and corporates, from 1-day to semester-long.",
+  alternates: { canonical: "/programs" },
   keywords: [
     "innovation workshops Bangkok",
     "entrepreneurship camp Thailand",
