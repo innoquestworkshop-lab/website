@@ -24,12 +24,9 @@ export async function createPaymentLink(input: {
         netAmount: input.amountSatang,
         referenceId: input.referenceId,
       },
-      linkSettings: {
-        card: { isEnabled: true },
-        qrPromptPay: { isEnabled: true },
-        eWallets: { isEnabled: true },
-        mobileBanking: { isEnabled: true },
-      },
+      // No linkSettings: the link offers the default payment methods set in Beam
+      // Lighthouse. Sending it would replace them, and Beam refuses the whole link
+      // if it names a method this account is not approved for.
       collectDeliveryAddress: false,
       redirectUrl: input.redirectUrl,
       expiresAt: input.expiresAt.toISOString(),
