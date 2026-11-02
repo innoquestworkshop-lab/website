@@ -7,6 +7,16 @@ function headers() {
   return { "Content-Type": "application/json", Authorization: `Basic ${auth}` };
 }
 
+/**
+ * Methods a link offers: Beam's linkSettings groups, comma separated, such as
+ * BEAM_LINK_METHODS=card,qrPromptPay. Beam refuses the whole link if one is not
+ * approved on this account, so only list approved ones.
+ */
+function linkSettings() {
+  const methods = (process.env.BEAM_LINK_METHODS ?? "").split(",").map((m) => m.trim()).filter(Boolean);
+  return Object.fromEntries((methods.length ? methods : ["qrPromptPay"]).map((m) => [m, { isEnabled: true }]));
+}
+
 export async function createPaymentLink(input: {
   amountSatang: number;
   description: string;
@@ -24,9 +34,7 @@ export async function createPaymentLink(input: {
         netAmount: input.amountSatang,
         referenceId: input.referenceId,
       },
-      // No linkSettings: the link offers the default payment methods set in Beam
-      // Lighthouse. Sending it would replace them, and Beam refuses the whole link
-      // if it names a method this account is not approved for.
+      linkSettings: linkSettings(),
       collectDeliveryAddress: false,
       redirectUrl: input.redirectUrl,
       expiresAt: input.expiresAt.toISOString(),
