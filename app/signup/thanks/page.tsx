@@ -6,6 +6,7 @@ import { signupThanks } from "@/data/signup";
 import { getLocale } from "@/lib/i18n";
 import { supabaseAdmin } from "@/lib/workshops";
 import { formatBaht, whenText } from "@/lib/confirmation-email";
+import { CopyLinkButton } from "@/components/ui/CopyLinkButton";
 import { lineQrUrl } from "@/lib/workshop-line";
 
 export const metadata: Metadata = { title: "Sign-up status | InnoQuest", robots: { index: false } };
@@ -102,9 +103,12 @@ export default async function ThanksPage({ searchParams }: { searchParams: Promi
                   <h2 className="t-display" style={{ fontSize: 20 }}>{pv.lineHeading}</h2>
                   <p className="t-small">{pv.lineBody}</p>
                   {lineUrl && (
-                    <a href={lineUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ alignSelf: "flex-start" }}>
-                      {pv.lineButton}
-                    </a>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+                      <a href={lineUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+                        {pv.lineButton}
+                      </a>
+                      <CopyLinkButton url={lineUrl} label={pv.lineCopy} copied={pv.lineCopied} failed={pv.lineCopyFailed} />
+                    </div>
                   )}
                   {qr && (
                     <figure style={{ margin: 0, display: "grid", gap: 8, justifyItems: "start" }}>
