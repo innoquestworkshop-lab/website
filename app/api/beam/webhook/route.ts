@@ -3,6 +3,7 @@ import { Resend } from "resend";
 import { disablePaymentLink, findPaidChargeId, verifyBeamSignature } from "@/lib/beam";
 import { escapeHtml, supabaseAdmin } from "@/lib/workshops";
 import { emailFooter } from "@/lib/email-footer";
+import { confirmationEmail, type ConfirmationWorkshop } from "@/lib/confirmation-email";
 import { site } from "@/data/site";
 
 async function sendConfirmation(signupId: string) {
@@ -13,11 +14,13 @@ async function sendConfirmation(signupId: string) {
     .update({ confirmation_sent_at: new Date().toISOString() })
     .eq("id", signupId)
     .is("confirmation_sent_at", null)
-    .select("email, student_name, locale, status, workshops(title_th, title_en)")
+    .select(
+      "email, student_name, locale, status, filled_by, amount_satang, workshops(title_th, title_en, starts_at, ends_at, location_th, location_en, line_group_url, line_qr_path)"
+    )
     .maybeSingle();
   if (!claimed) return;
 
-  const workshop = claimed.workshops as unknown as { title_th: string; title_en: string | null };
+  const workshop = claimed.workshops as unknown as ConfirmationWorkshop;
   const th = claimed.locale === "th";
   const title = escapeHtml(th ? workshop.title_th : workshop.title_en ?? workshop.title_th);
   const name = escapeHtml(claimed.student_name);
@@ -28,9 +31,13 @@ async function sendConfirmation(signupId: string) {
     from,
     to: claimed.email,
     subject: th ? `ยืนยันการลงทะเบียน ${workshop.title_th}` : `Registration confirmed: ${workshop.title_en ?? workshop.title_th}`,
-    html: th
-      ? `<p>InnoQuest ได้รับการชำระเงินเรียบร้อยแล้ว และขอยืนยันการลงทะเบียนของ ${name} ใน ${title}</p>${emailFooter(true)}`
-      : `<p>InnoQuest has received your payment and confirmed ${name}'s place in ${title}.</p>${emailFooter(false)}`,
+    html: confirmationEmail({
+      th,
+      filledBy: claimed.filled_by,
+      studentName: claimed.student_name,
+      amountSatang: claimed.amount_satang,
+      workshop,
+    }),
   });
   await resend.emails.send({
     from,
