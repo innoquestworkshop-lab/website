@@ -1,11 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
-import { findPaidChargeId, verifyBeamSignature } from "@/lib/beam";
-import { supabaseAdmin } from "@/lib/workshops";
+import { disablePaymentLink, findPaidChargeId, verifyBeamSignature } from "@/lib/beam";
+import { escapeHtml, supabaseAdmin } from "@/lib/workshops";
 import { site } from "@/data/site";
-
-const escapeHtml = (s: string) =>
-  s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
 
 async function sendConfirmation(signupId: string) {
   const db = supabaseAdmin();
@@ -42,16 +39,21 @@ async function sendConfirmation(signupId: string) {
   });
 }
 
-/** A recovery payer paid, but the workshop filled up in the meantime (no seat was
- *  held during the 24h window). The money is captured — don't refund. Ask an admin
- *  to approve an extra seat or refund, and reassure the payer without promising a seat.
- *  Relies on confirm_workshop_payment returning "overflow" only on the first transition,
- *  so this sends exactly once. */
+const REVIEW_SUBJECT: Record<string, string> = {
+  paid_over_capacity: "Paid but full",
+  paid_workshop_closed: "Paid but closed",
+  paid_after_cancel: "Paid after cancelling",
+};
+
+/** Money was captured but no seat confirmed: the workshop is full or closed, or the
+ *  sign-up was cancelled. Ask an admin to approve a seat or refund, and reassure the
+ *  payer without promising a seat. confirm_workshop_payment returns "overflow" only on
+ *  the first transition, so this sends once. */
 async function handleOverflow(signupId: string) {
   const db = supabaseAdmin();
   const { data: s } = await db
     .from("workshop_signups")
-    .select("email, student_name, locale, workshops(title_th, title_en)")
+    .select("email, student_name, locale, review_reason, workshops(title_th, title_en)")
     .eq("id", signupId)
     .maybeSingle();
   if (!s) return;
@@ -65,8 +67,8 @@ async function handleOverflow(signupId: string) {
   await resend.emails.send({
     from,
     to: site.contact.email,
-    subject: `Paid but full — approve or refund: ${workshop.title_en ?? workshop.title_th}`,
-    html: `<p>${name} paid for ${title}, but it is now full. Approve an extra seat or refund in the workshop admin.</p><p>Sign-up id: ${signupId}</p>`,
+    subject: `${REVIEW_SUBJECT[s.review_reason ?? ""] ?? "Payment to review"} — approve or refund: ${workshop.title_en ?? workshop.title_th}`,
+    html: `<p>${name} paid for ${title}, but no seat could be confirmed (${escapeHtml(s.review_reason ?? "unknown reason")}). Review it in the workshop admin.</p><p>Sign-up id: ${signupId}</p>`,
   });
 
   const th = s.locale === "th";
@@ -79,6 +81,8 @@ async function handleOverflow(signupId: string) {
       : `<p>InnoQuest has received your payment for ${name} (${title}). We're confirming the seat and will be in touch shortly.</p>`,
   });
 }
+
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 export async function POST(req: NextRequest) {
   const rawBody = await req.text();
@@ -93,7 +97,7 @@ export async function POST(req: NextRequest) {
     const { refundId } = JSON.parse(rawBody) as { refundId: string };
     await supabaseAdmin()
       .from("workshop_signups")
-      .update({ status: "needs_review", refunded_at: null, refunded_by: null })
+      .update({ status: "needs_review", review_reason: "refund_failed", refunded_at: null, refunded_by: null })
       .eq("beam_refund_id", refundId)
       .eq("status", "refunded");
     return NextResponse.json({ received: true });
@@ -132,11 +136,15 @@ export async function POST(req: NextRequest) {
   };
 
   const db = supabaseAdmin();
-  const { data: signup } = await db
-    .from("workshop_signups")
-    .select("id, amount_satang")
-    .eq("beam_payment_link_id", paymentLinkId)
-    .maybeSingle();
+  // The recovery job replaces beam_payment_link_id, so a late payment on the old
+  // link no longer matches it. The signed referenceId still names the sign-up.
+  const columns = "id, amount_satang, beam_payment_link_id";
+  const { data: byLink } = await db.from("workshop_signups").select(columns).eq("beam_payment_link_id", paymentLinkId).maybeSingle();
+  const { data: byReference } =
+    !byLink && UUID.test(order.referenceId ?? "")
+      ? await db.from("workshop_signups").select(columns).eq("id", order.referenceId).maybeSingle()
+      : { data: null };
+  const signup = byLink ?? byReference;
   // Beam retries any non-2xx up to 10x with backoff. The two cases below can
   // never succeed on a retry, so acknowledge (2xx) to stop the retries; the
   // error log is the signal. Neither path confirms payment or emails anyone.
@@ -151,12 +159,23 @@ export async function POST(req: NextRequest) {
 
   const chargeId = await findPaidChargeId(paymentLinkId);
   const { data: status, error } = await db.rpc("confirm_workshop_payment", {
-    p_payment_link_id: paymentLinkId,
+    p_payment_link_id: signup.beam_payment_link_id,
     p_charge_id: chargeId,
   });
   if (error) return NextResponse.json({ error: "failed" }, { status: 500 });
 
   if (status === "paid") await sendConfirmation(signup.id);
   else if (status === "overflow") await handleOverflow(signup.id);
+
+  // Paid on an older link: the newer one must not stay payable. A retry is safe,
+  // since the RPC and the emails above do not repeat.
+  if (paymentLinkId !== signup.beam_payment_link_id) {
+    try {
+      await disablePaymentLink(signup.beam_payment_link_id);
+    } catch (err) {
+      console.error("Could not disable the newer link for sign-up", signup.id, err);
+      return NextResponse.json({ error: "failed" }, { status: 500 });
+    }
+  }
   return NextResponse.json({ received: true, status });
 }

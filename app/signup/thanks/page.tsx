@@ -8,6 +8,8 @@ import { supabaseAdmin } from "@/lib/workshops";
 
 export const metadata: Metadata = { title: "Sign-up status | InnoQuest", robots: { index: false } };
 
+const isRecent = (sentAt?: string | null) => !!sentAt && Date.now() - Date.parse(sentAt) < 25 * 60 * 60 * 1000;
+
 export default async function ThanksPage({ searchParams }: { searchParams: Promise<{ id?: string }> }) {
   const { id } = await searchParams;
   const locale = await getLocale();
@@ -15,14 +17,17 @@ export default async function ThanksPage({ searchParams }: { searchParams: Promi
 
   const isId = /^[0-9a-f-]{36}$/i.test(id ?? "");
   const { data } = isId
-    ? await supabaseAdmin().from("workshop_signups").select("status, hold_expires_at").eq("id", id!).maybeSingle()
+    ? await supabaseAdmin().from("workshop_signups").select("status, hold_expires_at, recovery_sent_at").eq("id", id!).maybeSingle()
     : { data: null };
 
   // A hold past its end has simply expired; the webhook may still move it to paid.
+  // During a recovery window the payer lands here before the webhook arrives.
+  const recovering = isRecent(data?.recovery_sent_at);
   const key: keyof typeof t | "expired" =
     data?.status === "paid" ? "paid"
     : data?.status === "needs_review" ? "needs_review"
-    : data?.status === "held" && new Date(data.hold_expires_at) > new Date() ? "held"
+    : data?.status === "held" && (recovering || new Date(data.hold_expires_at) > new Date()) ? "held"
+    : data?.status === "expired" && recovering ? "held"
     : "expired";
   const state = t[key];
 

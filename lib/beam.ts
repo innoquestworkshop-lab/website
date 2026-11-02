@@ -65,7 +65,9 @@ export async function disablePaymentLink(paymentLinkId: string): Promise<void> {
     method: "PATCH",
     headers: headers(),
   });
-  // A 4xx means the link is already disabled, expired, or unknown — fine to ignore.
-  // Only a server-side failure is worth surfacing to the caller.
-  if (res.status >= 500) throw new Error(`Beam disable link failed: ${res.status}`);
+  // Beam refuses a link that is no longer ACTIVE (paid, expired, disabled), which
+  // is fine. Bad credentials, a rate limit or a server error leave it payable.
+  if (res.status >= 500 || [401, 403, 429].includes(res.status)) {
+    throw new Error(`Beam disable link failed: ${res.status}`);
+  }
 }
