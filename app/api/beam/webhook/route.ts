@@ -61,6 +61,29 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ received: true });
   }
 
+  // A refund Beam confirms as succeeded: let an admin know it completed.
+  if (event === "refund.succeeded") {
+    const { refundId } = JSON.parse(rawBody) as { refundId: string };
+    const { data: refunded } = await supabaseAdmin()
+      .from("workshop_signups")
+      .select("student_name, workshops(title_th, title_en)")
+      .eq("beam_refund_id", refundId)
+      .maybeSingle();
+    if (refunded) {
+      const workshop = refunded.workshops as unknown as { title_th: string; title_en: string | null };
+      const title = escapeHtml(workshop.title_en ?? workshop.title_th);
+      const name = escapeHtml(refunded.student_name ?? "");
+      const resend = new Resend(process.env.RESEND_API_KEY);
+      await resend.emails.send({
+        from: "InnoQuest <no-reply@innoquest.tech>",
+        to: site.contact.email,
+        subject: `Refund completed: ${workshop.title_en ?? workshop.title_th}`,
+        html: `<p>The refund for ${name} (${title}) has completed successfully.</p>`,
+      });
+    }
+    return NextResponse.json({ received: true });
+  }
+
   if (event !== "payment_link.paid") {
     return NextResponse.json({ received: true });
   }
