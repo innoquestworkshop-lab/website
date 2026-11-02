@@ -50,7 +50,7 @@ function recoveryEmail(p: { th: boolean; parent: boolean; plainTitle: string; na
 <p style="margin:0 0 24px;font-size:20px;font-weight:bold;">InnoQuest</p>
 <p style="margin:0 0 12px;">${t.greeting}</p>
 <p style="margin:0 0 24px;">${t.body}</p>
-<p style="margin:0 0 24px;"><a href="${url}" style="display:inline-block;background:#E63946;color:#ffffff;text-decoration:none;font-weight:bold;padding:12px 24px;border-radius:6px;">${t.button}</a></p>
+<p style="margin:0 0 24px;"><a href="${url}" style="display:inline-block;background:#D10000;color:#ffffff;text-decoration:none;font-weight:bold;padding:12px 24px;border-radius:6px;">${t.button}</a></p>
 <p style="margin:0;font-size:14px;color:#444444;">${t.deadline}</p>
 ${emailFooter(p.th)}
 </div>`,
