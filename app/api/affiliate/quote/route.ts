@@ -18,7 +18,8 @@ export async function GET(req: NextRequest) {
   return NextResponse.json(
     {
       valid: !!data.valid,
-      reason: data.reason ?? null,
+      // A real code with no deal on this workshop must look exactly like a wrong code.
+      reason: data.reason === "not_assigned" ? "invalid" : (data.reason ?? null),
       affiliateName: data.affiliate_name ?? null,
       code: data.code ?? null,
       listSatang: data.list_satang,

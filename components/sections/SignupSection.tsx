@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useLocale } from "@/components/LanguageProvider";
 import { SignupForm } from "@/components/ui/SignupForm";
 import { signupPage } from "@/data/signup";
+import { normalizeAffiliateCode, REF_COOKIE } from "@/lib/affiliate";
 import type { Workshop } from "@/lib/workshops";
 import { CheckIcon, PageHero, plain, type Tile } from "@/components/ui/system";
 
@@ -25,12 +26,53 @@ const columns: Tile[][] = [
   ],
 ];
 
-export function SignupSection({ workshops }: { workshops: Workshop[] }) {
+function linkCode(): string | null {
+  const fromUrl = normalizeAffiliateCode(new URLSearchParams(window.location.search).get("ref"));
+  if (fromUrl) return fromUrl;
+  const m = document.cookie.match(new RegExp(`(?:^|; )${REF_COOKIE}=([^;]*)`));
+  return m ? normalizeAffiliateCode(decodeURIComponent(m[1])) : null;
+}
+
+export function SignupSection({ workshops: openWorkshops }: { workshops: Workshop[] }) {
   const { locale } = useLocale();
   const t = signupPage[locale];
-  const firstOpen = workshops.find((w) => w.seats_left > 0);
+  const firstOpen = openWorkshops.find((w) => w.seats_left > 0);
   const [selectedId, setSelectedId] = useState(firstOpen?.id ?? null);
+  const [assigned, setAssigned] = useState<string[]>([]);
+  const [unavailable, setUnavailable] = useState(false);
+  // The form stays hidden until the link and code are read, so it never mounts on the wrong workshop.
+  const [ready, setReady] = useState(false);
+
+  // Assigned workshops first, otherwise keeping the original order.
+  const workshops = useMemo(() => {
+    if (assigned.length === 0) return openWorkshops;
+    return [...openWorkshops.filter((w) => assigned.includes(w.id)), ...openWorkshops.filter((w) => !assigned.includes(w.id))];
+  }, [openWorkshops, assigned]);
   const selected = workshops.find((w) => w.id === selectedId);
+
+  useEffect(() => {
+    let cancelled = false;
+    const slug = new URLSearchParams(window.location.search).get("workshop");
+    const code = linkCode();
+    const finish = (ids: string[]) => {
+      if (cancelled) return;
+      const wanted = slug ? openWorkshops.find((w) => w.slug === slug) : undefined;
+      const hasSeats = (w?: Workshop) => !!w && w.seats_left > 0;
+      const firstAssigned = openWorkshops.find((w) => ids.includes(w.id) && w.seats_left > 0);
+      setAssigned(ids);
+      setUnavailable(!!slug && !hasSeats(wanted));
+      setSelectedId((hasSeats(wanted) ? wanted : firstAssigned ?? firstOpen)?.id ?? null);
+      setReady(true);
+    };
+    if (!code) { finish([]); return () => { cancelled = true; }; }
+    fetch(`/api/affiliate/assigned?code=${code}`)
+      .then((r) => (r.ok ? r.json() : { workshopIds: [] }))
+      .then((d) => finish(Array.isArray(d.workshopIds) ? d.workshopIds : []))
+      .catch(() => finish([]));
+    return () => { cancelled = true; };
+    // Runs once on load; the inputs are the URL and cookie.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const when = (iso: string) =>
     new Date(iso).toLocaleDateString(locale === "en" ? "en-GB" : "th-TH", {
@@ -50,6 +92,9 @@ export function SignupSection({ workshops }: { workshops: Workshop[] }) {
       {workshops.length > 0 && (
         <section id="workshops" className="sec sec--line">
           <div className="wrap">
+            {unavailable && (
+              <p className="t-small" role="status" style={{ marginBottom: 16 }}>{t.workshopUnavailable}</p>
+            )}
             <div className="workshops">
               {workshops.map((w) => {
                 const title = locale === "en" ? w.title_en || w.title_th : w.title_th;
@@ -82,7 +127,7 @@ export function SignupSection({ workshops }: { workshops: Workshop[] }) {
               })}
             </div>
 
-            {selected && (
+            {ready && selected && (
               <div className="signup-form-card">
                 <SignupForm key={selected.id} workshop={selected} />
               </div>
