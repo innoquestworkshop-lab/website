@@ -57,3 +57,17 @@ export function verifyBeamSignature(rawBody: string, signature: string | null): 
   const given = Buffer.from(signature, "base64");
   return given.length === expected.length && timingSafeEqual(given, expected);
 }
+
+/** Disable a payment link so it can no longer be paid. Used to retire the old
+ *  link before issuing a recovery link, so a sign-up never has two live links. */
+export async function disablePaymentLink(paymentLinkId: string): Promise<void> {
+  const res = await fetch(`${base()}/api/v1/payment-links/${paymentLinkId}/disable`, {
+    method: "PATCH",
+    headers: headers(),
+  });
+  // Beam refuses a link that is no longer ACTIVE (paid, expired, disabled), which
+  // is fine. Bad credentials, a rate limit or a server error leave it payable.
+  if (res.status >= 500 || [401, 403, 429].includes(res.status)) {
+    throw new Error(`Beam disable link failed: ${res.status}`);
+  }
+}

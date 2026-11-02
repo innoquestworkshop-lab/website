@@ -2,6 +2,9 @@ import { createClient } from "@supabase/supabase-js";
 
 export const HOLD_MINUTES = 15;
 
+export const escapeHtml = (s: string) =>
+  s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
+
 export type FormField = {
   id: string;
   type: "short" | "paragraph" | "multiple_choice" | "checkboxes" | "dropdown" | "date" | "file";

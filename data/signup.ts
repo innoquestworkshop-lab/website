@@ -78,14 +78,14 @@ export const signupThanks = {
     paid: { heading: "Registration confirmed", body: "Payment has been received. A confirmation email is on its way." },
     held: { heading: "Confirming your payment", body: "This page updates automatically. Please stay on it for a moment." },
     expired: { heading: "This sign-up has expired", body: "No payment was received in time, so the seat has been released." },
-    needs_review: { heading: "We are reviewing your payment", body: "Payment arrived after the workshop filled up. Our team will contact you." },
+    needs_review: { heading: "We are reviewing your payment", body: "We have your payment and are checking your seat. Our team will contact you shortly." },
     back: "Back to workshops",
   },
   th: {
     paid: { heading: "ยืนยันการลงทะเบียนเรียบร้อยแล้ว", body: "InnoQuest ได้รับการชำระเงินแล้ว และจะส่งอีเมลยืนยันให้ท่าน" },
     held: { heading: "กำลังตรวจสอบการชำระเงิน", body: "หน้านี้จะอัปเดตโดยอัตโนมัติ โปรดรอสักครู่" },
     expired: { heading: "การลงทะเบียนหมดอายุ", body: "ระบบไม่ได้รับการชำระเงินภายในเวลาที่กำหนด จึงยกเลิกการสำรองที่นั่งแล้ว" },
-    needs_review: { heading: "กำลังตรวจสอบการชำระเงิน", body: "ระบบได้รับการชำระเงินหลังจากที่นั่งเต็มแล้ว เจ้าหน้าที่จะติดต่อกลับโดยเร็ว" },
+    needs_review: { heading: "กำลังตรวจสอบการชำระเงิน", body: "เราได้รับการชำระเงินแล้วและกำลังตรวจสอบที่นั่งของท่าน เจ้าหน้าที่จะติดต่อกลับโดยเร็ว" },
     back: "กลับไปหน้าเวิร์กช็อป",
   },
 };
