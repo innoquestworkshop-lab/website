@@ -57,3 +57,15 @@ export function verifyBeamSignature(rawBody: string, signature: string | null): 
   const given = Buffer.from(signature, "base64");
   return given.length === expected.length && timingSafeEqual(given, expected);
 }
+
+/** Disable a payment link so it can no longer be paid. Used to retire the old
+ *  link before issuing a recovery link, so a sign-up never has two live links. */
+export async function disablePaymentLink(paymentLinkId: string): Promise<void> {
+  const res = await fetch(`${base()}/api/v1/payment-links/${paymentLinkId}/disable`, {
+    method: "PATCH",
+    headers: headers(),
+  });
+  // A 4xx means the link is already disabled, expired, or unknown — fine to ignore.
+  // Only a server-side failure is worth surfacing to the caller.
+  if (res.status >= 500) throw new Error(`Beam disable link failed: ${res.status}`);
+}

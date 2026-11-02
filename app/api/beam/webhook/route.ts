@@ -42,6 +42,44 @@ async function sendConfirmation(signupId: string) {
   });
 }
 
+/** A recovery payer paid, but the workshop filled up in the meantime (no seat was
+ *  held during the 24h window). The money is captured — don't refund. Ask an admin
+ *  to approve an extra seat or refund, and reassure the payer without promising a seat.
+ *  Relies on confirm_workshop_payment returning "overflow" only on the first transition,
+ *  so this sends exactly once. */
+async function handleOverflow(signupId: string) {
+  const db = supabaseAdmin();
+  const { data: s } = await db
+    .from("workshop_signups")
+    .select("email, student_name, locale, workshops(title_th, title_en)")
+    .eq("id", signupId)
+    .maybeSingle();
+  if (!s) return;
+
+  const workshop = s.workshops as unknown as { title_th: string; title_en: string | null };
+  const title = escapeHtml(workshop.title_en ?? workshop.title_th);
+  const name = escapeHtml(s.student_name ?? "");
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  const from = "InnoQuest <no-reply@innoquest.tech>";
+
+  await resend.emails.send({
+    from,
+    to: site.contact.email,
+    subject: `Paid but full — approve or refund: ${workshop.title_en ?? workshop.title_th}`,
+    html: `<p>${name} paid for ${title}, but it is now full. Approve an extra seat or refund in the workshop admin.</p><p>Sign-up id: ${signupId}</p>`,
+  });
+
+  const th = s.locale === "th";
+  await resend.emails.send({
+    from,
+    to: s.email,
+    subject: th ? `ได้รับการชำระเงินแล้ว: ${workshop.title_th}` : `Payment received: ${workshop.title_en ?? workshop.title_th}`,
+    html: th
+      ? `<p>InnoQuest ได้รับการชำระเงินของ ${name} สำหรับ ${title} แล้ว เรากำลังยืนยันที่นั่งและจะติดต่อกลับโดยเร็วที่สุด</p>`
+      : `<p>InnoQuest has received your payment for ${name} (${title}). We're confirming the seat and will be in touch shortly.</p>`,
+  });
+}
+
 export async function POST(req: NextRequest) {
   const rawBody = await req.text();
   if (!verifyBeamSignature(rawBody, req.headers.get("x-beam-signature"))) {
@@ -119,5 +157,6 @@ export async function POST(req: NextRequest) {
   if (error) return NextResponse.json({ error: "failed" }, { status: 500 });
 
   if (status === "paid") await sendConfirmation(signup.id);
+  else if (status === "overflow") await handleOverflow(signup.id);
   return NextResponse.json({ received: true, status });
 }

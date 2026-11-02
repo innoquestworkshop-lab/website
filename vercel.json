@@ -1,0 +1,5 @@
+{
+  "crons": [
+    { "path": "/api/cron/workshop-recovery", "schedule": "*/5 * * * *" }
+  ]
+}
