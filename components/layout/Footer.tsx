@@ -30,9 +30,6 @@ export function Footer() {
                 ? "We build young people's abilities through play-based, science-backed learning."
                 : "InnoQuest พัฒนาศักยภาพของเยาวชนด้วยการเรียนรู้ผ่านการเล่นที่มีหลักวิทยาศาสตร์รองรับ"}
             </p>
-            <div style={{ marginTop: 16 }}>
-              <span className="pill">BKK · Thailand</span>
-            </div>
           </div>
 
           {/* Link columns */}
@@ -50,7 +47,7 @@ export function Footer() {
 
         <div className="footer-base caption">
           <span>© {new Date().getFullYear()} {site.name}. {locale === "en" ? "All rights reserved." : "สงวนลิขสิทธิ์"}</span>
-          <span style={{ overflowWrap: "anywhere" }}>{site.location.display} · {site.contact.email}</span>
+          <span style={{ overflowWrap: "anywhere" }}>{site.contact.email}</span>
         </div>
       </div>
     </footer>
