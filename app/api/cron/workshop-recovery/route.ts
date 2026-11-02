@@ -3,7 +3,6 @@ import { Resend } from "resend";
 import { createPaymentLink, disablePaymentLink } from "@/lib/beam";
 import { escapeHtml, supabaseAdmin } from "@/lib/workshops";
 import { emailFooter } from "@/lib/email-footer";
-import { site } from "@/data/site";
 
 const RECOVERY_HOURS = 24;
 // Soon after the first link expires, while the person is still interested. If they
@@ -24,7 +23,7 @@ const dateText = (iso: string, th: boolean, withTime: boolean) =>
     ...(withTime ? { timeStyle: "short" as const } : {}),
   });
 
-function recoveryEmail(p: { th: boolean; plainTitle: string; name: string; startsAt: string; payBy: string; url: string }) {
+function recoveryEmail(p: { th: boolean; parent: boolean; plainTitle: string; name: string; startsAt: string; payBy: string; url: string }) {
   const title = escapeHtml(p.plainTitle);
   const name = escapeHtml(p.name);
   const starts = escapeHtml(dateText(p.startsAt, p.th, false));
@@ -33,29 +32,26 @@ function recoveryEmail(p: { th: boolean; plainTitle: string; name: string; start
   const t = p.th
     ? {
         subject: `ยังไม่ได้ชำระเงิน: ${p.plainTitle}`,
-        heading: "อีกขั้นเดียวก็ลงทะเบียนเสร็จ",
-        body: `เราได้รับใบสมัครของ <strong>${name}</strong> สำหรับ <strong>${title}</strong> (${starts}) แล้ว แต่ยังไม่ได้รับการชำระเงิน`,
+        greeting: p.parent ? "เรียน ท่านผู้ปกครอง" : "เรียน นักเรียน",
+        body: `อีกเพียงขั้นตอนเดียว การลงทะเบียนของ${p.parent ? ` <strong>${name}</strong>` : "คุณ"} สำหรับ <strong>${title}</strong> (${starts}) ก็จะเสร็จสมบูรณ์!`,
         button: "ชำระเงิน",
         deadline: `ลิงก์นี้ใช้ได้ถึง ${payBy} ที่นั่งจะยืนยันเมื่อชำระเงินแล้วเท่านั้น`,
-        help: `หากมีข้อสงสัย โทร ${site.contact.phone}`,
       }
     : {
         subject: `Finish signing up for ${p.plainTitle}`,
-        heading: "One step left",
-        body: `We have <strong>${name}</strong>'s sign-up for <strong>${title}</strong> (${starts}), but the payment hasn't come through yet.`,
+        greeting: p.parent ? "Dear Parent," : "Dear Student,",
+        body: `You are one step away from completing ${p.parent ? `<strong>${name}</strong>'s` : "your"} sign-up for <strong>${title}</strong> (${starts})!`,
         button: "Complete payment",
         deadline: `This link works until ${payBy}. The seat is confirmed once payment goes through.`,
-        help: `Questions? Call ${site.contact.phone}.`,
       };
   return {
     subject: t.subject,
     html: `<div style="max-width:520px;margin:0 auto;padding:32px 16px;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6;color:#000000;">
 <p style="margin:0 0 24px;font-size:20px;font-weight:bold;">InnoQuest</p>
-<h1 style="margin:0 0 12px;font-size:24px;line-height:1.3;">${t.heading}</h1>
+<p style="margin:0 0 12px;">${t.greeting}</p>
 <p style="margin:0 0 24px;">${t.body}</p>
 <p style="margin:0 0 24px;"><a href="${url}" style="display:inline-block;background:#E63946;color:#ffffff;text-decoration:none;font-weight:bold;padding:12px 24px;border-radius:6px;">${t.button}</a></p>
-<p style="margin:0 0 8px;font-size:14px;color:#444444;">${t.deadline}</p>
-<p style="margin:0;font-size:14px;color:#444444;">${t.help}</p>
+<p style="margin:0;font-size:14px;color:#444444;">${t.deadline}</p>
 ${emailFooter(p.th)}
 </div>`,
   };
@@ -85,7 +81,7 @@ export async function GET(req: NextRequest) {
 
   const { data: abandoned, error } = await db
     .from("workshop_signups")
-    .select("id, workshop_id, amount_satang, email, student_name, locale, beam_payment_link_id, workshops!inner(title_th, title_en, status, starts_at)")
+    .select("id, workshop_id, amount_satang, email, student_name, filled_by, locale, beam_payment_link_id, workshops!inner(title_th, title_en, status, starts_at)")
     .is("paid_at", null)
     .is("recovery_sent_at", null)
     .not("beam_payment_link_id", "is", null)
@@ -180,6 +176,7 @@ export async function GET(req: NextRequest) {
           th,
           plainTitle,
           name: s.student_name,
+          parent: s.filled_by === "parent",
           startsAt: workshop.starts_at,
           payBy: expiresAt.toISOString(),
           url: link.url,

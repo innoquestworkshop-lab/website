@@ -29,8 +29,8 @@ async function sendConfirmation(signupId: string) {
     to: claimed.email,
     subject: th ? `ยืนยันการลงทะเบียน ${workshop.title_th}` : `Registration confirmed: ${workshop.title_en ?? workshop.title_th}`,
     html: th
-      ? `<p>InnoQuest ได้รับการชำระเงินเรียบร้อยแล้ว และขอยืนยันการลงทะเบียนของ ${name} ใน ${title}</p><p>หากมีข้อสงสัย โปรดติดต่อ ${site.contact.phone} หรือ ${site.contact.email}</p>${emailFooter(true)}`
-      : `<p>InnoQuest has received your payment and confirmed ${name}'s place in ${title}.</p><p>Questions? Contact ${site.contact.phone} or ${site.contact.email}.</p>${emailFooter(false)}`,
+      ? `<p>InnoQuest ได้รับการชำระเงินเรียบร้อยแล้ว และขอยืนยันการลงทะเบียนของ ${name} ใน ${title}</p>${emailFooter(true)}`
+      : `<p>InnoQuest has received your payment and confirmed ${name}'s place in ${title}.</p>${emailFooter(false)}`,
   });
   await resend.emails.send({
     from,
