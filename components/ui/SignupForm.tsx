@@ -82,6 +82,8 @@ export function SignupForm({ workshop }: { workshop: Workshop }) {
   const [parentConsent, setParentConsent] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [refCode, setRefCode] = useState("");
+  // True while the code came from the link or cookie; false once the buyer types in the field.
+  const [fromLink, setFromLink] = useState(false);
   const [quote, setQuote] = useState<Quote | null>(null);
   const [quoting, setQuoting] = useState(false);
   const [shareName, setShareName] = useState(false);
@@ -116,7 +118,11 @@ export function SignupForm({ workshop }: { workshop: Workshop }) {
     document.head.appendChild(script);
   }, []);
 
-  useEffect(() => { setRefCode(initialRefCode()); }, []);
+  useEffect(() => {
+    const c = initialRefCode();
+    setRefCode(c);
+    setFromLink(c !== "");
+  }, []);
 
   const normalized = normalizeAffiliateCode(refCode);
   const typedButBad = refCode.trim() !== "" && !normalized;
@@ -136,6 +142,11 @@ export function SignupForm({ workshop }: { workshop: Workshop }) {
     }, 400);
     return () => { clearTimeout(timer); ctrl.abort(); };
   }, [normalized, workshop.id]);
+
+  // A link code with no deal on this workshop empties quietly. The cookie is left alone.
+  useEffect(() => {
+    if (fromLink && quote && !quote.valid) { setRefCode(""); setFromLink(false); }
+  }, [fromLink, quote]);
 
   const codeValid = !!(normalized && quote?.valid);
   const listPrice = workshop.price_satang;
@@ -254,10 +265,10 @@ export function SignupForm({ workshop }: { workshop: Workshop }) {
           maxLength={20}
           autoComplete="off"
           autoCapitalize="characters"
-          onChange={(e) => setRefCode(e.target.value.toUpperCase())}
+          onChange={(e) => { setFromLink(false); setRefCode(e.target.value.toUpperCase()); }}
         />
         <p className="t-small mt-1 break-words" aria-live="polite">
-          {typedButBad || (normalized && !quoting && quote && !quote.valid)
+          {typedButBad || (!fromLink && normalized && !quoting && quote && !quote.valid)
             ? t.affiliateInvalid
             : quoting
               ? t.affiliateChecking

@@ -12,15 +12,22 @@ export async function POST(req: NextRequest) {
   const res = NextResponse.json({ ok: true });
   res.cookies.set(REF_COOKIE, code, { maxAge: REF_MAX_AGE, sameSite: "lax", secure, path: "/" });
 
-  // One click per browser per code per day.
-  const seenName = `iq_rc_${code}`;
-  if (!req.cookies.get(seenName) && process.env.SUPABASE_SERVICE_ROLE_KEY) {
+  // One click per browser per code per workshop per day (general links count separately from event links).
+  const slug = typeof body?.workshop === "string" && /^[A-Za-z0-9_-]{1,100}$/.test(body.workshop) ? body.workshop : null;
+  if (process.env.SUPABASE_SERVICE_ROLE_KEY) {
     try {
       const db = supabaseAdmin();
+      let workshopId: string | null = null;
+      if (slug) {
+        const { data: w } = await db.from("workshops").select("id").eq("slug", slug).maybeSingle();
+        workshopId = w?.id ?? null;
+      }
+      const seenName = `iq_rc_${code}_${workshopId ?? "g"}`;
+      if (req.cookies.get(seenName)) return res;
       const { data: aff } = await db.from("affiliates").select("id").eq("code", code).eq("status", "active").maybeSingle();
       if (aff) {
         const path = typeof body?.path === "string" && body.path.startsWith("/") ? body.path.slice(0, 200) : "/";
-        await db.from("affiliate_clicks").insert({ affiliate_id: aff.id, landing_path: path });
+        await db.from("affiliate_clicks").insert({ affiliate_id: aff.id, landing_path: path, workshop_id: workshopId });
         res.cookies.set(seenName, "1", { maxAge: 60 * 60 * 24, sameSite: "lax", secure, httpOnly: true, path: "/" });
       }
     } catch (err) {
