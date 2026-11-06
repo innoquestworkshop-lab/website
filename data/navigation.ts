@@ -22,6 +22,7 @@ export const navLinks: Record<"en" | "th", NavItem[]> = {
     { label: "Testimonials", href: "/testimonials" },
     { label: "Interactive Play", href: "https://interactive.innoquest.tech", external: true, highlight: true },
     { label: "About", href: "/about" },
+    { label: "Blog", href: "/blog" },
   ],
   th: [
     { label: "สิ่งที่เราทำ", href: "/what-we-do" },
@@ -38,6 +39,7 @@ export const navLinks: Record<"en" | "th", NavItem[]> = {
     { label: "เสียงจากผู้เข้าร่วม", href: "/testimonials" },
     { label: "เกมอินเทอร์แอ็กทีฟ", href: "https://interactive.innoquest.tech", external: true, highlight: true },
     { label: "เกี่ยวกับเรา", href: "/about" },
+    { label: "บล็อก", href: "/th/blog" },
   ],
 };
 

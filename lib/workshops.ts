@@ -7,7 +7,7 @@ export const escapeHtml = (s: string) =>
 
 export type FormField = {
   id: string;
-  type: "short" | "paragraph" | "multiple_choice" | "checkboxes" | "dropdown" | "date" | "file";
+  type: "short" | "short_answer" | "paragraph" | "multiple_choice" | "checkboxes" | "dropdown" | "date" | "file" | "file_upload";
   label_th: string;
   label_en?: string | null;
   required?: boolean;

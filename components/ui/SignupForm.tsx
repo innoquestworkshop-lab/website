@@ -45,10 +45,10 @@ function CustomField({ field, value, onChange, label, selectText, fileNote }: {
       <label className="field-label">
         {label} {field.required && <span className="field-req">*</span>}
       </label>
-      {field.type === "short" && <input className={inputClass} value={text} onChange={(e) => onChange(e.target.value)} />}
+      {(field.type === "short" || field.type === "short_answer") && <input className={inputClass} value={text} onChange={(e) => onChange(e.target.value)} />}
       {field.type === "paragraph" && <textarea className={inputClass} rows={3} value={text} onChange={(e) => onChange(e.target.value)} />}
       {field.type === "date" && <input type="date" className={inputClass} value={text} onChange={(e) => onChange(e.target.value)} />}
-      {field.type === "file" && <p className="t-small">{fileNote}</p>}
+      {(field.type === "file" || field.type === "file_upload") && <p className="t-small">{fileNote}</p>}
       {field.type === "dropdown" && (
         <select className={inputClass} value={text} onChange={(e) => onChange(e.target.value)}>
           <option value="">{selectText}</option>

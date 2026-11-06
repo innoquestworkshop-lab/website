@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
 
   const missing = (workshop.form_fields as FormField[]).some((f) => {
     const answer = signup.answers[f.id];
-    return f.required && f.type !== "file" && (!answer || answer.length === 0);
+    return f.required && f.type !== "file" && f.type !== "file_upload" && (!answer || answer.length === 0);
   });
   if (missing) return NextResponse.json({ error: "invalid" }, { status: 400 });
 
