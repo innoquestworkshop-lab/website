@@ -5,6 +5,7 @@ import { useLocale } from "@/components/LanguageProvider";
 import { signupPage } from "@/data/signup";
 import { normalizeAffiliateCode, REF_COOKIE } from "@/lib/affiliate";
 import type { FormField, Workshop } from "@/lib/workshops";
+import { cn } from "@/lib/utils";
 
 const baht = (satang: number) => (satang / 100).toLocaleString("en-US");
 
@@ -267,14 +268,14 @@ export function SignupForm({ workshop }: { workshop: Workshop }) {
           autoCapitalize="characters"
           onChange={(e) => { setFromLink(false); setRefCode(e.target.value.toUpperCase()); }}
         />
-        <p className="t-small mt-1 break-words" aria-live="polite">
+        <p className={cn("t-small mt-1 break-words", codeValid && quote && discounted && !quoting && "text-red-ink")} aria-live="polite">
           {typedButBad || (!fromLink && normalized && !quoting && quote && !quote.valid)
             ? t.affiliateInvalid
             : quoting
               ? t.affiliateChecking
               : codeValid && quote
                 ? discounted
-                  ? t.affiliateApplied(quote.code ?? normalized!, baht(quote.discountSatang), baht(quote.priceSatang))
+                  ? t.affiliateApplied(quote.code ?? normalized!, baht(quote.discountSatang))
                   : t.affiliateNoted(quote.code ?? normalized!)
                 : t.affiliateHint}
         </p>
