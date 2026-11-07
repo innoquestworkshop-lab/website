@@ -9,13 +9,24 @@ function headers() {
 
 /**
  * Methods a link offers: Beam's linkSettings groups, comma separated, such as
- * BEAM_LINK_METHODS=card,qrPromptPay. Beam refuses the whole link if one is not
- * approved on this account, so only list approved ones.
+ * BEAM_LINK_METHODS=card,cardInstallments,qrPromptPay. Beam refuses the whole link
+ * if one is not approved on this account, so only list approved ones.
+ * cardInstallments offers the periods in BEAM_INSTALLMENT_MONTHS (default 3,4).
  */
-function linkSettings() {
-  const methods = (process.env.BEAM_LINK_METHODS ?? "").split(",").map((m) => m.trim()).filter(Boolean);
-  return Object.fromEntries((methods.length ? methods : ["qrPromptPay"]).map((m) => [m, { isEnabled: true }]));
+function linkSettings(withInstallments = true) {
+  const listed = (process.env.BEAM_LINK_METHODS ?? "").split(",").map((m) => m.trim()).filter(Boolean);
+  const methods = (listed.length ? listed : ["qrPromptPay"]).filter((m) => withInstallments || m !== "cardInstallments");
+  const months = (process.env.BEAM_INSTALLMENT_MONTHS ?? "3,4").split(",").map((m) => m.trim()).filter((m) => /^(3|4|6|10)$/.test(m));
+  return Object.fromEntries(
+    methods.map((m) =>
+      m === "cardInstallments"
+        ? [m, { isEnabled: true, ...Object.fromEntries(months.map((n) => [`installments${n}m`, { isEnabled: true }])) }]
+        : [m, { isEnabled: true }]
+    )
+  );
 }
+
+const offersInstallments = () => (process.env.BEAM_LINK_METHODS ?? "").split(",").some((m) => m.trim() === "cardInstallments");
 
 export async function createPaymentLink(input: {
   amountSatang: number;
@@ -24,22 +35,27 @@ export async function createPaymentLink(input: {
   redirectUrl: string;
   expiresAt: Date;
 }): Promise<{ id: string; url: string }> {
-  const res = await fetch(`${base()}/api/v1/payment-links`, {
-    method: "POST",
-    headers: headers(),
-    body: JSON.stringify({
-      order: {
-        currency: "THB",
-        description: input.description,
-        netAmount: input.amountSatang,
-        referenceId: input.referenceId,
-      },
-      linkSettings: linkSettings(),
-      collectDeliveryAddress: false,
-      redirectUrl: input.redirectUrl,
-      expiresAt: input.expiresAt.toISOString(),
-    }),
-  });
+  const send = (withInstallments: boolean) =>
+    fetch(`${base()}/api/v1/payment-links`, {
+      method: "POST",
+      headers: headers(),
+      body: JSON.stringify({
+        order: {
+          currency: "THB",
+          description: input.description,
+          netAmount: input.amountSatang,
+          referenceId: input.referenceId,
+        },
+        linkSettings: linkSettings(withInstallments),
+        collectDeliveryAddress: false,
+        redirectUrl: input.redirectUrl,
+        expiresAt: input.expiresAt.toISOString(),
+      }),
+    });
+  let res = await send(true);
+  // Installment periods have a minimum price per period; a cheaper workshop gets a
+  // 400 for the whole link. Offer every other method rather than none.
+  if (res.status === 400 && offersInstallments()) res = await send(false);
   if (!res.ok) throw new Error(`Beam payment link failed: ${res.status}`);
   return res.json();
 }
