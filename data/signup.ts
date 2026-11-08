@@ -71,7 +71,7 @@ export const signupPage = {
     submit: "ดำเนินการชำระเงิน →",
     submitting: "โปรดรอสักครู่",
     workshopUnavailable: "เวิร์กช็อปนี้เต็มหรือปิดรับสมัครแล้ว ดูเวิร์กช็อปอื่นที่เปิดรับสมัครได้ด้านล่าง",
-    affiliateLabel: "รหัสพิเศษ",
+    affiliateLabel: "โค้ดพิเศษ",
     affiliateHint: "กรอกรหัสหากมีผู้แนะนำท่านมา",
     affiliateApplied: (code: string, off: string) => `ใช้โค้ด ${code} แล้ว ลด ฿${off}`,
     affiliateNoted: (code: string) => `บันทึกโค้ด ${code} แล้ว ราคาปกติ`,
