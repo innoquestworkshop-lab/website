@@ -277,7 +277,7 @@ export function SignupForm({ workshop }: { workshop: Workshop }) {
                 ? discounted
                   ? t.affiliateApplied(quote.code ?? normalized!, baht(quote.discountSatang))
                   : t.affiliateNoted(quote.code ?? normalized!)
-                : t.affiliateHint}
+                : null}
         </p>
         {priceNote && <p className="text-sm field-error mt-1" role="status">{priceNote}</p>}
       </div>
