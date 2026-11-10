@@ -46,6 +46,8 @@ export function confirmationEmail(p: {
   studentName: string;
   amountSatang: number;
   workshop: ConfirmationWorkshop;
+  /** The signed Request receipt link (lib/receipt-token.ts); no section when null. */
+  receiptUrl?: string | null;
 }) {
   const { th, workshop: w } = p;
   const parent = p.filledBy === "parent";
@@ -109,12 +111,21 @@ ${w.line_group_url ? `<p style="margin:0 0 16px;"><a href="${escapeHtml(w.line_g
         }</div>`
       : "";
 
+  const receipt = p.receiptUrl
+    ? `<div style="margin:16px 0 8px;padding:20px;border:1px solid #DADAD3;border-radius:8px;">
+<p style="margin:0 0 8px;font-size:18px;font-weight:bold;">${th ? "ต้องการใบเสร็จรับเงิน?" : "Need a receipt?"}</p>
+<p style="margin:0 0 16px;font-size:15px;color:#444444;">${th ? "กดปุ่มด้านล่าง ตรวจสอบชื่อและที่อยู่ที่จะพิมพ์บนใบเสร็จ แล้วส่งคำขอ" : "Press the button, check the name and address for the receipt, and send the request."}</p>
+<p style="margin:0;"><a href="${escapeHtml(p.receiptUrl)}" style="display:inline-block;background:#ffffff;color:#000000;text-decoration:none;font-weight:bold;padding:11px 23px;border:1px solid #000000;border-radius:6px;">Request receipt / ขอใบเสร็จรับเงิน</a></p>
+</div>`
+    : "";
+
   return `<div style="max-width:520px;margin:0 auto;padding:32px 16px;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6;color:#000000;">
 <p style="margin:0 0 24px;font-size:20px;font-weight:bold;">InnoQuest</p>
 <p style="margin:0 0 12px;">${t.greeting}</p>
 <p style="margin:0 0 24px;">${t.body}</p>
 ${details}
 ${line}
+${receipt}
 ${emailFooter(th)}
 </div>`;
 }

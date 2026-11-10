@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { signupThanks } from "@/data/signup";
+import { REQUEST_RECEIPT_LABEL, receiptRequest, signupThanks } from "@/data/signup";
+import { receiptRequestUrl } from "@/lib/receipt-token";
 import { getLocale } from "@/lib/i18n";
 import { supabaseAdmin } from "@/lib/workshops";
 import { formatBaht, whenText } from "@/lib/confirmation-email";
@@ -56,6 +57,9 @@ export default async function ThanksPage({ searchParams }: { searchParams: Promi
   const amount = paid && data?.amount_satang != null ? formatBaht(data.amount_satang) : "";
   const qr = paid && w ? lineQrUrl(w.line_qr_path) : null;
   const lineUrl = paid && w ? w.line_group_url : null;
+  // Request receipt (app migration 72): a signed link to /signup/receipt, only once paid.
+  const receiptHref = paid && id ? receiptRequestUrl("", id) : null;
+  const rr = receiptRequest[locale];
   const rows: [string, string][] = ([[pv.workshop, title], [pv.when, when], [pv.location, location], [pv.amount, amount]] as [string, string][]).filter(([, v]) => v);
 
   return (
@@ -96,6 +100,15 @@ export default async function ThanksPage({ searchParams }: { searchParams: Promi
                       {pv.receipt} {maskEmail(data.email)}
                     </p>
                   )}
+                </section>
+              )}
+              {receiptHref && (
+                <section className="card" style={{ gap: 12 }}>
+                  <h2 className="t-display" style={{ fontSize: 20 }}>{rr.sectionHeading}</h2>
+                  <p className="t-small">{rr.sectionBody}</p>
+                  <div>
+                    <Link href={receiptHref} className="btn btn-secondary">{REQUEST_RECEIPT_LABEL}</Link>
+                  </div>
                 </section>
               )}
               {(lineUrl || qr) && (

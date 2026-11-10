@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
-import { disablePaymentLink, findPaidChargeId, verifyBeamSignature } from "@/lib/beam";
+import { disablePaymentLink, findPaidCharge, verifyBeamSignature } from "@/lib/beam";
 import { escapeHtml, supabaseAdmin } from "@/lib/workshops";
 import { emailFooter } from "@/lib/email-footer";
 import { confirmationEmail, type ConfirmationWorkshop } from "@/lib/confirmation-email";
 import { site } from "@/data/site";
+import { draftReceipt, notifyBillingMoneyIn, notifyWorkshopMoneyIn } from "@/lib/receipts";
+import { receiptRequestUrl, siteOrigin } from "@/lib/receipt-token";
 
 async function sendConfirmation(signupId: string) {
   const db = supabaseAdmin();
@@ -37,6 +39,7 @@ async function sendConfirmation(signupId: string) {
       studentName: claimed.student_name,
       amountSatang: claimed.amount_satang,
       workshop,
+      receiptUrl: receiptRequestUrl(siteOrigin(), signupId),
     }),
   });
   await resend.emails.send({
@@ -103,7 +106,7 @@ async function markBillingPaid(paymentLinkId: string, order: { netAmount: number
   const db = supabaseAdmin();
   const { data: doc } = await db
     .from("billing_documents")
-    .select("id, status, net_payable_satang, beam_link_id")
+    .select("id, status, number, bill_to, net_payable_satang, beam_link_id")
     .eq("id", id)
     .maybeSingle();
   if (!doc) {
@@ -116,7 +119,8 @@ async function markBillingPaid(paymentLinkId: string, order: { netAmount: number
   }
   if (doc.status === "paid") return NextResponse.json({ received: true, status: "already paid" });
 
-  const chargeId = await findPaidChargeId(paymentLinkId).catch(() => null);
+  const charge = await findPaidCharge(paymentLinkId).catch(() => null);
+  const chargeId = charge?.chargeId ?? null;
   // Only an issued document moves to paid; the status filter makes a repeat webhook a no-op.
   const { data: updated, error } = await db
     .from("billing_documents")
@@ -141,6 +145,14 @@ async function markBillingPaid(paymentLinkId: string, order: { netAmount: number
     action: "paid_beam",
     done_by: null,
     changes: { status: { from: "issued", to: "paid" } },
+  });
+  await notifyBillingMoneyIn(db, {
+    documentId: id,
+    number: doc.number ?? null,
+    payer: (doc.bill_to as { name?: string } | null)?.name ?? "",
+    amountSatang: Number(doc.net_payable_satang),
+    paymentLinkId,
+    method: charge?.method ?? null,
   });
   return NextResponse.json({ received: true, status: "paid" });
 }
@@ -224,15 +236,23 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ received: true, ignored: "mismatch" });
   }
 
-  const chargeId = await findPaidChargeId(paymentLinkId);
+  const charge = await findPaidCharge(paymentLinkId);
   const { data: status, error } = await db.rpc("confirm_workshop_payment", {
     p_payment_link_id: signup.beam_payment_link_id,
-    p_charge_id: chargeId,
+    p_charge_id: charge.chargeId,
   });
   if (error) return NextResponse.json({ error: "failed" }, { status: 500 });
 
   if (status === "paid") await sendConfirmation(signup.id);
   else if (status === "overflow") await handleOverflow(signup.id);
+
+  // Auto billing (app migration 72): a paid seat gets its draft receipt, and every
+  // payment that came in alerts the super admins. Both are once only, so a retry is
+  // safe, and neither failing stops the webhook.
+  if (status === "paid") await draftReceipt(db, signup.id, charge.method);
+  if (status === "paid" || status === "overflow" || status === "needs_review") {
+    await notifyWorkshopMoneyIn(db, { signupId: signup.id, paymentLinkId, method: charge.method, status });
+  }
 
   // Paid on an older link: the newer one must not stay payable. A retry is safe,
   // since the RPC and the emails above do not repeat.

@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "check:receipts": "node scripts/check-receipts.mjs"
   },
   "dependencies": {
     "@fontsource/chakra-petch": "5.3.0",
