@@ -160,6 +160,14 @@ export function SignupForm({ workshop }: { workshop: Workshop }) {
   const set = (key: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
     setForm((f) => ({ ...f, [key]: e.target.value }));
 
+  // A Turnstile token is single use: after any reply that doesn't leave the page, get a fresh one.
+  const resetTurnstile = () => {
+    setTurnstileToken(null);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const w = window as any;
+    if (widgetId.current && w.turnstile) w.turnstile.reset(widgetId.current);
+  };
+
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!turnstileToken) { setError(t.errors.verification); return; }
@@ -184,6 +192,7 @@ export function SignupForm({ workshop }: { workshop: Workshop }) {
       });
       const data = await res.json();
       if (res.ok && data.url) { window.location.href = data.url; return; }
+      resetTurnstile();
       if (res.status === 409 && data.error === "price_changed" && typeof data.priceSatang === "number") {
         setQuote((q) => (q ? { ...q, priceSatang: data.priceSatang, discountSatang: Math.max(0, q.listSatang - data.priceSatang) } : q));
         setPriceNote(t.priceChangedNote(baht(data.priceSatang)));
@@ -193,6 +202,7 @@ export function SignupForm({ workshop }: { workshop: Workshop }) {
       const code = data.error as keyof typeof t.errors;
       setError(t.errors[code] ?? t.errors.failed);
     } catch {
+      resetTurnstile();
       setError(t.errors.failed);
     }
     setSubmitting(false);

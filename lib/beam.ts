@@ -13,9 +13,14 @@ function headers() {
  * if one is not approved on this account, so only list approved ones.
  * cardInstallments offers the periods in BEAM_INSTALLMENT_MONTHS (default 3,4).
  */
-function linkSettings(withInstallments = true) {
+type LinkMode = "all" | "noInstallments" | "promptPayOnly";
+
+function linkSettings(mode: LinkMode) {
   const listed = (process.env.BEAM_LINK_METHODS ?? "").split(",").map((m) => m.trim()).filter(Boolean);
-  const methods = (listed.length ? listed : ["qrPromptPay"]).filter((m) => withInstallments || m !== "cardInstallments");
+  const methods =
+    mode === "promptPayOnly"
+      ? ["qrPromptPay"]
+      : (listed.length ? listed : ["qrPromptPay"]).filter((m) => mode === "all" || m !== "cardInstallments");
   const months = (process.env.BEAM_INSTALLMENT_MONTHS ?? "3,4").split(",").map((m) => m.trim()).filter((m) => /^(3|4|6|10)$/.test(m));
   return Object.fromEntries(
     methods.map((m) =>
@@ -35,7 +40,7 @@ export async function createPaymentLink(input: {
   redirectUrl: string;
   expiresAt: Date;
 }): Promise<{ id: string; url: string }> {
-  const send = (withInstallments: boolean) =>
+  const send = (mode: LinkMode) =>
     fetch(`${base()}/api/v1/payment-links`, {
       method: "POST",
       headers: headers(),
@@ -46,18 +51,28 @@ export async function createPaymentLink(input: {
           netAmount: input.amountSatang,
           referenceId: input.referenceId,
         },
-        linkSettings: linkSettings(withInstallments),
+        linkSettings: linkSettings(mode),
         collectDeliveryAddress: false,
         redirectUrl: input.redirectUrl,
         expiresAt: input.expiresAt.toISOString(),
       }),
     });
-  let res = await send(true);
-  // Installment periods have a minimum price per period; a cheaper workshop gets a
-  // 400 for the whole link. Offer every other method rather than none.
-  if (res.status === 400 && offersInstallments()) res = await send(false);
-  if (!res.ok) throw new Error(`Beam payment link failed: ${res.status}`);
-  return res.json();
+  // Beam refuses the whole link (400) if one method is not allowed: installment periods
+  // have a minimum price per period, and an unapproved method fails every link.
+  // Step down to fewer methods rather than leave the payer with none.
+  const modes: LinkMode[] = offersInstallments() ? ["all", "noInstallments", "promptPayOnly"] : ["all", "promptPayOnly"];
+  let res!: Response;
+  for (const mode of modes) {
+    res = await send(mode);
+    if (res.ok) {
+      if (mode !== "all") console.warn(`Beam payment link created with fallback "${mode}"`);
+      return res.json();
+    }
+    const body = await res.text().catch(() => "");
+    console.error(`Beam payment link refused (${mode}): ${res.status} ${body.slice(0, 500)}`);
+    if (res.status !== 400) break;
+  }
+  throw new Error(`Beam payment link failed: ${res.status}`);
 }
 
 /** How a charge was paid, as the app's payment method pick list words it (lib/billing/options.ts). */
