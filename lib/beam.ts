@@ -13,14 +13,10 @@ function headers() {
  * if one is not approved on this account, so only list approved ones.
  * cardInstallments offers the periods in BEAM_INSTALLMENT_MONTHS (default 3,4).
  */
-type LinkMode = "all" | "noInstallments" | "promptPayOnly";
+/** A Beam method name in any spelling (eWallets, E_WALLET) reduced to one form. */
+const norm = (m: string) => m.toLowerCase().replace(/[^a-z]/g, "").replace(/s$/, "");
 
-function linkSettings(mode: LinkMode) {
-  const listed = (process.env.BEAM_LINK_METHODS ?? "").split(",").map((m) => m.trim()).filter(Boolean);
-  const methods =
-    mode === "promptPayOnly"
-      ? ["qrPromptPay"]
-      : (listed.length ? listed : ["qrPromptPay"]).filter((m) => mode === "all" || m !== "cardInstallments");
+function linkSettings(methods: string[]) {
   const months = (process.env.BEAM_INSTALLMENT_MONTHS ?? "3,4").split(",").map((m) => m.trim()).filter((m) => /^(3|4|6|10)$/.test(m));
   return Object.fromEntries(
     methods.map((m) =>
@@ -31,8 +27,6 @@ function linkSettings(mode: LinkMode) {
   );
 }
 
-const offersInstallments = () => (process.env.BEAM_LINK_METHODS ?? "").split(",").some((m) => m.trim() === "cardInstallments");
-
 export async function createPaymentLink(input: {
   amountSatang: number;
   description: string;
@@ -40,7 +34,7 @@ export async function createPaymentLink(input: {
   redirectUrl: string;
   expiresAt: Date;
 }): Promise<{ id: string; url: string }> {
-  const send = (mode: LinkMode) =>
+  const send = (methods: string[]) =>
     fetch(`${base()}/api/v1/payment-links`, {
       method: "POST",
       headers: headers(),
@@ -51,26 +45,34 @@ export async function createPaymentLink(input: {
           netAmount: input.amountSatang,
           referenceId: input.referenceId,
         },
-        linkSettings: linkSettings(mode),
+        linkSettings: linkSettings(methods),
         collectDeliveryAddress: false,
         redirectUrl: input.redirectUrl,
         expiresAt: input.expiresAt.toISOString(),
       }),
     });
-  // Beam refuses the whole link (400) if one method is not allowed: installment periods
-  // have a minimum price per period, and an unapproved method fails every link.
-  // Step down to fewer methods rather than leave the payer with none.
-  const modes: LinkMode[] = offersInstallments() ? ["all", "noInstallments", "promptPayOnly"] : ["all", "promptPayOnly"];
+  const listed = (process.env.BEAM_LINK_METHODS ?? "").split(",").map((m) => m.trim()).filter(Boolean);
+  let methods = listed.length ? listed : ["qrPromptPay"];
+  // Beam refuses the whole link (400) if one method is not allowed, e.g. "cannot enable
+  // E_WALLET" when the account is not approved for it, or installments below the minimum
+  // price per period. Drop the method it names (else installments, else all but
+  // PromptPay) and try again, so the payer keeps every method that works.
   let res!: Response;
-  for (const mode of modes) {
-    res = await send(mode);
+  for (let attempt = 0; attempt < 6; attempt++) {
+    res = await send(methods);
     if (res.ok) {
-      if (mode !== "all") console.warn(`Beam payment link created with fallback "${mode}"`);
+      if (methods.length !== (listed.length || 1)) console.warn(`Beam payment link created with methods ${methods.join(",")}`);
       return res.json();
     }
     const body = await res.text().catch(() => "");
-    console.error(`Beam payment link refused (${mode}): ${res.status} ${body.slice(0, 500)}`);
+    console.error(`Beam payment link refused (${methods.join(",")}): ${res.status} ${body.slice(0, 500)}`);
     if (res.status !== 400) break;
+    const named = /cannot enable (\w+)/i.exec(body)?.[1];
+    const fewer = named ? methods.filter((m) => norm(m) !== norm(named)) : methods;
+    if (fewer.length && fewer.length < methods.length) methods = fewer;
+    else if (methods.includes("cardInstallments")) methods = methods.filter((m) => m !== "cardInstallments");
+    else if (methods.join() !== "qrPromptPay") methods = ["qrPromptPay"];
+    else break;
   }
   throw new Error(`Beam payment link failed: ${res.status}`);
 }
