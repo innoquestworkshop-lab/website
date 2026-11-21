@@ -71,6 +71,7 @@ export async function createPaymentLink(input: {
     const fewer = named ? methods.filter((m) => norm(m) !== norm(named)) : methods;
     if (fewer.length && fewer.length < methods.length) methods = fewer;
     else if (methods.includes("cardInstallments")) methods = methods.filter((m) => m !== "cardInstallments");
+    else if (methods.join() !== "card,qrPromptPay" && methods.join() !== "qrPromptPay") methods = ["card", "qrPromptPay"];
     else if (methods.join() !== "qrPromptPay") methods = ["qrPromptPay"];
     else break;
   }
