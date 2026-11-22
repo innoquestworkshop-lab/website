@@ -77,7 +77,7 @@ function CustomField({ field, value, onChange, label, selectText, fileNote }: {
 export function SignupForm({ workshop }: { workshop: Workshop }) {
   const { locale } = useLocale();
   const t = signupPage[locale];
-  const [form, setForm] = useState({ filled_by: "parent", student_name: "", student_age: "", school: "", parent_name: "", phone: "", email: "", line_id: "" });
+  const [form, setForm] = useState({ filled_by: "parent", student_name: "", student_nickname: "", student_age: "", school: "", parent_name: "", phone: "", parent_phone: "", email: "", line_id: "" });
   const [answers, setAnswers] = useState<Record<string, Answer>>({});
   const [consent, setConsent] = useState(false);
   const [parentConsent, setParentConsent] = useState(false);
@@ -234,6 +234,10 @@ export function SignupForm({ workshop }: { workshop: Workshop }) {
           <input className={inputClass} value={form.student_name} onChange={set("student_name")} required />
         </div>
         <div>
+          {label(t.studentNickname)}
+          <input className={inputClass} value={form.student_nickname} onChange={set("student_nickname")} required />
+        </div>
+        <div>
           {label(t.studentAge)}
           <input type="number" min={5} max={99} className={inputClass} value={form.student_age} onChange={set("student_age")} required />
         </div>
@@ -244,6 +248,10 @@ export function SignupForm({ workshop }: { workshop: Workshop }) {
         <div>
           {label(t.phone)}
           <input type="tel" className={inputClass} value={form.phone} onChange={set("phone")} required />
+        </div>
+        <div>
+          {label(t.parentPhone)}
+          <input type="tel" className={inputClass} value={form.parent_phone} onChange={set("parent_phone")} required />
         </div>
         <div>
           {label(t.email)}
