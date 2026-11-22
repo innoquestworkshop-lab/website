@@ -109,7 +109,7 @@ export function SignupSection({ workshops: openWorkshops }: { workshops: Worksho
                     <p className="t-small" style={{ flex: 1 }}>{description}</p>
                     <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 8, flexWrap: "wrap", marginTop: 8 }}>
                       <span className="num-sm" style={{ color: "var(--ink)" }}>฿{(w.price_satang / 100).toLocaleString("en-US")}</span>
-                      <span className={full ? "pill pill--red" : "pill"}>{t.seatsLeft(w.seats_left)}</span>
+                      <span className="t-small" style={{ color: "var(--red-ink)", fontWeight: 700 }}>{t.seatsLeft(w.seats_left)}</span>
                     </div>
                     <button
                       type="button"
