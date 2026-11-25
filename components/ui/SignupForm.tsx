@@ -293,7 +293,7 @@ export function SignupForm({ workshop }: { workshop: Workshop }) {
               ? t.affiliateChecking
               : codeValid && quote
                 ? discounted
-                  ? t.affiliateApplied(quote.code ?? normalized!, baht(quote.discountSatang))
+                  ? t.affiliateApplied(quote.code ?? normalized!, baht(quote.priceSatang))
                   : t.affiliateNoted(quote.code ?? normalized!)
                 : t.affiliateHint}
         </p>
